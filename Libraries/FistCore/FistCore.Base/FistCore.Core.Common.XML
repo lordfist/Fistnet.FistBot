@@ -1,0 +1,785 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FistCore.Core.Common</name>
+    </assembly>
+    <members>
+        <member name="M:FistCore.Core.Common.ColumnKey.GetColumnKeys(System.Collections.Generic.Dictionary{FistCore.Core.IDbColumn,System.String})">
+            <summary>
+            Converts standard <see cref="T:FistCore.Core.IDbColumn"/> list to it's <see cref="T:FistCore.Core.Common.ColumnKey"/> list representation.
+            </summary>
+            <param name="colList">Dictionairy of columns.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FistCore.Core.Common.ColumnKey.#ctor(FistCore.Core.IDbColumn,FistCore.Core.DbRelation)">
+            <summary>
+            Create instance with parent relation.
+            </summary>
+            <param name="column">Column to create.</param>
+            <param name="parentRelation">Relation to column.</param>
+        </member>
+        <member name="M:FistCore.Core.Common.ColumnKey.#ctor(FistCore.Core.IDbColumn)">
+            <summary>
+            Create instance without parent relation.
+            </summary>
+            <param name="col">Column to create.</param>
+        </member>
+        <member name="P:FistCore.Core.Common.ColumnKey.Column">
+            <summary>
+            Gets column of this item.
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.Common.ColumnKey.ParentRelation">
+            <summary>
+            Gets relation of this item.
+            </summary>
+        </member>
+        <member name="M:FistCore.Core.Common.DALHelper.GetDao``1(FistCore.Core.IConnectionProvider)">
+            <summary>Returns DAO for new entity.</summary>
+        </member>
+        <member name="M:FistCore.Core.Common.DALHelper.GetDao(FistCore.Core.IEntity,FistCore.Core.IConnectionProvider)">
+            <summary>Returns DAO for selected entity.</summary>
+        </member>
+        <member name="M:FistCore.Core.Common.DALHelper.GetDao(FistCore.Core.IDbTable,FistCore.Core.IConnectionProvider)">
+            <summary>Returns DAO for selected table.</summary>
+        </member>
+        <member name="M:FistCore.Core.Common.DALHelper.GetDao(FistCore.Core.IEntityCollection,FistCore.Core.IConnectionProvider)">
+            <summary>Returns DAO for selected collection.</summary>
+        </member>
+        <member name="M:FistCore.Core.Common.DALHelper.GetFieldCaption(FistCore.Core.IDbColumn)">
+            <summary>
+            Returns full name of column
+            </summary>
+            <param name="column">Column to get full name</param>
+            <returns>Full name of column</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.DALHelper.SaveEntities(FistCore.Core.IEntityCollection,FistCore.Core.IConnectionProvider)">
+            <summary>
+            Saves collection of entites
+            </summary>
+            <param name="entities">Entities to save</param>
+            <param name="conn">Connection provider.</param>
+        </member>
+        <member name="M:FistCore.Core.Common.DALHelper.EnsureParents(FistCore.Core.IEntity,FistCore.Core.DbRelation[])">
+            <summary>
+            Fetches parents whose FK is defined but parent object is not set. <b>RPC enabled.</b>
+            </summary>
+            <param name="child">Child entity which is to be checked and updated.</param>
+            <param name="parentsToFetch">Relations (foreign keys) to parents which are to be fetched. Child table of the given FK must be the current entity's table; otherwise an exception is generated.</param>
+        </member>
+        <member name="M:FistCore.Core.Common.DALHelper.EnsureGrandParents(FistCore.Core.IEntity,FistCore.Core.DbRelation,FistCore.Core.DbRelation[])">
+            <summary>
+            Fetches parent with grand parents whose FK is defined but parent object is not set. <b>RPC enabled.</b>
+            </summary>
+            <param name="child">Child entity which is to be checked and updated.</param>
+            <param name="parentToFetch">Relation (foreign key) to parent which is to be fetched. Child table of the given FK must be the current entity's table; otherwise an exception is generated.</param>
+            <param name="grandParentsToFetch">Relations (foreign keys) between parent and grand parents which are to be fetched.</param>
+        </member>
+        <member name="M:FistCore.Core.Common.DALHelper.EnsureGrandParents(FistCore.Core.IEntity,FistCore.Core.DbRelation[],FistCore.Core.DbRelation[])">
+            <summary>
+            Fetches parents with grand parents whose FK is defined but parent object is not set. <b>RPC enabled.</b>
+            </summary>
+            <param name="child">Child entity which is to be checked and updated.</param>
+            <param name="parentsToFetch">Relations (foreign keys) to parents which are to be fetched. Child table of the given FK must be the current entity's table; otherwise an exception is generated.</param>
+            <param name="grandParentsToFetch">Relations (foreign keys) between parents and grand parents which are to be fetched.</param>
+        </member>
+        <member name="M:FistCore.Core.Common.DALHelper.FixNullStringValues(FistCore.Core.IEntity)">
+            <summary>
+            Sets nulls for nullabe filed values
+            </summary>
+            <param name="entity">Referenced entity.</param>
+        </member>
+        <member name="M:FistCore.Core.Common.DALHelper.FixNullToStringEmpty(FistCore.Core.IEntity)">
+            <summary>
+            Set string.Empty for notnullable field
+            </summary>
+            <param name="entity"></param>
+        </member>
+        <member name="M:FistCore.Core.Common.DALHelper.FixNullIntValues(FistCore.Core.IEntity)">
+            <summary>
+            Set 0 for non nullable field
+            </summary>
+            <param name="entity"></param>
+        </member>
+        <member name="M:FistCore.Core.Common.DALHelper.FixAllNull(FistCore.Core.IEntity)">
+            <summary>
+            Fixes all non-nullable fields for entity to default values
+            </summary>
+            <param name="entity"></param>
+        </member>
+        <member name="M:FistCore.Core.Common.DALHelper.CheckEntityRules(FistCore.Core.IEntity)">
+            <summary>
+            Checks basic field rules for entity.
+            </summary>
+            <param name="entity">Entity to check for rules.</param>
+            <returns>All rules that are checked.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.DALHelper.CompareColumns(FistCore.Core.IDbColumn,FistCore.Core.IDbColumn)">
+            <summary>
+            Compares <see cref="T:FistCore.Core.IDbColumn"/> types. If any of columns does not have table specified it ignores <see cref="T:FistCore.Core.IDbTable"/> property.
+            </summary>
+            <param name="first">First column to compare.</param>
+            <param name="second">Second column to compare.</param>
+            <returns>Returns true if the columns are the same. Does not need to have equal reference.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.DALHelper.FindColumnInList(System.Collections.Generic.IEnumerable{FistCore.Core.IDbColumn},FistCore.Core.IDbColumn)">
+            <summary>
+            Searches a list for <see cref="T:FistCore.Core.IDbColumn"/> that matches one to find.
+            </summary>
+            <param name="list">List of columns.</param>
+            <param name="toFind">Column to find. Does not need to have equal reference.</param>
+            <returns>Returns match from the list. Or null.</returns>
+        </member>
+        <member name="T:FistCore.Core.Common.IActor">
+            <summary>
+            Defines interface for actor (user that logged in)
+            </summary>
+        </member>
+        <member name="T:FistCore.Core.Common.IBusinessObject">
+            <summary>
+            Defines methods and properties which must be implemented by every business logic layer class.
+            </summary>
+        </member>
+        <member name="M:FistCore.Core.Common.IBusinessObject.GrantFetch(FistCore.Core.Common.IActor)">
+            <summary>
+            Checks whether the actor has permissions to fetch the data requested.
+            </summary>
+            <param name="actor">Actor whose data-access permissions are to be checked.</param>
+            <returns>Collection of permissions (broken rules) that the actor has failed.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.IBusinessObject.GrantSave(FistCore.Core.Common.IActor)">
+            <summary>
+            Checks whether the actor has permissions to save the current object.
+            </summary>
+            <param name="actor">Actor whose data-access permissions are to be checked.</param>
+            <returns>Collection of permissions (broken rules) that the actor has failed.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.IBusinessObject.GrantDelete(FistCore.Core.Common.IActor)">
+            <summary>
+            Checks whether the actor has permissions to delete the current object.
+            </summary>
+            <param name="actor">Actor whose data-access permissions are to be checked.</param>
+            <returns>Collection of permissions (broken rules) that the actor has failed.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.IBusinessObject.GrantCreate(FistCore.Core.Common.IActor)">
+            <summary>
+            Checks whether the actor has permissions to create the current object.
+            </summary>
+            <param name="actor">Actor whose data-access permissions are to be checked.</param>
+            <returns>Collection of permissions (broken rules) that the actor has failed.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.IBusinessObject.Validate(FistCore.Core.Common.ValidationLevel)">
+            <summary>
+            Validates a business object.
+            </summary>
+            <param name="level">Specifies the detail of validation.</param>
+            <returns>Collection of broken rules.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.IBusinessObject.DeleteIfValid(FistCore.Core.Common.IActor,System.Boolean)">
+            <summary>
+            Deletes a business object from the data-source.
+            </summary>
+            <param name="actionInitiator">Action initiator. This may be an application user, software module, 3rd party
+            application etc. which is initiating the fetch action. <b>Null</b> is not allowed.</param>
+            <param name="detailLevel">Specifies the scope and the detail level of data (related entities) that is to be
+            fetched. Specifies the minimum required level. Method may fetch more than requested, but never less.</param>
+            <param name="enforceSecurityChecks">Indicates whether the actor's permissions to fetch the requested data are
+            checked. Set to <b>false</b> only if client is trusted and the security checks have been executed elsewhere.</param>
+            <returns>Collection of broken rules. If not empty, the object was not deleted.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.IBusinessObject.FetchIfValid(FistCore.Core.Common.IActor,FistCore.Core.Common.DataAccessScope,System.Boolean)">
+            <summary>
+            Fetches a business object from the data-source.
+            </summary>
+            <param name="actionInitiator">Action initiator. This may be an application user, software module, 3rd party
+            application etc. which is initiating the fetch action. <b>Null</b> is not allowed.</param>
+            <param name="detailLevel">Specifies the scope and the detail level of data (related entities) that is to be
+            fetched. Specifies the minimum required level. Method may fetch more than requested, but never less.</param>
+            <param name="enforceSecurityChecks">Indicates whether the actor's permissions to fetch the requested data are
+            checked. Set to <b>false</b> only if client is trusted and the security checks have been executed elsewhere.</param>
+            <returns>Collection of broken rules. If not empty, the object was not fetched.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.IBusinessObject.SaveIfValid(FistCore.Core.Common.IActor,FistCore.Core.Common.ValidationLevel,System.Boolean)">
+            <summary>
+            Validates and saves a business object if it's valid.
+            </summary>
+            <param name="actionInitiator">Action initiator. This may be an application user, software module, 3rd party
+            application etc. which is initiating the save action. <b>Null</b> is not allowed.</param>
+            <param name="level">Specifies the detail of validation.</param>
+            <param name="enforceSecurityChecks">Indicates whether the actor's permissions to save the current object are
+            checked. Set to <b>false</b> only if client is trusted and the security checks have been executed elsewhere.</param>
+            <returns>Collection of broken rules. If not empty, the object was not saved.</returns>
+        </member>
+        <member name="T:FistCore.Core.Common.DataAccessScope">
+            <summary>
+            Specifies the scope of data-access operation.
+            <seealso cref="!:IBusinessObject.Fetch"/>
+            </summary>
+        </member>
+        <member name="F:FistCore.Core.Common.DataAccessScope.EntityOnly">
+            <summary>
+            Only the entity defined by the given ID is fetched.
+            </summary>
+        </member>
+        <member name="F:FistCore.Core.Common.DataAccessScope.Parents">
+            <summary>
+            Entity defined by the given ID and its <b>parent</b> entities are fetched.
+            </summary>
+        </member>
+        <member name="F:FistCore.Core.Common.DataAccessScope.Children">
+            <summary>
+            Entity defined by the given ID and its <b>child</b> entities are fetched.
+            </summary>
+        </member>
+        <member name="F:FistCore.Core.Common.DataAccessScope.ParentsAndChildren">
+            <summary>
+            Entity defined by the given ID, its <b>parent</b> and <b>child</b> entities are fetched.
+            </summary>
+        </member>
+        <member name="F:FistCore.Core.Common.DataAccessScope.AllRelatedEntites">
+            <summary>
+            All entites related to the business object defined by the given ID are fetched.
+            </summary>
+            <remarks>This level is the highest possible. It covers all predefined and custom levels.</remarks>
+        </member>
+        <member name="M:FistCore.Core.Common.DataAccessScope.#ctor(System.UInt32)">
+            <summary>
+            Initializes a new instance of <b>DataAccessScope</b> structure.
+            </summary>
+            <param name="level">32bit mask that defines the level.</param>
+        </member>
+        <member name="M:FistCore.Core.Common.DataAccessScope.#ctor(FistCore.Core.Common.DataAccessScope)">
+            <summary>
+            Initializes a new instance of <b>DataAccessScope</b> structure. Copy constructor.
+            </summary>
+            <param name="level">Existing level.</param>
+        </member>
+        <member name="M:FistCore.Core.Common.DataAccessScope.#ctor(System.UInt32[])">
+            <summary>
+            Initializes a new instance of <b>DataAccessScope</b> structure.
+            </summary>
+            <param name="levelsToCombine">Array of 32bit masks which are combined into a new 32bit mask.</param>
+            <remarks>The new level is a superset of all given levels.</remarks>
+        </member>
+        <member name="M:FistCore.Core.Common.DataAccessScope.#ctor(FistCore.Core.Common.DataAccessScope[])">
+            <summary>
+            Initializes a new instance of <b>DataAccessScope</b> structure.
+            </summary>
+            <param name="levelsToCombine">Array of levels which are combined into a new level.</param>
+            <remarks>The new level is a superset of all given levels.</remarks>
+        </member>
+        <member name="M:FistCore.Core.Common.DataAccessScope.Intersects(FistCore.Core.Common.DataAccessScope)">
+            <summary>
+            Returns a value indicating whether the current and given level have common elements.
+            </summary>
+            <param name="level">Other level.</param>
+            <returns><b>true</b> if current level intersects the given level; <b>false</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.DataAccessScope.Intersects(FistCore.Core.Common.DataAccessScope[])">
+            <summary>
+            Returns a value indicating whether the current and given levels have common elements.
+            </summary>
+            <param name="levels">Other levels.</param>
+            <returns><b>true</b> if current level intersects at least one of the given levels; <b>false</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.DataAccessScope.Equals(System.Object)">
+            <summary>
+            Determines whether the two <b>DataAccessScope</b> instances are equal.
+            </summary>
+            <param name="obj">Other <b>DataAccessScope</b> instance.</param>
+            <returns><b>true</b> if the levels are equal; <b>false</b> if not equal or
+            if the given object is not an instance of <b>DataAccessScope</b>.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.DataAccessScope.Equals(FistCore.Core.Common.DataAccessScope)">
+            <summary>
+            Determines whether the two <b>DataAccessScope</b> instances are equal.
+            </summary>
+            <param name="level">Other <b>DataAccessScope</b> instance.</param>
+            <returns><b>true</b> if the levels are equal; <b>false</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.DataAccessScope.GetHashCode">
+            <summary>
+            Returns the hash code for this instance.
+            </summary>
+            <returns>A 32-bit signed integer hash code.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.DataAccessScope.op_Explicit(FistCore.Core.Common.DataAccessScope)~System.UInt32">
+            <summary>
+            Casts an instance of <b>DataAccessScope</b> to a <b>System.UInt32</b> value.
+            </summary>
+            <param name="level">Level to be converted to <b>System.UInt32</b>.</param>
+            <returns><b>System.UInt32</b> value which represents a 32bit mask.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.DataAccessScope.op_Explicit(System.UInt32)~FistCore.Core.Common.DataAccessScope">
+            <summary>
+            Casts a <b>System.UInt32</b> value to an instance of <b>DataAccessScope</b>.
+            </summary>
+            <param name="level"><b>System.UInt32</b> value which represents a 32bit mask.</param>
+            <returns>An instance of <b>DataAccessScope</b>.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.DataAccessScope.op_Equality(FistCore.Core.Common.DataAccessScope,FistCore.Core.Common.DataAccessScope)">
+            <summary>
+            Determines whether the two <b>DataAccessScope</b> instances are equal.
+            </summary>
+            <param name="lhs">The first value to be compared.</param>
+            <param name="rhs">The second value to be compared.</param>
+            <returns><b>true</b> if the levels are equal; <b>false</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.DataAccessScope.op_Inequality(FistCore.Core.Common.DataAccessScope,FistCore.Core.Common.DataAccessScope)">
+            <summary>
+            Determines whether the two <b>DataAccessScope</b> instances are not equal.
+            </summary>
+            <param name="lhs">The first value to be compared.</param>
+            <param name="rhs">The second value to be compared.</param>
+            <returns><b>true</b> if the levels are not equal; <b>false</b> otherwise.</returns>
+        </member>
+        <member name="P:FistCore.Core.Common.DataAccessScope.Value">
+            <summary>
+            Gets or sets the 32bit mask that defines the level.
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.Common.DataAccessScope.IncludesParents">
+            <summary>
+            Gets a value indicating whether the current scope includes/intersects <see cref="F:FistCore.Core.Common.DataAccessScope.Parents"/>.
+            </summary>
+            <value><b>true</b> if <b>parent</b> entities should be fetched.</value>
+        </member>
+        <member name="P:FistCore.Core.Common.DataAccessScope.IncludesChildren">
+            <summary>
+            Gets a value indicating whether the current scope includes/intersects <see cref="F:FistCore.Core.Common.DataAccessScope.Children"/>.
+            </summary>
+            <value><b>true</b> if <b>child</b> entities should be fetched.</value>
+        </member>
+        <member name="T:FistCore.Core.Common.ValidationLevel">
+            <summary>
+            Specifies various validation levels.
+            Business object use this as a hint in their validation methods.
+            </summary>
+        </member>
+        <member name="M:FistCore.Core.Common.ValidationLevel.Equals(System.Object)">
+            <summary>
+            Determines whether the two <b>ValidationLevel</b> instances are equal.
+            </summary>
+            <param name="obj">Other <b>ValidationLevel</b> instance.</param>
+            <returns><b>true</b> if the levels are equal; <b>false</b> if not equal or
+            if the given object is not an instance of <b>ValidationLevel</b>.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.ValidationLevel.GetHashCode">
+            <summary>
+            Returns the hash code for this instance.
+            </summary>
+            <returns>A 32-bit signed integer hash code.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.ValidationLevel.Equals(FistCore.Core.Common.ValidationLevel)">
+            <summary>
+            Determines whether the two <b>ValidationLevel</b> instances are equal.
+            </summary>
+            <param name="otherLevel">Other <b>ValidationLevel</b> instance.</param>
+            <returns><b>true</b> if the levels are equal; <b>false</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.ValidationLevel.op_Equality(FistCore.Core.Common.ValidationLevel,FistCore.Core.Common.ValidationLevel)">
+            <summary>
+            Compares two <b>ValidationLevel</b> instances.
+            </summary>
+            <param name="lhs">The first value to be compared.</param>
+            <param name="rhs">The second value to be compared.</param>
+            <returns><b>true</b> if the levels are equal; <b>false</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.ValidationLevel.op_Inequality(FistCore.Core.Common.ValidationLevel,FistCore.Core.Common.ValidationLevel)">
+            <summary>
+            Compares two <b>ValidationLevel</b> instances.
+            </summary>
+            <param name="lhs">The first value to be compared.</param>
+            <param name="rhs">The second value to be compared.</param>
+            <returns><b>true</b> if the levels are not equal; <b>false</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.ValidationLevel.op_LessThan(FistCore.Core.Common.ValidationLevel,FistCore.Core.Common.ValidationLevel)">
+            <summary>
+            Compares two <b>ValidationLevel</b> instances.
+            </summary>
+            <param name="lhs">The first value to be compared.</param>
+            <param name="rhs">The second value to be compared.</param>
+            <returns><b>true</b> if the left-hand side level is lesser than the right one; <b>false</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.ValidationLevel.op_LessThanOrEqual(FistCore.Core.Common.ValidationLevel,FistCore.Core.Common.ValidationLevel)">
+            <summary>
+            Compares two <b>ValidationLevel</b> instances.
+            </summary>
+            <param name="lhs">The first value to be compared.</param>
+            <param name="rhs">The second value to be compared.</param>
+            <returns><b>true</b> if the left-hand side level is equal or lesser than the right one; <b>false</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.ValidationLevel.op_GreaterThan(FistCore.Core.Common.ValidationLevel,FistCore.Core.Common.ValidationLevel)">
+            <summary>
+            Compares two <b>ValidationLevel</b> instances.
+            </summary>
+            <param name="lhs">The first value to be compared.</param>
+            <param name="rhs">The second value to be compared.</param>
+            <returns><b>true</b> if the left-hand side level is greated than the right one; <b>false</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.ValidationLevel.op_GreaterThanOrEqual(FistCore.Core.Common.ValidationLevel,FistCore.Core.Common.ValidationLevel)">
+            <summary>
+            Compares two <b>ValidationLevel</b> instances.
+            </summary>
+            <param name="lhs">The first value to be compared.</param>
+            <param name="rhs">The second value to be compared.</param>
+            <returns><b>true</b> if the left-hand side level is equal or greater than the right one; <b>false</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.ValidationLevel.CompareTo(System.Object)">
+            <summary>
+            Compares the current instance with another <b>ValidationLevel</b> instance.
+            </summary>
+            <param name="obj">A <b>ValidationLevel</b> instance to compare with this instance.</param>
+            <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.ValidationLevel.CompareTo(FistCore.Core.Common.ValidationLevel)">
+            <summary>
+            Compares the current instance with another <b>ValidationLevel</b> instance.
+            </summary>
+            <param name="otherLevel">A <b>ValidationLevel</b> instance to compare with this instance.</param>
+            <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
+        </member>
+        <member name="P:FistCore.Core.Common.ValidationLevel.BasicFieldConstraints">
+            <summary>
+            Basic database field constraints. Null-checks, data format, minimum and maximum values etc.
+            </summary>
+            <remarks>Rules that affect only a single field. Usefull for real-time validation when business object is being edited.</remarks>
+        </member>
+        <member name="P:FistCore.Core.Common.ValidationLevel.RulesThatDontRequireDatabaseAccess">
+            <summary>
+            All rules that don't require database access.
+            Rules that affect more fields. Eg. one of the two fields is required.
+            </summary>
+            <remarks>Used when all fields of a business object have been set.</remarks>
+        </member>
+        <member name="P:FistCore.Core.Common.ValidationLevel.AllBusinessRules">
+            <summary>
+            All business rules.
+            </summary>
+            <remarks>Usually performed before a business object is persisted.</remarks>
+        </member>
+        <member name="P:FistCore.Core.Common.ValidationLevel.ThoroughValidation">
+            <summary>
+            All busines rules. A lot of database activity.
+            </summary>
+            <remarks>Used when client cannot be trusted (3rd party application). Eg. checks all foreign keys.</remarks>
+        </member>
+        <member name="T:FistCore.Core.Common.IBusinessRule">
+            <summary>
+            Defines interface for bizrules
+            </summary>
+        </member>
+        <member name="T:FistCore.Core.Common.IBusinessRuleCollection">
+            <summary>
+            Defines interface for bizrules collection
+            </summary>
+        </member>
+        <member name="M:FistCore.Core.Common.BusinessRuleCollection.#ctor">
+            <summary>
+            Initializes a new instance of <b>BusinessRuleCollection</b> class.
+            </summary>
+        </member>
+        <member name="M:FistCore.Core.Common.BusinessRuleCollection.#ctor(FistCore.Core.Common.IBusinessRule)">
+            <summary>
+            Initializes a new instance of <b>BusinessRuleCollection</b> class.
+            </summary>
+            <param name="firstRuleInCollection">First rule to add to collection.</param>
+        </member>
+        <member name="M:FistCore.Core.Common.BusinessRuleCollection.Add(FistCore.Core.Common.IBusinessRule)">
+            <summary>
+            Adds a <b>BusinessRule</b> to the end of the <b>BusinessRuleCollection</b>.
+            </summary>
+            <param name="rule">The rule to be added to the end of the collection. <b>null</b> is not allowed.</param>
+            <returns>The rule which was added to the collection.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.BusinessRuleCollection.Add(FistCore.Core.Common.BusinessRuleCollection)">
+            <summary>
+            Adds all rules in the given collection to the current <b>BusinessRuleCollection</b>.
+            </summary>
+            <param name="rules">Rules to be added to the end of the collection.</param>
+        </member>
+        <member name="M:FistCore.Core.Common.BusinessRuleCollection.GetBrokenRules">
+            <summary>
+            Searches the collection for broken rules and returns them.
+            </summary>
+            <returns>A collection of broken rules.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.BusinessRuleCollection.ToString">
+            <summary>
+            Concatenates descriptions of all rules in the collection and converts them to <b>string</b>.
+            </summary>
+            <param name="formatter">The <b>IMessageFormatter</b> that formattes the values contained in the descriptions of the rules.</param>
+            <returns>Descriptions of all rules.</returns>
+        </member>
+        <member name="P:FistCore.Core.Common.BusinessRuleCollection.Item(System.Int32)">
+            <summary>
+            Gets the element at the specified index.
+            </summary>
+            <param name="index">The zero-based index of the element to get.</param>
+            <returns>The element at the specified index.</returns>
+        </member>
+        <member name="P:FistCore.Core.Common.BusinessRuleCollection.Item(System.String)">
+            <summary>
+            Searches the collection for the first occurance of a rule with the specified <see cref="P:FistCore.Core.Common.BusinessRule.Name"/>.
+            </summary>
+            <param name="ruleName">Name of business rule.</param>
+            <returns>Specified rule or <b>null</b> if a rule with the given name is not found in the collection.</returns>
+        </member>
+        <member name="P:FistCore.Core.Common.BusinessRuleCollection.Count">
+            <summary>
+            Gets the number of elements actually contained in the collection.
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.Common.BusinessRuleCollection.HasBrokenRules">
+            <summary>
+            Gets the value indicating whether the collection contains broken rules.
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.Common.BusinessRuleCollection.AllRulesAreObeyed">
+            <summary>
+            Gets the value indicating whether all rules in the collection are obeyed.
+            </summary>
+        </member>
+        <member name="T:FistCore.Core.Common.Validator">
+            <summary>
+            Utility class with common validation methods.
+            </summary>
+        </member>
+        <member name="M:FistCore.Core.Common.Validator.CheckString(System.String,System.Int32)">
+            <summary>
+            Checks if the given string obeys the specified format.
+            </summary>
+            <param name="val">A textual value to validate.</param>
+            <param name="minLength">Minimum length of the text. <b>null</b> is treated as invalid value.</param>
+            <returns><b>true</b> is the given value is valid; <b>false</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.Validator.CheckString(System.String,System.Int32,System.Int32)">
+            <summary>
+            Checks if the given string obeys the specified format.
+            </summary>
+            <param name="val">A textual value to validate.</param>
+            <param name="minLength">Minimum length of the text. <b>null</b> is treated as invalid value.</param>
+            <param name="maxLength">Maximum length of the text.</param>
+            <returns><b>true</b> is the given value is valid; <b>false</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.Validator.CheckString(System.String,System.Boolean,System.Text.RegularExpressions.Regex)">
+            <summary>
+            Checks if the given string obeys the specified format.
+            </summary>
+            <param name="val">A textual value to validate.</param>
+            <param name="isNullable">Specifies whether <b>null</b> represents a valid value.</param>
+            <param name="regularExpression">Specifies valid text format/pattern.</param>
+            <returns><b>true</b> is the given value is valid; <b>false</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.Validator.CheckString(System.String,System.Boolean,System.Boolean,System.Int32,System.Int32,System.Text.RegularExpressions.Regex)">
+            <summary>
+            Checks if the given string obeys the specified format.
+            </summary>
+            <param name="val">A textual value to validate.</param>
+            <param name="isNullable">Specifies whether <b>null</b> represents a valid value.</param>
+            <param name="acceptEmptyString">Specifies whether <see cref="F:System.String.Empty"/> represents a valid value.</param>
+            <param name="minLength">Minimum length of the text. <b>null</b> is treated as invalid value.</param>
+            <param name="maxLength">Maximum length of the text.</param>
+            <param name="regularExpression">Specifies valid text format/pattern.</param>
+            <returns><b>true</b> is the given value is valid; <b>false</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.Validator.CheckInteger(System.Nullable{System.Int32},System.Boolean)">
+            <summary>
+            Checks if the given number obeys the specified constraints.
+            </summary>
+            <param name="val">An integer value to validate.</param>
+            <param name="isNullable">Specifies whether <b>null</b> represents a valid value.</param>
+            <returns><b>true</b> is the given value is valid; <b>false</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.Validator.CheckInteger(System.Nullable{System.Int32},System.Boolean,System.Int32)">
+            <summary>
+            Checks if the given number obeys the specified constraints.
+            </summary>
+            <param name="val">An integer value to validate.</param>
+            <param name="isNullable">Specifies whether <b>null</b> represents a valid value.</param>
+            <param name="minimumValue">Minimum allowed value.</param>
+            <returns><b>true</b> is the given value is valid; <b>false</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.Validator.CheckInteger(System.Nullable{System.Int32},System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            Checks if the given number obeys the specified constraints.
+            </summary>
+            <param name="val">An integer value to validate.</param>
+            <param name="isNullable">Specifies whether <b>null</b> represents a valid value.</param>
+            <param name="minimumValue">Minimum allowed value.</param>
+            <param name="maximumValue">Maximum allowed value.</param>
+            <returns><b>true</b> is the given value is valid; <b>false</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.Validator.CheckInteger(System.Int32,System.Int32)">
+            <summary>
+            Checks if the given number obeys the specified constraints.
+            </summary>
+            <param name="val">An integer value to validate.</param>
+            <param name="minimumValue">Minimum allowed value.</param>
+            <returns><b>true</b> is the given value is valid; <b>false</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.Validator.CheckInteger(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Checks if the given number obeys the specified constraints.
+            </summary>
+            <param name="val">An integer value to validate.</param>
+            <param name="minimumValue">Minimum allowed value.</param>
+            <param name="maximumValue">Maximum allowed value.</param>
+            <returns><b>true</b> is the given value is valid; <b>false</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.Validator.CheckRealNumber(System.Nullable{System.Double},System.Boolean)">
+            <summary>
+            Checks if the given number obeys the specified constraints.
+            </summary>
+            <param name="val">A floating point value to validate.</param>
+            <param name="isNullable">Specifies whether <b>null</b> represents a valid value.</param>
+            <returns><b>true</b> is the given value is valid; <b>false</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.Validator.CheckRealNumber(System.Nullable{System.Double},System.Boolean,System.Boolean)">
+            <summary>
+            Checks if the given number obeys the specified constraints.
+            </summary>
+            <param name="val">A floating point value to validate.</param>
+            <param name="isNullable">Specifies whether <b>null</b> represents a valid value.</param>
+            <param name="mustBePositive">Specifies whether only positive numbers represent a valid value.</param>
+            <returns><b>true</b> is the given value is valid; <b>false</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.Validator.CheckRealNumber(System.Nullable{System.Double},System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            Checks if the given number obeys the specified constraints.
+            </summary>
+            <param name="val">A floating point value to validate.</param>
+            <param name="isNullable">Specifies whether <b>null</b> represents a valid value.</param>
+            <param name="minimumValue">Minimum allowed value.</param>
+            <param name="maximumValue">Maximum allowed value.</param>
+            <returns><b>true</b> is the given value is valid; <b>false</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.Validator.CheckRealNumber(System.Double,System.Boolean)">
+            <summary>
+            Checks if the given number obeys the specified constraints.
+            </summary>
+            <param name="val">A floating point value to validate.</param>
+            <param name="mustBePositive">Specifies whether only positive numbers represent a valid value.</param>
+            <returns><b>true</b> is the given value is valid; <b>false</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.Validator.CheckRealNumber(System.Double,System.Double,System.Double)">
+            <summary>
+            Checks if the given number obeys the specified constraints.
+            </summary>
+            <param name="val">A floating point value to validate.</param>
+            <param name="minimumValue">Minimum allowed value.</param>
+            <param name="maximumValue">Maximum allowed value.</param>
+            <returns><b>true</b> is the given value is valid; <b>false</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.Validator.CheckRealNumber(System.Nullable{System.Decimal},System.Boolean)">
+            <summary>
+            Checks if the given number obeys the specified constraints.
+            </summary>
+            <param name="val">A floating point value to validate.</param>
+            <param name="isNullable">Specifies whether <b>null</b> represents a valid value.</param>
+            <returns><b>true</b> is the given value is valid; <b>false</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.Validator.CheckRealNumber(System.Nullable{System.Decimal},System.Boolean,System.Boolean)">
+            <summary>
+            Checks if the given number obeys the specified constraints.
+            </summary>
+            <param name="val">A floating point value to validate.</param>
+            <param name="isNullable">Specifies whether <b>null</b> represents a valid value.</param>
+            <param name="mustBePositive">Specifies whether only positive numbers represent a valid value.</param>
+            <returns><b>true</b> is the given value is valid; <b>false</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.Validator.CheckRealNumber(System.Nullable{System.Decimal},System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            Checks if the given number obeys the specified constraints.
+            </summary>
+            <param name="val">A floating point value to validate.</param>
+            <param name="isNullable">Specifies whether <b>null</b> represents a valid value.</param>
+            <param name="minimumValue">Minimum allowed value.</param>
+            <param name="maximumValue">Maximum allowed value.</param>
+            <returns><b>true</b> is the given value is valid; <b>false</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.Validator.CheckRealNumber(System.Decimal,System.Boolean)">
+            <summary>
+            Checks if the given number obeys the specified constraints.
+            </summary>
+            <param name="val">A floating point value to validate.</param>
+            <param name="mustBePositive">Specifies whether only positive numbers represent a valid value.</param>
+            <returns><b>true</b> is the given value is valid; <b>false</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.Validator.CheckRealNumber(System.Decimal,System.Decimal,System.Decimal)">
+            <summary>
+            Checks if the given number obeys the specified constraints.
+            </summary>
+            <param name="val">A floating point value to validate.</param>
+            <param name="minimumValue">Minimum allowed value.</param>
+            <param name="maximumValue">Maximum allowed value.</param>
+            <returns><b>true</b> is the given value is valid; <b>false</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.Validator.CheckDate(System.DateTime,System.DateTime)">
+            <summary>
+            Checks if the given DateTime value obeys the specified constraints.
+            </summary>
+            <param name="val">A date value to validate.</param>
+            <param name="minimumValue">Minimum allowed value.</param>
+            <returns><b>true</b> is the given value is valid; <b>false</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.Validator.CheckDate(System.DateTime,System.DateTime,System.DateTime)">
+            <summary>
+            Checks if the given DateTime value obeys the specified constraints.
+            </summary>
+            <param name="val">A date value to validate.</param>
+            <param name="minimumValue">Minimum allowed value.</param>
+            <param name="maximumValue">Maximum allowed value.</param>
+            <returns><b>true</b> is the given value is valid; <b>false</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.Validator.CheckDate(System.Nullable{System.DateTime},System.Boolean)">
+            <summary>
+            Checks if the given DateTime value obeys the specified constraints.
+            </summary>
+            <param name="val">A date value to validate.</param>
+            <param name="isNullable">Specifies whether <b>null</b> represents a valid value.</param>
+            <returns><b>true</b> is the given value is valid; <b>false</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.Validator.CheckDate(System.Nullable{System.DateTime},System.Boolean,System.DateTime)">
+            <summary>
+            Checks if the given DateTime value obeys the specified constraints.
+            </summary>
+            <param name="val">A date value to validate.</param>
+            <param name="isNullable">Specifies whether <b>null</b> represents a valid value.</param>
+            <param name="minimumValue">Minimum allowed value.</param>
+            <returns><b>true</b> is the given value is valid; <b>false</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.Validator.CheckDate(System.Nullable{System.DateTime},System.Boolean,System.DateTime,System.DateTime)">
+            <summary>
+            Checks if the given DateTime value obeys the specified constraints.
+            </summary>
+            <param name="val">A date value to validate.</param>
+            <param name="isNullable">Specifies whether <b>null</b> represents a valid value.</param>
+            <param name="minimumValue">Minimum allowed value.</param>
+            <param name="maximumValue">Maximum allowed value.</param>
+            <returns><b>true</b> is the given value is valid; <b>false</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Core.Common.SearchClass`1.EnsureParentsForEntity(FistCore.Core.IEntity)">
+            <summary>
+            Ensures parents for current entity
+            </summary>
+            <param name="entity">IEntity object to ensure parents for</param>
+        </member>
+        <member name="M:FistCore.Core.Common.SearchClass`1.EnsureParentsForCollection(FistCore.Core.IEntityCollection)">
+            <summary>
+            Ensures parents for entity collection
+            </summary>
+            <param name="collection">Collection for parents</param>
+        </member>
+        <member name="M:FistCore.Core.Common.SearchClass`1.#ctor(FistCore.Core.IConnectionProvider)">
+            <summary>
+            Constructor for class
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.Common.SearchClass`1.Table">
+            <summary>
+            Table object
+            </summary>
+        </member>
+    </members>
+</doc>

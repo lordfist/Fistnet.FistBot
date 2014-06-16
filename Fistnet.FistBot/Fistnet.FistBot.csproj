@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6A08127C-C656-4D1B-8659-B4BE80888517}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Fistnet.FistBot</RootNamespace>
+    <AssemblyName>Fistnet.FistBot</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="robocode">
+      <HintPath>..\Libraries\robocode.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Actions\ActionBase.cs" />
+    <Compile Include="Actions\Gun\AlignAndFire2.cs" />
+    <Compile Include="Actions\Gun\AlignAndFire1.cs" />
+    <Compile Include="Actions\Gun\Fire3.cs" />
+    <Compile Include="Actions\Gun\Fire2.cs" />
+    <Compile Include="Actions\Gun\Fire05.cs" />
+    <Compile Include="Actions\Gun\Fire1.cs" />
+    <Compile Include="Actions\Gun\TurnGunToBody.cs" />
+    <Compile Include="Actions\Gun\TurnGunRight10.cs" />
+    <Compile Include="Actions\Gun\TurnGunRight5.cs" />
+    <Compile Include="Actions\Gun\TurnGunLeft10.cs" />
+    <Compile Include="Actions\Gun\TurnGunLeft5.cs" />
+    <Compile Include="Actions\Gun\TurnGunToEnemy.cs" />
+    <Compile Include="Actions\MoveAndTurn\MoveAhead200Right45.cs" />
+    <Compile Include="Actions\MoveAndTurn\MoveAhead200Right90.cs" />
+    <Compile Include="Actions\MoveAndTurn\MoveAhead50Right45.cs" />
+    <Compile Include="Actions\MoveAndTurn\MoveAhead50Right90.cs" />
+    <Compile Include="Actions\MoveAndTurn\MoveAhead200Left45.cs" />
+    <Compile Include="Actions\MoveAndTurn\MoveAhead200Left90.cs" />
+    <Compile Include="Actions\MoveAndTurn\MoveAhead50Left90.cs" />
+    <Compile Include="Actions\MoveAndTurn\MoveAhead50Left45.cs" />
+    <Compile Include="Actions\MoveAndTurn\MoveToLRight.cs" />
+    <Compile Include="Actions\MoveAndTurn\MoveToLLeft.cs" />
+    <Compile Include="Actions\MoveAndTurn\MoveToTRight.cs" />
+    <Compile Include="Actions\MoveAndTurn\MoveToTLeft.cs" />
+    <Compile Include="Actions\MoveAndTurn\MoveToCenter.cs" />
+    <Compile Include="Actions\MoveAndTurn\MoveToEnemy.cs" />
+    <Compile Include="Actions\MoveAndTurn\MovePerpendicularHalfToEnemy.cs" />
+    <Compile Include="Actions\Move\DoNothing.cs" />
+    <Compile Include="Actions\Radar\UntrackTarget.cs" />
+    <Compile Include="Actions\Radar\TrackTarget.cs" />
+    <Compile Include="Actions\Radar\TurnRadarToBody.cs" />
+    <Compile Include="Actions\Radar\TurnRadarRightLeft60.cs" />
+    <Compile Include="Actions\Radar\TurnRadarRightLeft20.cs" />
+    <Compile Include="Actions\Radar\TurnRadarToGun.cs" />
+    <Compile Include="Actions\Radar\TurnRadarToEnemy.cs" />
+    <Compile Include="Actions\Radar\TurnRadarRight20.cs" />
+    <Compile Include="Actions\Radar\TurnRadarRight60.cs" />
+    <Compile Include="Actions\Radar\TurnRadarLeft60.cs" />
+    <Compile Include="Actions\Radar\TurnRadarLeft20.cs" />
+    <Compile Include="Actions\Turn\TurnAwayFromEnemy.cs" />
+    <Compile Include="Actions\Turn\TurnRight10.cs" />
+    <Compile Include="Actions\Turn\TurnRight90.cs" />
+    <Compile Include="Actions\Turn\TurnLeft90.cs" />
+    <Compile Include="Actions\Turn\TurnLeft10.cs" />
+    <Compile Include="Actions\Turn\TurnPerpendicularToNearestWall.cs" />
+    <Compile Include="Actions\Turn\TurnParallelToNearestWall.cs" />
+    <Compile Include="Actions\Turn\TurnPerpendicularToEnemy.cs" />
+    <Compile Include="Actions\Turn\TurnToEnemy.cs" />
+    <Compile Include="Actions\Turn\TurnAwayFromCenter.cs" />
+    <Compile Include="Actions\Move\Ahead50.cs" />
+    <Compile Include="Actions\Move\AheadDistanceToEnemy.cs" />
+    <Compile Include="Actions\Move\AheadHalfDistanceToEnemy.cs" />
+    <Compile Include="Actions\Move\AheadDistanceToCenter.cs" />
+    <Compile Include="Actions\Common.cs" />
+    <Compile Include="Actions\Move\Back50.cs" />
+    <Compile Include="Actions\Move\BackDistanceToEnemy.cs" />
+    <Compile Include="Actions\Move\BackDistanceToCenter.cs" />
+    <Compile Include="Actions\Turn\TurnToCenter.cs" />
+    <Compile Include="Bot\Bot.cs" />
+    <Compile Include="Bot\BotDna.cs" />
+    <Compile Include="Common.cs" />
+    <Compile Include="Evaluation\Common.cs" />
+    <Compile Include="Evaluation\JumpFalseCondition.cs" />
+    <Compile Include="Evaluation\JumpTrueCondition.cs" />
+    <Compile Include="Evaluation\JumpIfCondition.cs" />
+    <Compile Include="Evaluation\TrueCondition.cs" />
+    <Compile Include="Evaluation\EvaluationBase.cs" />
+    <Compile Include="Field.cs" />
+    <Compile Include="FieldData\ObservedBullet.cs" />
+    <Compile Include="FieldData\ObservedEnemy.cs" />
+    <Compile Include="FieldData\ObservedWall.cs" />
+    <Compile Include="FistBot.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests\Common.cs" />
+    <Compile Include="Tests\TestOthersMoreThan1.cs" />
+    <Compile Include="Tests\TestEnemyGunIsHot.cs" />
+    <Compile Include="Tests\TestFire1DistanceWithin5.cs" />
+    <Compile Include="Tests\TestFire2DistanceWithin5.cs" />
+    <Compile Include="Tests\TestFire3DistanceWithin5.cs" />
+    <Compile Include="Tests\TestFire1DistanceWithin10.cs" />
+    <Compile Include="Tests\TestFire2DistanceWithin10.cs" />
+    <Compile Include="Tests\TestFire3DistanceWithin10.cs" />
+    <Compile Include="Tests\TestFire3DistanceCapable.cs" />
+    <Compile Include="Tests\TestFire2DistanceCapable.cs" />
+    <Compile Include="Tests\TestFire1DistanceCapable.cs" />
+    <Compile Include="Tests\TestEnemyGunTurnOppositeWithin20.cs" />
+    <Compile Include="Tests\TestEnemyRadarTurnWithin20.cs" />
+    <Compile Include="Tests\TestEnemyRadarTurnWithin60.cs" />
+    <Compile Include="Tests\TestEnemyGunTurnWithin5.cs" />
+    <Compile Include="Tests\TestEnemyGunTurnWithin10.cs" />
+    <Compile Include="Tests\TestGunIsHot.cs" />
+    <Compile Include="Tests\TestEnemyHeadingOppositeWithin20.cs" />
+    <Compile Include="Tests\TestEnemyHeadingWithin90.cs" />
+    <Compile Include="Tests\TestEnemyHeadingWithin10.cs" />
+    <Compile Include="Tests\TestEnemyWithin100.cs" />
+    <Compile Include="Tests\TestEnemyWithin50.cs" />
+    <Compile Include="Tests\TestEnemyWithin10.cs" />
+    <Compile Include="Tests\TestEnergyLesserThanEnemy.cs" />
+    <Compile Include="Tests\TestEnergyGreaterThanEnemy.cs" />
+    <Compile Include="Tests\TestEnergyBelow30.cs" />
+    <Compile Include="Tests\TestEnergyBelow10.cs" />
+    <Compile Include="Tests\TestEnemyEnergyBelow10.cs" />
+    <Compile Include="Tests\TestBase.cs" />
+    <Compile Include="Tests\TestEnemyEnergy0.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{958FA388-746B-4165-822B-ECE0D755CC4D}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Fistnet.FistBot.StrategyBuilder</RootNamespace>
+    <AssemblyName>Fistnet.FistBot.StrategyBuilder</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\Robocode\libs\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FistCore.Common">
+      <HintPath>..\Libraries\FistCore\FistCore.Base\FistCore.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="FistCore.Core">
+      <HintPath>..\Libraries\FistCore\FistCore.Base\FistCore.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="FistCore.Core.Common">
+      <HintPath>..\Libraries\FistCore\FistCore.Base\FistCore.Core.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="jni4net.n-0.8.6.0">
+      <HintPath>..\..\..\Robocode\libs\jni4net.n-0.8.6.0.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\Libraries\FistCore\FistCore.Base\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="robocode">
+      <HintPath>..\Libraries\robocode.dll</HintPath>
+    </Reference>
+    <Reference Include="robocode.control">
+      <HintPath>..\Libraries\robocode.control.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BuildStrategy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BuildStrategy.Designer.cs">
+      <DependentUpon>BuildStrategy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DbInteraction\BizObj\Generation.cs" />
+    <Compile Include="DbInteraction\BizObj\Strategy.cs" />
+    <Compile Include="DbInteraction\Entities\Fistnet.FistBot.DAL.cs" />
+    <Compile Include="DbInteraction\Entities\Generation.cs" />
+    <Compile Include="DbInteraction\Entities\Strategy.cs" />
+    <Compile Include="DbInteraction\Permissions.cs" />
+    <Compile Include="GA\DnaStrategyUtil.cs" />
+    <Compile Include="GA\FitnessScore.cs" />
+    <Compile Include="GA\Population.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util.cs" />
+    <EmbeddedResource Include="BuildStrategy.resx">
+      <DependentUpon>BuildStrategy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Fistnet.FistBot\Fistnet.FistBot.csproj">
+      <Project>{6a08127c-c656-4d1b-8659-b4be80888517}</Project>
+      <Name>Fistnet.FistBot</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

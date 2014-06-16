@@ -1,0 +1,79 @@
+USE [FistBot]
+GO
+/****** Object:  StoredProcedure [dbo].[TakeNextStrategy]    Script Date: 17.6.2014. 0:21:41 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[TakeNextStrategy] 
+AS
+BEGIN
+BEGIN TRAN
+
+select top 1 Id, Strategy into #temp from Strategy where Used = 0 and IdGeneration=(select top 1 idGeneration from Generation where active=1);
+
+UPDATE Strategy set Used = 1 where id= (select top 1 id from #temp);
+
+COMMIT TRAN
+
+select * from #temp
+
+END
+
+GO
+/****** Object:  StoredProcedure [dbo].[TakeStrategy]    Script Date: 17.6.2014. 0:21:41 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[TakeStrategy] 
+@id int 
+AS
+BEGIN
+
+select top 1 Id, Strategy from Strategy where id=@id;
+
+
+END
+
+GO
+/****** Object:  Table [dbo].[Generation]    Script Date: 17.6.2014. 0:21:41 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Generation](
+	[IdGeneration] [int] IDENTITY(1,1) NOT NULL,
+	[Active] [bit] NOT NULL,
+ CONSTRAINT [PK_Generation] PRIMARY KEY CLUSTERED 
+(
+	[IdGeneration] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Strategy]    Script Date: 17.6.2014. 0:21:41 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Strategy](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[IdGeneration] [int] NOT NULL,
+	[Strategy] [nvarchar](max) NOT NULL,
+	[Used] [bit] NOT NULL,
+	[Fitness] [decimal](18, 6) NULL,
+ CONSTRAINT [PK_Strategy] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+ALTER TABLE [dbo].[Strategy]  WITH CHECK ADD  CONSTRAINT [FK_Strategy_Generation] FOREIGN KEY([IdGeneration])
+REFERENCES [dbo].[Generation] ([IdGeneration])
+GO
+ALTER TABLE [dbo].[Strategy] CHECK CONSTRAINT [FK_Strategy_Generation]
+GO
