@@ -81,6 +81,9 @@ namespace Fistnet.FistBot.StrategyBuilder.GA
 
             int genSize = oldGeneration.Count;
             int eliteCount = (int)(genSize * 0.05);
+            if (eliteCount > 2)
+                eliteCount = 2;
+
             int halfCount = (int)(genSize * 0.8);
             int remainingCount = oldGeneration.Count - halfCount - eliteCount;
 
@@ -100,19 +103,20 @@ namespace Fistnet.FistBot.StrategyBuilder.GA
             EntityCollection<StrategyEntity, StrategyMeta> chosenFirst = new EntityCollection<StrategyEntity, StrategyMeta>();
             EntityCollection<StrategyEntity, StrategyMeta> chosenSecond = new EntityCollection<StrategyEntity, StrategyMeta>();
 
+            decimal sumFitness = oldGeneration.Sum((item) => { return item.Fitness.Value; });
+
             while (chosenFirst.Count < halfCount || chosenSecond.Count < halfCount)
             {
+                decimal selectedNumber = (decimal)random.NextDouble() * sumFitness + ((decimal)100 - oldGeneration[0].Fitness.Value);
+                decimal selectedAltNumber = (decimal)random.NextDouble() * sumFitness + ((decimal)100 - oldGeneration[0].Fitness.Value);
+
+                decimal currentFitness = 0;
                 for (int i = 0; i < genSize - 1; i++)
                 {
-                    int fullProbability = (int)i / (int)((double)genSize * 0.10);
+                    currentFitness += ((decimal)100 - oldGeneration[i].Fitness.Value);
 
-                    if (fullProbability <= 1)
-                    {
-                        fullProbability = 2;
-                    }
-
-                    bool chooseThis = (random.Next(fullProbability) == 1);
-                    bool chooseAltThis = (random.Next(fullProbability) == 1);
+                    bool chooseThis = (selectedNumber > currentFitness);
+                    bool chooseAltThis = (selectedAltNumber > currentFitness);
 
                     if (chooseThis && chosenFirst.Count < halfCount)
                         chosenFirst.Add(oldGeneration[i]);
@@ -151,7 +155,11 @@ namespace Fistnet.FistBot.StrategyBuilder.GA
                 StrategyEntity strategy = new StrategyEntity();
                 strategy.IdGeneration = gen.IdGeneration;
                 strategy.Used = false;
-                strategy.Strategy = BotDna.CreateRandomDnaStrategy();
+
+                if (random.Next(2) == 1)
+                    strategy.Strategy = DnaStrategyUtil.CombineDna(BotDna.CreateRandomDnaStrategy(), chosenSecond[i].Strategy);
+                else
+                    strategy.Strategy = DnaStrategyUtil.CombineDna(BotDna.CreateRandomDnaStrategy(), chosenFirst[i].Strategy);
 
                 newGeneration.Add(strategy);
             }

@@ -1,0 +1,673 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FistCore.Core.PostgreSql</name>
+    </assembly>
+    <members>
+        <member name="T:FistCore.Core.PostgreSql.Messages">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.AggregateFunctionFactory_FieldMayNotBeNull">
+            <summary>
+              Looks up a localized string similar to Field may not be NULL..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.ConnectionProvider_ConnectionIsAlreadyOpen">
+            <summary>
+              Looks up a localized string similar to Connection is already open..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.ConnectionProvider_ConnectionStringMayNotBeNull">
+            <summary>
+              Looks up a localized string similar to Connection string may not be NULL..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.ConnectionProvider_ConnIsNotOpen">
+            <summary>
+              Looks up a localized string similar to Connection is not open..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.ConnectionProvider_ThereIsNoTranPending">
+            <summary>
+              Looks up a localized string similar to There is no transaction pending..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.ConnectionProvider_TranAlreadyPending">
+            <summary>
+              Looks up a localized string similar to Already transaction pending. Nesting not allowed..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.ConnectionProvider_UnsupportedDbmsType">
+            <summary>
+              Looks up a localized string similar to Unsupported DBMS type: .
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.ContainsPredicate_FieldXIsNotTextual">
+            <summary>
+              Looks up a localized string similar to CONTAINS predicate may only be used with textual field. {0} is not textual..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.ContainsPredicate_NullIsNotAllowed">
+            <summary>
+              Looks up a localized string similar to Null is not allowed..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.ContainsPredicate_TermIsNotValid">
+            <summary>
+              Looks up a localized string similar to Provided term is not valid. It must contain at least one alphanumeric or underscore character..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.DaoBase_ConnectionProviderMayNotBeNull">
+            <summary>
+              Looks up a localized string similar to ConnectionProvider may not be NULL..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.DbColumn_CantSetSeqForXBecauseNotAutoIncrement">
+            <summary>
+              Looks up a localized string similar to Sequence may not be assigned to {0} column because it is not an auto-incremented column..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.DbColumn_DbColumnIsReadOnlyDataMayNotBeAltered">
+            <summary>
+              Looks up a localized string similar to This DbColumn is read only. Data may not be altered..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.DbColumnCollection_ColumnMayNotBeNull">
+            <summary>
+              Looks up a localized string similar to Column may not be NULL..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.DbColumnCollection_ErrorBecauseItsReadOnly">
+            <summary>
+              Looks up a localized string similar to The attempted operation is invalid when the collection is in read-only state..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.DbmsComponentFactory_DbmsXIsNotSupported">
+            <summary>
+              Looks up a localized string similar to Specified DBMS {0} is not supported..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.DbParameter_NameMayNotBeNull">
+            <summary>
+              Looks up a localized string similar to ParameterName may not be NULL..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.DbParameterCollection_ParamMayNotBeNull">
+            <summary>
+              Looks up a localized string similar to Given parameter may not be null..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.DbRelation_ChildFkMayNotBeNull">
+            <summary>
+              Looks up a localized string similar to Child&apos;s foreign key may not be null..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.DbRelation_FieldTypesDontMatchXIsNotEqualToY">
+            <summary>
+              Looks up a localized string similar to Field types don&apos;t match: parentPrimaryKey[{0}].DbType != childForeignKey[{1}].DbType.
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.DbRelation_ParentAndChildKeysMustHaveEqualLen">
+            <summary>
+              Looks up a localized string similar to Parent and child keys must have equal number of columns..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.DbRelation_ParentPkMayNotBeNull">
+            <summary>
+              Looks up a localized string similar to Parent&apos;s primary key may not be null..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.DbRelationCollection_TableAliasMayNotBeNull">
+            <summary>
+              Looks up a localized string similar to Table alias may not be null..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.DbTable_GetChildRelationsNotImplemented">
+            <summary>
+              Looks up a localized string similar to GetChildRelations() method must be implemented in derived classes..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.DbTable_GetChildTablesNotImplemented">
+            <summary>
+              Looks up a localized string similar to GetChildTables() method must be implemented in derived classes..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.EntityBase_AtLeaseOneFieldMustBeSetToPerformUpdate">
+            <summary>
+              Looks up a localized string similar to At least one field has to be set to perform update..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.EntityBase_CannotAutoDeterminParentTableInRecursiveMnRelation">
+            <summary>
+              Looks up a localized string similar to Cannot automatically decide which table is used as a parent table in a recursive many-to-many relation..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.EntityBase_ConnectionProviderMayNotBeNull">
+            <summary>
+              Looks up a localized string similar to ConnectionProvider may not be NULL..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.EntityBase_CurrTableMustBeParentExpectedXButGotY">
+            <summary>
+              Looks up a localized string similar to Current entity&apos;s table must be defined as a child table in the given FK. Expected {0}, but {1} was provided..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.EntityBase_DaoFactoryMayNotBeNull">
+            <summary>
+              Looks up a localized string similar to DAO creation strategies may not be null..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.EntityBase_FieldXDoesNotBelongToChildTable">
+            <summary>
+              Looks up a localized string similar to The specified field {0} does not belong to the child table..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.EntityBase_InvalidParentExpectedXButGotY">
+            <summary>
+              Looks up a localized string similar to Invalid parent table. Expected {0}, but {1} was provided..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.EntityBase_NegativeValueIsNotAllowed">
+            <summary>
+              Looks up a localized string similar to Negative value is not allowed..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.EntityBase_PkFieldsNotSet">
+            <summary>
+              Looks up a localized string similar to Primary key field(s) of this entity are not set..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.EntityBase_PkIsNotDefinedForTable">
+            <summary>
+              Looks up a localized string similar to Primary key is not defined for the parent table/view..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.EntityBase_PkOfCurrParentEntityNotSet">
+            <summary>
+              Looks up a localized string similar to Primary key of the current (parent) entity is not set..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.EntityBase_SearchConditionMayNotBeNullOrEmpty">
+            <summary>
+              Looks up a localized string similar to Search condition may not be NULL or empty..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.EntityBase_UnsupportedMnParentValue">
+            <summary>
+              Looks up a localized string similar to Unsupported ManyToManyParent value: .
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.EntityBase_UpdateListMayBotBeNullOrEmpty">
+            <summary>
+              Looks up a localized string similar to Update list may not be NULL or empty..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.EntityBuilder_ReaderIsClosed">
+            <summary>
+              Looks up a localized string similar to Data reader is closed..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.EntityCollection_NullsNotAllowed">
+            <summary>
+              Looks up a localized string similar to Nulls are not allowed in the EntityCollection..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.EntityCollection_OnlyXOrDerivedClassesAreAllowed">
+            <summary>
+              Looks up a localized string similar to Only {0} or derived objects are allowed in the collection..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.EntityCollection_SetParents_InvalidFk">
+            <summary>
+              Looks up a localized string similar to An entity in the current collection references a parent which is not found in the given collection..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.EntityDAO_AtLeastOneFieldMustBeSetToExecUpdate">
+            <summary>
+              Looks up a localized string similar to At least one field has to be set to perform update..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.EntityDAO_CantAutoDecideWhichTableIsParentInMnRelation">
+            <summary>
+              Looks up a localized string similar to Cannot automatically decide which table is used as a parent table in a recursive many-to-many relation..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.EntityDAO_CurrEntityTableMustBeParentExpectedXGotY">
+            <summary>
+              Looks up a localized string similar to Current entity&apos;s table must be defined as a parent table in the given relation. Expected {0}, but {1} was provided..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.EntityDAO_CurrTableMustBeParentExpectedXButGotY">
+            <summary>
+              Looks up a localized string similar to Current entity&apos;s table must be defined as a child table in the given FK. Expected {0}, but {1} was provided..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.EntityDAO_DaoFactoryMayNotBeNull">
+            <summary>
+              Looks up a localized string similar to DAO factory may not be null..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.EntityDAO_EntityMayNotBeNull">
+            <summary>
+              Looks up a localized string similar to Entity to work with may not be null..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.EntityDAO_InvalidParentTableExpectedXGotY">
+            <summary>
+              Looks up a localized string similar to Invalid parent table. Expected {0}, but {1} was provided..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.EntityDAO_NegativeValueIsNotAllowed">
+            <summary>
+              Looks up a localized string similar to Negative value is not allowed..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.EntityDAO_PkMustBeDefinedAndInited">
+            <summary>
+              Looks up a localized string similar to PK must be defined for entity&apos;s table and PK properties must be initialized..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.EntityDAO_PkNotDefinedForTable">
+            <summary>
+              Looks up a localized string similar to Primary key is not defined for the entity&apos;s table/view..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.EntityDAO_PkNotSet">
+            <summary>
+              Looks up a localized string similar to Primary key field(s) of the entity are not set..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.EntityDAO_PkOfCurrParentEntityIsNotSet">
+            <summary>
+              Looks up a localized string similar to Primary key of the current (parent) entity is not set..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.EntityDAO_RelationCountMustBeEqualToCollectionCount">
+            <summary>
+              Looks up a localized string similar to The count and order of relations must match the count and order of collections..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.EntityDAO_SearchConditionMayNotBeNullOrEmpty">
+            <summary>
+              Looks up a localized string similar to Search condition may not be NULL or empty..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.EntityDAO_SpecifiedFieldXDoesntBelongToChildTable">
+            <summary>
+              Looks up a localized string similar to The specified field ({0}) does not belong to the child table..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.EntityDAO_UnsupportedManyToManyParentValue">
+            <summary>
+              Looks up a localized string similar to Unsupported ManyToManyParent value: .
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.EntityDAO_UpdateListMayNotBeNullOrEmpty">
+            <summary>
+              Looks up a localized string similar to Update list may not be NULL or empty..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.EntityDaoFactory_DefaultStrategyMayNotBeNull">
+            <summary>
+              Looks up a localized string similar to Default strategy may not be null..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.EntityFiller_ReaderIsClosed">
+            <summary>
+              Looks up a localized string similar to Reader is closed..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.EntityModelBase_EntityNotFromSameTableExpextedXButGotY">
+            <summary>
+              Looks up a localized string similar to Given entity doesn&apos;t belong to same table as current entity. Expected {0} but {1} was provided..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.EntityModelBase_SpecFieldDoesntExistInEntity">
+            <summary>
+              Looks up a localized string similar to Specified field doesn&apos;t exist in this entity..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.EntityModelBase_TableDoesntContainSpecifiedColumn">
+            <summary>
+              Looks up a localized string similar to DataTable doesn&apos;t contain the specified column: .
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.EntityModelBase_TableProviderMustBeStaticMethod">
+            <summary>
+              Looks up a localized string similar to The provided method must be static..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.ExistsPredicate_OnlySubqueriesAreAllowed">
+            <summary>
+              Looks up a localized string similar to Exists predicate accepts only SqlItemType.SubQuery items..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.GenericEntityCollection_OnlyXOrDerivedClassesAreAllowed">
+            <summary>
+              Looks up a localized string similar to Only {0} or derived objects are allowed in the collection..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.GenericHierarchicalQueryExecutor_EndLevelMustBeGreaterThanBeginLevel">
+            <summary>
+              Looks up a localized string similar to End level must be greater than begin level..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.GenericHierarchicalQueryExecutor_MaxLevelReachedFormat">
+            <summary>
+              Looks up a localized string similar to The maximum (sub)tree level has been reached. The maximum level may not be higher than {0}. This can be changed by configuring &apos;FistCore.Core.GenericHierarchicalQueryExecutor.MaxLevel&apos; entry in appSettings section of application&apos;s configuration file. The configured value may not be greater than 65535..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.GenericHierarchicalQueryExecutor_MustBePositiveInteger">
+            <summary>
+              Looks up a localized string similar to Must be a positive integer..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.GenericHierarchicalQueryExecutor_OnyNumberMayBeSummedColXTypeIsY">
+            <summary>
+              Looks up a localized string similar to Only numbers can be summed. Column &apos;{0}&apos; type is: {1}.
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.GenericHierarchicalQueryExecutor_RecursiveRelationIsRequired">
+            <summary>
+              Looks up a localized string similar to A recursive relation is required..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.GenericUpdater_SetListIsEmpty">
+            <summary>
+              Looks up a localized string similar to The SET list is empty..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.InPredicate_AtLeastOneValueIsRequired">
+            <summary>
+              Looks up a localized string similar to At least one value is required for InPredicate..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.InPredicate_NullsAreNotAllowedInArray">
+            <summary>
+              Looks up a localized string similar to Given list may not contain NULLs..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.InsertList_MayNotContainNulls">
+            <summary>
+              Looks up a localized string similar to InsertList may not contain nulls..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.InsertStatement_ColMayNoBeNull">
+            <summary>
+              Looks up a localized string similar to Column may not be NULL..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.ManyToManyRelation_RelationsSpecifyDiffJunctionTables">
+            <summary>
+              Looks up a localized string similar to Relations specify different junction tables..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.OrderByClause_ColumnNameMayNotBeNullOrEmpty">
+            <summary>
+              Looks up a localized string similar to Column name may not be NULL or empty string..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.OrderByClause_FieldMayNotBeNull">
+            <summary>
+              Looks up a localized string similar to Field may not be NULL..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.PkUtil_FkMustBeCompleteOrNull">
+            <summary>
+              Looks up a localized string similar to FK values in the child entity are invalid. Either all, or none of the FK properties must be set..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.PredicateFactory_ObjReferenceIsNull">
+            <summary>
+              Looks up a localized string similar to Object reference not set to an instance of an object..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.PredicateItem_UnsupportedItemType">
+            <summary>
+              Looks up a localized string similar to Unsupported item type: .
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.RecursiveCteExecutor_EndLevelMustBeGreaterThanBeginLevel">
+            <summary>
+              Looks up a localized string similar to End level must be greater than begin level..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.RecursiveCteExecutor_MustBePositiveInteger">
+            <summary>
+              Looks up a localized string similar to Must be a positive integer..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.RecursiveCteExecutor_RecursiveRelationIsRequired">
+            <summary>
+              Looks up a localized string similar to A recursive relation is required..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.RecursiveCteExecutor_StatementWichUsesCteIsNotYetSet">
+            <summary>
+              Looks up a localized string similar to A statement which uses the CTE is not yet set..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.RecursiveCteExecutor_UpdateStatementWichUsesCteIsNotYetSet">
+            <summary>
+              Looks up a localized string similar to Update statement which uses CTE is not set..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.RelationBucket_AlreadyConnectsXAndYTables">
+            <summary>
+              Looks up a localized string similar to The bucket already contains a relation that connects the {0} and {1} tables..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.RelationBucket_DataSetNotCompatible">
+            <summary>
+              Looks up a localized string similar to Target DataSet structure is not compatible with this RelationBucket. Missing table: .
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.RelationBucket_None">
+            <summary>
+              Looks up a localized string similar to NONE.
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.RelationBucket_NotAllTablesAreConnectedTheseAreConnected">
+            <summary>
+              Looks up a localized string similar to Relations in the RelationBucket do not connect all tables. Make sure that all relations required to connect the table have been provided. If table aliases are used then check that relations properly use them. The following tables have been successfully added to the FROM clause:.
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.SealedDbTable_GetChildRelationsNotImplemented">
+            <summary>
+              Looks up a localized string similar to GetChildRelations() method must be implemented in derived classes..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.SealedDbTable_GetChildTablesNotImplemented">
+            <summary>
+              Looks up a localized string similar to GetChildTables() method must be implemented in derived classes..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.SearchCondition_PredicateMayNotBeNull">
+            <summary>
+              Looks up a localized string similar to Predicate may not be NULL..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.SearchCondition_SubConditionMayNotBeNull">
+            <summary>
+              Looks up a localized string similar to Sub-condition may not be NULL or empty..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.SelectItem_UnsuportedItemType">
+            <summary>
+              Looks up a localized string similar to Unsupported item type:.
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.SelectItemCollection_ObjRefIsNull">
+            <summary>
+              Looks up a localized string similar to Object reference not set to an instance of an object..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.SqlUpdater_SetListIsEmpty">
+            <summary>
+              Looks up a localized string similar to The SET list is empty..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.UpdateExpression_UnsupportedItemType">
+            <summary>
+              Looks up a localized string similar to Unsupported item type: .
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.UpdateExpression_ValMayNotBeNull">
+            <summary>
+              Looks up a localized string similar to Value cannot be null..
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.Messages.UpdateList_ColMayNotBeNull">
+            <summary>
+              Looks up a localized string similar to Column may not be NULL..
+            </summary>
+        </member>
+        <member name="M:FistCore.Core.PostgreSql.PostgreSqlInserter.RenderInsert(FistCore.Core.InsertStatement,FistCore.Core.DbParameter,FistCore.Core.DbmsType,System.Text.StringBuilder,FistCore.Core.DbParameterCollection)">
+            <summary>
+            Renders INSERT statement and code that retrieves the new ID.
+            </summary>
+            <param name="insert">INSERT statement that is being rendered.</param>
+            <param name="nextSequence">Ignored. SQL Server doesn't use sequences.</param>
+            <param name="dbms">Target DBMS. Different auto-id retrieval for SQL 7.0 then in newer versions.</param>
+            <param name="output">StringBuilder to which the SQL code is appended.</param>
+            <param name="parameters">SQL parameter collection to which the object's and its children's
+            parameters are added. After the rendering is done the collection contains all parameters with unique names.</param>
+            <returns><b>null</b> because automatically generated ID is fetched via RETURNING clauseas a part of INSERT statement.</returns>
+        </member>
+        <member name="M:FistCore.Core.PostgreSql.PostgreSqlInserter.Execute(FistCore.Core.InsertStatement,FistCore.Core.DbmsType,FistCore.Core.IConnectionProvider,FistCore.Core.CommandExecutionStatistics@,System.Int32)">
+            <summary>Executes the INSERT command. Automatically generates the code that retrieves the new identity for
+            the supported databases. DBMS specific code depends on the DBMS property of the used ConnectionProvider.</summary>
+            <param name="insert">INSERT statement to execute.</param>
+            <param name="dbms">Target DBMS.</param>
+            <param name="conn">Connection-transaction context to use.</param>
+            <param name="lastExecutedCommandInfo">Output parameter: statistic for executed command.</param>
+            <param name="cmdTimeout">Timeout for the execution.</param>
+            <returns>Automatically generated ID for inserted row, or <b>null</b> if ID is not automatically generated.</returns>
+        </member>
+        <member name="T:FistCore.Core.PostgreSql.PostgreSqlConnectionProvider">
+            <summary>
+            IConnectionProvider implementation for PostgreSQL databases.
+            </summary>
+            <remarks>Refrain from using this class in your code. Always use <see cref="T:FistCore.Core.IConnectionProvider"/> interface 
+            instead. Only classes that implement <see cref="T:FistCore.Core.ICatalog"/> interface should be aware of concrete 
+            IConnectionProvider implementation. <b>ICatalog</b> acts as a factory class for IConnectionProvider instances.</remarks>
+        </member>
+        <member name="M:FistCore.Core.PostgreSql.PostgreSqlConnectionProvider.#ctor(FistCore.Core.DbmsType,System.String)">
+            <summary>
+            Constructor. Sets DBMS type and connection string.
+            </summary>
+            <param name="dbmsType">DBMS type to which this provider connects to. Only PostgreSQL compatibile values are allowed.</param>
+            <param name="connectionString">Connection string.</param>
+        </member>
+        <member name="M:FistCore.Core.PostgreSql.PostgreSqlConnectionProvider.#ctor(FistCore.Core.DbmsType,System.String,System.Data.IsolationLevel)">
+            <summary>
+            Constructor. Sets DBMS type and connection string.
+            </summary>
+            <param name="dbmsType">DBMS type to which this provider connects to. Only PostgreSQL compatibile values are allowed.</param>
+            <param name="connectionString">Connection string.</param>
+            <param name="defaultTransactionIsolationLevel">Isolation level for transactions started by the parameterless <see cref="M:FistCore.Core.PostgreSql.PostgreSqlConnectionProvider.BeginTransaction"/> method overload.</param>
+        </member>
+        <member name="M:FistCore.Core.PostgreSql.PostgreSqlConnectionProvider.Dispose">
+            <summary>
+            Releases the resources used by this object.
+            Closes and disposes connection and transaction objects.
+            </summary>
+        </member>
+        <member name="M:FistCore.Core.PostgreSql.PostgreSqlConnectionProvider.Dispose(System.Boolean)">
+            <summary>
+            Releases the resources used by this object.
+            </summary>
+        </member>
+        <member name="M:FistCore.Core.PostgreSql.PostgreSqlConnectionProvider.OpenConnection">
+            <summary>
+            Opens the connection object.
+            Throws exception if it's already open.
+            </summary>
+        </member>
+        <member name="M:FistCore.Core.PostgreSql.PostgreSqlConnectionProvider.BeginTransaction">
+            <summary>
+            Starts a new ADO.NET transaction using the open connection object of this class.
+            Opens the connection if it isn't already open. 
+            No nesting allowed, throws exception if the transaction is already pending.
+            </summary>
+            <remarks>Uses default <see cref="T:System.Data.IsolationLevel"/>.</remarks>
+        </member>
+        <member name="M:FistCore.Core.PostgreSql.PostgreSqlConnectionProvider.BeginTransaction(System.Data.IsolationLevel)">
+            <summary>
+            Starts a new ADO.NET transaction using the open connection object of this class.
+            Opens the connection if it isn't already open. 
+            No nesting allowed, throws exception if the transaction is already pending.
+            </summary>
+            <param name="isolationLevel">The transaction isolation level.</param>
+        </member>
+        <member name="M:FistCore.Core.PostgreSql.PostgreSqlConnectionProvider.CommitTransaction">
+            <summary>
+            Commits a pending transaction on the open connection object of this class.
+            Throws exception if there is no pending transaction.
+            </summary>
+        </member>
+        <member name="M:FistCore.Core.PostgreSql.PostgreSqlConnectionProvider.RollbackTransaction">
+            <summary>
+            Rolls back a transaction from a pending state.
+            Throws exception if there is no pending transaction.
+            </summary>
+        </member>
+        <member name="M:FistCore.Core.PostgreSql.PostgreSqlConnectionProvider.CloseConnection">
+            <summary>
+            Closes the connection to the database. This is the preferred method of closing any open connection.
+            </summary>
+            <remarks>
+            <para>The Close method rolls back any pending transactions. It then releases the connection 
+            to the connection pool, or closes the connection if connection pooling is disabled. 
+            It is a good practice to explicitly close connection immediately after it is no longer required.</para>
+            <para>Does nothing if the connection has already been closed.</para>
+            </remarks>
+        </member>
+        <member name="M:FistCore.Core.PostgreSql.PostgreSqlConnectionProvider.CloseConnection(System.Boolean)">
+            <summary>
+            Closes the open connection and commits or rollbacks transaction as specified.
+            Does nothing if the connection has already been closed.
+            </summary>
+            <param name="commitPendingTransaction">True will commit the current transaction, 
+            false will rollback the complete current transaction.</param>		
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.PostgreSqlConnectionProvider.DBMS">
+            <summary>
+            Gets the DBMS type this provider is working with.
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.PostgreSqlConnectionProvider.IsTransactionPending">
+            <summary>
+            Gets the value which indicates whether there is a pending transaction.
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.PostgreSqlConnectionProvider.IsOpen">
+            <summary>
+            Gets the value which indicates whether the connection is open.
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.PostgreSqlConnectionProvider.Connection">
+            <summary>
+            Gets the connection object.
+            </summary>
+        </member>
+        <member name="P:FistCore.Core.PostgreSql.PostgreSqlConnectionProvider.Transaction">
+            <summary>
+            Gets the transaction object.
+            </summary>
+        </member>
+    </members>
+</doc>

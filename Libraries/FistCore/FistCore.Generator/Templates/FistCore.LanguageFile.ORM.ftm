@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Template>
+  <Header>
+    <Title>BL LanguageData XML</Title>
+    <Description>Generates LanguageData.xml file with messages and captions for selected business objects</Description>
+    <Family>Other</Family>
+  </Header>
+  <Variables>
+    <Variable>
+      <Name>SuffixReplacementMap</Name>
+      <Description>Semicolon delimited rules for table name suffix replacement, eg: "ies"->"y";"s"->""</Description>
+      <DefaultValue></DefaultValue>
+    </Variable>
+    <Variable>
+      <Name>OutputSubdirectory</Name>
+      <Description>Output subdirectory</Description>
+      <DefaultValue></DefaultValue>
+    </Variable>
+    <Variable>
+      <Name>SingleFile</Name>
+      <Description>Name of the single file which will contain code for all selected items</Description>
+      <DefaultValue>LanguageData.xml</DefaultValue>
+    </Variable>
+  </Variables>
+  <ReferencedAssemblies>
+    <Assembly>FistCore.Generator.OrmComponents.dll</Assembly>
+    <Assembly>FistCore.Generator.DbMetaData.dll</Assembly>
+  </ReferencedAssemblies>
+  <Namespaces>
+    <Using>System</Using>
+    <Using>FistCore.Generator.OrmComponents</Using>
+  </Namespaces>
+  <InputComponentBuilder>
+    <Assembly>FistCore.Generator.OrmComponents</Assembly>
+    <Class>FistCore.Generator.OrmComponents.DbComponentBuilder</Class>
+  </InputComponentBuilder>
+  <TemplateSegments>
+    <TemplateSegment Id="FunctionsRoot">
+      <![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<root>
+
+	<Common_Yes>Yes</Common_Yes>
+	<Common_No>No</Common_No>
+	<Common_NewItem>New {0}</Common_NewItem>
+	<Common_EditItem>Edit {0}</Common_EditItem>
+	<Common_DeleteItem>Delete {0}</Common_DeleteItem>
+	<Common_DeleteAll>Delete all</Common_DeleteAll>
+	<Common_DeleteSelected>Delete selected</Common_DeleteSelected>
+	<Common_SearchFor>Search for {0}</Common_SearchFor>
+	<Common_Search>Search!</Common_Search>
+	<Common_SearchFilter>Find by {0}: </Common_SearchFilter>
+	<Common_Edit>Edit</Common_Edit>
+	<Common_Delete>Delete</Common_Delete>
+
+  $Generate("BizObjText", Input.GetChildren(DbComponentType.Table))$
+</root>
+]]>
+    </TemplateSegment>
+    <TemplateSegment Id="BizObjText">
+      <![CDATA[$Generate("FieldCaption", Input.GetChildren(DbComponentType.Field))$
+  $Generate("ChildrenCaption", Input.GetChildren(DbComponentType.ChildRelation))$
+  ]]>
+    </TemplateSegment>
+    <TemplateSegment Id="FieldCaption">
+      <![CDATA[<$Input.Parent.Name$_$Input.PublicMemberName()$>
+    $Input.SplitNameToWords().Replace(" id", "")$
+  </$Input.Parent.Name$_$Input.PublicMemberName()$>
+  ]]>
+    </TemplateSegment>
+    <TemplateSegment Id="ChildrenCaption">
+      <![CDATA[<$Input.Parent.Name$_$Input.ChildClassPrefix()$Children>
+    $Input.ChildClassPrefix().SplitNameToWords()$ stavke
+  </$Input.Parent.Name$_$Input.ChildClassPrefix()$Children>
+  ]]>
+    </TemplateSegment>
+  </TemplateSegments>
+</Template>

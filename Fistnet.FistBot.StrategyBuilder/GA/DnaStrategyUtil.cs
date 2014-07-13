@@ -12,6 +12,8 @@ namespace Fistnet.FistBot.StrategyBuilder.GA
 {
     public class EvalData
     {
+        public static Random rnd = new Random(DateTime.Now.Millisecond * DateTime.Now.Minute + DateTime.Now.Day);
+
         public EvaluationTypeEnum Evaluation { get; set; }
 
         public TestTypeEnum Test { get; set; }
@@ -26,7 +28,6 @@ namespace Fistnet.FistBot.StrategyBuilder.GA
 
         private void RandomizeMe()
         {
-            Random rnd = new Random(DateTime.Now.Millisecond);
             this.Evaluation = BotDna.CreateRandomEval();
             this.Test = BotDna.CreateRandomTest();
 
@@ -194,7 +195,7 @@ namespace Fistnet.FistBot.StrategyBuilder.GA
 
         public static string CombineSingleEval(string dnaEval, string otherDnaEval, int jumpCount, out bool hasJump)
         {
-            if (random.Next(50) == 10)
+            if (random.Next(GlobalConstants.DNA_SIZE * 3) == 5)
             {
                 EvalData evData = new EvalData(true);
 

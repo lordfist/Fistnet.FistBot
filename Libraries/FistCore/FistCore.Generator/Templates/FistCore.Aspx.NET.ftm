@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Template>
+  <Header>
+    <Title>ASPX Template</Title>
+    <Description>Generates ASPX file for an ASP.NET form which acts as a controler for a FistCore based business object.</Description>
+    <Family>EntityUI</Family>
+  </Header>
+  <Variables>
+    <Variable>
+      <Name>WebNamespace</Name>
+      <Description>Web namespace</Description>
+      <DefaultValue>MySolution.Web</DefaultValue>
+    </Variable>
+    <Variable>
+      <Name>BLNamespace</Name>
+      <Description>Web namespace</Description>
+      <DefaultValue>MySolution.BL</DefaultValue>
+    </Variable>
+    <Variable>
+      <Name>DALNamespace</Name>
+      <Description>DAL namespace</Description>
+      <DefaultValue>MySolution.DAL</DefaultValue>
+    </Variable>
+    <Variable>
+      <Name>RelativeFolderUrl</Name>
+      <DefaultValue>~/Forms</DefaultValue>
+      <Description>Relative path to virtual directory which contains the generated form ('~' is the root directory)</Description>
+    </Variable>
+    <Variable>
+      <Name>MasterPage</Name>
+      <DefaultValue>~/Forms/Administrator.Master</DefaultValue>
+      <Description>Master page file path</Description>
+    </Variable>
+    <Variable>
+      <Name>FistCoreWebCtl</Name>
+      <DefaultValue>~/FistCore.Web.Controls</DefaultValue>
+      <Description>FistCore web controls path</Description>
+    </Variable>
+    <Variable>
+      <Name>OutputSubdirectory</Name>
+      <Description>Output subdirectory</Description>
+      <DefaultValue>AspNet</DefaultValue>
+    </Variable>
+  </Variables>
+  <Settings>
+    <Setting>
+      <Name>FileExtension</Name>
+      <Description>File extension</Description>
+      <Value>aspx</Value>
+    </Setting>
+    <Setting>
+      <Name>FileNameSuffix</Name>
+      <Description>Suffix appended to generated file</Description>
+      <Value>Form</Value>
+    </Setting>
+  </Settings>
+  <ReferencedAssemblies>
+    <Assembly>FistCore.Generator.EntityComponents.dll</Assembly>
+  </ReferencedAssemblies>
+  <Namespaces>
+    <Using>System</Using>
+    <Using>FistCore.Generator.EntityComponents</Using>
+  </Namespaces>
+  <InputComponentBuilder>
+    <Assembly>FistCore.Generator.EntityComponents</Assembly>
+    <Class>FistCore.Generator.EntityComponents.FistCoreComponentBuilder</Class>
+  </InputComponentBuilder>
+  <TemplateSegments>
+    <TemplateSegment Id="AspxRoot">
+      <![CDATA[<%@ Page Title="$Input.Name$" Language="C#" MasterPageFile="$Variables["MasterPage"]$"
+    AutoEventWireup="True" CodeBehind="$Input.Name$Form.aspx.cs" Inherits="$Variables["WebNamespace"]$.$Input.Name$Form" %>
+
+<%@ Register TagName="Dialog" TagPrefix="fistCore" Src="$Variables["FistCoreWebCtl"]$/DialogControl.ascx" %>
+<%@ Register TagName="Pager" TagPrefix="fistCore" Src="$Variables["FistCoreWebCtl"]$/Pager.ascx" %>
+<%@ Register TagName="TableView" TagPrefix="fistCore" Src="$Variables["FistCoreWebCtl"]$/TableViewControl.ascx" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderHeader" runat="server">
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderBody" runat="server">
+    <asp:UpdatePanel ID="AjaxUpdatePanel" runat="server">
+        <ContentTemplate>
+            <div class="Filter">
+                <div class="ui-corner-all ui-widget-header doc-header">
+                    Filter
+                </div>
+                <div class="ui-corner-all ui-widget doc-header">
+                    <ul>
+                        <li>
+                            <asp:Label ID="LabelSearch" AssociatedControlID="TextBoxSearch" runat="server"
+                                Text="Search"></asp:Label>
+                            <asp:TextBox ID="TextBoxSearch" runat="server"></asp:TextBox>
+                        </li>
+                        <li>
+                            <asp:Label ID="LabelFilterCaption" AssociatedControlID="LinkButtonSearch" runat="server" Text="Filter"></asp:Label>
+                            <asp:LinkButton ID="LinkButtonSearch" CssClass="LinkButton" OnClick="BindData"
+                                runat="server">Find</asp:LinkButton>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <fistCore:TableView OnClick="uiTableView_Click" OnPagerPageChanged="uiTableView_PagerPageChanged"
+                ID="uiTableView" runat="server" />
+            <div class="Bottom">
+                <ul>
+                    <li>
+                        <asp:LinkButton ID="LinkButtonNew" CssClass="LinkButton new" title="Add new"
+                            runat="server" OnClick="LinkButtonNew_Click">New</asp:LinkButton>
+                    </li>
+                    <li>
+                        <asp:LinkButton ID="LinkButtonDeleteSelected" CssClass="LinkButton del" title="Delete selected"
+                            runat="server" OnClick="LinkButtonDeleteSelected_Click">Delete selected</asp:LinkButton>
+                    </li>
+                </ul>
+            </div>
+            <fistCore:Dialog runat="server" OnSaveClicked="uiDialog_SaveClicked" EnableViewState="true"
+                ID="uiDialog" Visible="false" />
+        </ContentTemplate>
+    </asp:UpdatePanel>
+</asp:Content>]]>
+    </TemplateSegment>
+  </TemplateSegments>
+</Template>

@@ -25,6 +25,8 @@ namespace Fistnet.FistBot.Bot
 
     public abstract class BotBase : AdvancedRobot
     {
+        public BotStatistics Statistics { get; private set; }
+
         public bool IsDead { get; private set; }
 
         public Field ActiveField { get; private set; }
@@ -36,6 +38,7 @@ namespace Fistnet.FistBot.Bot
             this.ActiveField = new Field(this);
             this.Evaluations = strategies;
             this.IsDead = false;
+            this.Statistics = new BotStatistics();
         }
 
         #region Strategy events.
@@ -44,6 +47,8 @@ namespace Fistnet.FistBot.Bot
 
         public override void OnBulletHit(BulletHitEvent evnt)
         {
+            this.Statistics.BulletHit++;
+
             if (this.ActiveField != null)
                 this.ActiveField.Observe(evnt);
             RequestChangeStrategy(StrategyEnum.OnBulletHit);
@@ -51,13 +56,20 @@ namespace Fistnet.FistBot.Bot
 
         public override void OnBulletHitBullet(BulletHitBulletEvent evnt)
         {
+            this.Statistics.BulletHit++;
+            this.Statistics.SelfDamage += (int)evnt.Bullet.Power;
+
             if (this.ActiveField != null)
                 this.ActiveField.Observe(evnt);
+
             RequestChangeStrategy(StrategyEnum.OnBulletHitBullet);
         }
 
         public override void OnBulletMissed(BulletMissedEvent evnt)
         {
+            this.Statistics.BulletMiss++;
+            this.Statistics.SelfDamage += (int)evnt.Bullet.Power;
+
             if (this.ActiveField != null)
                 this.ActiveField.Observe(evnt);
             RequestChangeStrategy(StrategyEnum.OnBulletMissed);
@@ -65,6 +77,8 @@ namespace Fistnet.FistBot.Bot
 
         public override void OnHitByBullet(HitByBulletEvent evnt)
         {
+            this.Statistics.SelfDamage += evnt.Bullet.GetDamage();
+
             if (this.ActiveField != null)
                 this.ActiveField.Observe(evnt);
             RequestChangeStrategy(StrategyEnum.OnHitByBullet);
@@ -72,6 +86,8 @@ namespace Fistnet.FistBot.Bot
 
         public override void OnHitRobot(HitRobotEvent evnt)
         {
+            this.Statistics.SelfDamage += 1;
+
             if (this.ActiveField != null)
                 this.ActiveField.Observe(evnt);
             RequestChangeStrategy(StrategyEnum.OnHitRobot);
@@ -79,6 +95,8 @@ namespace Fistnet.FistBot.Bot
 
         public override void OnHitWall(HitWallEvent evnt)
         {
+            this.Statistics.SelfDamage += this.GetWallDamage();
+
             if (this.ActiveField != null)
                 this.ActiveField.Observe(evnt);
             RequestChangeStrategy(StrategyEnum.OnHitWall);
@@ -88,7 +106,7 @@ namespace Fistnet.FistBot.Bot
         {
             if (this.ActiveField != null)
                 this.ActiveField.Observe(evnt);
-            RequestChangeStrategy(StrategyEnum.OnHitWall);
+            RequestChangeStrategy(StrategyEnum.OnScannedRobot);
         }
 
         #endregion Strategy events.
@@ -97,6 +115,7 @@ namespace Fistnet.FistBot.Bot
 
         public override void OnDeath(DeathEvent evnt)
         {
+            this.Statistics.DeathAfterTicks = (int)this.Time;
             this.IsDead = true;
         }
 
@@ -104,19 +123,9 @@ namespace Fistnet.FistBot.Bot
 
         #region Statistical events.
 
-        //public override void OnBattleEnded(BattleEndedEvent evnt)
-        //{
-        //    base.OnBattleEnded(evnt);
-        //}
-
         //public override void OnRobotDeath(RobotDeathEvent evnt)
         //{
         //    base.OnRobotDeath(evnt);
-        //}
-
-        //public override void OnRoundEnded(RoundEndedEvent evnt)
-        //{
-        //    base.OnRoundEnded(evnt);
         //}
 
         public override void OnStatus(StatusEvent e)

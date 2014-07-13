@@ -1,0 +1,2374 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FistCore.Common</name>
+    </assembly>
+    <members>
+        <member name="F:FistCore.Common.RegexValues.Email">
+            <summary>Regular expression which defined a valid e-mail addres.</summary>
+        </member>
+        <member name="F:FistCore.Common.RegexValues.Url">
+            <summary>Regular expression which defines a valid HTTP, HTTPS, FTP or FTPS URL.</summary>
+        </member>
+        <member name="T:FistCore.Common.Serialization.IJsonObject">
+            <summary>
+            This interface enables json object to be set up.
+            </summary>
+        </member>
+        <member name="T:FistCore.Common.Serialization.JsonEnumConverter`1">
+            <summary>
+            A specialized type converter which will convert any enum type into the string
+            specified in the JsonEnumNameAttribute attribute.
+            </summary>
+        </member>
+        <member name="M:FistCore.Common.Serialization.JsonObjectBase.InvalidateJsonValue">
+            <summary>
+            Removes sync status with Membase db. Must call for each parameter change.
+            </summary>
+        </member>
+        <member name="M:FistCore.Common.Serialization.JsonObjectBase.ToJson">
+            <summary>
+            Serializes object into JSON string.
+            </summary>
+            <returns>JSON string.</returns>
+        </member>
+        <member name="M:FistCore.Common.Serialization.JsonObjectBase.FromJson(System.String)">
+            <summary>
+            Populates current object from JSON string.
+            </summary>
+            <param name="data">JSON string.</param>
+        </member>
+        <member name="T:FistCore.Common.ImageUtil">
+            <summary>
+            Provides image manipulation functions.
+            </summary>
+        </member>
+        <member name="T:FistCore.Common.NumberParser">
+            <summary>
+            Provides common value parsing functionalities.
+            </summary>
+        </member>
+        <member name="M:FistCore.Common.NumberParser.ParseInt(System.String)">
+            <summary>
+            Converts the string representation of a number to its 32-bit signed integer equivalent.
+            </summary>
+            <param name="textRepresentation">A string containing a number to convert.</param>
+            <returns>A number if conversion succeeded; <b>null</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Common.NumberParser.ParseInt(System.String,FistCore.Common.IMessageFormatter)">
+            <summary>
+            Converts the string representation of a number to its 32-bit signed integer equivalent.
+            </summary>
+            <param name="textRepresentation">A string containing a number to convert.</param>
+            <param name="formatter">An object which contains an <see cref="T:System.IFormatProvider"/> and
+            <see cref="T:System.Globalization.NumberStyles"/> objects that supply culture-specific formatting information about <b>textRepresentation</b>.</param>
+            <returns>A number if conversion succeeded; <b>null</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Common.NumberParser.ParseInt(System.String,System.IFormatProvider)">
+            <summary>
+            Converts the string representation of a number to its 32-bit signed integer equivalent.
+            </summary>
+            <param name="textRepresentation">A string containing a number to convert.</param>
+            <param name="provider">An <see cref="T:System.IFormatProvider"/> object that supplies culture-specific
+            formatting information about <b>textRepresentation</b>.</param>
+            <returns>A number if conversion succeeded; <b>null</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Common.NumberParser.ParseInt(System.String,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Converts the string representation of a number to its 32-bit signed integer equivalent.
+            </summary>
+            <param name="textRepresentation">A string containing a number to convert.</param>
+            <param name="style">A bitwise combination of <see cref="T:System.Globalization.NumberStyles"/> values
+            that indicates the permitted format of textRepresentation. A typical value to specify is
+            <see cref="F:System.Globalization.NumberStyles.Integer"/>.</param>
+            <param name="provider">An <see cref="T:System.IFormatProvider"/> object that supplies culture-specific
+            formatting information about <b>textRepresentation</b>.</param>
+            <returns>A number if conversion succeeded; <b>null</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Common.NumberParser.ParseLong(System.String)">
+            <summary>
+            Converts the string representation of a number to its 64-bit signed integer equivalent.
+            </summary>
+            <param name="textRepresentation">A string containing a number to convert.</param>
+            <returns>A number if conversion succeeded; <b>null</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Common.NumberParser.ParseLong(System.String,FistCore.Common.IMessageFormatter)">
+            <summary>
+            Converts the string representation of a number to its 64-bit signed integer equivalent.
+            </summary>
+            <param name="textRepresentation">A string containing a number to convert.</param>
+            <param name="formatter">An object which contains an <see cref="T:System.IFormatProvider"/> and
+            <see cref="T:System.Globalization.NumberStyles"/> objects that supply culture-specific formatting information about <b>textRepresentation</b>.</param>
+            <returns>A number if conversion succeeded; <b>null</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Common.NumberParser.ParseLong(System.String,System.IFormatProvider)">
+            <summary>
+            Converts the string representation of a number to its 64-bit signed integer equivalent.
+            </summary>
+            <param name="textRepresentation">A string containing a number to convert.</param>
+            <param name="provider">An <see cref="T:System.IFormatProvider"/> object that supplies culture-specific
+            formatting information about <b>textRepresentation</b>.</param>
+            <returns>A number if conversion succeeded; <b>null</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Common.NumberParser.ParseLong(System.String,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Converts the string representation of a number to its 64-bit signed integer equivalent.
+            </summary>
+            <param name="textRepresentation">A string containing a number to convert.</param>
+            <param name="style">A bitwise combination of <see cref="T:System.Globalization.NumberStyles"/> values
+            that indicates the permitted format of textRepresentation. A typical value to specify is
+            <see cref="F:System.Globalization.NumberStyles.Integer"/>.</param>
+            <param name="provider">An <see cref="T:System.IFormatProvider"/> object that supplies culture-specific
+            formatting information about <b>textRepresentation</b>.</param>
+            <returns>A number if conversion succeeded; <b>null</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Common.NumberParser.ParseFloat(System.String,FistCore.Common.IMessageFormatter)">
+            <summary>
+            Converts the string representation of a number to its single-precision floating point number equivalent.
+            </summary>
+            <param name="textRepresentation">A string containing a number to convert.</param>
+            <param name="formatter">An object which contains an <see cref="T:System.IFormatProvider"/> and
+            <see cref="T:System.Globalization.NumberStyles"/> objects that supply culture-specific formatting information about <b>textRepresentation</b>.</param>
+            <returns>A number if conversion succeeded; <b>null</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Common.NumberParser.ParseFloat(System.String,System.IFormatProvider)">
+            <summary>
+            Converts the string representation of a number to its single-precision floating point number equivalent.
+            </summary>
+            <param name="textRepresentation">A string containing a number to convert.</param>
+            <param name="provider">An <see cref="T:System.IFormatProvider"/> object that supplies culture-specific
+            formatting information about <b>textRepresentation</b>.</param>
+            <returns>A number if conversion succeeded; <b>null</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Common.NumberParser.ParseFloat(System.String,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Converts the string representation of a number to its single-precision floating point number equivalent.
+            </summary>
+            <param name="textRepresentation">A string containing a number to convert.</param>
+            <param name="style">A bitwise combination of <see cref="T:System.Globalization.NumberStyles"/> values
+            that indicates the permitted format of textRepresentation. A typical value to specify is
+            <see cref="F:System.Globalization.NumberStyles.Float"/> combined with <see cref="F:System.Globalization.NumberStyles.AllowThousands"/>.</param>
+            <param name="provider">An <see cref="T:System.IFormatProvider"/> object that supplies culture-specific
+            formatting information about <b>textRepresentation</b>.</param>
+            <returns>A number if conversion succeeded; <b>null</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Common.NumberParser.ParseDouble(System.String,FistCore.Common.IMessageFormatter)">
+            <summary>
+            Converts the string representation of a number to its double-precision floating point number equivalent.
+            </summary>
+            <param name="textRepresentation">A string containing a number to convert.</param>
+            <param name="formatter">An object which contains an <see cref="T:System.IFormatProvider"/> and
+            <see cref="T:System.Globalization.NumberStyles"/> objects that supply culture-specific formatting information about <b>textRepresentation</b>.</param>
+            <returns>A number if conversion succeeded; <b>null</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Common.NumberParser.ParseDouble(System.String,System.IFormatProvider)">
+            <summary>
+            Converts the string representation of a number to its double-precision floating point number equivalent.
+            </summary>
+            <param name="textRepresentation">A string containing a number to convert.</param>
+            <param name="provider">An <see cref="T:System.IFormatProvider"/> object that supplies culture-specific
+            formatting information about <b>textRepresentation</b>.</param>
+            <returns>A number if conversion succeeded; <b>null</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Common.NumberParser.ParseDouble(System.String,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Converts the string representation of a number to its double-precision floating point number equivalent.
+            </summary>
+            <param name="textRepresentation">A string containing a number to convert.</param>
+            <param name="style">A bitwise combination of <see cref="T:System.Globalization.NumberStyles"/> values
+            that indicates the permitted format of textRepresentation. A typical value to specify is
+            <see cref="F:System.Globalization.NumberStyles.Float"/> combined with <see cref="F:System.Globalization.NumberStyles.AllowThousands"/>.</param>
+            <param name="provider">An <see cref="T:System.IFormatProvider"/> object that supplies culture-specific
+            formatting information about <b>textRepresentation</b>.</param>
+            <returns>A number if conversion succeeded; <b>null</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Common.NumberParser.ParseDecimal(System.String,FistCore.Common.IMessageFormatter)">
+            <summary>
+            Converts the string representation of a number to its <b>Decimal</b> equivalent.
+            </summary>
+            <param name="textRepresentation">A string containing a number to convert.</param>
+            <param name="formatter">An object which contains an <see cref="T:System.IFormatProvider"/> and
+            <see cref="T:System.Globalization.NumberStyles"/> objects that supply culture-specific formatting information about <b>textRepresentation</b>.</param>
+            <returns>A number if conversion succeeded; <b>null</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Common.NumberParser.ParseDecimal(System.String,System.IFormatProvider)">
+            <summary>
+            Converts the string representation of a number to its <b>Decimal</b> equivalent.
+            </summary>
+            <param name="textRepresentation">A string containing a number to convert.</param>
+            <param name="provider">An <see cref="T:System.IFormatProvider"/> object that supplies culture-specific
+            formatting information about <b>textRepresentation</b>.</param>
+            <returns>A number if conversion succeeded; <b>null</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Common.NumberParser.ParseDecimal(System.String,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Converts the string representation of a number to its <b>Decimal</b> equivalent.
+            </summary>
+            <param name="textRepresentation">A string containing a number to convert.</param>
+            <param name="style">A bitwise combination of <see cref="T:System.Globalization.NumberStyles"/> values
+            that indicates the permitted format of textRepresentation. A typical value to specify is
+            <see cref="F:System.Globalization.NumberStyles.Number"/>.</param>
+            <param name="provider">An <see cref="T:System.IFormatProvider"/> object that supplies culture-specific
+            formatting information about <b>textRepresentation</b>.</param>
+            <returns>A number if conversion succeeded; <b>null</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Common.NumberParser.IsInteger(System.String)">
+            <summary>
+            Checks whether the given string represents an integer value.
+            </summary>
+            <returns><b>true</b> if the given string is an integer; <b>false</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Common.NumberParser.IsInteger(System.String,FistCore.Common.IMessageFormatter)">
+            <summary>
+            Checks whether the given string represents an integer value.
+            </summary>
+            <param name="str">A string to test.</param>
+            <param name="formatter">An object which contains an <see cref="T:System.IFormatProvider"/> and
+            <see cref="T:System.Globalization.NumberStyles"/> objects that supply culture-specific formatting information about <b>textRepresentation</b>.</param>
+            <returns><b>true</b> if the given string is an integer; <b>false</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Common.NumberParser.IsInteger(System.String,System.IFormatProvider)">
+            <summary>
+            Checks whether the given string represents an integer value.
+            </summary>
+            <param name="str">A string to test.</param>
+            <param name="provider">An <see cref="T:System.IFormatProvider"/> object that supplies culture-specific
+            formatting information about <b>str</b>.</param>
+            <returns><b>true</b> if the given string is an integer; <b>false</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Common.NumberParser.IsInteger(System.String,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Checks whether the given string represents an integer value.
+            </summary>
+            <param name="str">A string to test.</param>
+            <param name="style">A bitwise combination of <see cref="T:System.Globalization.NumberStyles"/> values
+            that indicates the permitted format of textRepresentation. A typical value to specify is
+            <see cref="F:System.Globalization.NumberStyles.Integer"/>.</param>
+            <param name="provider">An <see cref="T:System.IFormatProvider"/> object that supplies culture-specific
+            formatting information about <b>textRepresentation</b>.</param>
+            <returns><b>true</b> if the given string is an integer; <b>false</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Common.NumberParser.IsNumber(System.String,FistCore.Common.IMessageFormatter)">
+            <summary>
+            Checks whether the given string represents a number.
+            </summary>
+            <param name="str">A string to test.</param>
+            <param name="formatter">An object which contains an <see cref="T:System.IFormatProvider"/> and
+            <see cref="T:System.Globalization.NumberStyles"/> objects that supply culture-specific formatting information about <b>textRepresentation</b>.</param>
+            <returns><b>true</b> if the given string is an integer; <b>false</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Common.NumberParser.IsNumber(System.String,System.IFormatProvider)">
+            <summary>
+            Checks whether the given string represents a number.
+            </summary>
+            <param name="str">A string to test.</param>
+            <param name="provider">An <see cref="T:System.IFormatProvider"/> object that supplies culture-specific
+            formatting information about <b>str</b>.</param>
+            <returns><b>true</b> if the given string is an integer; <b>false</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Common.NumberParser.IsNumber(System.String,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Checks whether the given string represents a number.
+            </summary>
+            <param name="str">A string to test.</param>
+            <param name="style">A bitwise combination of <see cref="T:System.Globalization.NumberStyles"/> values
+            that indicates the permitted format of textRepresentation. A typical value to specify is
+            <see cref="F:System.Globalization.NumberStyles.Number"/>.</param>
+            <param name="provider">An <see cref="T:System.IFormatProvider"/> object that supplies culture-specific
+            formatting information about <b>str</b>.</param>
+            <returns><b>true</b> if the given string is an integer; <b>false</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Common.NumberParser.ParseEnum``1(System.String)">
+            <summary>
+            Converts the string representation of the name or numeric value of one or more enumerated constants to an equivalent enumerated object.
+            </summary>
+            <typeparam name="T">The <see cref="T:System.Type"/> of the enumeration.</typeparam>
+            <param name="textRepresentation">A string containing the name or value to convert.</param>
+            <returns>An object of type enumType whose value is represented by value. <b>null</b> if conversion fails.</returns>
+        </member>
+        <member name="M:FistCore.Common.NumberParser.ParseEnum``1(System.String,System.Boolean)">
+            <summary>
+            Converts the string representation of the name or numeric value of one or more enumerated constants to an equivalent enumerated object.
+            </summary>
+            <typeparam name="T">The <see cref="T:System.Type"/> of the enumeration.</typeparam>
+            <param name="textRepresentation">A string containing the name or value to convert.</param>
+            <param name="ignoreCase">If <b>true</b>, ignore case; otherwise, regard case.</param>
+            <returns>An object of type enumType whose value is represented by value. <b>null</b> if conversion fails.</returns>
+        </member>
+        <member name="M:FistCore.Common.NumberParser.ParseDateTime(System.String,FistCore.Common.IMessageFormatter)">
+            <summary>
+            Converts the string representation of a date to its <b>DateTime</b> equivalent.
+            </summary>
+            <param name="textRepresentation">A string containing a date to convert.</param>
+            <param name="formatter">An object which contains an <see cref="T:System.IFormatProvider"/> and
+            <see cref="T:System.Globalization.DateTimeStyles"/> objects that supply culture-specific formatting information about <b>textRepresentation</b>.</param>
+            <returns>A date if conversion succeeded; <b>null</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Common.NumberParser.ParseDateTime(System.String,System.IFormatProvider)">
+            <summary>
+            Converts the string representation of a date to its <b>DateTime</b> equivalent.
+            </summary>
+            <param name="textRepresentation">A string containing a date to convert.</param>
+            <param name="provider">An <see cref="T:System.IFormatProvider"/> object that supplies culture-specific
+            formatting information about <b>textRepresentation</b>.</param>
+            <returns>A date if conversion succeeded; <b>null</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Common.NumberParser.ParseDateTime(System.String,System.Globalization.DateTimeStyles,System.IFormatProvider)">
+            <summary>
+            Converts the string representation of a date to its <b>DateTime</b> equivalent.
+            </summary>
+            <param name="textRepresentation">A string containing a date to convert.</param>
+            <param name="styles">A bitwise combination of <see cref="T:System.Globalization.DateTimeStyles"/>
+            values that indicates the permitted format of textRepresentation. A typical value to specify is
+            <see cref="F:System.Globalization.DateTimeStyles.None"/>.</param>
+            <param name="provider">An <see cref="T:System.IFormatProvider"/> object that supplies culture-specific
+            formatting information about <b>textRepresentation</b>.</param>
+            <returns>A date if conversion succeeded; <b>null</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Common.NumberParser.ParseDateTime(System.String,System.Globalization.DateTimeStyles,System.IFormatProvider,System.String)">
+            <summary>
+            Converts the string representation of a date to its <b>DateTime</b> equivalent.
+            </summary>
+            <param name="textRepresentation">A string containing a date to convert.</param>
+            <param name="styles">A bitwise combination of <see cref="T:System.Globalization.DateTimeStyles"/>
+            values that indicates the permitted format of textRepresentation. A typical value to specify is
+            <see cref="F:System.Globalization.DateTimeStyles.None"/>.</param>
+            <param name="provider">An <see cref="T:System.IFormatProvider"/> object that supplies culture-specific
+            formatting information about <b>textRepresentation</b>.</param>
+            <param name="format">The expected format of <b>textRepresentation</b>.</param>
+            <returns>A date if conversion succeeded; <b>null</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Common.NumberParser.ParseValue(System.Type,System.String,FistCore.Common.IMessageFormatter)">
+            <summary>
+            Converts the string to a value of the specified type.
+            </summary>
+            <param name="valueType">Type of the value to return.</param>
+            <param name="textRepresentation">A string containing a value to convert.</param>
+            <param name="formatter">An object which contains an <see cref="T:System.IFormatProvider"/> and
+            <see cref="T:System.Globalization.DateTimeStyles"/> objects that supply culture-specific formatting information about <b>textRepresentation</b>.</param>
+            <returns>A value if conversion succeeded; <b>null</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Common.NumberParser.ParseValue``1(System.String,FistCore.Common.IMessageFormatter)">
+            <summary>
+            Converts the string to a value of the specified type.
+            </summary>
+            <typeparam name="T">Type of the value to return.</typeparam>
+            <param name="textRepresentation">A string containing a value to convert.</param>
+            <param name="formatter">An object which contains an <see cref="T:System.IFormatProvider"/> and
+            <see cref="T:System.Globalization.DateTimeStyles"/> objects that supply culture-specific formatting information about <b>textRepresentation</b>.</param>
+            <returns>A value if conversion succeeded; <b>null</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Common.NumberParser.ParseArray(System.Type,System.String,System.Char,FistCore.Common.IMessageFormatter)">
+            <summary>
+            Converts the string to an array of values of the specified type.
+            </summary>
+            <param name="elementType">Type of the value to return.</param>
+            <param name="delimitedElements">A string containing values to convert.</param>
+            <param name="delimiter">A character which delimites the elements of the array in the string.</param>
+            <param name="formatter">An object which contains an <see cref="T:System.IFormatProvider"/> and
+            <see cref="T:System.Globalization.DateTimeStyles"/> objects that supply culture-specific formatting information about <b>textRepresentation</b>.</param>
+            <returns>Array which contains the objects of the specified type and nulls for values which couldn't be parsed.</returns>
+        </member>
+        <member name="M:FistCore.Common.NumberParser.ParseArray(System.Type,System.String,System.String,FistCore.Common.IMessageFormatter)">
+            <summary>
+            Converts the string to an array of values of the specified type.
+            </summary>
+            <param name="elementType">Type of the value to return.</param>
+            <param name="delimitedElements">A string containing values to convert.</param>
+            <param name="delimiter">A string which delimites the elements of the array in the string.</param>
+            <param name="formatter">An object which contains an <see cref="T:System.IFormatProvider"/> and
+            <see cref="T:System.Globalization.DateTimeStyles"/> objects that supply culture-specific formatting information about <b>textRepresentation</b>.</param>
+            <returns>Array which contains the objects of the specified type and nulls for values which couldn't be parsed.</returns>
+        </member>
+        <member name="M:FistCore.Common.NumberParser.ParseArray``1(System.String,System.Char,FistCore.Common.IMessageFormatter)">
+            <summary>
+            Converts the string to an array of values of the specified type.
+            </summary>
+            <typeparam name="T">Type of the value to return.</typeparam>
+            <param name="delimitedElements">A string containing values to convert.</param>
+            <param name="delimiter">A character which delimites the elements of the array in the string.</param>
+            <param name="formatter">An object which contains an <see cref="T:System.IFormatProvider"/> and
+            <see cref="T:System.Globalization.DateTimeStyles"/> objects that supply culture-specific formatting information about <b>textRepresentation</b>.</param>
+            <returns>Array which contains the objects of the specified type and nulls for values which couldn't be parsed.</returns>
+        </member>
+        <member name="M:FistCore.Common.NumberParser.ParseArray``1(System.String,System.String,FistCore.Common.IMessageFormatter)">
+            <summary>
+            Converts the string to an array of values of the specified type.
+            </summary>
+            <typeparam name="T">Type of the value to return.</typeparam>
+            <param name="delimitedElements">A string containing values to convert.</param>
+            <param name="delimiter">A character which delimites the elements of the array in the string.</param>
+            <param name="formatter">An object which contains an <see cref="T:System.IFormatProvider"/> and
+            <see cref="T:System.Globalization.DateTimeStyles"/> objects that supply culture-specific formatting information about <b>textRepresentation</b>.</param>
+            <returns>Array which contains the objects of the specified type and nulls for values which couldn't be parsed.</returns>
+        </member>
+        <member name="M:FistCore.Common.NumberParser.ParseDictionary(System.Type,System.Type,System.String,System.Char,System.Char,FistCore.Common.IMessageFormatter)">
+            <summary>
+            Converts a string to a dictionary with keys and values of the specified types.
+            </summary>
+            <param name="keyType">The type of the keys in the dictionary.</param>
+            <param name="valueType">The type of the values in the dictionary.</param>
+            <param name="delimitedVariables">A string containing varibles (key-value pairs) to convert.</param>
+            <param name="variableDelimiter">A character which delimites variables in the string.</param>
+            <param name="keyValueDelimiter">A character which delimites a key from a value in a key-value pair.</param>
+            <param name="formatter">An object which contains an <see cref="T:System.IFormatProvider"/> and
+            <see cref="T:System.Globalization.DateTimeStyles"/> objects that supply culture-specific formatting information about <b>textRepresentation</b>.</param>
+            <returns>Hashtable which contains the keys and values of the specified types.
+            Values which couldn't be parsed are represented with <b>null</b> references.</returns>
+        </member>
+        <member name="M:FistCore.Common.NumberParser.ParseDictionary(System.Type,System.Type,System.String,System.String,System.String,FistCore.Common.IMessageFormatter)">
+            <summary>
+            Converts a string to a dictionary with keys and values of the specified types.
+            </summary>
+            <param name="keyType">The type of the keys in the dictionary.</param>
+            <param name="valueType">The type of the values in the dictionary.</param>
+            <param name="delimitedVariables">A string containing varibles (key-value pairs) to convert.</param>
+            <param name="variableDelimiter">A string which delimites variables in the string.</param>
+            <param name="keyValueDelimiter">A string which delimites a key from a value in a key-value pair.</param>
+            <param name="formatter">An object which contains an <see cref="T:System.IFormatProvider"/> and
+            <see cref="T:System.Globalization.DateTimeStyles"/> objects that supply culture-specific formatting information about <b>textRepresentation</b>.</param>
+            <returns>Hashtable which contains the keys and values of the specified types.
+            Values which couldn't be parsed are represented with <b>null</b> references.</returns>
+        </member>
+        <member name="M:FistCore.Common.NumberParser.ParseDictionary``2(System.String,System.Char,System.Char,FistCore.Common.IMessageFormatter)">
+            <summary>
+            Converts a string to a dictionary with keys and values of the specified types.
+            </summary>
+            <typeparam name="TKey">The type of the keys in the dictionary.</typeparam>
+            <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
+            <param name="delimitedVariables">A string containing varibles (key-value pairs) to convert.</param>
+            <param name="variableDelimiter">A character which delimites variables in the string.</param>
+            <param name="keyValueDelimiter">A character which delimites a key from a value in a key-value pair.</param>
+            <param name="formatter">An object which contains an <see cref="T:System.IFormatProvider"/> and
+            <see cref="T:System.Globalization.DateTimeStyles"/> objects that supply culture-specific formatting information about <b>textRepresentation</b>.</param>
+            <returns>Dictionary which contains the keys and values of the specified types.
+            Values which couldn't be parsed are represented with <b>null</b> references.</returns>
+        </member>
+        <member name="M:FistCore.Common.NumberParser.ParseDictionary``2(System.String,System.String,System.String,FistCore.Common.IMessageFormatter)">
+            <summary>
+            Converts a string to a dictionary with keys and values of the specified types.
+            </summary>
+            <typeparam name="TKey">The type of the keys in the dictionary.</typeparam>
+            <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
+            <param name="delimitedVariables">A string containing varibles (key-value pairs) to convert.</param>
+            <param name="variableDelimiter">A string which delimites variables in the string.</param>
+            <param name="keyValueDelimiter">A string which delimites a key from a value in a key-value pair.</param>
+            <param name="formatter">An object which contains an <see cref="T:System.IFormatProvider"/> and
+            <see cref="T:System.Globalization.DateTimeStyles"/> objects that supply culture-specific formatting information about <b>textRepresentation</b>.</param>
+            <returns>Dictionary which contains the keys and values of the specified types.
+            Values which couldn't be parsed are represented with <b>null</b> references.</returns>
+        </member>
+        <member name="M:FistCore.Common.NumberParser.ParseValidValues``1(System.String,System.Char,FistCore.Common.IMessageFormatter)">
+            <summary>
+            Converts the string to an array of values of the specified type.
+            </summary>
+            <typeparam name="T">Type of the value to return.</typeparam>
+            <param name="delimitedElements">A string containing values to convert.</param>
+            <param name="delimiter">A character which delimites the elements of the array in the string.</param>
+            <param name="formatter">An object which contains an <see cref="T:System.IFormatProvider"/> and
+            <see cref="T:System.Globalization.DateTimeStyles"/> objects that supply culture-specific formatting information about <b>textRepresentation</b>.</param>
+            <returns>Array which contains only values which were succesfully parsed.</returns>
+        </member>
+        <member name="M:FistCore.Common.NumberParser.ParseValidValues``1(System.String,System.String,FistCore.Common.IMessageFormatter)">
+            <summary>
+            Converts the string to an array of values of the specified type.
+            </summary>
+            <typeparam name="T">Type of the value to return.</typeparam>
+            <param name="delimitedElements">A string containing values to convert.</param>
+            <param name="delimiter">A character which delimites the elements of the array in the string.</param>
+            <param name="formatter">An object which contains an <see cref="T:System.IFormatProvider"/> and
+            <see cref="T:System.Globalization.DateTimeStyles"/> objects that supply culture-specific formatting information about <b>textRepresentation</b>.</param>
+            <returns>Array which contains only values which were succesfully parsed.</returns>
+        </member>
+        <member name="T:FistCore.Common.TypeUtil">
+            <summary>
+            Provides methods which classify the basic .NET types.
+            </summary>
+        </member>
+        <member name="M:FistCore.Common.TypeUtil.IsInteger(System.Type)">
+            <summary>
+            Indicates whether the given type is an integer number (Int32, Byte, Long etc.).
+            </summary>
+            <param name="t">Type to be tested.</param>
+            <returns>True if a given type is an integral type; false otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Common.TypeUtil.IsFloatingPointNumber(System.Type)">
+            <summary>
+            Indicates wheter the given type is a floating point number (Single, Double, Decimal).
+            </summary>
+            <param name="t">Type to be tested.</param>
+            <returns>True if a given type is an integral type; false otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Common.TypeUtil.IsNumber(System.Type)">
+            <summary>
+            Indicates whether the given type is a number (integer or real number).
+            </summary>
+            <param name="t">Type to be tested.</param>
+            <returns>True if a given type is an integral type; false otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Common.TypeUtil.IsDate(System.Type)">
+            <summary>
+            Indicates whether the given type is a date type.
+            </summary>
+            <param name="t">Type to be tested.</param>
+            <returns>True if a given type is an integral type; false otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Common.TypeUtil.IsText(System.Type)">
+            <summary>
+            Indicates whether the given type is textual (String, Char, Char[]).
+            </summary>
+            <param name="t">Type to be tested.</param>
+            <returns>True if a given type is an integral type; false otherwise.</returns>
+        </member>
+        <member name="T:FistCore.Common.ArrayUtil">
+            <summary>
+            Provides common operations for array and list manipulation (conversions, sets...).
+            </summary>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.ToObjectArray(System.Collections.IList)">
+            <summary>
+            Converts an ArrayList to an array of objects.
+            </summary>
+            <param name="list">Source list.</param>
+            <returns>An array of objects which contains the same objects (same references) as the source list.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.ToIntArray(System.Collections.IList)">
+            <summary>
+            Converts an ArrayList to an array of integers.
+            </summary>
+            <param name="list">Source list.</param>
+            <returns>An array of integers which contains the same values (not references) as the source list.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.ToArray``1(System.Collections.IList)">
+            <summary>
+            Converts a list to array.
+            </summary>
+            <typeparam name="T">Type of objects contained in the list.</typeparam>
+            <param name="list">A list of objects.</param>
+            <returns>Array containg the same objects as the input list.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.ToArray``1(System.Collections.IEnumerable)">
+            <summary>
+            Converts a collection to array.
+            </summary>
+            <typeparam name="T">Type of objects contained in the list.</typeparam>
+            <param name="collection">A collection of objects.</param>
+            <returns>Array containg the same objects as the input collection.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.ToArray``1(System.Collections.IList,System.String)">
+            <summary>
+            Creates an array that contains the values in the specified property.
+            </summary>
+            <typeparam name="T">Type of objects contained in the output array.</typeparam>
+            <param name="list">A list of objects that have the specified property.</param>
+            <param name="propertyName">Property that holds the numbers which are to be coppied to array.</param>
+            <returns>Array.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.ToArray``1(System.Collections.IEnumerable,System.String)">
+            <summary>
+            Creates an array that contains the values in the specified property.
+            </summary>
+            <typeparam name="T">Type of objects contained in the output array.</typeparam>
+            <param name="collection">A collection of objects that have the specified property.</param>
+            <param name="propertyName">Property that holds the numbers which are to be coppied to array.</param>
+            <returns>Array.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.ToArray``2(System.Collections.ICollection,FistCore.Common.Delegates.Function{``0,``1})">
+            <summary>
+            Creates an array that contains the values returned by the specified getter.
+            </summary>
+            <typeparam name="TProperty">Type of objects contained in the output array.</typeparam>
+            <typeparam name="TElement">Type of elements contained in the collection.</typeparam>
+            <param name="list">A list of objects that have the specified property.</param>
+            <param name="getValue">A delegate to a method which returns values for output array.</param>
+            <returns>Array.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.ToArray``2(System.Collections.IEnumerable,FistCore.Common.Delegates.Function{``0,``1})">
+            <summary>
+            Creates an array that contains the values returned by the specified getter.
+            </summary>
+            <typeparam name="TProperty">Type of objects contained in the output array.</typeparam>
+            <typeparam name="TElement">Type of elements contained in the collection.</typeparam>
+            <param name="collection">A collection of objects that have the specified property.</param>
+            <param name="getValue">A delegate to a method which returns values for output array.</param>
+            <returns>Array.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.Convert``3(System.Collections.IEnumerable,FistCore.Common.Delegates.Function{``2,``1})">
+            <summary>
+            Converts all objects from the source collection and adds them to the new list.
+            </summary>
+            <typeparam name="TList">Type of the list which is returned from the method.</typeparam>
+            <typeparam name="TInputElement">Type of elements contained in the source list.</typeparam>
+            <typeparam name="TOutElement">Type of elements contained in the output list.</typeparam>
+            <param name="collection">Source list.</param>
+            <param name="conversion">A delegate which converts an input to output element.</param>
+            <returns>A list which contains converted elements.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.ConvertElements``2(System.Collections.IList,FistCore.Common.Delegates.Function{``1,``0})">
+            <summary>
+            Converts all objects in the list.
+            </summary>
+            <typeparam name="TInputElement">Type of elements contained in the source list.</typeparam>
+            <typeparam name="TOutElement">Type of elements contained in the output list.</typeparam>
+            <param name="list">List whose elements are to be converted.</param>
+            <param name="conversion">A delegate which converts an input to output element.</param>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.IndexOf``1(System.Collections.IEnumerable,System.String,``0)">
+            <summary>
+            Returns zero-based index of an object with the specified key.
+            </summary>
+            <typeparam name="TKey">Type of the values in the key property.</typeparam>
+            <param name="objects">A list or an array of objects.</param>
+            <param name="keyPropertyName">Name of the property that contains key values.</param>
+            <param name="key">Key value of object that is to be found in the source list.</param>
+            <returns>Index of the object; -1 if not found.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.IndexOf``1(System.Collections.IEnumerable,System.Predicate{``0})">
+            <summary>
+            Returns zero-based index of a first occurance of object which matches the specified criteria.
+            </summary>
+            <typeparam name="TElement">Type of elements contained in the collection.</typeparam>
+            <param name="collection">A collection.</param>
+            <param name="match">The Predicate(TElement) delegate that defines the conditions of the elements to search for.</param>
+            <returns>Index of the element; -1 if not found.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.IndexOf(System.Collections.IEnumerable,System.Object)">
+            <summary>
+            Searches for the specified object and returns the zero-based index of the first occurrence within the entire collection.
+            </summary>
+            <param name="collection">A collection.</param>
+            <param name="item">The object to locate in the collection. The value can be <b>null</b> for reference types.</param>
+            <returns>The zero-based index of the first occurrence of item within the entire collection, if found; otherwise, –1.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.RemoveAt(System.Collections.IList,System.Int32[])">
+            <summary>
+            Removes list items at the specified indexes.
+            </summary>
+            <param name="list">A list form which items are to be removed.</param>
+            <param name="indexes">The zero-based indexes of items to remove.</param>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.Exists``1(System.Collections.IEnumerable,System.Predicate{``0})">
+            <summary>
+            Determines whether the collection contains elements that match the conditions defined by the specified predicate.
+            </summary>
+            <typeparam name="TElement">Type of elements contained in the collection.</typeparam>
+            <param name="collection">A collection.</param>
+            <param name="match">The Predicate(TElement) delegate that defines the conditions of the elements to search for.</param>
+            <returns>true if the collection contains one or more elements that match the conditions defined by the specified predicate; otherwise, false.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.Find``1(System.Collections.IEnumerable,System.Predicate{``0})">
+            <summary>
+            Searches for an element that matches the conditions defined by the specified predicate, and returns the first occurrence within the entire collection.
+            </summary>
+            <typeparam name="TElement">Type of elements contained in the collection.</typeparam>
+            <param name="collection">A collection.</param>
+            <param name="match">The Predicate(TElement) delegate that defines the conditions of the elements to search for.</param>
+            <returns>The first element that matches the conditions defined by the specified predicate, if found; otherwise, the default value for type TElement.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.FindAll``2(System.Collections.IEnumerable,System.Predicate{``1})">
+            <summary>
+            Retrieves all the elements that match the conditions defined by the specified predicate.
+            </summary>
+            <typeparam name="TList">Type of the list which is returned from the method.</typeparam>
+            <typeparam name="TElement">Type of elements contained in the collection.</typeparam>
+            <param name="collection">A collection.</param>
+            <param name="match">The Predicate(TElement) delegate that defines the conditions of the elements to search for.</param>
+            <returns>A list containing all the elements that match the conditions defined by the specified predicate, if found; otherwise, an empty list.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.FindIndex``1(System.Collections.IEnumerable,System.Predicate{``0})">
+            <summary>
+            Searches for an element that matches the conditions defined by the specified predicate, and returns the zero-based index of the first occurrence within the entire collection.
+            </summary>
+            <typeparam name="TElement">Type of elements contained in the collection.</typeparam>
+            <param name="collection">A collection.</param>
+            <param name="match">The Predicate(TElement) delegate that defines the conditions of the elements to search for.</param>
+            <returns>The zero-based index of the first occurrence of an element that matches the conditions defined by match, if found; otherwise, –1.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.FindIndex``1(System.Collections.IEnumerable,System.Int32,System.Predicate{``0})">
+            <summary>
+            Searches for an element that matches the conditions defined by the specified predicate, and returns the zero-based index of the first occurrence within the range of elements in the collection that extends from the specified index to the last element.
+            </summary>
+            <typeparam name="TElement">Type of elements contained in the collection.</typeparam>
+            <param name="collection">A collection.</param>
+            <param name="startIndex">The zero-based starting index of the search.</param>
+            <param name="match">The Predicate(TElement) delegate that defines the conditions of the elements to search for.</param>
+            <returns>The zero-based index of the first occurrence of an element that matches the conditions defined by match, if found; otherwise, –1.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.FindIndex``1(System.Array,System.Int32,System.Predicate{``0})">
+            <summary>
+            Searches for an element that matches the conditions defined by the specified predicate, and returns the zero-based index of the first occurrence within the range of elements in the array that extends from the specified index to the last element.
+            </summary>
+            <typeparam name="TElement">Type of elements contained in the array.</typeparam>
+            <param name="array">An array.</param>
+            <param name="startIndex">The zero-based starting index of the search.</param>
+            <param name="match">The Predicate(TElement) delegate that defines the conditions of the elements to search for.</param>
+            <returns>The zero-based index of the first occurrence of an element that matches the conditions defined by match, if found; otherwise, –1.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.FindIndex``1(System.Collections.IList,System.Int32,System.Predicate{``0})">
+            <summary>
+            Searches for an element that matches the conditions defined by the specified predicate, and returns the zero-based index of the first occurrence within the range of elements in the list that extends from the specified index to the last element.
+            </summary>
+            <typeparam name="TElement">Type of elements contained in the list.</typeparam>
+            <param name="list">A list.</param>
+            <param name="startIndex">The zero-based starting index of the search.</param>
+            <param name="match">The Predicate(TElement) delegate that defines the conditions of the elements to search for.</param>
+            <returns>The zero-based index of the first occurrence of an element that matches the conditions defined by match, if found; otherwise, –1.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.FindLast``1(System.Collections.IEnumerable,System.Predicate{``0})">
+            <summary>
+            Searches for an element that matches the conditions defined by the specified predicate, and returns the last occurrence within the entire collection.
+            </summary>
+            <typeparam name="TElement">Type of elements contained in the collection.</typeparam>
+            <param name="collection">A collection.</param>
+            <param name="match">The Predicate(TElement) delegate that defines the conditions of the elements to search for.</param>
+            <returns>The last element that matches the conditions defined by the specified predicate, if found; otherwise, the default value for type TElement.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.FindLast``1(System.Array,System.Predicate{``0})">
+            <summary>
+            Searches for an element that matches the conditions defined by the specified predicate, and returns the last occurrence within the entire array.
+            </summary>
+            <typeparam name="TElement">Type of elements contained in the array.</typeparam>
+            <param name="array">An array.</param>
+            <param name="match">The Predicate(TElement) delegate that defines the conditions of the elements to search for.</param>
+            <returns>The last element that matches the conditions defined by the specified predicate, if found; otherwise, the default value for type TElement.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.FindLast``1(System.Collections.IList,System.Predicate{``0})">
+            <summary>
+            Searches for an element that matches the conditions defined by the specified predicate, and returns the last occurrence within the entire list.
+            </summary>
+            <typeparam name="TElement">Type of elements contained in the list.</typeparam>
+            <param name="list">A list.</param>
+            <param name="match">The Predicate(TElement) delegate that defines the conditions of the elements to search for.</param>
+            <returns>The last element that matches the conditions defined by the specified predicate, if found; otherwise, the default value for type TElement.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.FindLastIndex``1(System.Collections.IEnumerable,System.Predicate{``0})">
+            <summary>
+            Searches for an element that matches the conditions defined by the specified predicate, and returns the zero-based index of the last occurrence within the entire collection.
+            </summary>
+            <typeparam name="TElement">Type of elements contained in the collection.</typeparam>
+            <param name="collection">A collection.</param>
+            <param name="match">The Predicate(TElement) delegate that defines the conditions of the elements to search for.</param>
+            <returns>The zero-based index of the last occurrence of an element that matches the conditions defined by match, if found; otherwise, –1.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.FindLastIndex``1(System.Array,System.Predicate{``0})">
+            <summary>
+            Searches for an element that matches the conditions defined by the specified predicate, and returns the zero-based index of the last occurrence within the entire array.
+            </summary>
+            <typeparam name="TElement">Type of elements contained in the array.</typeparam>
+            <param name="array">An array.</param>
+            <param name="match">The Predicate(TElement) delegate that defines the conditions of the elements to search for.</param>
+            <returns>The zero-based index of the last occurrence of an element that matches the conditions defined by match, if found; otherwise, –1.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.FindLastIndex``1(System.Collections.IList,System.Predicate{``0})">
+            <summary>
+            Searches for an element that matches the conditions defined by the specified predicate, and returns the zero-based index of the last occurrence within the entire list.
+            </summary>
+            <typeparam name="TElement">Type of elements contained in the list.</typeparam>
+            <param name="list">A list.</param>
+            <param name="match">The Predicate(TElement) delegate that defines the conditions of the elements to search for.</param>
+            <returns>The zero-based index of the last occurrence of an element that matches the conditions defined by match, if found; otherwise, –1.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.RemoveAll``1(System.Collections.IList,System.Predicate{``0})">
+            <summary>
+            Removes the all the elements that match the conditions defined by the specified predicate.
+            </summary>
+            <typeparam name="TElement">Type of elements contained in the list.</typeparam>
+            <param name="list">A list.</param>
+            <param name="match">The Predicate(TElement) delegate that defines the conditions of the elements to search for.</param>
+            <returns>The number of elements removed from the list.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.TrueForAll``1(System.Collections.IEnumerable,System.Predicate{``0})">
+            <summary>
+            Determines whether every element in the collection matches the conditions defined by the specified predicate.
+            </summary>
+            <typeparam name="TElement">Type of elements contained in the list.</typeparam>
+            <param name="collection">A collection.</param>
+            <param name="match">The Predicate(TElement) delegate that defines the conditions to check against the elements.</param>
+            <returns>true if every element in the collection matches the conditions defined by the specified predicate; otherwise, false. If the list has no elements, the return value is true.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.IsNullOrEmpty(System.Array)">
+            <summary>
+            Checks whether the specified array is a null reference or an empty array.
+            </summary>
+            <param name="array">Array to check.</param>
+            <returns><b>true</b> if the provided array is <b>null</b> or empty; otherwise, false.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.IsNullOrEmpty(System.Collections.ICollection)">
+            <summary>
+            Checks whether the specified collection is a null reference or an empty collection.
+            </summary>
+            <param name="collection">Collection to check.</param>
+            <returns><b>true</b> if the provided collection is <b>null</b> or empty; otherwise, false.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.IsNullOrEmpty(System.Collections.IEnumerable)">
+            <summary>
+            Checks whether the specified collection is a null reference or an empty collection.
+            </summary>
+            <param name="collection">Collection to check.</param>
+            <returns><b>true</b> if the provided collection is <b>null</b> or empty; otherwise, false.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.GetLastValue``1(System.Collections.IList)">
+            <summary>
+            Returns last element in the list.
+            </summary>
+            <typeparam name="TElement">Type of elements contained in the input list.</typeparam>
+            <param name="list">A list of objects.</param>
+            <returns>Last element or null if the list is empty or null.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.GetLastValue``1(System.Array)">
+            <summary>
+            Returns last element in the array.
+            </summary>
+            <typeparam name="TElement">Type of elements contained in the input array.</typeparam>
+            <param name="array">An array of objects.</param>
+            <returns>Last element or null if the array is empty or null.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.GetLastValue``1(System.Collections.IEnumerable)">
+            <summary>
+            Returns last element in the collection.
+            </summary>
+            <typeparam name="TElement">Type of elements contained in the input collection.</typeparam>
+            <param name="collection">A collection of objects.</param>
+            <returns>Last element or null if the collection is empty or null.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.GetLastObject``1(System.Collections.IList)">
+            <summary>
+            Returns last element in the list.
+            </summary>
+            <typeparam name="TElement">Type of elements contained in the input list.</typeparam>
+            <param name="list">A list of objects.</param>
+            <returns>Last element or null if the list is empty or null.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.GetLastObject``1(System.Array)">
+            <summary>
+            Returns last element in the array.
+            </summary>
+            <typeparam name="TElement">Type of elements contained in the input array.</typeparam>
+            <param name="array">An array of objects.</param>
+            <returns>Last element or null if the array is empty or null.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.GetLastObject``1(System.Collections.IEnumerable)">
+            <summary>
+            Returns last element in the collection.
+            </summary>
+            <typeparam name="TElement">Type of elements contained in the input collection.</typeparam>
+            <param name="collection">A collection of objects.</param>
+            <returns>Last element or null if the collection is empty or null.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.GetFirstValue``1(System.Collections.IList)">
+            <summary>
+            Returns first element in the list.
+            </summary>
+            <typeparam name="TElement">Type of elements contained in the input list.</typeparam>
+            <param name="list">A list of objects.</param>
+            <returns>First element or null if the list is empty or null.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.GetFirstValue``1(System.Array)">
+            <summary>
+            Returns first element in the list.
+            </summary>
+            <typeparam name="TElement">Type of elements contained in the input list.</typeparam>
+            <param name="array">An array of objects.</param>
+            <returns>First element or null if the list is empty or null.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.GetFirstValue``1(System.Collections.IEnumerable)">
+            <summary>
+            Returns first element in the list.
+            </summary>
+            <typeparam name="TElement">Type of elements contained in the input list.</typeparam>
+            <param name="collection">A collection of objects.</param>
+            <returns>First element or null if the list is empty or null.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.GetFirstObject``1(System.Collections.IList)">
+            <summary>
+            Returns first element in the list.
+            </summary>
+            <typeparam name="TElement">Type of elements contained in the input list.</typeparam>
+            <param name="list">A list of objects.</param>
+            <returns>First element or null if the list is empty or null.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.GetFirstObject``1(System.Array)">
+            <summary>
+            Returns first element in the list.
+            </summary>
+            <typeparam name="TElement">Type of elements contained in the input list.</typeparam>
+            <param name="array">An array of objects.</param>
+            <returns>First element or null if the list is empty or null.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.GetFirstObject``1(System.Collections.IEnumerable)">
+            <summary>
+            Returns first element in the list.
+            </summary>
+            <typeparam name="TElement">Type of elements contained in the input list.</typeparam>
+            <param name="collection">A collection of objects.</param>
+            <returns>First element or null if the list is empty or null.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.SetFirstElement(System.Collections.IList,System.Object)">
+            <summary>
+            Sets first element of the list.
+            </summary>
+            <param name="list">A list of objects. If empty, the element will be added.</param>
+            <param name="element">Object to set.</param>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.SetFirstElement``1(System.Collections.Generic.IList{``0},``0)">
+            <summary>
+            Sets first element of the list.
+            </summary>
+            <typeparam name="TElement">Type of elements contained in the input list.</typeparam>
+            <param name="list">A list of objects. If empty, the element will be added.</param>
+            <param name="element">Object to set.</param>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.ToObjectArray(System.Collections.IList,System.String)">
+            <summary>
+            Creates an array of objects with values in the given property.
+            </summary>
+            <param name="list">A list of objects that have the specified property.</param>
+            <param name="property">Property that holds the values which are to be coppied to array.</param>
+            <returns>Array of objects.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.ToIntArray(System.Collections.IList,System.String)">
+            <summary>
+            Creates an array of integers with values in the given property.
+            </summary>
+            <param name="list">A list of objects that have the specified property.</param>
+            <param name="property">Property that holds the numbers which are to be coppied to array.</param>
+            <returns>Array of integers.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.GetObjectsWithoutKeys(System.Collections.IList,System.String,System.Int32[])">
+            <summary>
+            Gets all object that don't have the specified keys.
+            </summary>
+            <param name="allObjects">Source list.</param>
+            <param name="keyProperty">Name of the property that contains key values.</param>
+            <param name="excludedKeyValues">Key values of object that will <b>not</b> be added to output list.</param>
+            <returns>A list of objects without the specified keys.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.IndexOf(System.Collections.IList,System.String,System.Object)">
+            <summary>
+            Returns zero-based index of an object with the specified key.
+            </summary>
+            <param name="objects">List of objects.</param>
+            <param name="keyProperty">Name of the property that contains key values.</param>
+            <param name="key">Key value of object that is to be found in the source list.</param>
+            <returns>Index of the object; -1 if not found.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.GetObjectsWithKeys(System.Collections.IList,System.String,System.Int32[])">
+            <summary>
+            Gets all objects with the specified keys.
+            </summary>
+            <param name="allObjects">Source list.</param>
+            <param name="keyProperty">Name of the property that contains key values.</param>
+            <param name="allowedKeyValues">Key values of object that will be added to output list.</param>
+            <returns>A list of objects with the specified keys.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.GetObjectsWithKeys``3(System.Collections.IEnumerable,System.String,``2[])">
+            <summary>
+            Gets all object with the specified keys.
+            </summary>
+            <typeparam name="TList">Type of the list which is returned from the method.</typeparam>
+            <typeparam name="TElement">Type of elements contained in the input and output lists.</typeparam>
+            <typeparam name="TKey">Type of the values in the key property.</typeparam>
+            <param name="allObjects">Source list.</param>
+            <param name="keyPropertyName">Name of the property that contains key values.</param>
+            <param name="allowedKeyValues">Key values of object that will be added to output list.</param>
+            <returns>A list of objects with the specified keys.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.GetObjectByKey(System.Collections.IList,System.String,System.Object)">
+            <summary>
+            Gets a single object with the specified key.
+            </summary>
+            <param name="allObjects">Source list.</param>
+            <param name="keyProperty">Name of the property that contains key values.</param>
+            <param name="key">Key value of object that is to be found in the source list.</param>
+            <returns>Object with the given key; null if not found.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.GetObjectByKey``2(System.Collections.IEnumerable,System.String,``1)">
+            <summary>
+            Gets a singe object with the specified key.
+            </summary>
+            <typeparam name="TElement">Type of elements contained in the input and output lists.</typeparam>
+            <typeparam name="TKey">Type of the values in the key property.</typeparam>
+            <param name="allObjects">Source list.</param>
+            <param name="keyPropertyName">Name of the property that contains key values.</param>
+            <param name="key">Key value of object that is to be found in the source list.</param>
+            <returns>Object with the given key; null if not found.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.GetObjectWithoutKeys``3(System.Collections.IEnumerable,System.String,``2[])">
+            <summary>
+            Gets all object that don't have the specified keys.
+            </summary>
+            <typeparam name="TList">Type of the list which is returned from the method.</typeparam>
+            <typeparam name="TElement">Type of elements contained in the input and output lists.</typeparam>
+            <typeparam name="TKey">Type of the values in the key property.</typeparam>
+            <param name="allObjects">Source list.</param>
+            <param name="keyPropertyName">Name of the property that contains key values.</param>
+            <param name="excludedKeyValues">Key values of object that will <b>not</b> be added to output list.</param>
+            <returns>A list of objects without the specified keys.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.UnionDistinct(System.Collections.IList,System.Collections.IList,System.String)">
+            <summary>
+            Creates a distinct union of two lists. All object with duplicate key values are eliminated.
+            </summary>
+            <param name="lhs">Left-hand side list.</param>
+            <param name="rhs">Right-hand side list.</param>
+            <param name="uniqueField">Field with distinct values. Objects in both lists must contain this property/field.</param>
+            <returns>Distinct union.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.Intersect(System.Collections.IList,System.Collections.IList,System.String)">
+            <summary>
+            Returns an intersection of two lists.
+            </summary>
+            <param name="leftList">First list.</param>
+            <param name="rightList">Second list.</param>
+            <param name="keyProperty">Field used to compare objects. Objects in both lists must contain this property/field.</param>
+            <returns>Intersection. Contains only objects that are found in both arrays.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.Union(System.Int32[],System.Int32[])">
+            <summary>
+            Creates a union of two arrays.
+            </summary>
+            <param name="lhs">Left-hand side array.</param>
+            <param name="rhs">Right-hand side array.</param>
+            <returns>Union of arrays.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.Union(System.Collections.IList,System.Collections.IList)">
+            <summary>
+            Creates a union of two lists.
+            </summary>
+            <param name="lhs">Left-hand side list.</param>
+            <param name="rhs">Right-hand side list.</param>
+            <returns>Union of lists.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.Union``2(System.Collections.IEnumerable[])">
+            <summary>
+            Creates a union of provided collections.
+            </summary>
+            <typeparam name="TList">Type of the list which is returned from the method.</typeparam>
+            <typeparam name="TElement">Type of elements contained in the input and output collections.</typeparam>
+            <param name="collections">Source collections whose elements will be coppied to union list.</param>
+            <returns>A list of all objects in the provided collections.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.Union``1(System.Array[])">
+            <summary>
+            Creates a union of provided arrays.
+            </summary>
+            <typeparam name="T">Type of elements contained in the input and output collections.</typeparam>
+            <param name="arrays">Source arrays whose elements will be coppied to union array.</param>
+            <returns>An array of all objects in the provided arrays.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.UnionDistinct(System.Int32[],System.Int32[])">
+            <summary>
+            Creates a distinct union of two arrays. All duplicates are eliminated.
+            </summary>
+            <param name="lhs">Left-hand side array.</param>
+            <param name="rhs">Right-hand side array.</param>
+            <returns>Distinct union.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.UnionDistinct``2(System.Collections.IEnumerable[])">
+            <summary>
+            Creates a union of provided collections that contains only distinct values.
+            </summary>
+            <typeparam name="TList">Type of the list which is returned from the method.</typeparam>
+            <typeparam name="TElement">Type of elements contained in the input and output collections.</typeparam>
+            <param name="collections">Source collections whose elements will be coppied to union list.</param>
+            <returns>A list of distinct values in the provided collections.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.UnionDistinct``3(System.String,System.Collections.IEnumerable[])">
+            <summary>
+            Creates a union of provided collections that contains only objects with distinct keys.
+            </summary>
+            <typeparam name="TList">Type of the list which is returned from the method.</typeparam>
+            <typeparam name="TElement">Type of elements contained in the input and output collections.</typeparam>
+            <typeparam name="TKey">Type of the values in the key property.</typeparam>
+            <param name="keyPropertyName">Name of the property that contains key values.</param>
+            <param name="collections">Source collections whose elements will be coppied to union list.</param>
+            <returns>A list of distinct objects in the provided collections.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.UnionDistinct``3(FistCore.Common.Delegates.Function{``2,``1},System.Collections.IEnumerable[])">
+            <summary>
+            Creates a union of provided collections that contains only objects with distinct keys.
+            </summary>
+            <typeparam name="TList">Type of the list which is returned from the method.</typeparam>
+            <typeparam name="TElement">Type of elements contained in the input and output collections.</typeparam>
+            <typeparam name="TKey">Type of the values in the key property.</typeparam>
+            <param name="keyGetter">A delegate which gets the value of property that contains key values.</param>
+            <param name="collections">Source collections whose elements will be coppied to union list.</param>
+            <returns>A list of distinct objects in the provided collections.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.EliminateDuplicates(System.Int32[])">
+            <summary>
+            Eliminates duplicates in the source array.
+            </summary>
+            <param name="arrayWithDuplicateValues">Array of integers that may contains duplicates.</param>
+            <returns>Array of integers that contains only distinct values.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.EliminateDuplicates``2(System.Collections.IEnumerable)">
+            <summary>
+            Eliminates duplicate values in the source list.
+            </summary>
+            <typeparam name="TList">Type of the list which is returned from the method.</typeparam>
+            <typeparam name="TElement">Type of elements contained in the input and output lists.</typeparam>
+            <param name="listWithDuplicateValues">A list of values that may contain duplicates.</param>
+            <returns>A list of distinct values.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.EliminateDuplicates``3(System.Collections.IEnumerable,System.String)">
+            <summary>
+            Eliminates objects with duplicate key values in the source list.
+            </summary>
+            <typeparam name="TList">Type of the list which is returned from the method.</typeparam>
+            <typeparam name="TElement">Type of elements contained in the input and output lists.</typeparam>
+            <typeparam name="TKey">Type of the values in the key property.</typeparam>
+            <param name="listWithDuplicateValues">A list of objects that may contain duplicate key values.</param>
+            <param name="keyPropertyName">Name of the property that contains key values.</param>
+            <returns>A list of objects with distinct keys.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.EliminateDuplicates``2(System.Collections.IEnumerable,System.Comparison{``1})">
+            <summary>
+            Eliminates duplicate objects in the source list.
+            </summary>
+            <typeparam name="TList">Type of the list which is returned from the method.</typeparam>
+            <typeparam name="TElement">Type of elements contained in the input and output lists.</typeparam>
+            <param name="listWithDuplicateValues">A list of objects that may contain duplicate key values.</param>
+            <param name="comparison">The Comparison(TElement) delegate that defines how elements are compared.</param>
+            <returns>A list of distinct objects.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.GetDuplicates``2(System.Collections.IEnumerable,System.Comparison{``1})">
+            <summary>
+            Gets non-distinct objects from the source list.
+            </summary>
+            <typeparam name="TList">Type of the list which is returned from the method.</typeparam>
+            <typeparam name="TElement">Type of elements contained in the input and output lists.</typeparam>
+            <param name="listWithDuplicateValues">A list of objects that may contain duplicate key values.</param>
+            <param name="comparison">The Comparison(TElement) delegate that defines how elements are compared.</param>
+            <returns>A list of non-distinct objects.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.GetDifference(System.Int32[],System.Int32[])">
+            <summary>
+            Removes specified values from source array.
+            </summary>
+            <param name="array">Source array.</param>
+            <param name="valuesToBeExcludedFromArray">Values that are to be excluded from the source array.</param>
+            <returns>Source array without the specified values.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.GetDifference``2(System.Collections.IEnumerable,System.Collections.IEnumerable)">
+            <summary>
+            Gets the set-theoretic difference of two provided values sets.
+            </summary>
+            <typeparam name="TList">Type of the list which is returned from the method.</typeparam>
+            <typeparam name="TElement">Type of elements contained in the input and output lists.</typeparam>
+            <param name="source">A set from which the elements/value are removed.</param>
+            <param name="valuesToRemove">A set which contains the values to remove from the first set.</param>
+            <returns>Source without the specified values.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.GetDifference``2(System.Collections.IEnumerable,``1[])">
+            <summary>
+            Gets the set-theoretic difference of two provided values sets.
+            </summary>
+            <typeparam name="TList">Type of the list which is returned from the method.</typeparam>
+            <typeparam name="TElement">Type of elements contained in the input and output lists.</typeparam>
+            <param name="source">A set from which the elements/value are removed.</param>
+            <param name="valuesToRemove">A set which contains the values to remove from the first set.</param>
+            <returns>Source without the specified values.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.Intersect(System.Int32[],System.Int32[])">
+            <summary>
+            Returns an intersection of two arrays.
+            </summary>
+            <param name="leftArray">First array.</param>
+            <param name="rightArray">Second array.</param>
+            <returns>Intersection. Contains only values that are found in both arrays.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.Intersect``2(System.Collections.IEnumerable,System.Collections.IEnumerable)">
+            <summary>
+            Gets the set-theoretic difference of two provided values sets.
+            </summary>
+            <typeparam name="TList">Type of the list which is returned from the method.</typeparam>
+            <typeparam name="TElement">Type of elements contained in the input and output lists.</typeparam>
+            <param name="leftList">First list.</param>
+            <param name="rightList">Second list.</param>
+            <returns>The set that contains all elements of 1st list that also belong to 2nd list.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.Intersect``3(System.Collections.IEnumerable,System.Collections.IEnumerable,System.String)">
+            <summary>
+            Gets the set-theoretic difference of two provided values sets.
+            </summary>
+            <typeparam name="TList">Type of the list which is returned from the method.</typeparam>
+            <typeparam name="TElement">Type of elements contained in the input and output lists.</typeparam>
+            <typeparam name="TKey">Type of the values in the key property.</typeparam>
+            <param name="leftList">First list.</param>
+            <param name="rightList">Second list.</param>
+            <param name="keyPropertyName">Name of the property that contains key values.</param>
+            <returns>The set that contains all elements of 1st list that also belong to 2nd list.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.Contains(System.Object[],System.Object)">
+            <summary>
+            Checks whether an array contains a given value.
+            </summary>
+            <param name="array">Array.</param>
+            <param name="val">Value to find in array.</param>
+            <returns>True if array contains the given value; false otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.Contains(System.Int32[],System.Int32)">
+            <summary>
+            Checks whether an array contains a given value.
+            </summary>
+            <param name="array">Array.</param>
+            <param name="val">Value to find in array.</param>
+            <returns>True if array contains the given value; false otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.Contains(System.Collections.IList,System.Int32)">
+            <summary>
+            Checks whether a list contains a given integer value.
+            </summary>
+            <param name="integers">List of integers.</param>
+            <param name="val">Value to find in array.</param>
+            <returns>True if array contains the given value; false otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.Contains``1(System.Collections.IEnumerable,``0)">
+            <summary>
+            Checks whether a collection contains the specified value.
+            </summary>
+            <typeparam name="TElement">Type of elements in the collection.</typeparam>
+            <param name="collection">A collection which will be scanned.</param>
+            <param name="value">Value to find the collection.</param>
+            <returns><b>true</b> if array contains the given value; <b>false</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.Contains``1(System.Collections.IEnumerable,System.String,``0)">
+            <summary>
+            Checks whether a collection contains an object with the specified key value.
+            </summary>
+            <typeparam name="TKey">Type of the values in the key property.</typeparam>
+            <param name="collection">A list or an array of objects.</param>
+            <param name="keyPropertyName">Name of the property that contains key values.</param>
+            <param name="key">Key value of object that is to be found in the source list.</param>
+            <returns><b>true</b> if array contains the given value; <b>false</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.Min(System.Int32[])">
+            <summary>
+            Returns the smallest value in the array.
+            </summary>
+            <param name="numbers">An array of numbers to inspect.</param>
+            <returns>The smallest number. Zero if collection iz empty.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.Min``1(``0[])">
+            <summary>
+            Returns the smallest value in the array.
+            </summary>
+            <typeparam name="TElement">Type of elements in the collection.</typeparam>
+            <param name="array">An array of values to inspect.</param>
+            <returns>The smallest element. Default type value if collection iz empty.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.Min``1(System.Collections.IEnumerable)">
+            <summary>
+            Returns the smallest value in the collection.
+            </summary>
+            <typeparam name="TElement">Type of elements in the collection.</typeparam>
+            <param name="collection">A collection of values to inspect.</param>
+            <returns>The smallest element. Default type value if collection iz empty.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.Min``2(System.Collections.IEnumerable,System.String)">
+            <summary>
+            Returns the object with the smallest comparation property value.
+            </summary>
+            <typeparam name="TElement">Type of elements in the collection. Must be a reference type, ie. class.</typeparam>
+            <typeparam name="TComparableProperty">Type of the values in the property by which the objects are compared.</typeparam>
+            <param name="collection">A collection of objects to inspect.</param>
+            <param name="comparablePropertyName">Name of the property by which the object are compared.</param>
+            <returns>Object with the smallest comparation value. <b>null</b> if collection is empty.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.Min``1(System.Collections.IEnumerable,System.Comparison{``0})">
+            <summary>
+            Returns the object with the smallest comparisson value.
+            </summary>
+            <typeparam name="TElement">Type of elements in the collection. Must be a reference type, ie. class.</typeparam>
+            <param name="collection">A collection of objects to inspect.</param>
+            <param name="comparison">The Comparison(TElement) delegate that defines how elements are compared.</param>
+            <returns>Object with the smallest comparation value. <b>null</b> if collection is empty.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.Min``2(System.Collections.IEnumerable,FistCore.Common.Delegates.Function{``1,``0})">
+            <summary>
+            Returns the object with the smallest comparisson value.
+            </summary>
+            <typeparam name="TElement">Type of elements in the collection. Must be a reference type, ie. class.</typeparam>
+            <typeparam name="TComparableProperty">Type of the values in the property by which the objects are compared.</typeparam>
+            <param name="collection">A collection of objects to inspect.</param>
+            <param name="compareByGetter">A delegate which gets the value of property by which the objects are compared.</param>
+            <returns>Object with the smallest comparation value. <b>null</b> if collection is empty.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.MinValue``1(System.Collections.IEnumerable)">
+            <summary>
+            Returns the smallest value in the collection or null.
+            </summary>
+            <typeparam name="TValue">Type of elements in the collection.</typeparam>
+            <param name="collection">A collection of values to inspect.</param>
+            <returns>The smallest value. <b>null</b> if collection is empty.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.MinValue``2(System.Collections.IEnumerable,FistCore.Common.Delegates.Function{``1,``0})">
+            <summary>
+            Returns the smallest value in the collection or null.
+            </summary>
+            <typeparam name="TElement">Type of elements in the collection. Must be a reference type, ie. class.</typeparam>
+            <typeparam name="TValue">Type of the values in the property which is compared.</typeparam>
+            <param name="collection">A collection of objects whose properties are inspected.</param>
+            <param name="valueGetter">A delegate which gets the value of property which is compared.</param>
+            <returns>The smallest value. <b>null</b> if collection is empty.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.Max(System.Int32[])">
+            <summary>
+            Returns the greatest value in the array.
+            </summary>
+            <param name="numbers">Array of numbers to inspect. Zero if collection is empty.</param>
+            <returns>The greatest number.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.Max``1(``0[])">
+            <summary>
+            Returns the greatest value in the array.
+            </summary>
+            <typeparam name="TElement">Type of elements in the collection.</typeparam>
+            <param name="array">An array of values to inspect.</param>
+            <returns>The greatest element. Default type value if collection is empty.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.Max``1(System.Collections.IEnumerable)">
+            <summary>
+            Returns the greatest value in the collection.
+            </summary>
+            <typeparam name="TElement">Type of elements in the collection.</typeparam>
+            <param name="collection">A collection of values to inspect.</param>
+            <returns>The greatest element. Default type value if collection is empty.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.Max``2(System.Collections.IEnumerable,System.String)">
+            <summary>
+            Returns the object with the greatest comparation property value.
+            </summary>
+            <typeparam name="TElement">Type of elements in the collection. Must be a reference type, ie. class.</typeparam>
+            <typeparam name="TComparableProperty">Type of the values in the property by which the object are compared.</typeparam>
+            <param name="collection">A collection of objects to inspect.</param>
+            <param name="comparablePropertyName">Name of the property by which the object are compared.</param>
+            <returns>Object with the greatest comparation value. <b>null</b> if collection is empty.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.Max``1(System.Collections.IEnumerable,System.Comparison{``0})">
+            <summary>
+            Returns the object with the greatest comparisson value.
+            </summary>
+            <typeparam name="TElement">Type of elements in the collection. Must be a reference type, ie. class.</typeparam>
+            <param name="collection">A collection of objects to inspect.</param>
+            <param name="comparison">The Comparison(TElement) delegate that defines how elements are compared.</param>
+            <returns>Object with the greatest comparation value. <b>null</b> if collection is empty.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.Max``2(System.Collections.IEnumerable,FistCore.Common.Delegates.Function{``1,``0})">
+            <summary>
+            Returns the object with the greatest comparisson value.
+            </summary>
+            <typeparam name="TElement">Type of elements in the collection. Must be a reference type, ie. class.</typeparam>
+            <typeparam name="TComparableProperty">Type of the values in the property by which the objects are compared.</typeparam>
+            <param name="collection">A collection of objects to inspect.</param>
+            <param name="compareByGetter">A delegate which gets the value tha value of property by which the objects are compared.</param>
+            <returns>Object with the greatest comparation value. <b>null</b> if collection is empty.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.MaxValue``1(System.Collections.IEnumerable)">
+            <summary>
+            Returns the greatest value in the collection or null.
+            </summary>
+            <typeparam name="TValue">Type of elements in the collection.</typeparam>
+            <param name="collection">A collection of values to inspect.</param>
+            <returns>The greatest value. <b>null</b> if collection is empty.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.MaxValue``2(System.Collections.IEnumerable,FistCore.Common.Delegates.Function{``1,``0})">
+            <summary>
+            Returns the greatest value in the collection or null.
+            </summary>
+            <typeparam name="TElement">Type of elements in the collection. Must be a reference type, ie. class.</typeparam>
+            <typeparam name="TValue">Type of the values in the property which is compared.</typeparam>
+            <param name="collection">A collection of objects whose properties are inspected.</param>
+            <param name="valueGetter">A delegate which gets the value of property which is compared.</param>
+            <returns>The greatest value. <b>null</b> if collection is empty.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.Count``1(System.Collections.IEnumerable,System.Predicate{``0})">
+            <summary>
+            Returns the number of elements that match the conditions defined by the specified predicate.
+            </summary>
+            <typeparam name="TElement">Type of elements contained in the collection.</typeparam>
+            <param name="collection">A collection.</param>
+            <param name="match">The Predicate(TElement) delegate that defines the conditions of the elements to search for.</param>
+            <returns>Number of elements that match the conditions defined by the specified predicate.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.Sort(System.Collections.IEnumerable)">
+            <summary>
+            Sorts a list using default comparer.
+            </summary>
+            <param name="objectsToSort">A list of objects to sort.</param>
+            <returns>Sorted objects.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.Sort(System.Collections.IEnumerable,System.String)">
+            <summary>
+            Sorts a list.
+            </summary>
+            <param name="objectsToSort">A list of objects to sort.</param>
+            <param name="orderByProperty">Object property whose values are to be sorted.</param>
+            <returns>Sorted objects.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.Sort(System.Collections.IEnumerable,System.String,System.Boolean)">
+            <summary>
+            Sorts a list.
+            </summary>
+            <param name="objectsToSort">A list of objects to sort.</param>
+            <param name="orderByProperty">Object property whose values are to be sorted.</param>
+            <param name="ascending">Specifies whether the values in the specified property should be sorted in ascending order, from lowest value to highest value.</param>
+            <returns>Sorted objects.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.Sort``2(System.Collections.IEnumerable)">
+            <summary>
+            Sorts a collection using default comparer.
+            </summary>
+            <typeparam name="TList">Type of the list which is returned from the method.</typeparam>
+            <typeparam name="TElement">Type of elements contained in the collection.</typeparam>
+            <param name="collection">A collection of objects to sort.</param>
+            <returns>Sorted list.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.Sort``2(System.Collections.IEnumerable,System.Comparison{``1})">
+            <summary>
+            Sorts a collection using the specified comparison.
+            </summary>
+            <typeparam name="TList">Type of the list which is returned from the method.</typeparam>
+            <typeparam name="TElement">Type of elements contained in the collection.</typeparam>
+            <param name="collection">A collection of objects to sort.</param>
+            <param name="comparison">The Comparison(TElement) delegate that defines how elements are compared.</param>
+            <returns>Sorted list.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.Sort``3(System.Collections.IEnumerable,FistCore.Common.Delegates.Function{``2,``1})">
+            <summary>
+            Sorts a collection.
+            </summary>
+            <typeparam name="TList">Type of the list which is returned from the method.</typeparam>
+            <typeparam name="TElement">Type of elements contained in the collection.</typeparam>
+            <typeparam name="TComparableProperty">Type of the values in the property by which the objects are ordered.</typeparam>
+            <param name="collection">A collection of objects to sort.</param>
+            <param name="orderByGetter">A delegate which gets the value tha value of property by which the objects are ordered.</param>
+            <returns>Sorted list.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.Sort``3(System.Collections.IEnumerable,System.Boolean,FistCore.Common.Delegates.Function{``2,``1})">
+            <summary>
+            Sorts a collection.
+            </summary>
+            <typeparam name="TList">Type of the list which is returned from the method.</typeparam>
+            <typeparam name="TElement">Type of elements contained in the collection.</typeparam>
+            <typeparam name="TComparableProperty">Type of the values in the property by which the objects are ordered.</typeparam>
+            <param name="collection">A collection of objects to sort.</param>
+            <param name="ascending">Specifies whether the values in the specified property should be sorted in ascending order, from lowest value to highest value.</param>
+            <param name="orderByGetter">A delegate which gets the value tha value of property by which the objects are ordered.</param>
+            <returns>Sorted list.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.Concat(System.Collections.IEnumerable,System.String)">
+            <summary>
+            Concatenates the string representations of the elements in the specified list.
+            </summary>
+            <param name="list">A list of objects.</param>
+            <param name="delimiter">Optional string which is used to delimit objects. Nullable.</param>
+            <returns>The concatenated and delimited string representations of the values of the elements in the list.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.Concat(System.Collections.IEnumerable,System.String,FistCore.Common.IMessageFormatter)">
+            <summary>
+            Concatenates the string representations of the elements in the specified list.
+            </summary>
+            <param name="list">A list of objects.</param>
+            <param name="delimiter">Optional string which is used to delimit objects. Nullable.</param>
+            <param name="formatter">Formats elements of the list.</param>
+            <returns>The concatenated and delimited string representations of the values of the elements in the list.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.Concat``1(System.Collections.IEnumerable,System.String,FistCore.Common.Delegates.Function{System.Object,``0})">
+            <summary>
+            Concatenates the string representations of the elements in the specified list.
+            </summary>
+            <typeparam name="TElement">Type of elements contained in the collection.</typeparam>
+            <param name="collection">A collection of objects that contain the values to concatenate.</param>
+            <param name="delimiter">Optional string which is used to delimit objects. Nullable.</param>
+            <param name="getValueToConcat">A delegate to a method which returns value to concatenate.</param>
+            <returns>The concatenated and delimited string representations of the values of the elements in the list.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.Concat``1(System.Collections.IEnumerable,System.String,FistCore.Common.IMessageFormatter,FistCore.Common.Delegates.Function{System.Object,``0})">
+            <summary>
+            Concatenates the string representations of the elements in the specified list.
+            </summary>
+            <typeparam name="TElement">Type of elements contained in the collection.</typeparam>
+            <param name="collection">A collection of objects that contain the values to concatenate.</param>
+            <param name="delimiter">Optional string which is used to delimit objects. Nullable.</param>
+            <param name="formatter">Formats elements of the list.</param>
+            <param name="getValueToConcat">A delegate to a method which returns value to concatenate.</param>
+            <returns>The concatenated and delimited string representations of the values of the elements in the list.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.SplitIntoChunks``1(System.Collections.Generic.List{``0},System.Int32)">
+            <summary>
+            Splits a <see cref="T:System.Collections.Generic.List`1"/> into multiple chunks.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="list">The list to be chunked.</param>
+            <param name="chunkSize">The size of each chunk.</param>
+            <returns>A list of chunks.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.ForEach``1(System.Collections.IEnumerable,System.Action{``0})">
+            <summary>
+            Performs the specified action on each element of the collection.
+            </summary>
+            <typeparam name="TElement">Type of elements contained in the collection.</typeparam>
+            <param name="collection">A collection.</param>
+            <param name="action">The Action(TElement) delegate to perform on each element of the collection.</param>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.NextNegativeId``1(System.Collections.IEnumerable,FistCore.Common.Delegates.Function{System.Int32,``0})">
+            <summary>
+            Computes a temporary negative ID which uniquely identifies a new record in the given collection.
+            </summary>
+            <typeparam name="TElement">Type of objects in the collection. Typically these are entities, business objects or ADO.NET data rows.</typeparam>
+            <param name="collection">A collection which is to be inspected.</param>
+            <param name="getElementId">A method which returns object's ID.</param>
+            <returns>A negative integer.</returns>
+        </member>
+        <member name="M:FistCore.Common.ArrayUtil.ToBindingList``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            Converts dictionary to its <see cref="!:DictionaryBindingList"/> representation.
+            </summary>
+            <typeparam name="TKey">Key type.</typeparam>
+            <typeparam name="TValue">Value type.</typeparam>
+            <param name="data">Dictionary to be changed.</param>
+            <returns>Returns <see cref="!:DictionaryBindingList"/> representation of <paramref name="data"/>.</returns>
+        </member>
+        <member name="T:FistCore.Common.ReflectionUtil">
+            <summary>
+            Provides common operations which use advanced reflection features.
+            </summary>
+        </member>
+        <member name="M:FistCore.Common.ReflectionUtil.InvokeMethod(System.Object,System.String,System.Object[])">
+            <summary>
+            Invokes a method.
+            </summary>
+            <param name="obj">Object whose definition (class) contains the specified method.</param>
+            <param name="methodName">Method to be executed.</param>
+            <param name="methodParameters">Method parameters.</param>
+            <returns>Method's return value.</returns>
+        </member>
+        <member name="M:FistCore.Common.ReflectionUtil.InvokeStaticMethod(System.Type,System.String,System.Object[])">
+            <summary>
+            Invokes a static method.
+            </summary>
+            <param name="type">Type which contains the specified static method.</param>
+            <param name="methodName">Method to be executed.</param>
+            <param name="methodParameters">Method parameters.</param>
+            <returns>Method's return value.</returns>
+        </member>
+        <member name="M:FistCore.Common.ReflectionUtil.CopyObject(System.Object,System.Object)">
+            <summary>
+            Copies entire object graph to another instance of the same type.
+            </summary>
+            <param name="source">Source object.</param>
+            <param name="destination">Destination object which is to receive the data contained in the source object.</param>
+        </member>
+        <member name="M:FistCore.Common.ReflectionUtil.CopyPublicProperties(System.Object,System.Object)">
+            <summary>
+            Copies all values of public properties to another instance of the same type.
+            </summary>
+            <param name="source">Source object.</param>
+            <param name="destination">Destination object which is to receive the data contained in the source object.</param>
+            <remarks>Only properties which have getter and setter are copied.</remarks>
+        </member>
+        <member name="M:FistCore.Common.ReflectionUtil.GetPublicPropertyValue(System.Object,System.String)">
+            <summary>
+            Searches for the public property with the specified name and returns its value.
+            </summary>
+            <param name="obj">The object whose property value will be returned.</param>
+            <param name="propertyName">Name of the public property to get.</param>
+            <returns>The property value.</returns>
+        </member>
+        <member name="M:FistCore.Common.ReflectionUtil.FindMember(System.Object,System.String,System.Reflection.FieldInfo@,System.Reflection.PropertyInfo@)">
+            <summary>
+            Tries to find a member in object's class hierarchy.
+            </summary>
+            <param name="obj">Object whose type hierarchy is inspected.</param>
+            <param name="memberName">Name of the field or property to find.</param>
+            <param name="field">A <see cref="T:System.Reflection.FieldInfo"/> instance if matching field is found; <b>null</b> otherwise.</param>
+            <param name="property">A <see cref="T:System.Reflection.PropertyInfo"/> instance if matching property is found; <b>null</b> otherwise.</param>
+            <returns><b>true</b> if member with the specified name was found; <b>false</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Common.ReflectionUtil.TrySetValueAtPath(System.Object,System.String[],System.Object,System.Boolean)">
+            <summary>
+            Tries to set the value at the specified path in the object graph.
+            </summary>
+            <param name="component">Component/object whose object graph is analyzed and whose sub-component is to receive the value.</param>
+            <param name="path">Array of public property names and indexer arguments.</param>
+            <param name="value">Value to set in the final sub-component of the path.</param>
+            <param name="logErrorsAsWarnings">Whether to log all encountered errors are logged as warnings (see <see cref="!:Log.AppWarning"/>).</param>
+            <returns><b>true</b> if the operation was successfull; <b>false</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Common.ReflectionUtil.TrySetPropertyValue(System.Object,System.String,System.Object)">
+            <summary>
+            Tries to set the value in the specified public property.
+            </summary>
+            <param name="obj">Object to receive the value through public property.</param>
+            <param name="publicPropertyName">Writeable public property.</param>
+            <param name="convertibileValue">A value which can be converted to the type which property accepts.</param>
+            <param name="logErrorsAsWarnings">Whether to log all encountered errors are logged as warnings (see <see cref="!:Log.AppWarning"/>).</param>
+            <returns><b>true</b> if the operation was successfull; <b>false</b> otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Common.ReflectionUtil.TryCreateInstance(System.String,System.String)">
+            <summary>
+            Tries to locate the specified class in the given assembly and create an instance of it using system activator.
+            </summary>
+            <param name="assemblyFullName">The long form of the assembly name.</param>
+            <param name="classFullName">The <see cref="P:System.Type.FullName"/> of the class to locate.</param>
+            <returns>An instance of <see cref="T:System.Object"/> representing the type. <b>null</b> reference if en error occures.</returns>
+            <remarks>Logs <see cref="!:Log.AppWarning"/> if an <see cref="T:System.Exception"/> occures.</remarks>
+        </member>
+        <member name="M:FistCore.Common.ReflectionUtil.TryCreateInstanceFromAppSettings(System.String,System.String)">
+            <summary>
+            Tries to locate the specified class in the given assembly and create an instance of it using system activator.
+            </summary>
+            <param name="assemblyStringSetting">Application setting which contains the short or long form of the assembly name.</param>
+            <param name="classNameSetting">Application setting which contains the full name of the type.</param>
+            <returns>An instance of <see cref="T:System.Object"/> representing the type. <b>null</b> reference if en error occures.</returns>
+            <remarks>Logs <see cref="!:Log.AppWarning"/> if an <see cref="T:System.Exception"/> occures.</remarks>
+        </member>
+        <member name="M:FistCore.Common.ReflectionUtil.CreateDelegate``1(System.String,System.String,System.String)">
+            <summary>
+            Creates a delegate of the specified type to represent the specified static method.
+            </summary>
+            <typeparam name="T">Delegate type/signature.</typeparam>
+            <param name="assemblyString">The short or long form of the assembly name.</param>
+            <param name="className">The full name of the type.</param>
+            <param name="methodName">The name of the static method to which a delegate is created.</param>
+            <returns>Delegate.</returns>
+        </member>
+        <member name="M:FistCore.Common.ReflectionUtil.CreateDelegateFromAppSettings``1(System.String,System.String,System.String)">
+            <summary>
+            Creates a delegate of the specified type to represent the static method specified in the configuration file.
+            </summary>
+            <typeparam name="T">Delegate type/signature.</typeparam>
+            <param name="assemblyStringSetting">Application setting which contains the short or long form of the assembly name.</param>
+            <param name="classNameSetting">Application setting which contains the full name of the type.</param>
+            <param name="methodNameSetting">Application setting which contains the name of the static method to which a delegate is created.</param>
+            <returns>Delegate.</returns>
+        </member>
+        <member name="M:FistCore.Common.ReflectionUtil.TryCreateDelegateFromAppSettings``1(System.String,System.String,System.String)">
+            <summary>
+            Tries to creates a delegate of the specified type to represent the static method specified in the configuration file.
+            </summary>
+            <typeparam name="T">Delegate type/signature.</typeparam>
+            <param name="assemblyStringSetting">Application setting which contains the short or long form of the assembly name.</param>
+            <param name="classNameSetting">Application setting which contains the full name of the type.</param>
+            <param name="methodNameSetting">Application setting which contains the name of the static method to which a delegate is created.</param>
+            <returns>Delegate. <b>null</b> if settings are not configured, or if an error occures.</returns>
+            <remarks>Logs <see cref="!:Log.AppWarning"/> if an <see cref="T:System.Exception"/> occures.</remarks>
+        </member>
+        <member name="T:FistCore.Common.Delegates">
+            <summary>
+            Contains commonly used generic procedure and function delegates.
+            </summary>
+        </member>
+        <member name="T:FistCore.Common.Delegates.Procedure">
+            <summary>
+            Represents a parameterless method that doesn't return a value.
+            </summary>
+        </member>
+        <member name="T:FistCore.Common.Delegates.Procedure`1">
+            <summary>
+            Represents a method that accepts one argument and doesn't return a value.
+            </summary>
+            <typeparam name="TArg">Argument type.</typeparam>
+            <param name="arg">Method argument.</param>
+        </member>
+        <member name="T:FistCore.Common.Delegates.Procedure`2">
+            <summary>
+            Represents a method that accepts two arguments and doesn't return a value.
+            </summary>
+            <typeparam name="TArg1">Type of the first argument.</typeparam>
+            <typeparam name="TArg2">Type of the second argument.</typeparam>
+            <param name="arg1">First argument.</param>
+            <param name="arg2">Second argument.</param>
+        </member>
+        <member name="T:FistCore.Common.Delegates.Procedure`3">
+            <summary>
+            Represents a method that accepts three arguments and doesn't return a value.
+            </summary>
+            <typeparam name="TArg1">Type of the first argument.</typeparam>
+            <typeparam name="TArg2">Type of the second argument.</typeparam>
+            <typeparam name="TArg3">Type of the third argument.</typeparam>
+            <param name="arg1">First argument.</param>
+            <param name="arg2">Second argument.</param>
+            <param name="arg3">Third argument.</param>
+        </member>
+        <member name="T:FistCore.Common.Delegates.Procedure`4">
+            <summary>
+            Represents a method that accepts four arguments and doesn't return a value.
+            </summary>
+            <typeparam name="TArg1">Type of the first argument.</typeparam>
+            <typeparam name="TArg2">Type of the second argument.</typeparam>
+            <typeparam name="TArg3">Type of the third argument.</typeparam>
+            <typeparam name="TArg4">Type of the fourth argument.</typeparam>
+            <param name="arg1">First argument.</param>
+            <param name="arg2">Second argument.</param>
+            <param name="arg3">Third argument.</param>
+            <param name="arg4">Fourth argument.</param>
+        </member>
+        <member name="T:FistCore.Common.Delegates.Procedure`5">
+            <summary>
+            Represents a method that accepts five arguments and doesn't return a value.
+            </summary>
+            <typeparam name="TArg1">Type of the first argument.</typeparam>
+            <typeparam name="TArg2">Type of the second argument.</typeparam>
+            <typeparam name="TArg3">Type of the third argument.</typeparam>
+            <typeparam name="TArg4">Type of the fourth argument.</typeparam>
+            <typeparam name="TArg5">Type of the fifth argument.</typeparam>
+            <param name="arg1">First argument.</param>
+            <param name="arg2">Second argument.</param>
+            <param name="arg3">Third argument.</param>
+            <param name="arg4">Fourth argument.</param>
+            <param name="arg5">Fifth argument.</param>
+        </member>
+        <member name="T:FistCore.Common.Delegates.Function`1">
+            <summary>
+            Represents a parameterless method that returns a value of the specified type.
+            </summary>
+            <typeparam name="TRetVal">Type of the return value.</typeparam>
+            <returns>A value of the specified type.</returns>
+        </member>
+        <member name="T:FistCore.Common.Delegates.Function`2">
+            <summary>
+            Represents a method that accepts one argument and returns a value of the specified type.
+            </summary>
+            <typeparam name="TRetVal">Type of the return value.</typeparam>
+            <typeparam name="TArg">Argument type.</typeparam>
+            <param name="arg">Method argument.</param>
+            <returns>A value of the specified type.</returns>
+        </member>
+        <member name="T:FistCore.Common.Delegates.Function`3">
+            <summary>
+            Represents a method that accepts two arguments and returns a value of the specified type.
+            </summary>
+            <typeparam name="TRetVal">Type of the return value.</typeparam>
+            <typeparam name="TArg1">Type of the first argument.</typeparam>
+            <typeparam name="TArg2">Type of the second argument.</typeparam>
+            <param name="arg1">First argument.</param>
+            <param name="arg2">Second argument.</param>
+            <returns>A value of the specified type.</returns>
+        </member>
+        <member name="T:FistCore.Common.Delegates.Function`4">
+            <summary>
+            Represents a method that accepts three arguments and returns a value of the specified type.
+            </summary>
+            <typeparam name="TRetVal">Type of the return value.</typeparam>
+            <typeparam name="TArg1">Type of the first argument.</typeparam>
+            <typeparam name="TArg2">Type of the second argument.</typeparam>
+            <typeparam name="TArg3">Type of the third argument.</typeparam>
+            <param name="arg1">First argument.</param>
+            <param name="arg2">Second argument.</param>
+            <param name="arg3">Third argument.</param>
+            <returns>A value of the specified type.</returns>
+        </member>
+        <member name="T:FistCore.Common.Delegates.Function`5">
+            <summary>
+            Represents a method that accepts four arguments and returns a value of the specified type.
+            </summary>
+            <typeparam name="TRetVal">Type of the return value.</typeparam>
+            <typeparam name="TArg1">Type of the first argument.</typeparam>
+            <typeparam name="TArg2">Type of the second argument.</typeparam>
+            <typeparam name="TArg3">Type of the third argument.</typeparam>
+            <typeparam name="TArg4">Type of the fourh argument.</typeparam>
+            <param name="arg1">First argument.</param>
+            <param name="arg2">Second argument.</param>
+            <param name="arg3">Third argument.</param>
+            <param name="arg4">Fourth argument.</param>
+            <returns>A value of the specified type.</returns>
+        </member>
+        <member name="T:FistCore.Common.Delegates.Function`6">
+            <summary>
+            Represents a method that accepts five arguments and returns a value of the specified type.
+            </summary>
+            <typeparam name="TRetVal">Type of the return value.</typeparam>
+            <typeparam name="TArg1">Type of the first argument.</typeparam>
+            <typeparam name="TArg2">Type of the second argument.</typeparam>
+            <typeparam name="TArg3">Type of the third argument.</typeparam>
+            <typeparam name="TArg4">Type of the fourth argument.</typeparam>
+            <typeparam name="TArg5">Type of the fifth argument.</typeparam>
+            <param name="arg1">First argument.</param>
+            <param name="arg2">Second argument.</param>
+            <param name="arg3">Third argument.</param>
+            <param name="arg4">Fourth argument.</param>
+            <param name="arg5">Fifth argument.</param>
+            <returns>A value of the specified type.</returns>
+        </member>
+        <member name="T:FistCore.Common.LevelTwoDictionary`3">
+            <summary>
+            Represents a hierarchical two-level collection of keys and values.
+            </summary>
+            <typeparam name="T2ndLevelKey">The type of the highest level key in the dictionary.</typeparam>
+            <typeparam name="T1stLevelKey">The type of the lower level key in the dictionary.</typeparam>
+            <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
+        </member>
+        <member name="M:FistCore.Common.LevelTwoDictionary`3.#ctor">
+            <summary>
+            Initializes a new instance of <b>LevelTwoDictionary</b> class.
+            </summary>
+        </member>
+        <member name="M:FistCore.Common.LevelTwoDictionary`3.Remove(`0)">
+            <summary>
+            Removes all keys and values below the specified 2nd level key.
+            </summary>
+            <param name="l2key">Highest level key in the dictionary.</param>
+            <returns><b>true</b> if the element is successfully found and removed; otherwise, <b>false</b>.
+            This method returns <b>false</b> if any of the specified keys is not found in the dictionary.</returns>
+        </member>
+        <member name="M:FistCore.Common.LevelTwoDictionary`3.Remove(`0,`1)">
+            <summary>
+            Removes the value with the specified keys from the dictionary.
+            </summary>
+            <param name="l2key">Highest level key in the dictionary.</param>
+            <param name="l1key">Lower level key in the dictionary.</param>
+            <returns><b>true</b> if the element is successfully found and removed; otherwise, <b>false</b>.
+            This method returns <b>false</b> if any of the specified keys is not found in the dictionary.</returns>
+        </member>
+        <member name="M:FistCore.Common.LevelTwoDictionary`3.Clear">
+            <summary>
+            Removes all keys and values from the dictionary.
+            </summary>
+        </member>
+        <member name="M:FistCore.Common.LevelTwoDictionary`3.Get1stLevelDictionary(`0)">
+            <summary>
+            Gets first level key-value pairs below the specified 2nd level key.
+            </summary>
+            <param name="l2key">Highest level key in the dictionary.</param>
+            <returns>Dictionary. <b>null</b> if the specified 2nd level key does not exist.</returns>
+        </member>
+        <member name="M:FistCore.Common.LevelTwoDictionary`3.CopyFrom(FistCore.Common.LevelTwoDictionary{`0,`1,`2})">
+            <summary>
+            Copies all entries from the given dictionary into the current instance.
+            </summary>
+            <param name="source">Another dictionary.</param>
+            <remarks>If a key-combination already exists in the current instance, it will be overwritten.</remarks>
+        </member>
+        <member name="M:FistCore.Common.LevelTwoDictionary`3.Clone">
+            <summary>
+            Creates a new object that is a copy of the current instance.
+            </summary>
+            <returns>A new object that is a copy of this instance.</returns>
+        </member>
+        <member name="P:FistCore.Common.LevelTwoDictionary`3.Item(`0,`1)">
+            <summary>
+            Gets or sets the value associated with the specified keys.
+            </summary>
+            <param name="l2key">Highest level key in the dictionary.</param>
+            <param name="l1key">Lower level key in the dictionary.</param>
+            <returns>The value associated with the specified keys. If any of the specified keys is not found,
+            <b>null</b> is returned, and a <b>set</b> operation creates a new element with the specified keys.</returns>
+        </member>
+        <member name="P:FistCore.Common.LevelTwoDictionary`3.Count">
+            <summary>
+            Gets the number of elements in the highest (2nd) level.
+            </summary>
+        </member>
+        <member name="T:FistCore.Common.BindingPair`2">
+            <summary>
+            Binding pair for bound dictionary <see cref="!:DictionaryBindingList"/>.
+            </summary>
+            <typeparam name="TKey">Key type</typeparam>
+            <typeparam name="TValue">Pair type</typeparam>
+        </member>
+        <member name="M:FistCore.Common.BindingPair`2.#ctor(`0,System.Collections.Generic.IDictionary{`0,`1})">
+            <summary>
+            Creates new instance of this class.
+            </summary>
+            <param name="key">Key of item.</param>
+            <param name="data">Dictionary connected to this item.</param>
+        </member>
+        <member name="P:FistCore.Common.BindingPair`2.Key">
+            <summary>
+            Key of item in dictionary.
+            </summary>
+        </member>
+        <member name="P:FistCore.Common.BindingPair`2.Value">
+            <summary>
+            Value of item in dictionary.
+            </summary>
+        </member>
+        <member name="T:FistCore.Common.DictionaryBindingList`2">
+            <summary>
+            Bound dictionary.
+            </summary>
+            <typeparam name="TKey">Key type.</typeparam>
+            <typeparam name="TValue">Value type.</typeparam>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:FistCore.Common.DictionaryBindingList`2.#ctor(System.Collections.Generic.IDictionary{`0,`1})" -->
+        <!-- Badly formed XML comment ignored for member "M:FistCore.Common.DictionaryBindingList`2.Reset" -->
+        <member name="T:FistCore.Common.ObjectProperties">
+            <summary>
+            Utility class for storing object properties and applying them to object instances.
+            </summary>
+            <remarks>The class can store values of all properties and single-parameter indexers (collections).</remarks>
+        </member>
+        <member name="M:FistCore.Common.ObjectProperties.#ctor">
+            <summary>
+            Initializes a new instance of <b>ObjectProperties</b> class.
+            </summary>
+        </member>
+        <member name="M:FistCore.Common.ObjectProperties.WriteToObject(System.Object)">
+            <summary>
+            Writes property values to the given object.
+            </summary>
+            <param name="obj">Object whose propertis are to be set to match the values stored in the <b>ObjectProperties</b> instance.</param>
+            <remarks>The properties which do not exist in the given object are skipped.</remarks>
+        </member>
+        <member name="M:FistCore.Common.ObjectProperties.WriteToObject(System.Object,System.Boolean)">
+            <summary>
+            Writes property values to the given object.
+            </summary>
+            <param name="obj">Object whose propertis are to be set to match the values stored in the <b>ObjectProperties</b> instance.</param>
+            <param name="ignoreErrors">Indicates whether all exceptions encountered during writing and type conversion should be ignored.</param>
+            <remarks>The properties which do not exist in the given object are skipped.</remarks>
+        </member>
+        <member name="P:FistCore.Common.ObjectProperties.Properties">
+            <summary>
+            Gets a collection of property names and values.
+            </summary>
+        </member>
+        <member name="P:FistCore.Common.ObjectProperties.Indexers">
+            <summary>
+            Gets a collection of indexer names (collection property which exposes <b>Item</b> property) and values.
+            </summary>
+        </member>
+        <member name="T:FistCore.Common.Pair`2">
+            <summary>
+            Provides a generic utility class that is used to store two related objects.
+            </summary>
+            <typeparam name="TKey">Type of the first object of the pair.</typeparam>
+            <typeparam name="TValue">Type of the second object of the pair.</typeparam>
+            <remarks>The <b>Pair</b> class is used as a basic structure to store two related objects. You can use the
+            Pair class in your own code anywhere that you need a structure to contain two related objects.</remarks>
+        </member>
+        <member name="F:FistCore.Common.Pair`2.first">
+            <summary>
+            Gets or sets the first object of the pair.
+            </summary>
+        </member>
+        <member name="F:FistCore.Common.Pair`2.second">
+            <summary>
+            Gets or sets the second object of the pair.
+            </summary>
+        </member>
+        <member name="M:FistCore.Common.Pair`2.#ctor">
+            <summary>
+            Creates a new, uninitialized instance of the <b>Pair</b> class.
+            </summary>
+        </member>
+        <member name="M:FistCore.Common.Pair`2.#ctor(`0,`1)">
+            <summary>
+            Initializes a new instance of the <b>Pair</b> class, using the specified object pair.
+            </summary>
+            <param name="first">Object assigned to <see cref="P:FistCore.Common.Pair`2.First"/>.</param>
+            <param name="second">Object assigned to <see cref="P:FistCore.Common.Pair`2.Second"/>.</param>
+        </member>
+        <member name="P:FistCore.Common.Pair`2.First">
+            <summary>
+            Gets or sets the first object of the pair.
+            </summary>
+        </member>
+        <member name="P:FistCore.Common.Pair`2.Second">
+            <summary>
+            Gets or sets the second object of the pair.
+            </summary>
+        </member>
+        <member name="T:FistCore.Common.GZipUtil">
+            <summary>
+            Compresses and decompresses data using GZIP algorithm.
+            </summary>
+        </member>
+        <member name="M:FistCore.Common.GZipUtil.Compress(System.Byte[])">
+            <summary>
+            Compresses data using GZIP algorithm.
+            </summary>
+            <param name="dataToCompress">Data to compress.</param>
+            <returns>Compressed data.</returns>
+        </member>
+        <member name="M:FistCore.Common.GZipUtil.Decompress(System.Byte[])">
+            <summary>
+            Decompresses data which has been compressed using GZIP algorithm.
+            </summary>
+            <param name="compressedData">Compressed data.</param>
+            <returns>Decompressed data.</returns>
+        </member>
+        <member name="T:FistCore.Common.Time">
+            <summary>
+            Gets the current date and time for the current application.
+            </summary>
+            <remarks>Prefer using <see cref="P:FistCore.Common.Time.Now"/> in your code instead of <see cref="P:System.DateTime.Now"/>.
+            Currently, both return the same value, but in the future <b>Time</b> class will be upgraded to
+            support configurable time adjustments and time synchronization with other servers.</remarks>
+        </member>
+        <member name="P:FistCore.Common.Time.Now">
+            <summary>
+            Gets a DateTime object that is set to the current date and time on this computer, expressed as the local time.
+            </summary>
+        </member>
+        <member name="T:FistCore.Common.TextUtil">
+            <summary>
+            Provides common text processing functionalities.
+            </summary>
+        </member>
+        <member name="M:FistCore.Common.TextUtil.TrimNullableString(System.String)">
+            <summary>
+            Trims and parses nullable strings.
+            </summary>
+            <param name="s">String or <b>null</b> reference.</param>
+            <returns>Trimmed string or <b>null</b> if empty string is provided or yielded.</returns>
+        </member>
+        <member name="M:FistCore.Common.TextUtil.EnsureSuffix(System.String,System.String)">
+            <summary>
+            Checks whether the text ends with the specified suffix. If not, it will be appended.
+            </summary>
+            <param name="text">Text to check. Nulls are converted to empty strings.</param>
+            <param name="suffix">Suffix. Nullable.</param>
+            <returns>A string which ends with the specified suffix.</returns>
+        </member>
+        <member name="M:FistCore.Common.TextUtil.ReplaceNewLine(System.String,System.String)">
+            <summary>
+            Replaces new line and/or carriage return characters with the specified value.
+            </summary>
+            <param name="text">Text to correct. Nullable.</param>
+            <param name="newLineReplacementValue">A string to replace all occurrences of <b>\r\n</b>, <b>\n\r</b>, <b>\n</b> and <b>\r</b> strings. Nullable.</param>
+            <returns>A string without <b>\r\n</b>, <b>\n\r</b>, <b>\n</b> and <b>\r</b> strings.</returns>
+        </member>
+        <member name="M:FistCore.Common.TextUtil.RemovePrefix(System.String,System.String)">
+            <summary>
+            Checks whether the text starts with the specified prefix. If it does, it will be removed.
+            </summary>
+            <param name="text">Text to check. Nullable.</param>
+            <param name="prefix">Prefix. Nullable.</param>
+            <returns>A string from which the prefix has been removed. <b>null</b> if input text is <b>null</b>. Empty string if prefix is equal to input text.</returns>
+        </member>
+        <member name="M:FistCore.Common.TextUtil.IsNumeric(System.String)">
+            <summary>
+            Checks if string is numeric value (e.g. Double, Single, Integer, Long...)
+            </summary>
+            <param name="txt">String to check.</param>
+            <returns>True if is numeric.</returns>
+        </member>
+        <member name="M:FistCore.Common.TextUtil.CreateSEOLink(System.String,System.Int32)">
+            <summary>
+            Creates user friendly SEO link attribute
+            </summary>
+            <param name="txt">Text for SEO linking</param>
+            <param name="leng">Size of SEO string to use</param>
+            <returns>User friendly, URL safe, SEO link attribute</returns>
+        </member>
+        <member name="M:FistCore.Common.TextUtil.IpAddrToLong(System.String)">
+            <summary>
+            Converts string Ip address in form of XXX.XXX.XXX.XXX to it's long value.
+            </summary>
+            <param name="ipAddress">String ip address.</param>
+            <returns>Long ip address</returns>
+        </member>
+        <member name="M:FistCore.Common.TextUtil.LongToIpAddr(System.Int64)">
+            <summary>
+            Converts long ip address to it's string representation.
+            </summary>
+            <param name="numIpAddress">Long ip address in range [0-4294967295].</param>
+            <returns>String ip address in form of XXX.XXX.XXX.XXX.</returns>
+        </member>
+        <member name="T:FistCore.Common.FormattedMessage">
+            <summary>
+            Message text and format with values that can be formatted using any culture.
+            </summary>
+            <remarks>Typically used to pass messages that contain real numbers and dates from business
+            logic layer to UI layer. UI layer decides how the values are to be formatted, while
+            business layer creates the content of message.</remarks>
+        </member>
+        <member name="M:FistCore.Common.FormattedMessage.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <b>FormattedMessage</b> class.
+            </summary>
+            <param name="messageFormat">Message text and format. The message format must obey the rules of the
+            <see cref="M:System.String.Format(System.String,System.Object)"/> method.</param>
+        </member>
+        <member name="M:FistCore.Common.FormattedMessage.#ctor(System.String,System.Object[])">
+            <summary>
+            Initializes a new instance of the <b>FormattedMessage</b> class.
+            </summary>
+            <param name="messageFormat">Message text and format. The message format must obey the rules of the
+            <see cref="M:System.String.Format(System.String,System.Object)"/> method.</param>
+            <param name="values">Values which are to be inserted into <b>MessageFormat</b> and formatted by <b>Formatter</b>.</param>
+        </member>
+        <member name="M:FistCore.Common.FormattedMessage.#ctor(System.String,FistCore.Common.IMessageFormatter,System.Object[])">
+            <summary>
+            Initializes a new instance of the <b>FormattedMessage</b> class.
+            </summary>
+            <param name="messageFormat">Message text and format. The message format must obey the rules of the
+            <see cref="M:System.String.Format(System.String,System.Object)"/> method.</param>
+            <param name="formatter">An <b>IMessageFormatter</b> object that formattes the values contained in the message.</param>
+            <param name="values">Values which are to be inserted into <b>MessageFormat</b> and formatted by <b>Formatter</b>.</param>
+        </member>
+        <member name="M:FistCore.Common.FormattedMessage.ToString">
+            <summary>
+            Converts an instance of <b>FormattedMessage</b> to a <b>System.String</b>.
+            </summary>
+            <returns>String with formatted values.</returns>
+        </member>
+        <member name="M:FistCore.Common.FormattedMessage.ToString(FistCore.Common.IMessageFormatter)">
+            <summary>
+            Converts an instance of <b>FormattedMessage</b> to a <b>System.String</b>.
+            </summary>
+            <param name="formatter">The <b>IMessageFormatter</b> that formattes the values contained in the message.</param>
+            <returns>String with formatted values.</returns>
+        </member>
+        <member name="M:FistCore.Common.FormattedMessage.Append(FistCore.Common.FormattedMessage)">
+            <summary>
+            Appends the given message to the end of this instance.
+            </summary>
+            <param name="message">Message with values to be appended.</param>
+        </member>
+        <member name="M:FistCore.Common.FormattedMessage.Append(System.String)">
+            <summary>
+            Appends the given message to the end of this instance.
+            </summary>
+            <param name="message">String to be appended.</param>
+        </member>
+        <member name="M:FistCore.Common.FormattedMessage.Append(System.String,System.Object[])">
+            <summary>
+            Appends the given message to the end of this instance.
+            </summary>
+            <param name="messageFormat">Message text and format. The message format must obey the rules of the <see cref="M:System.String.Format(System.String,System.Object)"/> method.</param>
+            <param name="values">Array of values which are to be inserted into message format.</param>
+        </member>
+        <member name="M:FistCore.Common.FormattedMessage.op_Addition(FistCore.Common.FormattedMessage,FistCore.Common.FormattedMessage)">
+            <summary>
+            Concatenates two messages into a new one that contains all the values of the original messages.
+            </summary>
+            <param name="lhs">The first message.</param>
+            <param name="rhs">The second message.</param>
+            <returns>Concatenated message.</returns>
+        </member>
+        <member name="M:FistCore.Common.FormattedMessage.op_Implicit(FistCore.Common.FormattedMessage)~System.String">
+            <summary>
+            Casts an instance of <b>FormattedMessage</b> to a <b>System.String</b>.
+            </summary>
+            <param name="message">Message to be converted to <b>System.String</b>.</param>
+            <returns>String with formatted values.</returns>
+            <remarks>Implicit cast operators allow the <b>FormattedMessage</b> to be used anywhere where strings are used.</remarks>
+        </member>
+        <member name="M:FistCore.Common.FormattedMessage.op_Implicit(System.String)~FistCore.Common.FormattedMessage">
+            <summary>
+            Casts a <b>System.String</b> to an instance of <b>FormattedMessage</b>.
+            </summary>
+            <param name="str">String.</param>
+            <returns>FormattedMessage.</returns>
+            <remarks>Implicit cast operators allow the <b>FormattedMessage</b> to be used anywhere where strings are used.</remarks>
+        </member>
+        <member name="P:FistCore.Common.FormattedMessage.Formatter">
+            <summary>
+            Gets or sets the <b>IMessageFormatter</b> that formattes the values contained in the message.
+            </summary>
+        </member>
+        <member name="P:FistCore.Common.FormattedMessage.MessageFormat">
+            <summary>
+            Gets or sets the message text and format. The message format must obey the rules of the <see cref="M:System.String.Format(System.String,System.Object)"/> method.
+            </summary>
+        </member>
+        <member name="P:FistCore.Common.FormattedMessage.Values">
+            <summary>
+            Gets or sets the list of values which are to be inserted into <b>MessageFormat</b> and formatted by <b>Formatter</b>.
+            </summary>
+        </member>
+        <member name="T:FistCore.Common.IMessageFormatter">
+            <summary>
+            Contains format providers for common types and implements formatting logic.
+            </summary>
+        </member>
+        <member name="M:FistCore.Common.IMessageFormatter.Format(System.Object)">
+            <summary>
+            Formats the given value.
+            </summary>
+            <param name="val">Value to be formatted.</param>
+            <returns>String representation of the given value.</returns>
+        </member>
+        <member name="M:FistCore.Common.IMessageFormatter.GetFormat(System.Type)">
+            <summary>
+            Gets format used to format values of the given type.
+            </summary>
+            <param name="t">Type of value to be formatted.</param>
+            <returns>Value format.</returns>
+        </member>
+        <member name="P:FistCore.Common.IMessageFormatter.DefaultProvider">
+            <summary>
+            An <see cref="T:System.IFormatProvider"/> object used for all types unless specific provider exists.
+            </summary>
+        </member>
+        <member name="P:FistCore.Common.IMessageFormatter.IntProvider">
+            <summary>
+            An <see cref="T:System.IFormatProvider"/> object used to format integer values.
+            </summary>
+        </member>
+        <member name="P:FistCore.Common.IMessageFormatter.IntFormat">
+            <summary>
+            Format for integer values.
+            </summary>
+        </member>
+        <member name="P:FistCore.Common.IMessageFormatter.IntStyle">
+            <summary>
+            <see cref="T:System.Globalization.NumberStyles"/> which indicates the permitted format of strings representing integer values.
+            </summary>
+        </member>
+        <member name="P:FistCore.Common.IMessageFormatter.RealProvider">
+            <summary>
+            An <see cref="T:System.IFormatProvider"/> object used to format floating point numbers.
+            </summary>
+        </member>
+        <member name="P:FistCore.Common.IMessageFormatter.RealFormat">
+            <summary>
+            Format for floating point numbers.
+            </summary>
+        </member>
+        <member name="P:FistCore.Common.IMessageFormatter.RealStyle">
+            <summary>
+            <see cref="T:System.Globalization.NumberStyles"/> which indicates the permitted format of strings representing floating point numbers.
+            </summary>
+        </member>
+        <member name="P:FistCore.Common.IMessageFormatter.DateProvider">
+            <summary>
+            An <see cref="T:System.IFormatProvider"/> object used to format DateTime values.
+            </summary>
+        </member>
+        <member name="P:FistCore.Common.IMessageFormatter.DateFormat">
+            <summary>
+            Format for DateTime values.
+            </summary>
+        </member>
+        <member name="P:FistCore.Common.IMessageFormatter.DateStyle">
+            <summary>
+            <see cref="T:System.Globalization.DateTimeStyles"/> which indicates the permitted format of strings representing <b>DateTime</b> values.
+            </summary>
+        </member>
+        <member name="T:FistCore.Common.MessageFormatter">
+            <summary>
+            Defines format providers and styles for common types and implements formatting logic.
+            </summary>
+        </member>
+        <member name="M:FistCore.Common.MessageFormatter.#ctor">
+            <summary>
+            Initializes a new instance of <b>MessageFormatter</b> class.
+            </summary>
+            <remarks>Uses default system format providers for all types.</remarks>
+        </member>
+        <member name="M:FistCore.Common.MessageFormatter.#ctor(System.IFormatProvider)">
+            <summary>
+            Initializes a new instance of <b>MessageFormatter</b> class.
+            </summary>
+            <param name="defaultProvider">Format provider used for all types. <b>Nullable.</b></param>
+        </member>
+        <member name="M:FistCore.Common.MessageFormatter.#ctor(System.IFormatProvider,System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of <b>MessageFormatter</b> class.
+            </summary>
+            <param name="defaultProvider">Format provider used for all types unless specific provider for a type is asigned. <b>Nullable.</b></param>
+            <param name="intFormat">Format for integer values. <b>Nullable.</b></param>
+            <param name="realFormat">Format for floating point numbers. <b>Nullable.</b></param>
+            <param name="dateFormat">Format for DateTime values. <b>Nullable.</b></param>
+        </member>
+        <member name="M:FistCore.Common.MessageFormatter.#ctor(System.IFormatProvider,System.IFormatProvider,System.IFormatProvider,System.IFormatProvider,System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of <b>MessageFormatter</b> class.
+            </summary>
+            <param name="defaultProvider">Format provider used for all types unless specific provider for a type is asigned. <b>Nullable.</b></param>
+            <param name="intProvider">Format provider used to format integer values. <b>Nullable.</b></param>
+            <param name="realProvider">Format provider used to format floating point numbers. <b>Nullable.</b></param>
+            <param name="dateProvider">Format provider used to format DateTime values. <b>Nullable.</b></param>
+            <param name="intFormat">Format for integer values. <b>Nullable.</b></param>
+            <param name="realFormat">Format for floating point numbers. <b>Nullable.</b></param>
+            <param name="dateFormat">Format for DateTime values. <b>Nullable.</b></param>
+        </member>
+        <member name="M:FistCore.Common.MessageFormatter.#ctor(System.IFormatProvider,System.IFormatProvider,System.IFormatProvider,System.IFormatProvider,System.String,System.String,System.String,System.Globalization.NumberStyles,System.Globalization.NumberStyles,System.Globalization.DateTimeStyles)">
+            <summary>
+            Initializes a new instance of <b>MessageFormatter</b> class.
+            </summary>
+            <param name="defaultProvider">Format provider used for all types unless specific provider for a type is asigned. <b>Nullable.</b></param>
+            <param name="intProvider">Format provider used to format integer values. <b>Nullable.</b></param>
+            <param name="realProvider">Format provider used to format floating point numbers. <b>Nullable.</b></param>
+            <param name="dateProvider">Format provider used to format DateTime values. <b>Nullable.</b></param>
+            <param name="intFormat">Format for integer values. <b>Nullable.</b></param>
+            <param name="realFormat">Format for floating point numbers. <b>Nullable.</b></param>
+            <param name="dateFormat">Format for DateTime values. <b>Nullable.</b></param>
+            <param name="intStyle"><see cref="T:System.Globalization.NumberStyles"/> which indicates the permitted format of strings representing
+            integer values. A typical value to specify is <see cref="F:System.Globalization.NumberStyles.Integer"/>.</param>
+            <param name="realStyle"><see cref="T:System.Globalization.NumberStyles"/> which indicates the permitted format of strings representing
+            floating point numbers. A typical value to specify is <see cref="F:System.Globalization.NumberStyles.Number"/>.</param>
+            <param name="dateStyle"><see cref="T:System.Globalization.DateTimeStyles"/> which indicates the permitted format of strings representing
+            <b>DateTime</b> values. A typical value to specify is <see cref="F:System.Globalization.DateTimeStyles.None"/>.</param>
+        </member>
+        <member name="M:FistCore.Common.MessageFormatter.Format(System.Object)">
+            <summary>
+            Formats the given value.
+            </summary>
+            <param name="val">Value to be formatted.</param>
+            <returns>String representation of the given value.</returns>
+        </member>
+        <member name="M:FistCore.Common.MessageFormatter.GetFormat(System.Type)">
+            <summary>
+            Gets format used to format values of the given type.
+            </summary>
+            <param name="t">Type of value to be formatted.</param>
+            <returns>Value format.</returns>
+        </member>
+        <member name="P:FistCore.Common.MessageFormatter.DefaultProvider">
+            <summary>
+            Gets or sets the format provider used for all types unless specific provider exists. <b>Nullable.</b>
+            </summary>
+            <remarks>If set to <b>null</b>, default system format will be used.</remarks>
+        </member>
+        <member name="P:FistCore.Common.MessageFormatter.IntProvider">
+            <summary>
+            Gets or sets the format provider used to format integer values. <b>Nullable.</b>
+            </summary>
+        </member>
+        <member name="P:FistCore.Common.MessageFormatter.IntFormat">
+            <summary>
+            Gets or sets the format for integer values. <b>Nullable.</b>
+            </summary>
+        </member>
+        <member name="P:FistCore.Common.MessageFormatter.IntStyle">
+            <summary>
+            Gets or sets <see cref="T:System.Globalization.NumberStyles"/> which indicates the permitted format of strings representing integer values.
+            A typical value to specify is <see cref="F:System.Globalization.NumberStyles.Integer"/>.
+            </summary>
+        </member>
+        <member name="P:FistCore.Common.MessageFormatter.RealProvider">
+            <summary>
+            Gets or sets the format provider used to format floating point numbers. <b>Nullable.</b>
+            </summary>
+        </member>
+        <member name="P:FistCore.Common.MessageFormatter.RealFormat">
+            <summary>
+            Gets or sets the format for floating point numbers. <b>Nullable.</b>
+            </summary>
+        </member>
+        <member name="P:FistCore.Common.MessageFormatter.RealStyle">
+            <summary>
+            Gets or sets <see cref="T:System.Globalization.NumberStyles"/> which indicates the permitted format of strings representing floating point numbers.
+            A typical value to specify is <see cref="F:System.Globalization.NumberStyles.Number"/>.
+            </summary>
+        </member>
+        <member name="P:FistCore.Common.MessageFormatter.DateProvider">
+            <summary>
+            Gets or sets the format provider used to format DateTime values. <b>Nullable.</b>
+            </summary>
+        </member>
+        <member name="P:FistCore.Common.MessageFormatter.DateFormat">
+            <summary>
+            Gets or sets the format for DateTime values. <b>Nullable.</b>
+            </summary>
+        </member>
+        <member name="P:FistCore.Common.MessageFormatter.DateStyle">
+            <summary>
+            Gets or sets <see cref="T:System.Globalization.DateTimeStyles"/> which indicates the permitted format of strings representing <b>DateTime</b> values.
+            A typical value to specify is <see cref="F:System.Globalization.DateTimeStyles.None"/>.
+            </summary>
+        </member>
+        <member name="P:FistCore.Common.MessageFormatter.ShortTimeFormat">
+            <summary>
+            Gets or sets the format for ShortTimeFormat values. <b>Nullable.</b>
+            </summary>
+        </member>
+    </members>
+</doc>

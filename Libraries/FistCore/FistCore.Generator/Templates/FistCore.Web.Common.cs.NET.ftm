@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Template>
+  <Header>
+    <Title>Common.cs</Title>
+    <Description>Generates file with common BL classes</Description>
+    <Family>Other</Family>
+  </Header>
+  <Variables>
+    <Variable>
+      <Name>WebNamespace</Name>
+      <Description>Web namespace</Description>
+      <DefaultValue>MySolution.Web</DefaultValue>
+    </Variable>
+    <Variable>
+      <Name>SuffixReplacementMap</Name>
+      <Description>Semicolon delimited rules for table name suffix replacement, eg: "ies"->"y";"s"->""</Description>
+      <DefaultValue></DefaultValue>
+    </Variable>
+    <Variable>
+      <Name>OutputSubdirectory</Name>
+      <Description>Output subdirectory</Description>
+      <DefaultValue></DefaultValue>
+    </Variable>
+    <Variable>
+      <Name>SingleFile</Name>
+      <Description>Name of the single file which will contain code for all selected items</Description>
+      <DefaultValue>Common.cs</DefaultValue>
+    </Variable>
+  </Variables>
+  <ReferencedAssemblies>
+    <Assembly>FistCore.Generator.EntityComponents.dll</Assembly>
+  </ReferencedAssemblies>
+  <Namespaces>
+    <Using>System</Using>
+    <Using>FistCore.Generator.EntityComponents</Using>
+  </Namespaces>
+  <InputComponentBuilder>
+    <Assembly>FistCore.Generator.EntityComponents</Assembly>
+    <Class>FistCore.Generator.EntityComponents.FistCoreComponentBuilder</Class>
+  </InputComponentBuilder>
+  <TemplateSegments>
+    <TemplateSegment Id="CommonRoot">
+      <![CDATA[using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Reflection;
+using System.Resources;
+
+using FistCore.Common;
+using FistCore.Core;
+using FistCore.Core.Common;
+using FistCore.Web.Common;
+
+namespace $Variables["WebNamespace"]$.Common
+{
+    /// <summary>Dummy actor with all permissions.</summary>
+    public class SuperUser : Actor
+    {
+        public SuperUser(int id)
+            :base(id)
+        {
+
+        }
+
+        public SuperUser(IEntity entity)
+            :base(entity)
+        {
+
+        }
+
+		#region GetByUserPass delegate
+
+        /// <summary>
+        /// Gets the user by username and password
+        /// </summary>
+        /// <param name="Username">Username</param>
+        /// <param name="Password">Password</param>
+        /// <returns>Returns user associated with the username and password pair</returns>
+        public static Actor GetByUserPass(string Username, string Password)
+        {
+			return new SuperUser(1);
+        }
+
+        #endregion
+
+        #region Actor members
+
+        public override int Id
+        {
+            get
+            {
+                return 1;
+            }
+        }
+
+        public override string Username
+        {
+            get
+            {
+                return "superuser";
+            }
+        }
+
+        public override string Password
+        {
+            get
+            {
+                return "superuser";
+            }
+        }
+
+        public string Name
+        {
+            get
+            {
+                return "superuser";
+            }
+        }
+
+        public string Fullname
+        {
+            get
+            {
+                return "superuser";
+            }
+        }
+
+        public override object PrimaryRole
+        {
+            get
+            {
+                return null;
+
+            }
+        }
+
+        public override object CurrentRole
+        {
+            get;
+			set;
+        }
+
+        public override string PrimaryRoleName
+        {
+            get
+            {
+                return null;
+
+            }
+        }
+
+        public override object DefaultCulture
+        {
+            get
+            {
+                return System.Globalization.CultureInfo.CurrentCulture;
+            }
+        }
+
+        public override bool HasPermission(int processId)
+        {
+            return HasPermission(processId, null);
+        }
+
+        public override bool HasPermission(object processId, object accessType)
+        {
+            return true;
+
+        }
+
+        public override bool IsInRole(int role)
+        {
+            return true;
+        }
+
+        public override bool IsInRole(int[] roles)
+        {
+            return true;
+        }
+
+        public override IEntity UserEntity
+        {
+            get
+            {
+                return null;
+            }
+        }
+
+        public override IEntityCollection RoleList
+        {
+            get
+            {
+                return null;
+            }
+        }
+
+        public override IEntityCollection PermissionList
+        {
+            get
+            {
+                return null;
+            }
+        }
+
+        #endregion
+
+    }
+}
+]]>
+    </TemplateSegment>
+  </TemplateSegments>
+</Template>

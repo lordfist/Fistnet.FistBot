@@ -30,6 +30,11 @@ namespace Fistnet.FistBot.StrategyBuilder
         private void button2_Click(object sender, EventArgs e)
         {
             this.uiRandomSS.Text = DnaStrategyUtil.CombineDna(BotDna.CreateRandomDnaStrategy(), BotDna.CreateRandomDnaStrategy());
+            Directory.CreateDirectory(FistBot.ROBOT_DATA_FILE_PATH);
+            using (TextWriter writer = File.CreateText(FistBot.ROBOT_DATA_FILE))
+            {
+                writer.Write(this.uiRandomSS.Text);
+            }
         }
 
         private void uiLoadRobots_Click(object sender, EventArgs e)
@@ -52,7 +57,7 @@ namespace Fistnet.FistBot.StrategyBuilder
             if (this.uiRobots.CheckedItems.Count == 0)
                 return;
 
-            this.currentGeneration = 0;
+            this.currentGeneration = Generation.GetGenerationCount();
             this.currentBattle = 0;
             this.shouldStop = false;
             this.uiCancelButton.Enabled = true;
@@ -105,14 +110,14 @@ namespace Fistnet.FistBot.StrategyBuilder
                 {
                     RunSingleBattle(false, selectedRobots);
                     this.currentBattle = i;
-                    this.uiBattleWorker.ReportProgress(generation / genCount);
+                    this.uiBattleWorker.ReportProgress(i * 100 / popCount);
                     if (this.shouldStop)
-                        break;
+                        return;
                 }
                 genId = Population.CreateAndActivateNextGenerationBasedOn(genId);
 
                 if (this.shouldStop)
-                    break;
+                    return;
             }
         }
 

@@ -80,7 +80,7 @@ namespace Fistnet.FistBot.StrategyBuilder
             if (Util.activeStrategy == null || Util.activeDnaBot == null)
                 return;
 
-            Util.activeStrategy.Fitness = FitnessScore.CalculateFitness(e.IndexedResults.ToList(), Util.activeDnaBot);
+            FitnessScore.CalculateFitness(e.IndexedResults.ToList(), Util.activeDnaBot, ref Util.activeStrategy);
             Util.activeStrategy.Save(null);
 
             //Console.WriteLine("-- Battle has completed --");

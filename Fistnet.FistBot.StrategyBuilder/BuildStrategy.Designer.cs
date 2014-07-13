@@ -147,6 +147,7 @@
             this.uiGenerationProgress.Location = new System.Drawing.Point(12, 494);
             this.uiGenerationProgress.Name = "uiGenerationProgress";
             this.uiGenerationProgress.Size = new System.Drawing.Size(384, 23);
+            this.uiGenerationProgress.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.uiGenerationProgress.TabIndex = 11;
             // 
             // uiLabelBattle

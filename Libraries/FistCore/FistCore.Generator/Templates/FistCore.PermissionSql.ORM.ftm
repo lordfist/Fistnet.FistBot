@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Template>
+  <Header>
+    <Title>Permissions INSERT statements</Title>
+    <Description>Generates INSERT statements for typical permissions/functions for selected business objects</Description>
+    <Family>Other</Family>
+  </Header>
+  <Variables>
+    <Variable>
+      <Name>SuffixReplacementMap</Name>
+      <Description>Semicolon delimited rules for table name suffix replacement, eg: "ies"->"y";"s"->""</Description>
+      <DefaultValue></DefaultValue>
+    </Variable>
+    <Variable>
+      <Name>SingleFile</Name>
+      <Description>Name of the single file which will contain code for all selected items</Description>
+      <DefaultValue>Permissions.sql</DefaultValue>
+    </Variable>
+    <Variable>
+      <Name>OutputSubdirectory</Name>
+      <Description>Output subdirectory</Description>
+      <DefaultValue></DefaultValue>
+    </Variable>
+  </Variables>
+  <ReferencedAssemblies>
+    <Assembly>FistCore.Generator.OrmComponents.dll</Assembly>
+    <Assembly>FistCore.Generator.DbMetaData.dll</Assembly>
+  </ReferencedAssemblies>
+  <Namespaces>
+    <Using>System</Using>
+    <Using>FistCore.Generator.OrmComponents</Using>
+  </Namespaces>
+  <InputComponentBuilder>
+    <Assembly>FistCore.Generator.OrmComponents</Assembly>
+    <Class>FistCore.Generator.OrmComponents.DbComponentBuilder</Class>
+  </InputComponentBuilder>
+  <TemplateSegments>
+    <TemplateSegment Id="FunctionsRoot">
+      <![CDATA[$Generate("BizObjFunctions", Input.GetChildren(DbComponentType.Table))$]]>
+    </TemplateSegment>
+    <TemplateSegment Id="BizObjFunctions">
+      <![CDATA[-- $Input.ClassPrefix()$
+insert into Permissions(Id, Name) values ('$Input.ClassPrefix()$_Read', 0);
+insert into Permissions(Id, Name) values ('$Input.ClassPrefix()$_Insert', 0);
+insert into Permissions(Id, Name) values ('$Input.ClassPrefix()$_Update', 0);
+insert into Permissions(Id, Name) values ('$Input.ClassPrefix()$_Delete', 0);
+]]>
+    </TemplateSegment>
+  </TemplateSegments>
+</Template>

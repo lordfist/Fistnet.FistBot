@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Template xmlns="http://fuzzyeye.org/FistCore/TemplateEngine/Template.xsd" >
+  <Header>
+    <Title>ASPX Partial Designer Class</Title>
+    <Description>Generates ASPX partial designer class file for an ASP.NET form which acts as an application controler for a FistCore based business object.</Description>
+    <Family>EntityUI</Family>
+  </Header>
+  <Variables>
+    <Variable>
+      <Name>WebNamespace</Name>
+      <Description>Web namespace</Description>
+      <DefaultValue>MySolution.Web</DefaultValue>
+    </Variable>
+    <Variable>
+      <Name>BLNamespace</Name>
+      <Description>Web namespace</Description>
+      <DefaultValue>MySolution.BL</DefaultValue>
+    </Variable>
+    <Variable>
+      <Name>DALNamespace</Name>
+      <Description>DAL namespace</Description>
+      <DefaultValue>MySolution.DAL</DefaultValue>
+    </Variable>
+    <Variable>
+      <Name>OutputSubdirectory</Name>
+      <Description>Output subdirectory</Description>
+      <DefaultValue>AspNet</DefaultValue>
+    </Variable>
+  </Variables>
+  <Settings>
+    <Setting>
+      <Name>FileExtension</Name>
+      <Description>File extension</Description>
+      <Value>aspx.designer.cs</Value>
+    </Setting>
+    <Setting>
+      <Name>FileNameSuffix</Name>
+      <Description>Suffix appended to generated file</Description>
+      <Value>Form</Value>
+    </Setting>
+  </Settings>
+  <ReferencedAssemblies>
+    <Assembly>FistCore.Generator.EntityComponents.dll</Assembly>
+  </ReferencedAssemblies>
+  <Namespaces>
+    <Using>System</Using>
+    <Using>FistCore.Generator.EntityComponents</Using>
+  </Namespaces>
+  <InputComponentBuilder>
+    <Assembly>FistCore.Generator.EntityComponents</Assembly>
+    <Class>FistCore.Generator.EntityComponents.FistCoreComponentBuilder</Class>
+  </InputComponentBuilder>
+  <TemplateSegments>
+    <TemplateSegment Id="AspxPartialDesignerClassRoot">
+      <![CDATA[namespace $Variables["WebNamespace"]$
+{
+	public partial class $Input.Root.Name$Form
+	{
+
+        /// <summary>
+        /// AjaxUpdatePanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel AjaxUpdatePanel;
+
+        /// <summary>
+        /// LabelSearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelSearch;
+
+        /// <summary>
+        /// TextBoxSearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBoxSearch;
+
+        /// <summary>
+        /// LabelFilterCaption control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelFilterCaption;
+
+        /// <summary>
+        /// LinkButtonSearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkButtonSearch;
+
+        /// <summary>
+        /// uiTableView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::FistCore.Web.Controls.TableView uiTableView;
+
+        /// <summary>
+        /// LinkButtonNew control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkButtonNew;
+
+        /// <summary>
+        /// LinkButtonDeleteSelected control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkButtonDeleteSelected;
+
+        /// <summary>
+        /// uiDialog control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::FistCore.Web.Controls.DialogControl uiDialog;
+    }
+}
+]]>
+    </TemplateSegment>
+  </TemplateSegments>
+</Template>

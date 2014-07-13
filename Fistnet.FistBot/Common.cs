@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Fistnet.FistBot.Actions;
 using Fistnet.FistBot.Bot;
 using Fistnet.FistBot.Tests;
+using Robocode;
 
 namespace Fistnet.FistBot
 {
@@ -13,7 +15,7 @@ namespace Fistnet.FistBot
     {
         #region Constant.
 
-        public const byte DNA_SIZE = 16;
+        public const byte DNA_SIZE = 20;
         public const byte HISTORY_SIZE = 20;
         public const byte BOT_HALF_SIZE = 16;
         public const double BULLET_VELOCITY_1 = 17;
@@ -22,6 +24,19 @@ namespace Fistnet.FistBot
         public const byte DNA_STRANDS = 8;
 
         #endregion Constant.
+    }
+
+    public static class Extensions
+    {
+        public static int GetDamage(this Bullet bullet)
+        {
+            return (int)(4 * bullet.Power + 2 * (bullet.Power - 1));
+        }
+
+        public static int GetWallDamage(this Robot robot)
+        {
+            return (int)Math.Max(Math.Abs(robot.Velocity) * 0.5 - 1, 0);
+        }
     }
 
     public static class Factory

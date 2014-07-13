@@ -6,16 +6,24 @@ using System.Text;
 using System.Threading.Tasks;
 using Fistnet.FistBot.Bot;
 using Robocode;
+using Robocode.Exception;
 using Robocode.RobotInterfaces;
 
 namespace Fistnet.FistBot
 {
     public class FistBot : BotBase
     {
-        public const string ROBOT_DATA_FILE = "H:\\Robocode\\robots\\.data\\Fistnet\\FistBot\\active.txt";
+        public const string ROBOT_DATA_FILE_PATH = "H:\\Robocode\\robots\\.data\\Fistnet\\FistBot\\";
+        public const string ROBOT_DATA_FILE_NAME = "active.txt";
+        public const string ROBOT_DATA_FILE = ROBOT_DATA_FILE_PATH + ROBOT_DATA_FILE_NAME;
+
+        public const string ROBOT_STATISTICS_FILE_NAME = "stats.txt";
+        public const string ROBOT_STATISTICS_FILE = ROBOT_DATA_FILE_PATH + ROBOT_STATISTICS_FILE_NAME;
 
         public const string ROBOT_NAME = "Fistnet.FistBot.FistBot";
         private static string fileData = "";
+        private static Dictionary<int, BotStatistics> BotStatistics = new Dictionary<int, BotStatistics>();
+        private static int currentRun = 0;
 
         public override void Run()
         {
@@ -23,7 +31,7 @@ namespace Fistnet.FistBot
 
             if (string.IsNullOrWhiteSpace(fileData))
             {
-                using (StreamReader rdr = new StreamReader(this.GetDataFile("active.txt")))
+                using (StreamReader rdr = new StreamReader(this.GetDataFile(ROBOT_DATA_FILE_NAME)))
                 {
                     fileData = rdr.ReadToEnd();
                 }
@@ -33,12 +41,47 @@ namespace Fistnet.FistBot
                 this.DeserializeStrategies(fileData);
 
             Ahead(2);
+            currentRun++;
 
             while (!this.IsDead)
             {
-                RunStrategies();
+                try
+                {
+                    RunStrategies();
+                }
+                catch (RobotException ex)
+                {
+                }
             }
         }
+
+        #region Battle statistics.
+
+        public override void OnBattleEnded(BattleEndedEvent evnt)
+        {
+            using (StreamWriter rdr = new StreamWriter(this.GetDataFile(ROBOT_STATISTICS_FILE_NAME)))
+            {
+                foreach (BotStatistics stats in FistBot.BotStatistics.Values)
+                {
+                    rdr.WriteLine(stats.Serialize());
+                }
+            }
+        }
+
+        public override void OnRoundEnded(RoundEndedEvent evnt)
+        {
+            if (!FistBot.BotStatistics.ContainsKey(currentRun))
+                FistBot.BotStatistics.Add(currentRun, this.Statistics);
+        }
+
+        public override void OnDeath(DeathEvent evnt)
+        {
+            base.OnDeath(evnt);
+            if (!FistBot.BotStatistics.ContainsKey(currentRun))
+                FistBot.BotStatistics.Add(currentRun, this.Statistics);
+        }
+
+        #endregion Battle statistics.
 
         #region Strategy controller.
 

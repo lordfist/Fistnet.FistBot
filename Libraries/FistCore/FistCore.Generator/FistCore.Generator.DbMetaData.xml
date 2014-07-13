@@ -1,0 +1,2306 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FistCore.Generator.DbMetaData</name>
+    </assembly>
+    <members>
+        <member name="T:FistCore.Generator.Firebird.FirebirdMetadataSource">
+            <summary>Fetches table metadata for Firebird through ADO.NET connection object and RDB$ system tables.</summary>
+        </member>
+        <member name="T:FistCore.Generator.IMetadataSource">
+            <summary>Fetches data source metadata.</summary>
+        </member>
+        <member name="M:FistCore.Generator.IMetadataSource.FetchTablesAndViews">
+            <summary>Fetches list with basic table and view info.</summary>
+        </member>
+        <member name="M:FistCore.Generator.IMetadataSource.FetchTableMetadata(System.String,FistCore.Generator.IClassItemNamingConvention,FistCore.Generator.ITypeMapper)">
+            <summary>Fetches table and column metadata.</summary>
+            <param name="tableName">Table name.</param>
+            <param name="classItemTemplate">Naming convention.</param>
+            <param name="typeTemplate">Type metadata.</param>
+            <returns>An instance of <b>Table</b> class.</returns>
+        </member>
+        <member name="M:FistCore.Generator.IMetadataSource.FetchStoredProcedures(System.String[])">
+            <summary>Fetches list with available stored procedure names.</summary>
+            <param name="excludedPrefixes">Excludes procedures with the specified prefixes.</param>
+        </member>
+        <member name="M:FistCore.Generator.IMetadataSource.FetchStoredProcedureMetaData(System.String)">
+            <summary>Fetches stoder procedure metadata.</summary>
+            <param name="procedureName">Procedure name.</param>
+            <returns>An instance of <b>StoredProcedure</b> class.</returns>
+        </member>
+        <member name="M:FistCore.Generator.IMetadataSource.OpenConnection">
+            <summary>Opens connection to database.</summary>
+        </member>
+        <member name="M:FistCore.Generator.IMetadataSource.CloseConnection">
+            <summary>Closes connection to database.</summary>
+        </member>
+        <member name="P:FistCore.Generator.IMetadataSource.Catalog">
+            <summary>Gets catalog/database name.</summary>
+        </member>
+        <member name="P:FistCore.Generator.IMetadataSource.Server">
+            <summary>Gets DB server name.</summary>
+        </member>
+        <member name="P:FistCore.Generator.IMetadataSource.ConnectionString">
+            <summary>Gets connection string.</summary>
+        </member>
+        <member name="P:FistCore.Generator.IMetadataSource.DBMS">
+            <summary>Gets DBMS type.</summary>
+        </member>
+        <member name="P:FistCore.Generator.IMetadataSource.ExcludedColumnsCriteria">
+            <summary>Gets or sets regex that specifies column names for which metadata should not be fetches.</summary>
+        </member>
+        <member name="P:FistCore.Generator.IMetadataSource.IsOpen">
+            <summary>Gets connection status.</summary>
+        </member>
+        <member name="P:FistCore.Generator.IMetadataSource.Schema">
+            <summary>Gets or sets optional table schema for which the metadata is retrieved.</summary>
+        </member>
+        <member name="M:FistCore.Generator.Firebird.FirebirdMetadataSource.#ctor(FistCore.Core.DbmsType,System.String)">
+            <summary>Initializes a new instance of <b>FirebirdMetadataSource</b> class.</summary>
+            <param name="dbms">DBMS type: Firebird 2.0</param>
+            <param name="connectionString">Connection string.</param>
+        </member>
+        <member name="M:FistCore.Generator.Firebird.FirebirdMetadataSource.OpenConnection">
+            <summary>Opens connection to database.</summary>
+        </member>
+        <member name="M:FistCore.Generator.Firebird.FirebirdMetadataSource.CloseConnection">
+            <summary>Closes connection to database.</summary>
+        </member>
+        <member name="M:FistCore.Generator.Firebird.FirebirdMetadataSource.FetchTablesAndViews">
+            <summary>Fetches list with basic table and view info.</summary>
+        </member>
+        <member name="M:FistCore.Generator.Firebird.FirebirdMetadataSource.FetchTableMetadata(System.String,FistCore.Generator.IClassItemNamingConvention,FistCore.Generator.ITypeMapper)">
+            <summary>Fetches table and column metadata.</summary>
+            <param name="tableName">Table name.</param>
+            <param name="classItemTemplate">Naming convention.</param>
+            <param name="typeTemplate">Type metadata.</param>
+            <returns>An instance of <b>Table</b> class.</returns>
+        </member>
+        <member name="M:FistCore.Generator.Firebird.FirebirdMetadataSource.FetchStoredProcedures(System.String[])">
+            <summary>Fetches list with available stored procedure names.</summary>
+            <param name="excludedPrefixes">Excludes procedures with the specified prefixes.</param>
+        </member>
+        <member name="M:FistCore.Generator.Firebird.FirebirdMetadataSource.FetchStoredProcedureMetaData(System.String)">
+            <summary>Fetches stoder procedure metadata.</summary>
+            <param name="procedureName">Procedure name.</param>
+            <returns>An instance of <b>StoredProcedure</b> class.</returns>
+        </member>
+        <member name="P:FistCore.Generator.Firebird.FirebirdMetadataSource.DBMS">
+            <summary>Gets DBMS type.</summary>
+        </member>
+        <member name="P:FistCore.Generator.Firebird.FirebirdMetadataSource.IsOpen">
+            <summary>Gets connection status.</summary>
+        </member>
+        <member name="P:FistCore.Generator.Firebird.FirebirdMetadataSource.ConnectionString">
+            <summary>Gets connection string.</summary>
+        </member>
+        <member name="P:FistCore.Generator.Firebird.FirebirdMetadataSource.Catalog">
+            <summary>Gets database name.</summary>
+        </member>
+        <member name="P:FistCore.Generator.Firebird.FirebirdMetadataSource.Server">
+            <summary>Gets DB server name.</summary>
+        </member>
+        <member name="P:FistCore.Generator.Firebird.FirebirdMetadataSource.ExcludedColumnsCriteria">
+            <summary>Gets or sets regex that specifies column names for which metadata should not be fetched.</summary>
+        </member>
+        <member name="P:FistCore.Generator.Firebird.FirebirdMetadataSource.Schema">
+            <summary>Returns null. Has no effect.</summary>
+        </member>
+        <member name="T:FistCore.Generator.Firebird.FirebirdTypeConverter">
+            <summary>Provides utility methods which inspect and convert Firebird native data types to .NET data types.</summary>
+        </member>
+        <member name="M:FistCore.Generator.Firebird.FirebirdTypeConverter.GetType(System.String,System.Int32,System.Int32)">
+            <summary>Get .NET type compatible with given Fbcle type.</summary>
+        </member>
+        <member name="T:FistCore.Generator.Firebird.FirebirdTypeMapper">
+            <summary>Type mapper and code renderer that uses C# 2.0 types in generated classes, and Firebird types in data source.</summary>
+        </member>
+        <member name="T:FistCore.Generator.ITypeMapper">
+            <summary>Mapps native DB to .NET type and renders code items associated with data type.</summary>
+        </member>
+        <member name="M:FistCore.Generator.ITypeMapper.NativeDbType(System.String)">
+            <summary>
+            Native database type used in stored procedures.
+            Eg. T-SQL or PL/SQL type.
+            </summary>
+            <param name="nativeDbType">Native DB type.</param>
+        </member>
+        <member name="M:FistCore.Generator.ITypeMapper.IsVariableLengthNativeType(System.String)">
+            <summary>
+            Indicates that native database type is variable length (eg: varchar).
+            </summary>
+            <param name="nativeDbType">Native DB type.</param>
+        </member>
+        <member name="M:FistCore.Generator.ITypeMapper.MinNativeValue(System.String,System.Int32,System.Int32)">
+            <summary>
+            Minimum value supported by native database type.
+            </summary>
+            <param name="nativeDbType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="M:FistCore.Generator.ITypeMapper.MaxNativeValue(System.String,System.Int32,System.Int32)">
+            <summary>
+            Maximum value supported by native database type.
+            </summary>
+            <param name="nativeDbType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="M:FistCore.Generator.ITypeMapper.Type(System.String,System.Int32,System.Int32)">
+            <summary>
+            Member/property type used in generated classes.
+            </summary>
+            <param name="nativeDbType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="M:FistCore.Generator.ITypeMapper.DefaultValue(System.String,System.Int32,System.Int32)">
+            <summary>
+            Default value of the type used in generated classes. 
+            Eg. default for System.Int32 is 0, default for System.String is null etc.
+            </summary>
+            <param name="nativeDbType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="M:FistCore.Generator.ITypeMapper.IsValueType(System.String)">
+            <summary>
+            Indicates whether the type used in generated classes is a value type; as opposed to reference type.
+            </summary>
+            <param name="nativeDbType">Native DB type.</param>
+        </member>
+        <member name="M:FistCore.Generator.ITypeMapper.DbType(System.String)">
+            <summary>
+            System.Data.DbType parameter type.
+            </summary>
+            <param name="nativeDbType">Native DB type.</param>
+        </member>
+        <member name="M:FistCore.Generator.ITypeMapper.NullableType(System.String,System.Int32,System.Int32)">
+            <summary>
+            Member/property type used for nullable fields in generated classes.
+            </summary>
+            <param name="nativeDbType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="M:FistCore.Generator.ITypeMapper.NullValue(System.String,System.Int32,System.Int32)">
+            <summary>
+            Null expression for the type used in generated classes.
+            Usually "null" for reference types. For value types it will depend on library used.
+            Eg. null-value for System.Int32 when NullableTypes.dll library is used is "NulableInt32.Null".		
+            </summary>
+            <param name="nativeDbType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="M:FistCore.Generator.ITypeMapper.NativeDbTypeWithLength(System.String,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Returns native type with length and precision if required. Eg: varchar(255). Has no effect for non-variable and non-fixedpoint types.
+            </summary>
+            <param name="precision">The maximum total number of decimal digits that can be stored, both to the left and to the right of the decimal point.</param>
+            <param name="scale">The maximum number of decimal digits that can be stored to the right of the decimal point. Scale must be a value from 0 through precision. Scale can be specified only if precision is specified.</param>
+            <returns>Native type with length.</returns>
+            <param name="nativeDbType">Native DB type.</param>
+            <param name="fieldLength">Length of textual or binary field.</param>
+        </member>
+        <member name="M:FistCore.Generator.ITypeMapper.CastExpression(System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Returns cast/convert expression that converts the given variable to the current class type.
+            </summary>
+            <param name="expressionThatIsToBeConverted">Expression (usually variable) that is to be converted to the current class type.</param>
+            <param name="nativeDbType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+            <returns>Cast/convert expression.</returns>
+        </member>
+        <member name="M:FistCore.Generator.ITypeMapper.HasValueExpression(System.String,System.String)">
+            <summary>
+            Returns expression that tests whether the nullable type variable contains a non-null value.
+            </summary>
+            <param name="variableToBeTested">Nullable type variable to be tested.</param>
+            <param name="nativeDbType">Native DB type.</param>
+            <returns>HasValue expression.</returns>
+        </member>
+        <member name="M:FistCore.Generator.ITypeMapper.IsNullExpression(System.String,System.String)">
+            <summary>
+            Returns expression that tests whether the nullable type variable contains null value.
+            </summary>
+            <param name="nativeDbType">Native DB type.</param>
+            <param name="variableToBeTested">Nullable type variable to be tested.</param>
+            <returns>IsNull expression.</returns>
+        </member>
+        <member name="M:FistCore.Generator.ITypeMapper.GetValueExpression(System.String,System.String,System.Boolean)">
+            <summary>
+            Returns expression that gets the value stored in a variable; both of nullable and non-nullable type.
+            Eg. "myVariable.Value".
+            </summary>
+            <param name="variable">Variable that holds the value.</param>
+            <param name="isNullableTypeVariable">Indicates whether the variable is of a nullable type.</param>
+            <param name="nativeDbType">Native DB type.</param>
+            <returns>Get value expression.</returns>
+        </member>
+        <member name="M:FistCore.Generator.ITypeMapper.NotEqualsExpression(System.String,System.String,System.Boolean,System.String,System.Boolean)">
+            <summary>
+            Returns boolean not equals expression for two nullable variables.
+            Example for NullableType library: (lhs.IsNull != rhs.IsNull) || (!lhs.IsNull &amp;&amp; (lhs.Value != rhs.Value)).
+            </summary>
+            <param name="nativeDbType">Native DB type.</param>
+            <param name="lhsVariable">First variable.</param>
+            <param name="lhsIsNullable">Indicates whether the first variable is a nullable structure.</param>
+            <param name="rhsVariable">Second variable.</param>
+            <param name="rhsIsNullable">Indicates whether the secont variable is a nullable structure.</param>
+            <returns>Code that comparse two variables.</returns>
+        </member>
+        <member name="M:FistCore.Generator.ITypeMapper.GetType(System.String,System.Int32,System.Int32)">
+            <summary>Gets .NET type compatible with given native DB type.</summary>
+            <param name="nativeDbType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="P:FistCore.Generator.ITypeMapper.RequiredNamespaces">
+            <summary>
+            Namespaces that contain referenced types.
+            </summary>
+        </member>
+        <member name="M:FistCore.Generator.Firebird.FirebirdTypeMapper.NativeDbType(System.String)">
+            <summary>
+            Native database type used in stored procedures (PL/SQL type).
+            </summary>
+            <param name="fbDataType">Native DB type.</param>
+        </member>
+        <member name="M:FistCore.Generator.Firebird.FirebirdTypeMapper.IsVariableLengthNativeType(System.String)">
+            <summary>
+            Indicates that native database type is variable length (eg: varchar).
+            </summary>
+            <param name="fbDataType">Native DB type.</param>
+        </member>
+        <member name="M:FistCore.Generator.Firebird.FirebirdTypeMapper.MinNativeValue(System.String,System.Int32,System.Int32)">
+            <summary>
+            Minimum value supported by native database type.
+            </summary>
+            <param name="fbDataType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="M:FistCore.Generator.Firebird.FirebirdTypeMapper.MaxNativeValue(System.String,System.Int32,System.Int32)">
+            <summary>
+            Maximum value supported by native database type.
+            </summary>
+            <param name="fbDataType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="M:FistCore.Generator.Firebird.FirebirdTypeMapper.Type(System.String,System.Int32,System.Int32)">
+            <summary>
+            Member/property type used in generated classes.
+            </summary>
+            <param name="fbDataType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="M:FistCore.Generator.Firebird.FirebirdTypeMapper.DefaultValue(System.String,System.Int32,System.Int32)">
+            <summary>
+            Default value of the type used in generated classes. 
+            Eg. default for System.Int32 is 0, default for System.String is null etc.
+            </summary>
+            <param name="fbDataType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="M:FistCore.Generator.Firebird.FirebirdTypeMapper.IsValueType(System.String)">
+            <summary>
+            Indicates whether the type used in generated classes is a value type; as opposed to reference type.
+            </summary>
+            <param name="fbDataType">Native DB type.</param>
+        </member>
+        <member name="M:FistCore.Generator.Firebird.FirebirdTypeMapper.DbType(System.String)">
+            <summary>
+            System.Data.DbType parameter type.
+            </summary>
+            <param name="fbDataType">Native DB type.</param>
+        </member>
+        <member name="M:FistCore.Generator.Firebird.FirebirdTypeMapper.NullableType(System.String,System.Int32,System.Int32)">
+            <summary>
+            Member/property type used for nullable fields in generated classes.
+            </summary>
+            <param name="fbDataType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="M:FistCore.Generator.Firebird.FirebirdTypeMapper.NullValue(System.String,System.Int32,System.Int32)">
+            <summary>
+            Null expression for the type used in generated classes.
+            Usually "null" for reference types. For value types it will depend on library used.
+            Eg. null-value for System.Int32 when NullableTypes.dll library is used is "NulableInt32.Null".		
+            </summary>
+            <param name="fbDataType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="M:FistCore.Generator.Firebird.FirebirdTypeMapper.NativeDbTypeWithLength(System.String,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Returns native type with length and precision if required. Eg: varchar(255). Has no effect for non-variable and non-fixedpoint types.
+            </summary>
+            <param name="precision">The maximum total number of decimal digits that can be stored, both to the left and to the right of the decimal point.</param>
+            <param name="scale">The maximum number of decimal digits that can be stored to the right of the decimal point. Scale must be a value from 0 through precision. Scale can be specified only if precision is specified.</param>
+            <returns>Native type with length.</returns>
+            <param name="fbDataType">Native DB type.</param>
+            <param name="fieldLength">Length of textual or binary field.</param>
+        </member>
+        <member name="M:FistCore.Generator.Firebird.FirebirdTypeMapper.CastExpression(System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Returns cast/convert expression that converts the given variable to the current class type.
+            </summary>
+            <param name="expressionThatIsToBeConverted">Expression (usually variable) that is to be converted to the current class type.</param>
+            <param name="fbDataType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+            <returns>Cast/convert expression.</returns>
+        </member>
+        <member name="M:FistCore.Generator.Firebird.FirebirdTypeMapper.HasValueExpression(System.String,System.String)">
+            <summary>
+            Returns expression that tests whether the nullable type variable contains a non-null value.
+            </summary>
+            <param name="variableToBeTested">Nullable type variable to be tested.</param>
+            <param name="fbDataType">Native DB type.</param>
+            <returns>HasValue expression.</returns>
+        </member>
+        <member name="M:FistCore.Generator.Firebird.FirebirdTypeMapper.IsNullExpression(System.String,System.String)">
+            <summary>
+            Returns expression that tests whether the nullable type variable contains null value.
+            </summary>
+            <param name="fbDataType">Native DB type.</param>
+            <param name="variableToBeTested">Nullable type variable to be tested.</param>
+            <returns>IsNull expression.</returns>
+        </member>
+        <member name="M:FistCore.Generator.Firebird.FirebirdTypeMapper.GetValueExpression(System.String,System.String,System.Boolean)">
+            <summary>
+            Returns expression that gets the value stored in a variable; both of nullable and non-nullable type.
+            Eg. "myVariable.Value".
+            </summary>
+            <param name="variable">Variable that holds the value.</param>
+            <param name="isNullableTypeVariable">Indicates whether the variable is of a nullable type.</param>
+            <param name="fbDataType">Native DB type.</param>
+            <returns>Get value expression.</returns>
+        </member>
+        <member name="M:FistCore.Generator.Firebird.FirebirdTypeMapper.NotEqualsExpression(System.String,System.String,System.Boolean,System.String,System.Boolean)">
+            <summary>
+            Returns boolean not equals expression for two nullable variables.
+            Example for NullableType library: (lhs.IsNull != rhs.IsNull) || (!lhs.IsNull &amp;&amp; (lhs.Value != rhs.Value)).
+            </summary>
+            <param name="fbDataType">Native DB type.</param>
+            <param name="lhsVariable">First variable.</param>
+            <param name="lhsIsNullable">Indicates whether the first variable is a nullable structure.</param>
+            <param name="rhsVariable">Second variable.</param>
+            <param name="rhsIsNullable">Indicates whether the secont variable is a nullable structure.</param>
+            <returns>Code that comparse two variables.</returns>
+        </member>
+        <member name="M:FistCore.Generator.Firebird.FirebirdTypeMapper.GetType(System.String,System.Int32,System.Int32)">
+            <summary>Gets .NET type compatible with given native DB type.</summary>
+            <param name="fbDataType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="P:FistCore.Generator.Firebird.FirebirdTypeMapper.RequiredNamespaces">
+            <summary>
+            Namespaces that contain referenced types.
+            </summary>
+        </member>
+        <member name="T:FistCore.Generator.MySql.MySqlMetadataSource">
+            <summary>Fetches table and view metadata from MySql information schema.</summary>
+        </member>
+        <member name="M:FistCore.Generator.MySql.MySqlMetadataSource.#ctor(FistCore.Core.DbmsType,System.String)">
+            <summary>Initializes a new instance of <b>MySqlMetadataSource</b> class.</summary>
+            <param name="dbms">DBMS type: MySQL 5.0.</param>
+            <param name="connectionString">Connection string.</param>
+        </member>
+        <member name="M:FistCore.Generator.MySql.MySqlMetadataSource.OpenConnection">
+            <summary>Opens connection to database.</summary>
+        </member>
+        <member name="M:FistCore.Generator.MySql.MySqlMetadataSource.CloseConnection">
+            <summary>Closes connection to database.</summary>
+        </member>
+        <member name="M:FistCore.Generator.MySql.MySqlMetadataSource.FetchTablesAndViews">
+            <summary>Fetches list with basic table and view info.</summary>
+        </member>
+        <member name="M:FistCore.Generator.MySql.MySqlMetadataSource.FetchTableMetadata(System.String,FistCore.Generator.IClassItemNamingConvention,FistCore.Generator.ITypeMapper)">
+            <summary>Fetches table and column metadata.</summary>
+            <param name="tableName">Table name.</param>
+            <param name="classItemTemplate">Naming convention.</param>
+            <param name="typeTemplate">Type metadata.</param>
+            <returns>An instance of <b>Table</b> class.</returns>
+        </member>
+        <member name="M:FistCore.Generator.MySql.MySqlMetadataSource.FetchStoredProcedures(System.String[])">
+            <summary>Fetches list with available stored procedure names.</summary>
+            <param name="excludedPrefixes">Excludes procedures with the specified prefixes.</param>
+        </member>
+        <member name="M:FistCore.Generator.MySql.MySqlMetadataSource.FetchStoredProcedureMetaData(System.String)">
+            <summary>Fetches stoder procedure metadata.</summary>
+            <param name="procedureName">Procedure name.</param>
+            <returns>An instance of <b>StoredProcedure</b> class.</returns>
+        </member>
+        <member name="P:FistCore.Generator.MySql.MySqlMetadataSource.DBMS">
+            <summary>Gets DBMS type.</summary>
+        </member>
+        <member name="P:FistCore.Generator.MySql.MySqlMetadataSource.IsOpen">
+            <summary>Gets connection status.</summary>
+        </member>
+        <member name="P:FistCore.Generator.MySql.MySqlMetadataSource.ConnectionString">
+            <summary>Gets connection string.</summary>
+        </member>
+        <member name="P:FistCore.Generator.MySql.MySqlMetadataSource.Catalog">
+            <summary>Gets database name.</summary>
+        </member>
+        <member name="P:FistCore.Generator.MySql.MySqlMetadataSource.Server">
+            <summary>Gets DB server name.</summary>
+        </member>
+        <member name="P:FistCore.Generator.MySql.MySqlMetadataSource.ExcludedColumnsCriteria">
+            <summary>Gets or sets regex that specifies column names for which metadata should not be fetched.</summary>
+        </member>
+        <member name="P:FistCore.Generator.MySql.MySqlMetadataSource.Schema">
+            <summary>Gets or sets optional table schema for which the metadata is retrieved.</summary>
+        </member>
+        <member name="T:FistCore.Generator.MySql.MySqlToCsharp2TypeMapper">
+            <summary>Type mapper and code renderer that uses C# 2.0 types in generated classes, and MySQL types in data source.</summary>
+        </member>
+        <member name="M:FistCore.Generator.MySql.MySqlToCsharp2TypeMapper.NativeDbType(System.String)">
+            <summary>
+            Native database type used in stored procedures (PL/SQL type).
+            </summary>
+            <param name="mySqlDataType">Native DB type.</param>
+        </member>
+        <member name="M:FistCore.Generator.MySql.MySqlToCsharp2TypeMapper.IsVariableLengthNativeType(System.String)">
+            <summary>
+            Indicates that native database type is variable length (eg: varchar).
+            </summary>
+            <param name="mySqlDataType">Native DB type.</param>
+        </member>
+        <member name="M:FistCore.Generator.MySql.MySqlToCsharp2TypeMapper.MinNativeValue(System.String,System.Int32,System.Int32)">
+            <summary>
+            Minimum value supported by native database type.
+            </summary>
+            <param name="mySqlDataType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="M:FistCore.Generator.MySql.MySqlToCsharp2TypeMapper.MaxNativeValue(System.String,System.Int32,System.Int32)">
+            <summary>
+            Maximum value supported by native database type.
+            </summary>
+            <param name="mySqlDataType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="M:FistCore.Generator.MySql.MySqlToCsharp2TypeMapper.Type(System.String,System.Int32,System.Int32)">
+            <summary>
+            Member/property type used in generated classes.
+            </summary>
+            <param name="mySqlDataType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="M:FistCore.Generator.MySql.MySqlToCsharp2TypeMapper.DefaultValue(System.String,System.Int32,System.Int32)">
+            <summary>
+            Default value of the type used in generated classes. 
+            Eg. default for System.Int32 is 0, default for System.String is null etc.
+            </summary>
+            <param name="mySqlDataType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="M:FistCore.Generator.MySql.MySqlToCsharp2TypeMapper.IsValueType(System.String)">
+            <summary>
+            Indicates whether the type used in generated classes is a value type; as opposed to reference type.
+            </summary>
+            <param name="mySqlDataType">Native DB type.</param>
+        </member>
+        <member name="M:FistCore.Generator.MySql.MySqlToCsharp2TypeMapper.DbType(System.String)">
+            <summary>
+            System.Data.DbType parameter type.
+            </summary>
+            <param name="mySqlDataType">Native DB type.</param>
+        </member>
+        <member name="M:FistCore.Generator.MySql.MySqlToCsharp2TypeMapper.NullableType(System.String,System.Int32,System.Int32)">
+            <summary>
+            Member/property type used for nullable fields in generated classes.
+            </summary>
+            <param name="mySqlDataType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="M:FistCore.Generator.MySql.MySqlToCsharp2TypeMapper.NullValue(System.String,System.Int32,System.Int32)">
+            <summary>
+            Null expression for the type used in generated classes.
+            Usually "null" for reference types. For value types it will depend on library used.
+            Eg. null-value for System.Int32 when NullableTypes.dll library is used is "NulableInt32.Null".		
+            </summary>
+            <param name="mySqlDataType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="M:FistCore.Generator.MySql.MySqlToCsharp2TypeMapper.NativeDbTypeWithLength(System.String,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Returns native type with length and precision if required. Eg: varchar(255). Has no effect for non-variable and non-fixedpoint types.
+            </summary>
+            <param name="precision">The maximum total number of decimal digits that can be stored, both to the left and to the right of the decimal point.</param>
+            <param name="scale">The maximum number of decimal digits that can be stored to the right of the decimal point. Scale must be a value from 0 through precision. Scale can be specified only if precision is specified.</param>
+            <returns>Native type with length.</returns>
+            <param name="mySqlDataType">Native DB type.</param>
+            <param name="fieldLength">Length of textual or binary field.</param>
+        </member>
+        <member name="M:FistCore.Generator.MySql.MySqlToCsharp2TypeMapper.CastExpression(System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Returns cast/convert expression that converts the given variable to the current class type.
+            </summary>
+            <param name="expressionThatIsToBeConverted">Expression (usually variable) that is to be converted to the current class type.</param>
+            <param name="mySqlDataType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+            <returns>Cast/convert expression.</returns>
+        </member>
+        <member name="M:FistCore.Generator.MySql.MySqlToCsharp2TypeMapper.HasValueExpression(System.String,System.String)">
+            <summary>
+            Returns expression that tests whether the nullable type variable contains a non-null value.
+            </summary>
+            <param name="variableToBeTested">Nullable type variable to be tested.</param>
+            <param name="mySqlDataType">Native DB type.</param>
+            <returns>HasValue expression.</returns>
+        </member>
+        <member name="M:FistCore.Generator.MySql.MySqlToCsharp2TypeMapper.IsNullExpression(System.String,System.String)">
+            <summary>
+            Returns expression that tests whether the nullable type variable contains null value.
+            </summary>
+            <param name="mySqlDataType">Native DB type.</param>
+            <param name="variableToBeTested">Nullable type variable to be tested.</param>
+            <returns>IsNull expression.</returns>
+        </member>
+        <member name="M:FistCore.Generator.MySql.MySqlToCsharp2TypeMapper.GetValueExpression(System.String,System.String,System.Boolean)">
+            <summary>
+            Returns expression that gets the value stored in a variable; both of nullable and non-nullable type.
+            Eg. "myVariable.Value".
+            </summary>
+            <param name="variable">Variable that holds the value.</param>
+            <param name="isNullableTypeVariable">Indicates whether the variable is of a nullable type.</param>
+            <param name="mySqlDataType">Native DB type.</param>
+            <returns>Get value expression.</returns>
+        </member>
+        <member name="M:FistCore.Generator.MySql.MySqlToCsharp2TypeMapper.NotEqualsExpression(System.String,System.String,System.Boolean,System.String,System.Boolean)">
+            <summary>
+            Returns boolean not equals expression for two nullable variables.
+            Example for NullableType library: (lhs.IsNull != rhs.IsNull) || (!lhs.IsNull &amp;&amp; (lhs.Value != rhs.Value)).
+            </summary>
+            <param name="mySqlDataType">Native DB type.</param>
+            <param name="lhsVariable">First variable.</param>
+            <param name="lhsIsNullable">Indicates whether the first variable is a nullable structure.</param>
+            <param name="rhsVariable">Second variable.</param>
+            <param name="rhsIsNullable">Indicates whether the secont variable is a nullable structure.</param>
+            <returns>Code that comparse two variables.</returns>
+        </member>
+        <member name="M:FistCore.Generator.MySql.MySqlToCsharp2TypeMapper.GetType(System.String,System.Int32,System.Int32)">
+            <summary>Gets .NET type compatible with given native DB type.</summary>
+            <param name="mySqlDataType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="P:FistCore.Generator.MySql.MySqlToCsharp2TypeMapper.RequiredNamespaces">
+            <summary>
+            Namespaces that contain referenced types.
+            </summary>
+        </member>
+        <member name="T:FistCore.Generator.MySql.MySqlTypeConverter">
+            <summary>Provides utility methods which inspect and convert MySQL native data types to .NET data types.</summary>
+        </member>
+        <member name="M:FistCore.Generator.MySql.MySqlTypeConverter.GetType(System.String,System.Int32,System.Int32)">
+            <summary>Get .NET type compatible with given MySqlcle type.</summary>
+        </member>
+        <member name="T:FistCore.Generator.PostgreSql.PostgreSqlMetadataSource">
+            <summary>Fetches table and view metadata from PostgreSql information schema.</summary>
+        </member>
+        <member name="M:FistCore.Generator.PostgreSql.PostgreSqlMetadataSource.#ctor(FistCore.Core.DbmsType,System.String)">
+            <summary>Initializes a new instance of <b>PostgreSqlMetadataSource</b> class.</summary>
+            <param name="dbms">DBMS type: PostgreSql 9.0.</param>
+            <param name="connectionString">Connection string.</param>
+        </member>
+        <member name="M:FistCore.Generator.PostgreSql.PostgreSqlMetadataSource.OpenConnection">
+            <summary>Opens connection to database.</summary>
+        </member>
+        <member name="M:FistCore.Generator.PostgreSql.PostgreSqlMetadataSource.CloseConnection">
+            <summary>Closes connection to database.</summary>
+        </member>
+        <member name="M:FistCore.Generator.PostgreSql.PostgreSqlMetadataSource.FetchTablesAndViews">
+            <summary>Fetches list with basic table and view info.</summary>
+        </member>
+        <member name="M:FistCore.Generator.PostgreSql.PostgreSqlMetadataSource.FetchTableMetadata(System.String,FistCore.Generator.IClassItemNamingConvention,FistCore.Generator.ITypeMapper)">
+            <summary>Fetches table and column metadata.</summary>
+            <param name="tableName">Table name.</param>
+            <param name="classItemTemplate">Naming convention.</param>
+            <param name="typeTemplate">Type metadata.</param>
+            <returns>An instance of <b>Table</b> class.</returns>
+        </member>
+        <member name="M:FistCore.Generator.PostgreSql.PostgreSqlMetadataSource.FetchStoredProcedures(System.String[])">
+            <summary>Fetches list with available stored procedure names.</summary>
+            <param name="excludedPrefixes">Excludes procedures with the specified prefixes.</param>
+        </member>
+        <member name="M:FistCore.Generator.PostgreSql.PostgreSqlMetadataSource.FetchStoredProcedureMetaData(System.String)">
+            <summary>Fetches stoder procedure metadata.</summary>
+            <param name="procedureName">Procedure name.</param>
+            <returns>An instance of <b>StoredProcedure</b> class.</returns>
+        </member>
+        <member name="P:FistCore.Generator.PostgreSql.PostgreSqlMetadataSource.DBMS">
+            <summary>Gets DBMS type.</summary>
+        </member>
+        <member name="P:FistCore.Generator.PostgreSql.PostgreSqlMetadataSource.IsOpen">
+            <summary>Gets connection status.</summary>
+        </member>
+        <member name="P:FistCore.Generator.PostgreSql.PostgreSqlMetadataSource.ConnectionString">
+            <summary>Gets connection string.</summary>
+        </member>
+        <member name="P:FistCore.Generator.PostgreSql.PostgreSqlMetadataSource.Catalog">
+            <summary>Gets database name.</summary>
+        </member>
+        <member name="P:FistCore.Generator.PostgreSql.PostgreSqlMetadataSource.Server">
+            <summary>Gets DB server name.</summary>
+        </member>
+        <member name="P:FistCore.Generator.PostgreSql.PostgreSqlMetadataSource.ExcludedColumnsCriteria">
+            <summary>Gets or sets regex that specifies column names for which metadata should not be fetched.</summary>
+        </member>
+        <member name="P:FistCore.Generator.PostgreSql.PostgreSqlMetadataSource.Schema">
+            <summary>Gets or sets optional table schema for which the metadata is retrieved.</summary>
+        </member>
+        <member name="T:FistCore.Generator.PostgreSql.PostgreSqlToCsharp2TypeMapper">
+            <summary>Type mapper and code renderer that uses C# 2.0 types in generated classes, and PostgreSQL types in data source.</summary>
+        </member>
+        <member name="M:FistCore.Generator.PostgreSql.PostgreSqlToCsharp2TypeMapper.NativeDbType(System.String)">
+            <summary>
+            Native database type used in stored procedures (PL/SQL type).
+            </summary>
+            <param name="pgDataType">Native DB type.</param>
+        </member>
+        <member name="M:FistCore.Generator.PostgreSql.PostgreSqlToCsharp2TypeMapper.IsVariableLengthNativeType(System.String)">
+            <summary>
+            Indicates that native database type is variable length (eg: varchar).
+            </summary>
+            <param name="pgDataType">Native DB type.</param>
+        </member>
+        <member name="M:FistCore.Generator.PostgreSql.PostgreSqlToCsharp2TypeMapper.MinNativeValue(System.String,System.Int32,System.Int32)">
+            <summary>
+            Minimum value supported by native database type.
+            </summary>
+            <param name="pgDataType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="M:FistCore.Generator.PostgreSql.PostgreSqlToCsharp2TypeMapper.MaxNativeValue(System.String,System.Int32,System.Int32)">
+            <summary>
+            Maximum value supported by native database type.
+            </summary>
+            <param name="pgDataType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="M:FistCore.Generator.PostgreSql.PostgreSqlToCsharp2TypeMapper.Type(System.String,System.Int32,System.Int32)">
+            <summary>
+            Member/property type used in generated classes.
+            </summary>
+            <param name="pgDataType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="M:FistCore.Generator.PostgreSql.PostgreSqlToCsharp2TypeMapper.DefaultValue(System.String,System.Int32,System.Int32)">
+            <summary>
+            Default value of the type used in generated classes. 
+            Eg. default for System.Int32 is 0, default for System.String is null etc.
+            </summary>
+            <param name="pgDataType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="M:FistCore.Generator.PostgreSql.PostgreSqlToCsharp2TypeMapper.IsValueType(System.String)">
+            <summary>
+            Indicates whether the type used in generated classes is a value type; as opposed to reference type.
+            </summary>
+            <param name="pgDataType">Native DB type.</param>
+        </member>
+        <member name="M:FistCore.Generator.PostgreSql.PostgreSqlToCsharp2TypeMapper.DbType(System.String)">
+            <summary>
+            System.Data.DbType parameter type.
+            </summary>
+            <param name="pgDataType">Native DB type.</param>
+        </member>
+        <member name="M:FistCore.Generator.PostgreSql.PostgreSqlToCsharp2TypeMapper.NullableType(System.String,System.Int32,System.Int32)">
+            <summary>
+            Member/property type used for nullable fields in generated classes.
+            </summary>
+            <param name="pgDataType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="M:FistCore.Generator.PostgreSql.PostgreSqlToCsharp2TypeMapper.NullValue(System.String,System.Int32,System.Int32)">
+            <summary>
+            Null expression for the type used in generated classes.
+            Usually "null" for reference types. For value types it will depend on library used.
+            Eg. null-value for System.Int32 when NullableTypes.dll library is used is "NulableInt32.Null".		
+            </summary>
+            <param name="pgDataType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="M:FistCore.Generator.PostgreSql.PostgreSqlToCsharp2TypeMapper.NativeDbTypeWithLength(System.String,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Returns native type with length and precision if required. Eg: varchar(255). Has no effect for non-variable and non-fixedpoint types.
+            </summary>
+            <param name="precision">The maximum total number of decimal digits that can be stored, both to the left and to the right of the decimal point.</param>
+            <param name="scale">The maximum number of decimal digits that can be stored to the right of the decimal point. Scale must be a value from 0 through precision. Scale can be specified only if precision is specified.</param>
+            <returns>Native type with length.</returns>
+            <param name="pgDataType">Native DB type.</param>
+            <param name="fieldLength">Length of textual or binary field.</param>
+        </member>
+        <member name="M:FistCore.Generator.PostgreSql.PostgreSqlToCsharp2TypeMapper.CastExpression(System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Returns cast/convert expression that converts the given variable to the current class type.
+            </summary>
+            <param name="expressionThatIsToBeConverted">Expression (usually variable) that is to be converted to the current class type.</param>
+            <param name="pgDataType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+            <returns>Cast/convert expression.</returns>
+        </member>
+        <member name="M:FistCore.Generator.PostgreSql.PostgreSqlToCsharp2TypeMapper.HasValueExpression(System.String,System.String)">
+            <summary>
+            Returns expression that tests whether the nullable type variable contains a non-null value.
+            </summary>
+            <param name="variableToBeTested">Nullable type variable to be tested.</param>
+            <param name="pgDataType">Native DB type.</param>
+            <returns>HasValue expression.</returns>
+        </member>
+        <member name="M:FistCore.Generator.PostgreSql.PostgreSqlToCsharp2TypeMapper.IsNullExpression(System.String,System.String)">
+            <summary>
+            Returns expression that tests whether the nullable type variable contains null value.
+            </summary>
+            <param name="pgDataType">Native DB type.</param>
+            <param name="variableToBeTested">Nullable type variable to be tested.</param>
+            <returns>IsNull expression.</returns>
+        </member>
+        <member name="M:FistCore.Generator.PostgreSql.PostgreSqlToCsharp2TypeMapper.GetValueExpression(System.String,System.String,System.Boolean)">
+            <summary>
+            Returns expression that gets the value stored in a variable; both of nullable and non-nullable type.
+            Eg. "myVariable.Value".
+            </summary>
+            <param name="variable">Variable that holds the value.</param>
+            <param name="isNullableTypeVariable">Indicates whether the variable is of a nullable type.</param>
+            <param name="pgDataType">Native DB type.</param>
+            <returns>Get value expression.</returns>
+        </member>
+        <member name="M:FistCore.Generator.PostgreSql.PostgreSqlToCsharp2TypeMapper.NotEqualsExpression(System.String,System.String,System.Boolean,System.String,System.Boolean)">
+            <summary>
+            Returns boolean not equals expression for two nullable variables.
+            Example for NullableType library: (lhs.IsNull != rhs.IsNull) || (!lhs.IsNull &amp;&amp; (lhs.Value != rhs.Value)).
+            </summary>
+            <param name="pgDataType">Native DB type.</param>
+            <param name="lhsVariable">First variable.</param>
+            <param name="lhsIsNullable">Indicates whether the first variable is a nullable structure.</param>
+            <param name="rhsVariable">Second variable.</param>
+            <param name="rhsIsNullable">Indicates whether the secont variable is a nullable structure.</param>
+            <returns>Code that comparse two variables.</returns>
+        </member>
+        <member name="M:FistCore.Generator.PostgreSql.PostgreSqlToCsharp2TypeMapper.GetType(System.String,System.Int32,System.Int32)">
+            <summary>Gets .NET type compatible with given native DB type.</summary>
+            <param name="pgDataType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="P:FistCore.Generator.PostgreSql.PostgreSqlToCsharp2TypeMapper.RequiredNamespaces">
+            <summary>
+            Namespaces that contain referenced types.
+            </summary>
+        </member>
+        <member name="T:FistCore.Generator.PostgreSql.PostgreSqlTypeConverter">
+            <summary>Provides utility methods which inspect and convert PostgreSQL native data types to .NET data types.</summary>
+        </member>
+        <member name="M:FistCore.Generator.PostgreSql.PostgreSqlTypeConverter.GetType(System.String,System.Int32,System.Int32)">
+            <summary>Get .NET type compatible with given Pgcle type.</summary>
+        </member>
+        <member name="T:FistCore.Generator.IStoredProcedureParameter">
+            <summary>SP parameter metadata, type converter and code item renderer.</summary>
+        </member>
+        <member name="M:FistCore.Generator.IStoredProcedureParameter.NullableType(FistCore.Generator.ITypeMapper)">
+            <summary>Generates nullable type.</summary>
+        </member>
+        <member name="M:FistCore.Generator.IStoredProcedureParameter.IsNullExpression(FistCore.Generator.ITypeMapper,System.String)">
+            <summary>Generates expression which whether the given variable contains <b>null</b> value.</summary>
+        </member>
+        <member name="M:FistCore.Generator.IStoredProcedureParameter.NullValue(FistCore.Generator.ITypeMapper)">
+            <summary>Generates <b>null</b> value.</summary>
+        </member>
+        <member name="M:FistCore.Generator.IStoredProcedureParameter.GetDirectionDescription(System.Boolean)">
+            <summary>Generates direction description.</summary>
+        </member>
+        <member name="P:FistCore.Generator.IStoredProcedureParameter.ParameterName">
+            <summary>Parameter name.</summary>
+        </member>
+        <member name="P:FistCore.Generator.IStoredProcedureParameter.Ordinal">
+            <summary>The position of parameter in SP definition.</summary>
+        </member>
+        <member name="P:FistCore.Generator.IStoredProcedureParameter.NativeDbType">
+            <summary>Native DB type, as defined by meta-data source.</summary>
+        </member>
+        <member name="P:FistCore.Generator.IStoredProcedureParameter.Size">
+            <summary>Length of textual parameter.</summary>
+        </member>
+        <member name="P:FistCore.Generator.IStoredProcedureParameter.Precision">
+            <summary>The number of decimal places to which a field value is resolved.</summary>
+        </member>
+        <member name="P:FistCore.Generator.IStoredProcedureParameter.Scale">
+            <summary>The number of decimal places to which a field value is resolved.</summary>
+        </member>
+        <member name="P:FistCore.Generator.IStoredProcedureParameter.Direction">
+            <summary>Direction modifier: in, out, in-out or return value.</summary>
+        </member>
+        <member name="P:FistCore.Generator.IStoredProcedureParameter.PassMode">
+            <summary>Specifies how argument is handled and passed to stored procedures.</summary>
+        </member>
+        <member name="P:FistCore.Generator.IStoredProcedureParameter.LocalVariableName">
+            <summary>Generates local variable name. Camel case.</summary>
+        </member>
+        <member name="P:FistCore.Generator.IStoredProcedureParameter.MethodParameterKeyword">
+            <summary>Generates method argument direction modifier (none, ref or out).</summary>
+        </member>
+        <member name="P:FistCore.Generator.IStoredProcedureParameter.NetDirection">
+            <summary>Generates <see cref="T:System.Data.ParameterDirection"/> constant.</summary>
+        </member>
+        <member name="P:FistCore.Generator.IStoredProcedureParameter.Type">
+            <summary>Gets class member/method variable type used by target language in generated code, eg. C#.</summary>
+        </member>
+        <member name="P:FistCore.Generator.IStoredProcedureParameter.IsValueType">
+            <summary>Indicates whether the parameter data type is value type.</summary>
+        </member>
+        <member name="P:FistCore.Generator.IStoredProcedureParameter.DbType">
+            <summary>Generates <see cref="T:System.Data.DbType"/>.</summary>
+        </member>
+        <member name="T:FistCore.Generator.ClassItemNames">
+            <summary>.NET class items generated using specified template.</summary>
+        </member>
+        <member name="M:FistCore.Generator.ClassItemNames.#ctor(System.String,FistCore.Generator.IClassItemNamingConvention)">
+            <summary>Initializes a new instance of <b>ClassItemNames</b> class.</summary>
+            <param name="item">Item mappet to class members.</param>
+            <param name="template">Naming convention template.</param>
+        </member>
+        <member name="P:FistCore.Generator.ClassItemNames.PrivateMember">
+            <summary>Gets name for a private class field.</summary>
+        </member>
+        <member name="P:FistCore.Generator.ClassItemNames.ProtectedMember">
+            <summary>Gets name for a protected class property of field.</summary>
+        </member>
+        <member name="P:FistCore.Generator.ClassItemNames.PublicMember">
+            <summary>Gets name for a public class property.</summary>
+        </member>
+        <member name="P:FistCore.Generator.ClassItemNames.LocalVariable">
+            <summary>Gets name for a method variable or paremeter.</summary>
+        </member>
+        <member name="P:FistCore.Generator.ClassItemNames.ClassName">
+            <summary>Gets class name.</summary>
+        </member>
+        <member name="T:FistCore.Generator.IClassItemNamingConvention">
+            <summary>Generates names of target language class items.</summary>
+        </member>
+        <member name="M:FistCore.Generator.IClassItemNamingConvention.GeneratePrivateMember(System.String)">
+            <summary>Generates name for a private class field.</summary>
+            <param name="item">Item mapped to class member.</param>
+            <returns>Name of class member.</returns>
+        </member>
+        <member name="M:FistCore.Generator.IClassItemNamingConvention.GenerateProtectedMember(System.String)">
+            <summary>Generates name for a protected class property of field.</summary>
+            <param name="item">Item mapped to class member.</param>
+            <returns>Name of class member.</returns>
+        </member>
+        <member name="M:FistCore.Generator.IClassItemNamingConvention.GeneratePublicMember(System.String)">
+            <summary>Generates name for a public class property.</summary>
+            <param name="item">Item mapped to class member.</param>
+            <returns>Name of class member.</returns>
+        </member>
+        <member name="M:FistCore.Generator.IClassItemNamingConvention.GenerateLocalVariable(System.String)">
+            <summary>Generates name for a method variable or paremeter.</summary>
+            <param name="item">Item mapped to class member.</param>
+            <returns>Name of class member.</returns>
+        </member>
+        <member name="M:FistCore.Generator.IClassItemNamingConvention.GenerateClassName(System.String)">
+            <summary>Generates class name.</summary>
+            <param name="item">Item mapped to class.</param>
+            <returns>Class name.</returns>
+        </member>
+        <member name="M:FistCore.Generator.IClassItemNamingConvention.GenerateMethodName(System.String)">
+            <summary>Generates class method/function name.</summary>
+            <param name="item">Item mapped to method.</param>
+            <returns>Method name.</returns>
+        </member>
+        <member name="T:FistCore.Generator.DbGeneratorComponentFactory">
+            <summary>Contains DBMS utility methods.</summary>
+        </member>
+        <member name="M:FistCore.Generator.DbGeneratorComponentFactory.IsOracle(FistCore.Core.DbmsType)">
+            <summary>Returns <b>true</b> if the given value belongs to Oracle family.</summary>
+        </member>
+        <member name="M:FistCore.Generator.DbGeneratorComponentFactory.IsSqlServer(FistCore.Core.DbmsType)">
+            <summary>Returns <b>true</b> if the given value belongs to SQL Server family.</summary>
+        </member>
+        <member name="M:FistCore.Generator.DbGeneratorComponentFactory.IsSqlCe(FistCore.Core.DbmsType)">
+            <summary>Returns <b>true</b> if the given value belongs to SQL Server Compact family.</summary>
+        </member>
+        <member name="M:FistCore.Generator.DbGeneratorComponentFactory.IsPostgreSql(FistCore.Core.DbmsType)">
+            <summary>Returns <b>true</b> if the given value belongs to PostgreSQL family.</summary>
+        </member>
+        <member name="M:FistCore.Generator.DbGeneratorComponentFactory.IsMySql(FistCore.Core.DbmsType)">
+            <summary>Returns <b>true</b> if the given value belongs to MySQL family.</summary>
+        </member>
+        <member name="M:FistCore.Generator.DbGeneratorComponentFactory.IsFirebird(FistCore.Core.DbmsType)">
+            <summary>Returns <b>true</b> if the given value belongs to Firebird family.</summary>
+        </member>
+        <member name="M:FistCore.Generator.DbGeneratorComponentFactory.GetMetadataSource(FistCore.Core.DbmsType,System.String)">
+            <summary>Creates medata source.</summary>
+            <param name="dbms">One of the supported RDBMSs: SQL Servler, Oracle, SQL Server CE, PostgreSQL, MySQL.</param>
+            <param name="connString">Connection string.</param>
+            <returns>Database metada source.</returns>
+        </member>
+        <member name="M:FistCore.Generator.DbGeneratorComponentFactory.GetTypeMappers(FistCore.Core.DbmsType)">
+            <summary>Get object that map native to target datatypes implemented for the specified DBMS.</summary>
+            <param name="dbms">One of the supported RDBMSs: SQL Servler, Oracle, SQL Server CE, PostgreSQL, MySQL.</param>
+            <returns>A collection od mappers implemented for specified DBMS. Contains at least one element.</returns>
+        </member>
+        <member name="T:FistCore.Generator.ForeignKey">
+            <summary>Represents FK meta.</summary>
+        </member>
+        <member name="M:FistCore.Generator.ForeignKey.#ctor(FistCore.Generator.Table,System.String,System.String)">
+            <summary>Initializes a new instance of <b>ForeignKey</b> class.</summary>
+            <param name="childTable">Child table. <see cref="P:FistCore.Generator.Table.GeneratedTables"/> property doesn't have to be initialized at this time.</param>
+            <param name="parentTableName">Parent table name.</param>
+            <param name="constraintName">Optional constraint name.</param>
+        </member>
+        <member name="M:FistCore.Generator.ForeignKey.GetChildFkFields">
+            <summary>Gets a <see cref="T:FistCore.Generator.TableField"/> array which contains all child fields that construct the current foreign key.</summary>
+        </member>
+        <member name="M:FistCore.Generator.ForeignKey.ToDbRelation">
+            <summary>Converts current object to <see cref="T:FistCore.Core.DbRelation"/>. <see cref="P:FistCore.Generator.Table.GeneratedTables"/> property must be initialized.</summary>
+        </member>
+        <member name="P:FistCore.Generator.ForeignKey.ChildTable">
+            <summary>Gets child table which owns this object.</summary>
+        </member>
+        <member name="P:FistCore.Generator.ForeignKey.ConstraintName">
+            <summary>Gets FK contraint name.</summary>
+        </member>
+        <member name="P:FistCore.Generator.ForeignKey.ParentTableName">
+            <summary>Gets parent table name.</summary>
+        </member>
+        <member name="P:FistCore.Generator.ForeignKey.ChildColumns">
+            <summary>Gets a collection of child table FK column names.</summary>
+        </member>
+        <member name="P:FistCore.Generator.ForeignKey.ParentColumns">
+            <summary>Gets a collection of parent table PK column names.</summary>
+        </member>
+        <member name="P:FistCore.Generator.ForeignKey.Index">
+            <summary>Gets zero-base index of FK in parent <see cref="P:FistCore.Generator.Table.ForeignKeys"/> collection.</summary>
+        </member>
+        <member name="T:FistCore.Generator.ForeignKeyCollection">
+            <summary>FK collection.</summary>
+        </member>
+        <member name="M:FistCore.Generator.ForeignKeyCollection.Add(FistCore.Generator.ForeignKey)">
+            <summary>Add FK to the collection.</summary>
+        </member>
+        <member name="M:FistCore.Generator.ForeignKeyCollection.GetEnumerator">
+            <summary>Returns an enumerator which enumerates through the collection.</summary>
+        </member>
+        <member name="M:FistCore.Generator.ForeignKeyCollection.FindParallelFKs">
+            <summary>Gets parallel FKs, ie. FKs which reference the same parent table. These need additional name resolving.</summary>
+        </member>
+        <member name="P:FistCore.Generator.ForeignKeyCollection.Item(System.String)">
+            <summary>Gets FK with the specified constraint name.</summary>
+        </member>
+        <member name="P:FistCore.Generator.ForeignKeyCollection.Item(System.Int32)">
+            <summary>Gets FK at the specified zero-based index.</summary>
+        </member>
+        <member name="P:FistCore.Generator.ForeignKeyCollection.Count">
+            <summary>Gets the number of items in the collection.</summary>
+        </member>
+        <member name="T:FistCore.Generator.DefaultNamingConvention">
+            <summary>Default .NET naming convention converts input strings to pascal and camel case.</summary>
+            <remarks>Default naming rules can be configured in configuration file.
+            <code></code></remarks>
+        </member>
+        <member name="M:FistCore.Generator.DefaultNamingConvention.GeneratePrivateMember(System.String)">
+            <summary>Gets private member name in camel case.</summary>
+            <param name="item">Item mapped to class member.</param>
+            <returns>Name of class member.</returns>
+        </member>
+        <member name="M:FistCore.Generator.DefaultNamingConvention.GenerateProtectedMember(System.String)">
+            <summary>Gets protected member name in pascal case prefixed with underscore character.</summary>
+            <param name="item">Item mapped to class member.</param>
+            <returns>Name of class member.</returns>
+        </member>
+        <member name="M:FistCore.Generator.DefaultNamingConvention.GeneratePublicMember(System.String)">
+            <summary>Gets public member name in pascal case.</summary>
+            <param name="item">Item mapped to class member.</param>
+            <returns>Name of class member.</returns>
+        </member>
+        <member name="M:FistCore.Generator.DefaultNamingConvention.GenerateLocalVariable(System.String)">
+            <summary>Gets local variable name in camel case.</summary>
+            <param name="item">Item mapped to class member.</param>
+            <returns>Name of class member.</returns>
+        </member>
+        <member name="M:FistCore.Generator.DefaultNamingConvention.GenerateClassName(System.String)">
+            <summary>Gets class name in pascal case.</summary>
+            <param name="item">Item mapped to class.</param>
+            <returns>Class name.</returns>
+        </member>
+        <member name="M:FistCore.Generator.DefaultNamingConvention.GenerateMethodName(System.String)">
+            <summary>Generates class method/function name in pascal case.</summary>
+            <param name="item">Item mapped to method.</param>
+            <returns>Method name.</returns>
+        </member>
+        <member name="T:FistCore.Generator.IForeignKeyCodeRenderer">
+            <summary>Renders .NET class member/property names associated with FK.</summary>
+        </member>
+        <member name="M:FistCore.Generator.IForeignKeyCodeRenderer.RenderParentMember(FistCore.Generator.ForeignKey,FistCore.Generator.NetClassItem,FistCore.Generator.IClassItemNamingConvention,System.String[],System.String)">
+            <summary>Renders member/property that contains parent entity.</summary>
+            <param name="fk">Foreign key meta data.</param>
+            <param name="memberType">Class item type.</param>
+            <param name="classItemTemplate">Naming convention template.</param>
+            <param name="prefixesToRemove">Table name prefixes to remove from item name.</param>
+            <param name="tableSufix">Sufix to append.</param>
+            <returns>Class member mapped to foreign key.</returns>
+        </member>
+        <member name="T:FistCore.Generator.FkCodeRenderer">
+            <summary>Renders .NET class member/property names associated with FK.</summary>
+        </member>
+        <member name="M:FistCore.Generator.FkCodeRenderer.#ctor(System.String,System.Boolean,System.String,System.String,System.Boolean,System.String[])">
+            <summary>Initializes a new instance of <b>FkCodeRenderer</b> class.</summary>
+            <param name="prefix">Prefix to prepend.</param>
+            <param name="renderTableName">Defines whether table name is a part of generated item.</param>
+            <param name="tableSuffix">Suffix to append.</param>
+            <param name="delimiter">Delimiter between name componets, eg. between table and column names.</param>
+            <param name="appendChildFields">Defines whether child FK columns are appended to generated item.</param>
+            <param name="tablePrefixesToBeRemoved">Table name prefixes to remove from item name.</param>
+        </member>
+        <member name="M:FistCore.Generator.FkCodeRenderer.RenderParentMember(FistCore.Generator.ForeignKey,FistCore.Generator.NetClassItem,FistCore.Generator.IClassItemNamingConvention,System.String[],System.String)">
+            <summary>Renders member/property that contains parent entity.</summary>
+            <param name="fk">Foreign key meta data.</param>
+            <param name="memberType">Class item type.</param>
+            <param name="classItemTemplate">Naming convention template.</param>
+            <param name="prefixesToRemove">Table name prefixes to remove from item name.</param>
+            <param name="tableSuffix">Sufix to append.</param>
+            <returns>Class member mapped to foreign key.</returns>
+        </member>
+        <member name="T:FistCore.Generator.SqlObjectType">
+            <summary>Supported SQL object types: tables, view, procedure.</summary>
+        </member>
+        <member name="F:FistCore.Generator.SqlObjectType.Table">
+            <summary>Table.</summary>
+        </member>
+        <member name="F:FistCore.Generator.SqlObjectType.View">
+            <summary>View.</summary>
+        </member>
+        <member name="F:FistCore.Generator.SqlObjectType.SP">
+            <summary>Stored procedure.</summary>
+        </member>
+        <member name="T:FistCore.Generator.SqlObjectHeader">
+            <summary>Contains basic DB object info, ie. object name and type.</summary>
+        </member>
+        <member name="M:FistCore.Generator.SqlObjectHeader.#ctor(System.String,FistCore.Generator.SqlObjectType)">
+            <summary>Initializes a new instance of <b>SqlObjectHeader</b> class.</summary>
+            <param name="objectName">Object name.</param>
+            <param name="objectType">Object type: table, view, stored procedure...</param>
+        </member>
+        <member name="P:FistCore.Generator.SqlObjectHeader.Name">
+            <summary>Gets object name.</summary>
+        </member>
+        <member name="P:FistCore.Generator.SqlObjectHeader.Type">
+            <summary>Gets object type.</summary>
+        </member>
+        <member name="P:FistCore.Generator.SqlObjectHeader.TypeName">
+            <summary>Gets object type name.</summary>
+        </member>
+        <member name="T:FistCore.Generator.Oracle.OracleMetadataSource">
+            <summary>Fetches table, view and stored procedure metadata from Oracle user* tables.</summary>
+        </member>
+        <member name="M:FistCore.Generator.Oracle.OracleMetadataSource.#ctor(FistCore.Core.DbmsType,System.String)">
+            <summary>Initializes a new instance of <b>OracleMetadataSource</b> class.</summary>
+            <param name="dbms">DBMS type: Oracle 9i, 10g or 11g.</param>
+            <param name="connectionString">Connection string.</param>
+        </member>
+        <member name="M:FistCore.Generator.Oracle.OracleMetadataSource.OpenConnection">
+            <summary>Opens connection to database.</summary>
+        </member>
+        <member name="M:FistCore.Generator.Oracle.OracleMetadataSource.CloseConnection">
+            <summary>Closes connection to database.</summary>
+        </member>
+        <member name="M:FistCore.Generator.Oracle.OracleMetadataSource.FetchTablesAndViews">
+            <summary>Fetches list with basic table and view info.</summary>
+        </member>
+        <member name="M:FistCore.Generator.Oracle.OracleMetadataSource.FetchTableMetadata(System.String,FistCore.Generator.IClassItemNamingConvention,FistCore.Generator.ITypeMapper)">
+            <summary>Fetches table and column metadata.</summary>
+            <param name="tableName">Table name.</param>
+            <param name="classItemTemplate">Naming convention.</param>
+            <param name="typeTemplate">Type metadata.</param>
+            <returns>An instance of <b>Table</b> class.</returns>
+        </member>
+        <member name="M:FistCore.Generator.Oracle.OracleMetadataSource.FetchStoredProcedures(System.String[])">
+            <summary>Fetches list with available stored procedure names.</summary>
+            <param name="excludedPrefixes">Excludes procedures with the specified prefixes.</param>
+        </member>
+        <member name="M:FistCore.Generator.Oracle.OracleMetadataSource.FetchStoredProcedureMetaData(System.String)">
+            <summary>Fetches stoder procedure metadata.</summary>
+            <param name="fullProcedureName">Procedure name.</param>
+            <returns>An instance of <b>StoredProcedure</b> class.</returns>
+        </member>
+        <member name="P:FistCore.Generator.Oracle.OracleMetadataSource.DBMS">
+            <summary>Gets DBMS type.</summary>
+        </member>
+        <member name="P:FistCore.Generator.Oracle.OracleMetadataSource.IsOpen">
+            <summary>Gets connection status.</summary>
+        </member>
+        <member name="P:FistCore.Generator.Oracle.OracleMetadataSource.ConnectionString">
+            <summary>Gets connection string.</summary>
+        </member>
+        <member name="P:FistCore.Generator.Oracle.OracleMetadataSource.Catalog">
+            <summary>Gets database name.</summary>
+        </member>
+        <member name="P:FistCore.Generator.Oracle.OracleMetadataSource.Server">
+            <summary>Gets DB server name.</summary>
+        </member>
+        <member name="P:FistCore.Generator.Oracle.OracleMetadataSource.ExcludedColumnsCriteria">
+            <summary>Gets or sets regex that specifies column names for which metadata should not be fetched.</summary>
+        </member>
+        <member name="P:FistCore.Generator.Oracle.OracleMetadataSource.Schema">
+            <summary>Has no effect. Always null.</summary>
+        </member>
+        <member name="T:FistCore.Generator.NamingConventionHelper">
+            <summary>Provides methods which convert input strings using various conventions, such as pascal and camel case.</summary>
+        </member>
+        <member name="M:FistCore.Generator.NamingConventionHelper.ToCamelCase(System.String)">
+            <summary>Converts input string using camel case convention.</summary>
+            <param name="name">Item mapped to class member.</param>
+            <returns>Name in camel case.</returns>
+        </member>
+        <member name="M:FistCore.Generator.NamingConventionHelper.ToPascalCase(System.String)">
+            <summary>Converts input string using pascal case convention.</summary>
+            <param name="name">Item mapped to class member.</param>
+            <returns>Name in pascal case.</returns>
+        </member>
+        <member name="T:FistCore.Generator.NetClassItem">
+            <summary>.NET class item (member, property, variable).</summary>
+        </member>
+        <member name="F:FistCore.Generator.NetClassItem.PrivateMember">
+            <summary>Private class field.</summary>
+        </member>
+        <member name="F:FistCore.Generator.NetClassItem.ProtectedMember">
+            <summary>Protected class field od property.</summary>
+        </member>
+        <member name="F:FistCore.Generator.NetClassItem.PublicProperty">
+            <summary>Public class property.</summary>
+        </member>
+        <member name="F:FistCore.Generator.NetClassItem.LocalVariable">
+            <summary>Method variable or parameter.</summary>
+        </member>
+        <member name="T:FistCore.Generator.SqlServerCe.SqlServerCeMetadataSource">
+            <summary>Fetches table metadata from SQL Server Compact Editions information schema.</summary>
+        </member>
+        <member name="M:FistCore.Generator.SqlServerCe.SqlServerCeMetadataSource.#ctor(FistCore.Core.DbmsType,System.String)">
+            <summary>Initializes a new instance of <b>SqlServerCeMetadataSource</b> class.</summary>
+            <param name="dbms">DBMS type: SQL Server CE 4.0.</param>
+            <param name="connectionString">Connection string.</param>
+        </member>
+        <member name="M:FistCore.Generator.SqlServerCe.SqlServerCeMetadataSource.OpenConnection">
+            <summary>Opens connection to database.</summary>
+        </member>
+        <member name="M:FistCore.Generator.SqlServerCe.SqlServerCeMetadataSource.CloseConnection">
+            <summary>Closes connection to database.</summary>
+        </member>
+        <member name="M:FistCore.Generator.SqlServerCe.SqlServerCeMetadataSource.FetchTablesAndViews">
+            <summary>Fetches list with basic table and view info.</summary>
+        </member>
+        <member name="M:FistCore.Generator.SqlServerCe.SqlServerCeMetadataSource.FetchTableMetadata(System.String,FistCore.Generator.IClassItemNamingConvention,FistCore.Generator.ITypeMapper)">
+            <summary>Fetches table and column metadata.</summary>
+            <param name="tableName">Table name.</param>
+            <param name="classItemTemplate">Naming convention.</param>
+            <param name="typeTemplate">Type metadata.</param>
+            <returns>An instance of <b>Table</b> class.</returns>
+        </member>
+        <member name="M:FistCore.Generator.SqlServerCe.SqlServerCeMetadataSource.FetchStoredProcedures(System.String[])">
+            <summary>Fetches list with available stored procedure names.</summary>
+            <param name="excludedPrefixes">Excludes procedures with the specified prefixes.</param>
+        </member>
+        <member name="M:FistCore.Generator.SqlServerCe.SqlServerCeMetadataSource.FetchStoredProcedureMetaData(System.String)">
+            <summary>Fetches stoder procedure metadata.</summary>
+            <param name="procedureName">Procedure name.</param>
+            <returns>An instance of <b>StoredProcedure</b> class.</returns>
+        </member>
+        <member name="P:FistCore.Generator.SqlServerCe.SqlServerCeMetadataSource.DBMS">
+            <summary>Gets DBMS type.</summary>
+        </member>
+        <member name="P:FistCore.Generator.SqlServerCe.SqlServerCeMetadataSource.IsOpen">
+            <summary>Gets connection status.</summary>
+        </member>
+        <member name="P:FistCore.Generator.SqlServerCe.SqlServerCeMetadataSource.ConnectionString">
+            <summary>Gets connection string.</summary>
+        </member>
+        <member name="P:FistCore.Generator.SqlServerCe.SqlServerCeMetadataSource.Catalog">
+            <summary>Gets database name.</summary>
+        </member>
+        <member name="P:FistCore.Generator.SqlServerCe.SqlServerCeMetadataSource.Server">
+            <summary>Gets DB server name.</summary>
+        </member>
+        <member name="P:FistCore.Generator.SqlServerCe.SqlServerCeMetadataSource.ExcludedColumnsCriteria">
+            <summary>Gets or sets regex that specifies column names for which metadata should not be fetched.</summary>
+        </member>
+        <member name="P:FistCore.Generator.SqlServerCe.SqlServerCeMetadataSource.Schema">
+            <summary>Has no effect. Always null.</summary>
+        </member>
+        <member name="T:FistCore.Generator.Oracle.OracleToCsharp2TypeMapper">
+            <summary>Type mapper and code renderer that uses C# 2.0 types in generated classes, and Oracle types in data source.</summary>
+        </member>
+        <member name="M:FistCore.Generator.Oracle.OracleToCsharp2TypeMapper.NativeDbType(System.String)">
+            <summary>
+            Native database type used in stored procedures (PL/SQL type).
+            </summary>
+            <param name="oraDataType">Native DB type.</param>
+        </member>
+        <member name="M:FistCore.Generator.Oracle.OracleToCsharp2TypeMapper.IsVariableLengthNativeType(System.String)">
+            <summary>
+            Indicates that native database type is variable length (eg: varchar).
+            </summary>
+            <param name="oraDataType">Native DB type.</param>
+        </member>
+        <member name="M:FistCore.Generator.Oracle.OracleToCsharp2TypeMapper.MinNativeValue(System.String,System.Int32,System.Int32)">
+            <summary>
+            Minimum value supported by native database type.
+            </summary>
+            <param name="oraDataType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="M:FistCore.Generator.Oracle.OracleToCsharp2TypeMapper.MaxNativeValue(System.String,System.Int32,System.Int32)">
+            <summary>
+            Maximum value supported by native database type.
+            </summary>
+            <param name="oraDataType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="M:FistCore.Generator.Oracle.OracleToCsharp2TypeMapper.Type(System.String,System.Int32,System.Int32)">
+            <summary>
+            Member/property type used in generated classes.
+            </summary>
+            <param name="oraDataType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="M:FistCore.Generator.Oracle.OracleToCsharp2TypeMapper.DefaultValue(System.String,System.Int32,System.Int32)">
+            <summary>
+            Default value of the type used in generated classes. 
+            Eg. default for System.Int32 is 0, default for System.String is null etc.
+            </summary>
+            <param name="oraDataType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="M:FistCore.Generator.Oracle.OracleToCsharp2TypeMapper.IsValueType(System.String)">
+            <summary>
+            Indicates whether the type used in generated classes is a value type; as opposed to reference type.
+            </summary>
+            <param name="oraDataType">Native DB type.</param>
+        </member>
+        <member name="M:FistCore.Generator.Oracle.OracleToCsharp2TypeMapper.DbType(System.String)">
+            <summary>
+            System.Data.DbType parameter type.
+            </summary>
+            <param name="oraDataType">Native DB type.</param>
+        </member>
+        <member name="M:FistCore.Generator.Oracle.OracleToCsharp2TypeMapper.NullableType(System.String,System.Int32,System.Int32)">
+            <summary>
+            Member/property type used for nullable fields in generated classes.
+            </summary>
+            <param name="oraDataType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="M:FistCore.Generator.Oracle.OracleToCsharp2TypeMapper.NullValue(System.String,System.Int32,System.Int32)">
+            <summary>
+            Null expression for the type used in generated classes.
+            Usually "null" for reference types. For value types it will depend on library used.
+            Eg. null-value for System.Int32 when NullableTypes.dll library is used is "NulableInt32.Null".		
+            </summary>
+            <param name="oraDataType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="M:FistCore.Generator.Oracle.OracleToCsharp2TypeMapper.NativeDbTypeWithLength(System.String,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Returns native type with length and precision if required. Eg: varchar(255). Has no effect for non-variable and non-fixedpoint types.
+            </summary>
+            <param name="precision">The maximum total number of decimal digits that can be stored, both to the left and to the right of the decimal point.</param>
+            <param name="scale">The maximum number of decimal digits that can be stored to the right of the decimal point. Scale must be a value from 0 through precision. Scale can be specified only if precision is specified.</param>
+            <returns>Native type with length.</returns>
+            <param name="oraDataType">Native DB type.</param>
+            <param name="fieldLength">Length of textual or binary field.</param>
+        </member>
+        <member name="M:FistCore.Generator.Oracle.OracleToCsharp2TypeMapper.CastExpression(System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Returns cast/convert expression that converts the given variable to the current class type.
+            </summary>
+            <param name="expressionThatIsToBeConverted">Expression (usually variable) that is to be converted to the current class type.</param>
+            <param name="oraDataType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+            <returns>Cast/convert expression.</returns>
+        </member>
+        <member name="M:FistCore.Generator.Oracle.OracleToCsharp2TypeMapper.HasValueExpression(System.String,System.String)">
+            <summary>
+            Returns expression that tests whether the nullable type variable contains a non-null value.
+            </summary>
+            <param name="variableToBeTested">Nullable type variable to be tested.</param>
+            <param name="oraDataType">Native DB type.</param>
+            <returns>HasValue expression.</returns>
+        </member>
+        <member name="M:FistCore.Generator.Oracle.OracleToCsharp2TypeMapper.IsNullExpression(System.String,System.String)">
+            <summary>
+            Returns expression that tests whether the nullable type variable contains null value.
+            </summary>
+            <param name="oraDataType">Native DB type.</param>
+            <param name="variableToBeTested">Nullable type variable to be tested.</param>
+            <returns>IsNull expression.</returns>
+        </member>
+        <member name="M:FistCore.Generator.Oracle.OracleToCsharp2TypeMapper.GetValueExpression(System.String,System.String,System.Boolean)">
+            <summary>
+            Returns expression that gets the value stored in a variable; both of nullable and non-nullable type.
+            Eg. "myVariable.Value".
+            </summary>
+            <param name="variable">Variable that holds the value.</param>
+            <param name="isNullableTypeVariable">Indicates whether the variable is of a nullable type.</param>
+            <param name="oraDataType">Native DB type.</param>
+            <returns>Get value expression.</returns>
+        </member>
+        <member name="M:FistCore.Generator.Oracle.OracleToCsharp2TypeMapper.NotEqualsExpression(System.String,System.String,System.Boolean,System.String,System.Boolean)">
+            <summary>
+            Returns boolean not equals expression for two nullable variables.
+            Example for NullableType library: (lhs.IsNull != rhs.IsNull) || (!lhs.IsNull &amp;&amp; (lhs.Value != rhs.Value)).
+            </summary>
+            <param name="oraDataType">Native DB type.</param>
+            <param name="lhsVariable">First variable.</param>
+            <param name="lhsIsNullable">Indicates whether the first variable is a nullable structure.</param>
+            <param name="rhsVariable">Second variable.</param>
+            <param name="rhsIsNullable">Indicates whether the secont variable is a nullable structure.</param>
+            <returns>Code that comparse two variables.</returns>
+        </member>
+        <member name="M:FistCore.Generator.Oracle.OracleToCsharp2TypeMapper.GetType(System.String,System.Int32,System.Int32)">
+            <summary>Gets .NET type compatible with given native DB type.</summary>
+            <param name="oraDataType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="P:FistCore.Generator.Oracle.OracleToCsharp2TypeMapper.RequiredNamespaces">
+            <summary>
+            Namespaces that contain referenced types.
+            </summary>
+        </member>
+        <member name="T:FistCore.Generator.Oracle.OracleStoredProcedureParameter">
+            <summary>Oracle SP parameter metadata and converter. Maps Oracle procedure parameters to .NET types.</summary>
+        </member>
+        <member name="T:FistCore.Generator.StoredProcedureParameter">
+            <summary>SP parameter metadata, type converter and code item renderer.</summary>
+        </member>
+        <member name="M:FistCore.Generator.StoredProcedureParameter.#ctor(System.String,System.Int32,System.String,System.Int32,System.Int32,System.Int32,System.Data.ParameterDirection)">
+            <summary>Initializes a new instance of <b>IStoredProcedureParameter</b> class.</summary>
+            <param name="name">Parameter name.</param>
+            <param name="ordinal">The position of parameter in SP definition.</param>
+            <param name="nativeDbType">Native DB type, as defined by meta-data source.</param>
+            <param name="size">Length of textual parameter.</param>
+            <param name="precision">The number of decimal places to which a field value is resolved.</param>
+            <param name="scale">The number of decimal places to which a field value is resolved.</param>
+            <param name="parDirection">Direction modifier: in, out, in-out or return value.</param>
+        </member>
+        <member name="M:FistCore.Generator.StoredProcedureParameter.#ctor(System.String,System.Int32,System.String,System.Int32,System.Int32,System.Int32,System.Data.ParameterDirection,FistCore.Core.SpArgumentPassMode)">
+            <summary>Initializes a new instance of <b>IStoredProcedureParameter</b> class.</summary>
+            <param name="name">Parameter name.</param>
+            <param name="ordinal">The position of parameter in SP definition.</param>
+            <param name="nativeDbType">Native DB type, as defined by meta-data source.</param>
+            <param name="size">Length of textual parameter.</param>
+            <param name="precision">The number of decimal places to which a field value is resolved.</param>
+            <param name="scale">The number of decimal places to which a field value is resolved.</param>
+            <param name="parDirection">Direction modifier: in, out, in-out or return value.</param>
+            <param name="passMode">Specifies how argument is handled and passed to stored procedures.</param>
+        </member>
+        <member name="M:FistCore.Generator.StoredProcedureParameter.NullableType(FistCore.Generator.ITypeMapper)">
+            <summary>Generates nullable type.</summary>
+        </member>
+        <member name="M:FistCore.Generator.StoredProcedureParameter.IsNullExpression(FistCore.Generator.ITypeMapper,System.String)">
+            <summary>Generates expression which whether the given variable contains <b>null</b> value.</summary>
+        </member>
+        <member name="M:FistCore.Generator.StoredProcedureParameter.NullValue(FistCore.Generator.ITypeMapper)">
+            <summary>Generates <b>null</b> value.</summary>
+        </member>
+        <member name="M:FistCore.Generator.StoredProcedureParameter.GetDirectionDescription(System.Boolean)">
+            <summary>Generates direction description.</summary>
+        </member>
+        <member name="P:FistCore.Generator.StoredProcedureParameter.ParameterName">
+            <summary>Parameter name.</summary>
+        </member>
+        <member name="P:FistCore.Generator.StoredProcedureParameter.Ordinal">
+            <summary>The position of parameter in SP definition.</summary>
+        </member>
+        <member name="P:FistCore.Generator.StoredProcedureParameter.NativeDbType">
+            <summary>Native DB type, as defined by meta-data source.</summary>
+        </member>
+        <member name="P:FistCore.Generator.StoredProcedureParameter.Size">
+            <summary>Length of textual parameter.</summary>
+        </member>
+        <member name="P:FistCore.Generator.StoredProcedureParameter.Precision">
+            <summary>The number of decimal places to which a field value is resolved.</summary>
+        </member>
+        <member name="P:FistCore.Generator.StoredProcedureParameter.Scale">
+            <summary>The number of decimal places to which a field value is resolved.</summary>
+        </member>
+        <member name="P:FistCore.Generator.StoredProcedureParameter.Direction">
+            <summary>Direction modifier: in, out, in-out or return value.</summary>
+        </member>
+        <member name="P:FistCore.Generator.StoredProcedureParameter.PassMode">
+            <summary>Specifies how argument is handled and passed to stored procedures.</summary>
+        </member>
+        <member name="P:FistCore.Generator.StoredProcedureParameter.LocalVariableName">
+            <summary>Generates local variable name. Camel case.</summary>
+        </member>
+        <member name="P:FistCore.Generator.StoredProcedureParameter.MethodParameterKeyword">
+            <summary>Generates method argument direction modifier (none, ref or out).</summary>
+        </member>
+        <member name="P:FistCore.Generator.StoredProcedureParameter.NetDirection">
+            <summary>Generates <see cref="T:System.Data.ParameterDirection"/> constant.</summary>
+        </member>
+        <member name="P:FistCore.Generator.StoredProcedureParameter.Type">
+            <summary>Gets C# data type.</summary>
+        </member>
+        <member name="P:FistCore.Generator.StoredProcedureParameter.IsValueType">
+            <summary>Indicates whether the parameter data type is value type.</summary>
+        </member>
+        <member name="P:FistCore.Generator.StoredProcedureParameter.DbType">
+            <summary>Generates <see cref="T:System.Data.DbType"/>.</summary>
+        </member>
+        <member name="M:FistCore.Generator.Oracle.OracleStoredProcedureParameter.#ctor(System.String,System.Int32,System.String,System.Int32,System.Int32,System.Int32,System.Data.ParameterDirection,FistCore.Core.SpArgumentPassMode)">
+            <summary>Initializes a new instance of <b>IStoredProcedureParameter</b> class.</summary>
+            <param name="name">Parameter name.</param>
+            <param name="ordinal">The position of parameter in SP definition.</param>
+            <param name="oraType">Native DB type, as defined by meta-data source.</param>
+            <param name="size">Length of textual parameter.</param>
+            <param name="precision">The number of decimal places to which a field value is resolved.</param>
+            <param name="scale">The number of decimal places to which a field value is resolved.</param>
+            <param name="parDirection">Direction modifier: in, out, in-out or return value.</param>
+            <param name="passMode">Specifies how argument is handled and passed to stored procedures.</param>
+        </member>
+        <member name="P:FistCore.Generator.Oracle.OracleStoredProcedureParameter.Type">
+            <summary>Gets C# data type.</summary>
+        </member>
+        <member name="P:FistCore.Generator.Oracle.OracleStoredProcedureParameter.IsValueType">
+            <summary>Indicates whether the parameter data type is value type.</summary>
+        </member>
+        <member name="P:FistCore.Generator.Oracle.OracleStoredProcedureParameter.DbType">
+            <summary>Generates <see cref="T:System.Data.DbType"/>.</summary>
+        </member>
+        <member name="T:FistCore.Generator.SqlServer.SqlServerStoredProcedureParameter">
+            <summary>SQL Server SP parameter metadata and converter. Maps SQL Server procedure parameters to .NET types.</summary>
+        </member>
+        <member name="M:FistCore.Generator.SqlServer.SqlServerStoredProcedureParameter.#ctor(System.String,System.Int32,System.String,System.Int32,System.Int32,System.Int32,System.Data.ParameterDirection)">
+            <summary>Initializes a new instance of <b>SqlServerStoredProcedureParameter</b> class.</summary>
+            <param name="name">Parameter name.</param>
+            <param name="ordinal">The position of parameter in SP definition.</param>
+            <param name="tsqlType">Native DB type, as defined by meta-data source.</param>
+            <param name="size">Length of textual parameter.</param>
+            <param name="precision">The number of decimal places to which a field value is resolved.</param>
+            <param name="scale">The number of decimal places to which a field value is resolved.</param>
+            <param name="parDirection">Direction modifier: in, out, in-out or return value.</param>
+        </member>
+        <member name="P:FistCore.Generator.SqlServer.SqlServerStoredProcedureParameter.Type">
+            <summary>Gets C# data type.</summary>
+        </member>
+        <member name="P:FistCore.Generator.SqlServer.SqlServerStoredProcedureParameter.IsValueType">
+            <summary>Indicates whether the parameter data type is value type.</summary>
+        </member>
+        <member name="P:FistCore.Generator.SqlServer.SqlServerStoredProcedureParameter.DbType">
+            <summary>Generates <see cref="T:System.Data.DbType"/>.</summary>
+        </member>
+        <member name="T:FistCore.Generator.SqlServer.SqlServerMetadataSource">
+            <summary>Fetches table, view and stored procedure metadata from SQL Server information schema and system tables.</summary>
+        </member>
+        <member name="M:FistCore.Generator.SqlServer.SqlServerMetadataSource.#ctor(FistCore.Core.DbmsType,System.String)">
+            <summary>Initializes a new instance of <b>SqlServerMetadataSource</b> class.</summary>
+            <param name="dbms">DBMS type: SQL Server 7, 2000, 2005 or 2008.</param>
+            <param name="connectionString">Connection string.</param>
+        </member>
+        <member name="M:FistCore.Generator.SqlServer.SqlServerMetadataSource.OpenConnection">
+            <summary>Opens connection to database.</summary>
+        </member>
+        <member name="M:FistCore.Generator.SqlServer.SqlServerMetadataSource.CloseConnection">
+            <summary>Closes connection to database.</summary>
+        </member>
+        <member name="M:FistCore.Generator.SqlServer.SqlServerMetadataSource.FetchTablesAndViews">
+            <summary>Fetches list with basic table and view info.</summary>
+        </member>
+        <member name="M:FistCore.Generator.SqlServer.SqlServerMetadataSource.FetchTableMetadata(System.String,FistCore.Generator.IClassItemNamingConvention,FistCore.Generator.ITypeMapper)">
+            <summary>Fetches table and column metadata.</summary>
+            <param name="tableName">Table name.</param>
+            <param name="classItemTemplate">Naming convention.</param>
+            <param name="typeTemplate">Type metadata.</param>
+            <returns>An instance of <b>Table</b> class.</returns>
+        </member>
+        <member name="M:FistCore.Generator.SqlServer.SqlServerMetadataSource.FetchStoredProcedures(System.String[])">
+            <summary>Fetches list with available stored procedure names.</summary>
+            <param name="excludedPrefixes">Excludes procedures with the specified prefixes.</param>
+        </member>
+        <member name="M:FistCore.Generator.SqlServer.SqlServerMetadataSource.FetchStoredProcedureMetaData(System.String)">
+            <summary>Fetches stoder procedure metadata.</summary>
+            <param name="procedureName">Procedure name.</param>
+            <returns>An instance of <b>StoredProcedure</b> class.</returns>
+        </member>
+        <member name="P:FistCore.Generator.SqlServer.SqlServerMetadataSource.DBMS">
+            <summary>Gets DBMS type.</summary>
+        </member>
+        <member name="P:FistCore.Generator.SqlServer.SqlServerMetadataSource.IsOpen">
+            <summary>Gets connection status.</summary>
+        </member>
+        <member name="P:FistCore.Generator.SqlServer.SqlServerMetadataSource.ConnectionString">
+            <summary>Gets connection string.</summary>
+        </member>
+        <member name="P:FistCore.Generator.SqlServer.SqlServerMetadataSource.Catalog">
+            <summary>Gets database name.</summary>
+        </member>
+        <member name="P:FistCore.Generator.SqlServer.SqlServerMetadataSource.Server">
+            <summary>Gets DB server name.</summary>
+        </member>
+        <member name="P:FistCore.Generator.SqlServer.SqlServerMetadataSource.ExcludedColumnsCriteria">
+            <summary>Gets or sets regex that specifies column names for which metadata should not be fetched.</summary>
+        </member>
+        <member name="P:FistCore.Generator.SqlServer.SqlServerMetadataSource.Schema">
+            <summary>Returns "dbo". Cannot change.</summary>
+        </member>
+        <member name="T:FistCore.Generator.SqlServer.TsqlToCsharp2TypeMapper">
+            <summary>Type mapper and code renderer that uses C# 2.0 types in generated classes, and T-SQL types in stored procedures.</summary>
+        </member>
+        <member name="M:FistCore.Generator.SqlServer.TsqlToCsharp2TypeMapper.NativeDbType(System.String)">
+            <summary>
+            Native database type used in stored procedures.
+            Eg. T-SQL or PL/SQL type.
+            </summary>
+            <param name="tsqlDataType">Native DB type.</param>
+        </member>
+        <member name="M:FistCore.Generator.SqlServer.TsqlToCsharp2TypeMapper.IsVariableLengthNativeType(System.String)">
+            <summary>
+            Indicates that native database type is variable length (eg: varchar).
+            </summary>
+            <param name="tsqlDataType">Native DB type.</param>
+        </member>
+        <member name="M:FistCore.Generator.SqlServer.TsqlToCsharp2TypeMapper.MinNativeValue(System.String,System.Int32,System.Int32)">
+            <summary>
+            Minimum value supported by native database type.
+            </summary>
+            <param name="tsqlDataType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="M:FistCore.Generator.SqlServer.TsqlToCsharp2TypeMapper.MaxNativeValue(System.String,System.Int32,System.Int32)">
+            <summary>
+            Maximum value supported by native database type.
+            </summary>
+            <param name="tsqlDataType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="M:FistCore.Generator.SqlServer.TsqlToCsharp2TypeMapper.Type(System.String,System.Int32,System.Int32)">
+            <summary>
+            Member/property type used in generated classes.
+            </summary>
+            <param name="tsqlDataType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="M:FistCore.Generator.SqlServer.TsqlToCsharp2TypeMapper.DefaultValue(System.String,System.Int32,System.Int32)">
+            <summary>
+            Default value of the type used in generated classes. 
+            Eg. default for System.Int32 is 0, default for System.String is null etc.
+            </summary>
+            <param name="tsqlDataType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="M:FistCore.Generator.SqlServer.TsqlToCsharp2TypeMapper.IsValueType(System.String)">
+            <summary>
+            Indicates whether the type used in generated classes is a value type; as opposed to reference type.
+            </summary>
+            <param name="tsqlDataType">Native DB type.</param>
+        </member>
+        <member name="M:FistCore.Generator.SqlServer.TsqlToCsharp2TypeMapper.DbType(System.String)">
+            <summary>
+            System.Data.DbType parameter type.
+            </summary>
+            <param name="tsqlDataType">Native DB type.</param>
+        </member>
+        <member name="M:FistCore.Generator.SqlServer.TsqlToCsharp2TypeMapper.NullableType(System.String,System.Int32,System.Int32)">
+            <summary>
+            Member/property type used for nullable fields in generated classes.
+            </summary>
+            <param name="tsqlDataType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="M:FistCore.Generator.SqlServer.TsqlToCsharp2TypeMapper.NullValue(System.String,System.Int32,System.Int32)">
+            <summary>
+            Null expression for the type used in generated classes. Always "null".
+            </summary>
+            <param name="tsqlDataType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="M:FistCore.Generator.SqlServer.TsqlToCsharp2TypeMapper.NativeDbTypeWithLength(System.String,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Returns native type with length and precision if required. Eg: varchar(255). Has no effect for non-variable and non-fixedpoint types.
+            </summary>
+            <param name="precision">The maximum total number of decimal digits that can be stored, both to the left and to the right of the decimal point.</param>
+            <param name="scale">The maximum number of decimal digits that can be stored to the right of the decimal point. Scale must be a value from 0 through precision. Scale can be specified only if precision is specified.</param>
+            <returns>Native type with length.</returns>
+            <param name="tsqlDataType">Native DB type.</param>
+            <param name="fieldLength">Length of textual or binary field.</param>
+        </member>
+        <member name="M:FistCore.Generator.SqlServer.TsqlToCsharp2TypeMapper.CastExpression(System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Returns cast/convert expression that converts the given variable to the current class type.
+            </summary>
+            <param name="expressionThatIsToBeConverted">Expression (usually variable) that is to be converted to the current class type.</param>
+            <param name="tsqlDataType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+            <returns>Cast/convert expression.</returns>
+        </member>
+        <member name="M:FistCore.Generator.SqlServer.TsqlToCsharp2TypeMapper.HasValueExpression(System.String,System.String)">
+            <summary>
+            Creates expression that tests whether the nullable type variable contains a non-null value.
+            </summary>
+            <param name="tsqlDataType">Native DB type.</param>
+            <param name="variableToBeTested">Nullable type variable to be tested.</param>
+            <returns>HasValue expression.</returns>
+        </member>
+        <member name="M:FistCore.Generator.SqlServer.TsqlToCsharp2TypeMapper.IsNullExpression(System.String,System.String)">
+            <summary>
+            Creates expression that tests whether the nullable type variable contains null value.
+            </summary>
+            <param name="tsqlDataType">Native DB type.</param>
+            <param name="variableToBeTested">Nullable type variable to be tested.</param>
+            <returns>IsNull expression.</returns>
+        </member>
+        <member name="M:FistCore.Generator.SqlServer.TsqlToCsharp2TypeMapper.GetValueExpression(System.String,System.String,System.Boolean)">
+            <summary>
+            Returns expression that gets the value stored in a variable; both of nullable and non-nullable type.
+            Eg. "myVariable.Value".
+            </summary>
+            <param name="tsqlDataType">Native DB type.</param>
+            <param name="variable">Variable that holds the value.</param>
+            <param name="isNullableTypeVariable">Indicates whether the variable is of a nullable type.</param>
+            <returns>Get value expression.</returns>
+        </member>
+        <member name="M:FistCore.Generator.SqlServer.TsqlToCsharp2TypeMapper.NotEqualsExpression(System.String,System.String,System.Boolean,System.String,System.Boolean)">
+            <summary>
+            Returns boolean not equals expression for two nullable variables.
+            Example for NullableType library: (lhs.IsNull != rhs.IsNull) || (!lhs.IsNull &amp;&amp; (lhs.Value != rhs.Value)).
+            </summary>
+            <param name="tsqlDataType">Native DB type.</param>
+            <param name="lhsVariable">First variable.</param>
+            <param name="lhsIsNullable">Indicates whether the first variable is a nullable structure.</param>
+            <param name="rhsVariable">Second variable.</param>
+            <param name="rhsIsNullable">Indicates whether the secont variable is a nullable structure.</param>
+            <returns>Code that comparse two variables.</returns>
+        </member>
+        <member name="M:FistCore.Generator.SqlServer.TsqlToCsharp2TypeMapper.GetType(System.String,System.Int32,System.Int32)">
+            <summary>Gets .NET type compatible with given native DB type.</summary>
+            <param name="tsqlDataType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="P:FistCore.Generator.SqlServer.TsqlToCsharp2TypeMapper.RequiredNamespaces">
+            <summary>
+            Namespaces that contain referenced types.
+            </summary>
+        </member>
+        <member name="T:FistCore.Generator.StoredProcedureWrapperClass">
+            <summary>Defines a collection of SPs for which wrapper methods should be generated and contains type conversion data.</summary>
+        </member>
+        <member name="P:FistCore.Generator.StoredProcedureWrapperClass.TypeTemplate">
+            <summary>Renders code items associated with data type.</summary>
+        </member>
+        <member name="P:FistCore.Generator.StoredProcedureWrapperClass.Procedures">
+            <summary>Array of procedures for which wrapper methods are generated.</summary>
+        </member>
+        <member name="T:FistCore.Generator.StoredProcedure">
+            <summary>SP metadata.</summary>
+        </member>
+        <member name="M:FistCore.Generator.StoredProcedure.#ctor">
+            <summary>Initializes a new instance of <b>StoredProcedure</b> class.</summary>
+        </member>
+        <member name="P:FistCore.Generator.StoredProcedure.Parameters">
+            <summary>Array of SP paremeters.</summary>
+        </member>
+        <member name="P:FistCore.Generator.StoredProcedure.ProcedureName">
+            <summary>Procedure name.</summary>
+        </member>
+        <member name="P:FistCore.Generator.StoredProcedure.PrefixesToBeStripped">
+            <summary>Array of SP prefixes to be removed.</summary>
+        </member>
+        <member name="P:FistCore.Generator.StoredProcedure.ShouldGenerateReturnValue">
+            <summary>Indicates whether return value parameter should be generated in SP wrapper method.</summary>
+        </member>
+        <member name="T:FistCore.Generator.Table">
+            <summary>Contains meta-data for a table/view. No rendering.</summary>
+        </member>
+        <member name="M:FistCore.Generator.Table.#ctor(System.String)">
+            <summary>Inititalizes a new instance of Table class.</summary>
+            <param name="tableName">Table/view name.</param>
+        </member>
+        <member name="M:FistCore.Generator.Table.GetFieldByName(System.String)">
+            <summary>Gets field by name.</summary>
+            <param name="columnName">Column name.</param>
+        </member>
+        <member name="M:FistCore.Generator.Table.GetGeneratedFKs">
+            <summary>Gets FKs for generated tables.</summary>
+        </member>
+        <member name="F:FistCore.Generator.Table.IsTableGeneratedAlgorithm">
+            <summary>Gets or sets the method which checks whether a table with the specified name is generated.</summary>
+        </member>
+        <member name="M:FistCore.Generator.Table.IsTableGenerated(System.String)">
+            <summary>Checks whether code for a table with the specified name is generated.</summary>
+        </member>
+        <member name="F:FistCore.Generator.Table.IndexOfGeneratedTableAlgorithm">
+            <summary>Gets or sets the method which gets index of specified table in the GenerateTables array.</summary>
+        </member>
+        <member name="M:FistCore.Generator.Table.IndexOfGeneratedTable(System.String)">
+            <summary>Gets index of specified table in the GenerateTables array.</summary>
+        </member>
+        <member name="M:FistCore.Generator.Table.GetChildTables">
+            <summary>Gets generated tables which reference the current table via foreign keys.</summary>
+        </member>
+        <member name="M:FistCore.Generator.Table.GetChildRelations">
+            <summary>Gets relations where current table acts as a parent.</summary>
+        </member>
+        <member name="M:FistCore.Generator.Table.FistCore#Core#IDbTable#NewEntity">
+            <summary>Not implemented.</summary>
+        </member>
+        <member name="M:FistCore.Generator.Table.FistCore#Core#IDbTable#NewEntityCollection">
+            <summary>Not implemented.</summary>
+        </member>
+        <member name="M:FistCore.Generator.Table.FistCore#Core#IDbTable#NewEntityFiller">
+            <summary>Not implemented.</summary>
+        </member>
+        <member name="M:FistCore.Generator.Table.Clone(System.String)">
+            <summary>Not implemented.</summary>
+        </member>
+        <member name="M:FistCore.Generator.Table.FistCore#Core#IDbTable#Clone(System.String,System.Boolean)">
+            <summary>Not implemented.</summary>
+        </member>
+        <member name="M:FistCore.Generator.Table.FistCore#Core#IDbTable#NewDataTable">
+            <summary>Not implemented.</summary>
+        </member>
+        <member name="M:FistCore.Generator.Table.FistCore#Core#IDbTable#RenderTableName(FistCore.Core.DbmsType,System.Text.StringBuilder)">
+            <summary>Not implemented.</summary>
+        </member>
+        <member name="M:FistCore.Generator.Table.FistCore#Core#IDbTable#RenderAlias(FistCore.Core.DbmsType,System.Text.StringBuilder)">
+            <summary>Not implemented.</summary>
+        </member>
+        <member name="M:FistCore.Generator.Table.FistCore#Core#IDbTable#SetPrefixedAliases">
+            <summary>Not implemented.</summary>
+        </member>
+        <member name="M:FistCore.Generator.Table.FistCore#Core#IDbTable#GetParentProperty(FistCore.Core.DbRelation,FistCore.Core.IDbColumn)">
+            <summary>Not implemented.</summary>
+        </member>
+        <member name="M:FistCore.Generator.Table.FistCore#Core#IDbTable#GetChildTables">
+            <summary>Gets tables which reference the current table.</summary>
+        </member>
+        <member name="M:FistCore.Generator.Table.FistCore#Core#IDbTable#GetChildRelations">
+            <summary>Gets relations where current table acts as a parent.</summary>
+        </member>
+        <member name="M:FistCore.Generator.Table.GetColumnConfiguration(System.Int32)">
+            <summary>Returns <b>null</b>.</summary>
+        </member>
+        <member name="M:FistCore.Generator.Table.GetColumnConfiguration(System.String)">
+            <summary>Returns <b>null</b>.</summary>
+        </member>
+        <member name="M:FistCore.Generator.Table.HasEqualAliasAndNameAs(FistCore.Core.IDbTable)">
+            <summary>Checks whether the two tables have equal aliases and names.</summary>
+            <param name="otherTable">Other table.</param>
+        </member>
+        <member name="P:FistCore.Generator.Table.GeneratedTables">
+            <summary>Gets or sets tables which are generated as part of the solution/project.</summary>
+        </member>
+        <member name="P:FistCore.Generator.Table.Fields">
+            <summary>Gets or set tables fields.</summary>
+        </member>
+        <member name="P:FistCore.Generator.Table.NumberOfPrimaryKeyFields">
+            <summary>Gets or sets the number of PK fields.</summary>
+        </member>
+        <member name="P:FistCore.Generator.Table.TableName">
+            <summary>Gets table name.</summary>
+        </member>
+        <member name="P:FistCore.Generator.Table.TableType">
+            <summary>Gets or set DB object description, ie. whether the current object represents table, view or unknown.</summary>
+        </member>
+        <member name="P:FistCore.Generator.Table.ForeignKeys">
+            <summary>Gets collection that contains all FKs, including those linking tables which are not generated as part of the solution.</summary>
+        </member>
+        <member name="P:FistCore.Generator.Table.IsView">
+            <summary>Gets or sets whether the current instance represents a database view.</summary>
+        </member>
+        <member name="P:FistCore.Generator.Table.FistCore#Core#IDbTable#Catalog">
+            <summary>Not implemented.</summary>
+        </member>
+        <member name="P:FistCore.Generator.Table.FistCore#Core#IDbTable#EntityDaoCreationStrategy">
+            <summary>Not implemented.</summary>
+        </member>
+        <member name="P:FistCore.Generator.Table.FistCore#Core#IDbTable#ParentEntityProperties">
+            <summary>Not implemented.</summary>
+        </member>
+        <member name="P:FistCore.Generator.Table.FistCore#Core#IDbTable#ForeignKeys">
+            <summary>
+            Gets the relations used by foreign keys.
+            Empty array if no foreign key relations have been defined.
+            </summary>
+        </member>
+        <member name="P:FistCore.Generator.Table.Alias">
+            <summary>Returns <see cref="P:FistCore.Generator.Table.TableName"/>.</summary>
+        </member>
+        <member name="P:FistCore.Generator.Table.Columns">
+            <summary>Gets table fields.</summary>
+        </member>
+        <member name="P:FistCore.Generator.Table.PrimaryKey">
+            <summary>Gets primary key fields.</summary>
+        </member>
+        <member name="P:FistCore.Generator.Table.ColumnAliasesArePrefixed">
+            <summary>Returns <b>false</b>.</summary>
+        </member>
+        <member name="P:FistCore.Generator.Table.ExtendedProperties">
+            <summary>Returns <b>null</b>.</summary>
+        </member>
+        <member name="T:FistCore.Generator.Table.Getter`2">
+            <summary>Gets value associated with the specified key.</summary>
+            <param name="key">Dictionary key.</param>
+            <returns>Returns the value asscoiated with the specified key.</returns>
+            <typeparam name="TKey">The type of keys.</typeparam>
+            <typeparam name="TValue">The type of values.</typeparam>
+        </member>
+        <member name="T:FistCore.Generator.TableField">
+            <summary>Represents a table field and renders code items mapped to DB field using specified templates.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TableField.#ctor(FistCore.Generator.Table,System.String,FistCore.Generator.IClassItemNamingConvention,System.String,FistCore.Generator.ITypeMapper,System.Int32,System.Int32,System.Boolean,System.Int32,System.Boolean,System.String,System.Int32,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.String)">
+            <summary>Initializes a new instance of TableField class.</summary>
+            <param name="table">Table or view to which this column belongs to.</param>
+            <param name="columnName">Column name.</param>
+            <param name="nameTemplate">Class item naming convention.</param>
+            <param name="nativeDbType">Native DB type.</param>
+            <param name="typeTemplate">Type metadata.</param>
+            <param name="precision">Precision if numeric type.</param>
+            <param name="scale">Scale if numeric type.</param>
+            <param name="isNullable">Specifies whether the values of this column are nullable.</param>
+            <param name="indexInParentTable">Index in parent table <see cref="P:FistCore.Generator.Table.Fields"/> array.</param>
+            <param name="autoIncrement">Specifies whether the values of this column are automatically incremented.</param>
+            <param name="dbDefaultValue">Optional textual representaion of default values configured in database.</param>
+            <param name="maxLength">Maximum length of textual or byte array column.</param>
+            <param name="isPrimaryKeyPart">Indicates whether the column is a part of the primary key.</param>
+            <param name="isForeignKeyPart">Indicates whether the column is a part of a foreign key.</param>
+            <param name="isUniqueConstraintPart">Indicates whether the column is a part of a unique constraint.</param>
+            <param name="isAutoGenerated">Indicates whether the value of the field is automatically generated by database (eg. timestamp in SQL Server).</param>
+            <param name="sequenceName">Optional sequence that increments value for this field. <b>Null</b> if the field is not auto-incremented or sequence does not exist.</param>
+        </member>
+        <member name="M:FistCore.Generator.TableField.FistCore#Core#IDbColumn#Validate(System.Object)">
+            <summary>Not implemented.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TableField.FistCore#Core#IDbColumn#NewDataColumn">
+            <summary>Not implemented.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TableField.FistCore#Core#IDbColumn#GetPrefixedAlias">
+            <summary>Not implemented.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TableField.FistCore#Core#IDbColumn#RenderColumnName(FistCore.Core.DbmsType,System.Text.StringBuilder)">
+            <summary>Not implemented.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TableField.FistCore#Core#IDbColumn#RenderFullName(FistCore.Core.DbmsType,System.Text.StringBuilder)">
+            <summary>Not implemented.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TableField.FistCore#Core#IDbColumn#RenderAlias(FistCore.Core.DbmsType,System.Text.StringBuilder)">
+            <summary>Not implemented.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TableField.Table">
+            <summary>Gets table to which the current field belongs to.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TableField.Types">
+            <summary>Gets object that defines types for this field and provides type helper methods.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TableField.Names">
+            <summary>Gets object that renders class item names.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TableField.Index">
+            <summary>Gets or sets zero base index which identifies column position in the parent <see cref="P:FistCore.Generator.Table.Fields"/> array.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TableField.DbDefaultValue">
+            <summary>Gets or sets the default field value configured in database.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TableField.IsForeignKeyPart">
+            <summary>Gets or sets the value that indicates whether the column is a part of a foreign key.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TableField.Precision">
+            <summary>Gets the number of decimal places to which a field value is resolved.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TableField.Scale">
+            <summary>Gets the number of decimal places to which a field value is resolved.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TableField.Length">
+            <summary>Gets or sets the maximum length of a text or byte array column.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TableField.NativeDbTypeWithLength">
+            <summary>Native DBMS data type with length if required. Eg: varchar(255).</summary>
+        </member>
+        <member name="P:FistCore.Generator.TableField.IsMaxType">
+            <summary>Returns <b>true</b> if column has variable type of maximum length, eg. varchar(max) in SQL Server.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TableField.FistCore#Core#IDbColumn#DefaultValue">
+            <summary>Returns null.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TableField.FistCore#Core#IDbColumn#MinValue">
+            <summary>Returns null.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TableField.FistCore#Core#IDbColumn#MaxValue">
+            <summary>Returns null.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TableField.FistCore#Core#IDbColumn#Table">
+            <summary>Gets or sets <see cref="T:FistCore.Core.IDbTable"/> object to which this column belongs to.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TableField.ColumnName">
+            <summary>Gets the field name.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TableField.DbType">
+            <summary>Gets the <see cref="P:FistCore.Generator.TableField.DbType"/> of the column.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TableField.FullName">
+            <summary>Gets the full name of this column in the following format: [Table].[ColumnName] or [ColumnName] if the <see cref="P:FistCore.Generator.TableField.Table"/> property is not set. Eg: [MyTable].[Id]</summary>
+        </member>
+        <member name="P:FistCore.Generator.TableField.Alias">
+            <summary>Returns <b>ColumnName</b>.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TableField.Prefix">
+            <summary>Return <b>null</b>.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TableField.DataType">
+            <summary>Gets .NET type of data stored in the column.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TableField.MaxLengthIfText">
+            <summary>Returns value stored in <see cref="P:FistCore.Generator.TableField.Length"/> property.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TableField.Ordinal">
+            <summary>Returns value stored in <see cref="P:FistCore.Generator.TableField.Index"/> property.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TableField.PropertyName">
+            <summary>Gets the name of the generated entity class property mapped to this column in pascal case without underscore characters.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TableField.SequenceName">
+            <summary>Gets sequence name if set; otherwise <b>null.</b></summary>
+        </member>
+        <member name="P:FistCore.Generator.TableField.ExtendedProperties">
+            <summary>Gets extended properties if set; otherwise <b>null.</b></summary>
+        </member>
+        <member name="P:FistCore.Generator.TableField.IsNullable">
+            <summary>Gets or sets the value that indicates whether null values are allowed in this column.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TableField.AutoIncrement">
+            <summary>Gets or sets the value that indicates whether the column automatically increments the value for new rows added to the table.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TableField.IsPrimaryKeyPart">
+            <summary>Gets or sets the value that indicates whether the column is a part of a primary key.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TableField.IsUniqueConstraintPart">
+            <summary>Gets or sets the value that indicates whether the column is a part of a unique constraint.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TableField.IsAutoGenerated">
+            <summary>
+            Gets or sets the value which indicates whether the value of the field is automatically generated by
+            database (eg. timestamp or computed fields in SQL Server).
+            If set to true then this field's value cannot be inserted or updated.
+            </summary>
+        </member>
+        <member name="T:FistCore.Generator.Oracle.OracleTypeConverter">
+            <summary>Provides utility methods which inspect and convert Oracle native data types to .NET data types.</summary>
+        </member>
+        <member name="M:FistCore.Generator.Oracle.OracleTypeConverter.GetType(System.String,System.Int32,System.Int32)">
+            <summary>Get .NET type compatible with given Oracle type.</summary>
+        </member>
+        <member name="T:FistCore.Generator.TypeInfo">
+            <summary>Represents type metadata and renders code items associated with data type using specified type mapper/code renderer.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TypeInfo.#ctor(System.String,FistCore.Generator.ITypeMapper,System.Int32,System.Int32)">
+            <summary>
+            Initialize a new object.
+            </summary>
+            <param name="nativeDbType">Native database type as used in stored procedures.</param>
+            <param name="typeMapper">Mapps native to target data types and renders code items associated with data type.</param>
+            <param name="precision">Native DB type precision - if applicable.</param>
+            <param name="scale">Native DB type scale - if applicable.</param>
+        </member>
+        <member name="M:FistCore.Generator.TypeInfo.NativeDbTypeWithLength(System.Int32)">
+            <summary>
+            Generates native DB type with length if applicable.
+            </summary>
+            <param name="fieldLength">Field/parameter length.</param>
+            <returns>Full native DB type.</returns>
+        </member>
+        <member name="M:FistCore.Generator.TypeInfo.CastExpression(System.String)">
+            <summary>
+            Generates cast or convert expression.
+            </summary>
+            <param name="expressionThatIsToBeConverted">Expression/variable to be converted.</param>
+            <returns>Cast or Convert.To* expression.</returns>
+        </member>
+        <member name="M:FistCore.Generator.TypeInfo.HasValueExpression(System.String)">
+            <summary>
+            Generates code that tests whether the variable has value, ie. not null, that can be used in IF statement.
+            </summary>
+            <param name="variableToBeTested">Variable.</param>
+            <returns>Expression that tests whether the provided variable contains a value or a non-null reference.</returns>
+        </member>
+        <member name="M:FistCore.Generator.TypeInfo.IsNullExpression(System.String)">
+            <summary>
+            Generates code that tests whether the provided value represents a null reference or contains a null value.
+            </summary>
+            <param name="variableToBeTested">Variable.</param>
+            <returns>Expression that tests whether the provided value represents a null reference or contains a null value.</returns>
+        </member>
+        <member name="M:FistCore.Generator.TypeInfo.GetValueExpression(System.String,System.Boolean)">
+            <summary>
+            Generates code that returns a value stored in variable.
+            </summary>
+            <param name="variable">Variable. Either nullable, or non-nullable.</param>
+            <param name="isNullableTypeVariable">Indicates whether the specified variable is a nullable structure.</param>
+            <returns>Code that returns a value.</returns>
+        </member>
+        <member name="M:FistCore.Generator.TypeInfo.NotEqualsExpression(System.String,System.Boolean,System.String,System.Boolean)">
+            <summary>
+            Generates code that evaluates whether the two variable do not contain equale values/objects.
+            </summary>
+            <param name="lhsVariable">First variable.</param>
+            <param name="lhsIsNullable">Indicates whether the first variable is a nullable structure.</param>
+            <param name="rhsVariable">Second variable.</param>
+            <param name="rhsIsNullable">Indicates whether the secont variable is a nullable structure.</param>
+            <returns>Code that comparse two variables.</returns>
+        </member>
+        <member name="P:FistCore.Generator.TypeInfo.NativeDbType">
+            <summary>
+            Native database type used in stored procedures.
+            Eg. T-SQL or PL/SQL type.
+            </summary>
+        </member>
+        <member name="P:FistCore.Generator.TypeInfo.IsVariableLengthNativeType">
+            <summary>
+            Indicates that native database type is variable length (eg: varchar).
+            </summary>
+        </member>
+        <member name="P:FistCore.Generator.TypeInfo.Type">
+            <summary>
+            Member/property type name used by target language in generated classes, eg. C#.
+            </summary>
+        </member>
+        <member name="P:FistCore.Generator.TypeInfo.DefaultValue">
+            <summary>
+            Default value of the type used in generated classes. 
+            Eg. default for System.Int32 is 0, default for System.String is null etc.
+            </summary>
+        </member>
+        <member name="P:FistCore.Generator.TypeInfo.IsValueType">
+            <summary>
+            Indicates whether the type used in generated classes is a value type; as opposed to reference type.
+            </summary>
+        </member>
+        <member name="P:FistCore.Generator.TypeInfo.DbType">
+            <summary>
+            System.Data.DbType parameter type.
+            </summary>
+        </member>
+        <member name="P:FistCore.Generator.TypeInfo.NullableType">
+            <summary>
+            Member/property type used for nullable fields in generated classes.
+            </summary>
+        </member>
+        <member name="P:FistCore.Generator.TypeInfo.NullValue">
+            <summary>
+            Null expression for the type used in generated classes.
+            Usually "null" for reference types. For value types it will depend on library used.
+            Eg. null-value for System.Int32 when NullableTypes.dll library is used is "NulableInt32.Null".		
+            </summary>
+        </member>
+        <member name="P:FistCore.Generator.TypeInfo.DataType">
+            <summary>
+            Member/property .NET type used in generated classes.
+            </summary>
+        </member>
+        <member name="P:FistCore.Generator.TypeInfo.MinNativeValue">
+            <summary>
+            Minimum value supported by native database type.
+            </summary>
+        </member>
+        <member name="P:FistCore.Generator.TypeInfo.MaxNativeValue">
+            <summary>
+            Maximum value supported by native database type.
+            </summary>
+        </member>
+        <member name="T:FistCore.Generator.SqlServer.SqlServerTypeConverter">
+            <summary>Provides utility methods which inspect and convert SQL Server native data types to .NET data types.</summary>
+        </member>
+        <member name="M:FistCore.Generator.SqlServer.SqlServerTypeConverter.GetType(System.String,System.Int32,System.Int32)">
+            <summary>Get .NET type compatible with given TSQL type.</summary>
+        </member>
+        <member name="T:FistCore.Generator.SqlServer.TsqlToCsharpNullableTypesMapper">
+            <summary>Type template that uses C# and NullableType.dll types in generated classes, and T-SQL types in stored procedures.</summary>
+        </member>
+        <member name="M:FistCore.Generator.SqlServer.TsqlToCsharpNullableTypesMapper.NativeDbType(System.String)">
+            <summary>
+            Native database type used in stored procedures.
+            Eg. T-SQL or PL/SQL type.
+            </summary>
+            <param name="tsqlDataType">Native DB type.</param>
+        </member>
+        <member name="M:FistCore.Generator.SqlServer.TsqlToCsharpNullableTypesMapper.IsVariableLengthNativeType(System.String)">
+            <summary>
+            Indicates that native database type is variable length (eg: varchar).
+            </summary>
+            <param name="tsqlDataType">Native DB type.</param>
+        </member>
+        <member name="M:FistCore.Generator.SqlServer.TsqlToCsharpNullableTypesMapper.MinNativeValue(System.String,System.Int32,System.Int32)">
+            <summary>
+            Minimum value supported by native database type.
+            </summary>
+            <param name="tsqlDataType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="M:FistCore.Generator.SqlServer.TsqlToCsharpNullableTypesMapper.MaxNativeValue(System.String,System.Int32,System.Int32)">
+            <summary>
+            Maximum value supported by native database type.
+            </summary>
+            <param name="tsqlDataType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="M:FistCore.Generator.SqlServer.TsqlToCsharpNullableTypesMapper.Type(System.String,System.Int32,System.Int32)">
+            <summary>
+            Member/property type used in generated classes.
+            </summary>
+            <param name="tsqlDataType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="M:FistCore.Generator.SqlServer.TsqlToCsharpNullableTypesMapper.DefaultValue(System.String,System.Int32,System.Int32)">
+            <summary>
+            Default value of the type used in generated classes. 
+            Eg. default for System.Int32 is 0, default for System.String is null etc.
+            </summary>
+            <param name="tsqlDataType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="M:FistCore.Generator.SqlServer.TsqlToCsharpNullableTypesMapper.IsValueType(System.String)">
+            <summary>
+            Indicates whether the type used in generated classes is a value type; as opposed to reference type.
+            </summary>
+            <param name="tsqlDataType">Native DB type.</param>
+        </member>
+        <member name="M:FistCore.Generator.SqlServer.TsqlToCsharpNullableTypesMapper.DbType(System.String)">
+            <summary>
+            System.Data.DbType parameter type.
+            </summary>
+            <param name="tsqlDataType">Native DB type.</param>
+        </member>
+        <member name="M:FistCore.Generator.SqlServer.TsqlToCsharpNullableTypesMapper.NullableType(System.String,System.Int32,System.Int32)">
+            <summary>
+            Member/property type used for nullable fields in generated classes.
+            </summary>
+            <param name="tsqlDataType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="M:FistCore.Generator.SqlServer.TsqlToCsharpNullableTypesMapper.NullValue(System.String,System.Int32,System.Int32)">
+            <summary>
+            Null expression for the type used in generated classes.
+            Usually "null" for reference types. For value types it will depend on library used.
+            Eg. null-value for System.Int32 when NullableTypes.dll library is used is "NulableInt32.Null".		
+            </summary>
+            <param name="tsqlDataType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="M:FistCore.Generator.SqlServer.TsqlToCsharpNullableTypesMapper.NativeDbTypeWithLength(System.String,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Returns native type with length and precision if required. Eg: varchar(255). Has no effect for non-variable and non-fixedpoint types.
+            </summary>
+            <param name="precision">The maximum total number of decimal digits that can be stored, both to the left and to the right of the decimal point.</param>
+            <param name="scale">The maximum number of decimal digits that can be stored to the right of the decimal point. Scale must be a value from 0 through precision. Scale can be specified only if precision is specified.</param>
+            <returns>Native type with length.</returns>
+            <param name="tsqlDataType">Native DB type.</param>
+            <param name="fieldLength">Length of textual or binary field.</param>
+        </member>
+        <member name="M:FistCore.Generator.SqlServer.TsqlToCsharpNullableTypesMapper.CastExpression(System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Returns cast/convert expression that converts the given variable to the current class type.
+            </summary>
+            <param name="expressionThatIsToBeConverted">Expression (usually variable) that is to be converted to the current class type.</param>
+            <param name="tsqlDataType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+            <returns>Cast/convert expression.</returns>
+        </member>
+        <member name="M:FistCore.Generator.SqlServer.TsqlToCsharpNullableTypesMapper.HasValueExpression(System.String,System.String)">
+            <summary>
+            Creates expression that tests whether the nullable type variable contains a non-null value.
+            </summary>
+            <param name="tsqlDataType">Native DB type.</param>
+            <param name="variableToBeTested">Nullable type variable to be tested.</param>
+            <returns>HasValue expression.</returns>
+        </member>
+        <member name="M:FistCore.Generator.SqlServer.TsqlToCsharpNullableTypesMapper.IsNullExpression(System.String,System.String)">
+            <summary>
+            Creates expression that tests whether the nullable type variable contains null value.
+            </summary>
+            <param name="tsqlDataType">Native DB type.</param>
+            <param name="variableToBeTested">Nullable type variable to be tested.</param>
+            <returns>IsNull expression.</returns>
+        </member>
+        <member name="M:FistCore.Generator.SqlServer.TsqlToCsharpNullableTypesMapper.GetValueExpression(System.String,System.String,System.Boolean)">
+            <summary>
+            Returns expression that gets the value stored in a variable; both of nullable and non-nullable type.
+            Eg. "myVariable.Value".
+            </summary>
+            <param name="tsqlDataType">Native DB type.</param>
+            <param name="variable">Variable that holds the value.</param>
+            <param name="isNullableTypeVariable">Indicates whether the variable is of a nullable type.</param>
+            <returns>Get value expression.</returns>
+        </member>
+        <member name="M:FistCore.Generator.SqlServer.TsqlToCsharpNullableTypesMapper.NotEqualsExpression(System.String,System.String,System.Boolean,System.String,System.Boolean)">
+            <summary>
+            Returns boolean not equals expression for two nullable variables.
+            Example for NullableType library: (lhs.IsNull != rhs.IsNull) || (!lhs.IsNull &amp;&amp; (lhs.Value != rhs.Value)).
+            </summary>
+            <param name="tsqlDataType">Native DB type.</param>
+            <param name="lhsVariable">First variable.</param>
+            <param name="lhsIsNullable">Indicates whether the first variable is a nullable structure.</param>
+            <param name="rhsVariable">Second variable.</param>
+            <param name="rhsIsNullable">Indicates whether the secont variable is a nullable structure.</param>
+            <returns>Code that comparse two variables.</returns>
+        </member>
+        <member name="M:FistCore.Generator.SqlServer.TsqlToCsharpNullableTypesMapper.GetType(System.String,System.Int32,System.Int32)">
+            <summary>Gets .NET type compatible with given native DB type.</summary>
+            <param name="tsqlDataType">Native DB type.</param>
+            <param name="precision">Numeric DB type precision.</param>
+            <param name="scale">Numeric DB type scale.</param>
+        </member>
+        <member name="P:FistCore.Generator.SqlServer.TsqlToCsharpNullableTypesMapper.RequiredNamespaces">
+            <summary>
+            Namespaces that contain referenced types.
+            </summary>
+        </member>
+    </members>
+</doc>

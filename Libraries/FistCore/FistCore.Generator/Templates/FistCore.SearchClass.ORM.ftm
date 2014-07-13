@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Template xmlns="http://fuzzyeye.org/FistCore/TemplateEngine/Template.xsd" >
+  <Header>
+    <Title>ISearchEngineBuilder objects</Title>
+    <Description>Generates light lookup and fulll search engine builder classes for tables and views</Description>
+    <Family>ORM</Family>
+  </Header>
+  <Variables>
+    <Variable>
+      <Name>ProjectNamespace</Name>
+      <Description>C# namespace which contains FistCore generated entities</Description>
+      <DefaultValue>MySolution.FistCore</DefaultValue>
+    </Variable>
+    <Variable>
+      <Name>BizLayerNamespace</Name>
+      <Description>C# namespace for business layer logic</Description>
+      <DefaultValue>MySolution.BL</DefaultValue>
+    </Variable>
+    <Variable>
+      <Name>OutputSubdirectory</Name>
+      <Description>Output subdirectory</Description>
+      <DefaultValue>Search</DefaultValue>
+    </Variable>
+  </Variables>
+  <Settings>
+    <Setting>
+      <Name>FileExtension</Name>
+      <Description>File extension</Description>
+      <Value>cs</Value>
+    </Setting>
+    <Setting>
+      <Name>FileNameSuffix</Name>
+      <Description>Suffix appended to generated file</Description>
+      <Value>Search</Value>
+    </Setting>
+  </Settings>
+  <ReferencedAssemblies>
+    <Assembly>FistCore.Generator.OrmComponents.dll</Assembly>
+    <Assembly>FistCore.Generator.DbMetaData.dll</Assembly>
+  </ReferencedAssemblies>
+  <Namespaces>
+    <Using>System</Using>
+    <Using>FistCore.Generator.OrmComponents</Using>
+  </Namespaces>
+  <InputComponentBuilder>
+    <Assembly>FistCore.Generator.OrmComponents</Assembly>
+    <Class>FistCore.Generator.OrmComponents.DbComponentBuilder</Class>
+  </InputComponentBuilder>
+  <TemplateSegments>
+    <TemplateSegment Id="SearchRoot">
+      <![CDATA[using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Data;
+using System.Globalization;
+using FistCore.Common;
+using FistCore.Core;
+using FistCore.Core.Common;
+
+using $Variables["ProjectNamespace"]$;
+
+namespace $Variables["BizLayerNamespace"]$
+{
+
+	/// <summary>Search class view/table. $Input.Root.Name$.</summary>
+	public class $Input.Root.Name$Search : SearchClass<$Input.Root.Name$Meta>
+	{
+
+        public $Input.Root.Name$Search()
+            : base(new Catalog().CreateConnectionProvider())
+        {
+
+        }
+
+        /// <summary>
+        /// Get <see cref="DataTable"/> for object $Input.Root.Name$.
+        /// </summary>
+        /// <param name="Filters">Filters to apply.</param>
+        /// <param name="orderBy">Order by.</param>
+        /// <returns>DataTable with selected items.</returns>
+        public DataTable Get$Input.Root.Name$(SearchCondition Filters = null, OrderByClause orderBy = null)
+        {
+            SelectStatement select = new SelectStatement(this.Table);
+            if(Filters != null)
+                select.Where.Add(Filters);
+            if(orderBy != null)
+                select.OrderBy = orderBy;
+
+            return select.Execute();
+        }
+
+        /// <summary>
+        /// Get <see cref="DataTable"/> for object $Input.Root.Name$ but only selected columns.
+        /// </summary>
+        /// <param name="Filters">Filters to apply.</param>
+        /// <param name="ReturnColumns">Array of columns to select.</param>
+        /// <param name="orderBy">Order by.</param>
+        /// <returns>DataTable with selected items.</returns>
+        public DataTable Get$Input.Root.Name$(SearchCondition Filters, IDbColumn[] ReturnColumns, OrderByClause orderBy = null)
+        {
+            SelectStatement select = new SelectStatement(this.Table, ReturnColumns);
+            if(Filters != null)
+                select.Where.Add(Filters);
+            if(orderBy != null)
+                select.OrderBy = orderBy;
+
+            return select.Execute();
+        }
+
+        /// <summary>
+        /// Get <see cref="EntityCollection"/> of object $Input.Root.Name$.
+        /// </summary>
+        /// <param name="Filters">Filters to apply.</param>
+        /// <param name="orderBy">Order by.</param>
+        /// <returns>EntityCollection with selected items.</returns>
+        public EntityCollection<$Input.Root.Name$Entity, $Input.Root.Name$Meta> Get$Input.Root.Name$Collection(SearchCondition Filters = null, OrderByClause orderBy = null)
+        {
+            EntityCollection<$Input.Root.Name$Entity, $Input.Root.Name$Meta> coll = new EntityCollection<$Input.Root.Name$Entity, $Input.Root.Name$Meta>();
+            SelectStatement select = new SelectStatement(coll.Table);
+
+            if(Filters != null)
+                select.Where.Add(Filters);
+            if(orderBy != null)
+                select.OrderBy = orderBy;
+
+            select.FillCollection(coll, coll.Table.NewEntityFiller());
+
+            return coll;
+        }
+
+        /// <summary>
+        /// Get <see cref="EntityCollection"/> of object $Input.Root.Name$ with parents.
+        /// </summary>
+        /// <param name="Filters">Filters to apply.</param>
+        /// <param name="EnsureParents">Select parents also.</param>
+        /// <param name="orderBy">Order by.</param>
+        /// <returns>EntityCollection with selected items.</returns>
+        public EntityCollection<$Input.Root.Name$Entity, $Input.Root.Name$Meta> Get$Input.Root.Name$Collection(SearchCondition Filters, bool EnsureParents, OrderByClause orderBy = null)
+        {
+            EntityCollection<$Input.Root.Name$Entity, $Input.Root.Name$Meta> collection = this.Get$Input.Root.Name$Collection(Filters, orderBy);
+            if (EnsureParents)
+                this.EnsureParentsForCollection(collection);
+            return collection;
+        }
+
+	}
+}
+]]>
+    </TemplateSegment>
+  </TemplateSegments>
+</Template>

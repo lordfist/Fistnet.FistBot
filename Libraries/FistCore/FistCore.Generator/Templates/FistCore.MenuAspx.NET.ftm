@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Template>
+  <Header>
+    <Title>Menu.aspx page</Title>
+    <Description>Generates ASPX file with menu that contains links to forms for editing and searching objects</Description>
+    <Family>EntityUI</Family>
+  </Header>
+  <Variables>
+    <Variable>
+      <Name>SolutionNamespace</Name>
+      <Description>C# solution namespace prefix used by all layers.</Description>
+      <DefaultValue>MySolution.Web</DefaultValue>
+    </Variable>
+    <Variable>
+      <Name>RelativeFolderUrl</Name>
+      <DefaultValue>~</DefaultValue>
+      <Description>Relative path to virtual directory which contains the generated forms ('~' is the root directory)</Description>
+    </Variable>
+    <Variable>
+      <Name>OutputSubdirectory</Name>
+      <Description>Output subdirectory</Description>
+      <DefaultValue></DefaultValue>
+    </Variable>
+  </Variables>
+  <Settings>
+    <Setting>
+      <Name>SingleFile</Name>
+      <Description>Name of the single file which will contain code for all selected items</Description>
+      <Value>AdminMenu.ascx</Value>
+    </Setting>
+  </Settings>
+  <ReferencedAssemblies>
+    <Assembly>FistCore.Generator.EntityComponents.dll</Assembly>
+  </ReferencedAssemblies>
+  <Namespaces>
+    <Using>System</Using>
+    <Using>FistCore.Generator.EntityComponents</Using>
+  </Namespaces>
+  <InputComponentBuilder>
+    <Assembly>FistCore.Generator.EntityComponents</Assembly>
+    <Class>FistCore.Generator.EntityComponents.BusinessObjectArrayComponentBuilder</Class>
+  </InputComponentBuilder>
+  <TemplateSegments>
+    <TemplateSegment Id="MenuRoot">
+      <![CDATA[<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AdminMenu.ascx.cs"
+    Inherits="$Variables["SolutionNamespace"]$.Controls.AdminMenu" %>
+
+<div class="AdminMenu">
+    <ul>
+        $Generate("EditAndSearchNodes", Input.GetChildren(FistCoreComponentType.BusinessObject))$
+
+        <li class="FloatRight">
+            <asp:LinkButton ID="LinkButtonOdjava"  CssClass="LinkButton" runat="server"
+                onclick="LinkButtonOdjava_Click">
+            <span class="AdminIcon icoLogout">
+                    Odjava
+                </span>
+                <span class="AdminText">Odjava</span>
+            </asp:LinkButton>
+        </li>
+    </ul>
+    <div class="clear"></div>
+</div>
+]]>
+    </TemplateSegment>
+    <TemplateSegment Id="EditAndSearchNodes">
+      <![CDATA[<li>
+            <a class="LinkButton" href="$Variables["RelativeFolderUrl"]$/$Input.Name$Form.aspx" runat="server">
+                <span class="AdminIcon ico$Input.Name$">$Input.Name$</span>
+                <span class="AdminText">$Input.Name$</span>
+            </a>
+        </li>
+		]]>
+    </TemplateSegment>
+  </TemplateSegments>
+</Template>

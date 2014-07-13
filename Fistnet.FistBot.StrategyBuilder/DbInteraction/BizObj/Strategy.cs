@@ -25,7 +25,10 @@ namespace Fistnet.FistBot.BL
             select.Top = topCount;
             select.Where.Add(PredicateFactory.IsNull(sMeta.Fitness, true));
             select.Where.And(PredicateFactory.Compare(sMeta.IdGeneration, ComparisonOperator.NotEqual, noGenId));
-            select.OrderBy.Add(sMeta.Fitness, false);
+
+            select.OrderBy.Add(sMeta.VictoryCount, false);
+            select.OrderBy.Add(sMeta.BulletHit, false);
+            select.OrderBy.Add(sMeta.DeathAfterTicks, false);
 
             return (EntityCollection<StrategyEntity, StrategyMeta>)select.Execute();
         }

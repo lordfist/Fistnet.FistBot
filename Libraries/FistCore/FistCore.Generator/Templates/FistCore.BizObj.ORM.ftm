@@ -1,0 +1,331 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Template xmlns="http://fuzzyeye.org/FistCore/TemplateEngine/Template.xsd" >
+  <Header>
+    <Title>Fist business object</Title>
+    <Description>FistCore XML template which generates AOP business object derived from FistCore generated entity class</Description>
+    <Family>ORM</Family>
+  </Header>
+  <Variables>
+    <Variable>
+      <Name>ProjectNamespace</Name>
+      <Description>C# namespace which contains FistCore generated entities</Description>
+      <DefaultValue>MySolution.DAL</DefaultValue>
+    </Variable>
+    <Variable>
+      <Name>BizLayerNamespace</Name>
+      <Description>C# namespace for business layer logic</Description>
+      <DefaultValue>MySolution.BL</DefaultValue>
+    </Variable>
+    <Variable>
+      <Name>ParentPrefixesToRemove</Name>
+      <Description>Parent members - semicolon delimited tablename prefixes to be removed</Description>
+      <DefaultValue></DefaultValue>
+    </Variable>
+    <Variable>
+      <Name>SuffixReplacementMap</Name>
+      <Description>Semicolon delimited rules for table name suffix replacement, eg: "ies"->"y";"s"->""</Description>
+      <DefaultValue></DefaultValue>
+    </Variable>
+    <Variable>
+      <Name>OutputSubdirectory</Name>
+      <Description>Output subdirectory</Description>
+      <DefaultValue>BizObj</DefaultValue>
+    </Variable>
+  </Variables>
+  <Settings>
+    <Setting>
+      <Name>FileExtension</Name>
+      <Description>File extension</Description>
+      <Value>cs</Value>
+    </Setting>
+    <Setting>
+      <Name>FileNameSuffix</Name>
+      <Description>Suffix appended to generated file</Description>
+      <Value></Value>
+    </Setting>
+  </Settings>
+  <ReferencedAssemblies>
+    <Assembly>FistCore.Generator.OrmComponents.dll</Assembly>
+    <Assembly>FistCore.Generator.DbMetaData.dll</Assembly>
+  </ReferencedAssemblies>
+  <Namespaces>
+    <Using>System</Using>
+    <Using>FistCore.Generator.OrmComponents</Using>
+  </Namespaces>
+  <InputComponentBuilder>
+    <Assembly>FistCore.Generator.OrmComponents</Assembly>
+    <Class>FistCore.Generator.OrmComponents.DbComponentBuilder</Class>
+  </InputComponentBuilder>
+  <TemplateSegments>
+    <TemplateSegment Id="BizObjRoot">
+      <![CDATA[using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using FistCore.Common;
+using FistCore.Common.Serialization;
+using FistCore.Core;
+using FistCore.Core.Common;
+using System.Data;
+using System.Globalization;
+
+using $Variables["ProjectNamespace"]$;
+
+namespace $Variables["BizLayerNamespace"]$
+{
+	/// <summary>$Input.Root.ClassPrefix()$.</summary>
+	[Serializable]
+	public class $Input.Root.ClassPrefix()$ : $Input.Root.ClassPrefix()$Entity, IBusinessObject
+	{
+		#region Constructors.
+
+		/// <summary>Kreira novi prazni objekt s aktivnim statusom.</summary>
+		public $Input.Root.ClassPrefix()$()
+			: base()
+		{
+		}
+
+		$GenerateIf("CtorsWithPK", Input, TableCriteria.HasIntegerPK)$
+		/// <summary>Konvertira entitet u business object.</summary>
+		protected $Input.Root.ClassPrefix()$($Input.Root.ClassPrefix()$Entity entity)
+			: base(entity)
+		{
+		}
+
+		#endregion
+
+		#region Security - grant everything.
+
+		/// <summary>
+		/// Returns empty BusinessRuleCollection indicating that the actor has permissions to fetch the data requested.
+		/// </summary>
+		/// <param name="actor">Actor whose data-access permissions are to be checked.</param>
+		/// <returns>Collection of permissions (broken rules) that the actor has failed.</returns>
+		/// <remarks>Override in derived classes to add security checks.</remarks>
+		public virtual BusinessRuleCollection GrantFetch(IActor actor)
+		{
+			return new BusinessRuleCollection();
+		}
+
+		/// <summary>
+		/// Returns empty BusinessRuleCollection indicating that the actor has permissions to save the current object.
+		/// </summary>
+		/// <param name="actor">Actor whose data-access permissions are to be checked.</param>
+		/// <returns>Collection of permissions (broken rules) that the actor has failed.</returns>
+		/// <remarks>Override in derived classes to add security checks.</remarks>
+		public virtual BusinessRuleCollection GrantSave(IActor actor)
+		{
+			return new BusinessRuleCollection();
+		}
+
+		/// <summary>
+		/// Returns empty BusinessRuleCollection indicating that the actor has permissions to delete the data requested.
+		/// </summary>
+		/// <param name="actor">Actor whose data-access permissions are to be checked.</param>
+		/// <returns>Collection of permissions (broken rules) that the actor has failed.</returns>
+		/// <remarks>Override in derived classes to add security checks.</remarks>
+		public virtual BusinessRuleCollection GrantDelete(IActor actor)
+		{
+			return new BusinessRuleCollection();
+		}
+
+		/// <summary>
+		/// Returns empty BusinessRuleCollection indicating that the actor has permissions to create the current object.
+		/// </summary>
+		/// <param name="actor">Actor whose data-access permissions are to be checked.</param>
+		/// <returns>Collection of permissions (broken rules) that the actor has failed.</returns>
+		/// <remarks>Override in derived classes to add security checks.</remarks>
+		public virtual BusinessRuleCollection GrantCreate(IActor actor)
+		{
+			return new BusinessRuleCollection();
+		}
+
+		#endregion
+
+		#region Fetch.
+
+		/// <summary>Fetches existing entity that with PK set.</summary>
+		public virtual bool Fetch(IActor actor, DataAccessScope detailLevel)
+		{
+			 IEntityDAO dao = DALHelper.GetDao(this, _ConnectionProvider);
+			 bool exists = dao.SelectOne(detailLevel.IncludesParents);
+			 if (exists && detailLevel.IncludesChildren)
+				  DbFetchChildren();
+
+			 return exists;
+		}
+
+		/// <summary>Saves biz object if actor has required permission and if biz object is valid.</summary>
+		public virtual BusinessRuleCollection FetchIfValid(IActor actor, DataAccessScope detailLevel, bool enforceSecurityChecks)
+		{
+				BusinessRuleCollection rules = new BusinessRuleCollection();
+
+				// Check permissions.
+				if (enforceSecurityChecks)
+				    rules.Add(GrantFetch(actor));
+
+				if (rules.HasBrokenRules)
+				    return rules.GetBrokenRules();
+
+				rules.Add(new BusinessRule("Entity_Exists", this.Fetch(actor, detailLevel), "Entity does not exist.", 1));
+				return rules.GetBrokenRules();
+		}
+
+		protected virtual void DbFetchChildren()
+		{
+		}
+
+		#endregion
+
+		#region Save.
+
+		/// <summary>Saves biz object if actor has required permission.</summary>
+		public virtual void Save(IActor actionInitiator)
+		{
+				IEntityDAO dao = DALHelper.GetDao(this, _ConnectionProvider);
+				dao.Save();
+		}
+
+		#endregion
+
+		#region SaveIfValid.
+
+		/// <summary>Saves biz object if actor has required permission and if biz object is valid.</summary>
+		public virtual BusinessRuleCollection SaveIfValid(IActor actionInitiator, ValidationLevel level, bool enforceSecurityChecks)
+		{
+				// Validate object.
+				BusinessRuleCollection rules = new BusinessRuleCollection();
+				rules.Add(Validate(level));
+				if (rules.HasBrokenRules)
+				    return rules.GetBrokenRules();
+
+				// Check permissions.
+				if (enforceSecurityChecks && !this.IsNew)
+				    rules.Add(GrantSave(actionInitiator));
+
+				if (enforceSecurityChecks && this.IsNew)
+				    rules.Add(GrantCreate(actionInitiator));
+
+				if (rules.HasBrokenRules)
+				    return rules.GetBrokenRules();
+
+				// Save if valid and actor has all required permissions.
+				Save(actionInitiator);
+				return rules.GetBrokenRules();
+		}
+
+		#endregion
+
+		#region Validate.
+
+		/// <summary>Validates object.</summary>
+		public virtual BusinessRuleCollection Validate(ValidationLevel level)
+		{
+				BusinessRuleCollection rules = new BusinessRuleCollection();
+			  rules.Add(DALHelper.CheckEntityRules(this));
+				if (rules.AllRulesAreObeyed && level > ValidationLevel.BasicFieldConstraints)
+				    ValidateChildren(rules, level);
+
+				return rules.GetBrokenRules();
+		}
+
+		protected virtual void ValidateChildren(BusinessRuleCollection rules, ValidationLevel level)
+		{
+		}
+
+		#endregion
+
+    #region Delete.
+
+		/// <summary>Deletes biz object if PK is set and if user has required permission.</summary>
+		public virtual void Delete(IActor actor)
+		{
+			if (GetPrimaryKeyValue() == null) throw new InvalidOperationException("ID nije postavljen.");
+
+			DeleteChildren(actor);
+			IEntityDAO dao = DALHelper.GetDao(this, _ConnectionProvider);
+			dao.DeleteOne();
+		}
+
+		/// <summary>Saves biz object if actor has required permission and if biz object is valid.</summary>
+		public virtual BusinessRuleCollection DeleteIfValid(IActor actor, bool enforceSecurityChecks)
+		{
+				BusinessRuleCollection rules = new BusinessRuleCollection();
+
+				// Check permissions.
+				if (enforceSecurityChecks)
+				    rules.Add(GrantDelete(actor));
+
+				if (rules.HasBrokenRules)
+				    return rules.GetBrokenRules();
+
+				this.Delete(actor);
+				return rules.GetBrokenRules();
+		}
+
+    /// <summary>Briše child objekte ako je postavljen ID i ako korisnik ima potrebne dozvole.</summary>
+    private void DeleteChildren(IActor actor)
+    {
+			if (GetPrimaryKeyValue() == null) throw new InvalidOperationException("ID nije postavljen.");
+		    this.DbFetchChildren();
+
+    }
+
+    #endregion
+
+		#region ConvertEntitiesToBusinessObjects.
+
+		/// <summary>Non-business object elemente kolekcije konvertira u business objekte.</summary>
+		public static void ConvertEntitiesToBusinessObjects(IEntityCollection entities)
+		{
+			for (int i = 0; i < entities.Count; i++)
+			{
+				$Input.Root.ClassPrefix()$Entity entity = ($Input.Root.ClassPrefix()$Entity)entities[i];
+				bool isBizObject = (entity is IBusinessObject);
+				if (!isBizObject)
+					entities[i] = new $Input.Root.ClassPrefix()$(entity);
+			}
+		}
+
+		/// <summary>Po potrebi konvertira entity u business objekt.</summary>
+		public static $Input.Root.ClassPrefix()$ ConvertEntityToBusinessObject($Input.Root.ClassPrefix()$Entity entity)
+		{
+			$Input.Root.ClassPrefix()$ bizobj = entity as $Input.Root.ClassPrefix()$;
+			if (bizobj == null)
+				bizobj = new $Input.Root.ClassPrefix()$(entity);
+
+			return bizobj;
+		}
+
+		#endregion
+
+		#region New$Input.Root.ClassPrefix()$.
+
+		/// <summary>Kreira novi objekt i postavlja default vrijednosti.</summary>
+		public static $Input.Root.ClassPrefix()$ New$Input.Root.ClassPrefix()$(IActor creator)
+		{
+			var newObject = new $Input.Root.ClassPrefix()$($WriteIf("-1", Input, TableCriteria.HasIntegerPK)$)
+			{
+				NullCheckEnabled = false
+			};
+
+			return newObject;
+		}
+
+		#endregion
+	}
+}
+]]>
+    </TemplateSegment>
+    <TemplateSegment Id="CtorsWithPK">
+      <![CDATA[
+		/// <summary>Inicijalizira postojeći entitet i postavlja mu ID. Ostala polja se ne inicijaliziraju.</summary>
+		public $Input.Root.ClassPrefix()$(int id)
+			: base(id)
+		{
+		}
+
+]]>
+    </TemplateSegment>
+  </TemplateSegments>
+</Template>

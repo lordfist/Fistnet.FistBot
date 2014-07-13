@@ -1,0 +1,305 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FistCore.Generator.EntityComponents</name>
+    </assembly>
+    <members>
+        <member name="T:FistCore.Generator.EntityComponents.ArrayUtil">
+            <summary>
+            Provides common operations for array and list manipulation (conversions, sets...).
+            </summary>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.ArrayUtil.IndexOf(System.Collections.IEnumerable,System.Object)">
+            <summary>
+            Searches for the specified object and returns the zero-based index of the first occurrence within the entire collection.
+            </summary>
+            <param name="collection">A collection.</param>
+            <param name="item">The object to locate in the collection. The value can be <b>null</b> for reference types.</param>
+            <returns>The zero-based index of the first occurrence of item within the entire collection, if found; otherwise, –1.</returns>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.ArrayUtil.FindAll``2(System.Collections.IEnumerable,System.Predicate{``1})">
+            <summary>
+            Retrieves all the elements that match the conditions defined by the specified predicate.
+            </summary>
+            <typeparam name="TList">Type of the list which is returned from the method.</typeparam>
+            <typeparam name="TElement">Type of elements contained in the collection.</typeparam>
+            <param name="collection">A collection.</param>
+            <param name="match">The Predicate(TElement) delegate that defines the conditions of the elements to search for.</param>
+            <returns>A list containing all the elements that match the conditions defined by the specified predicate, if found; otherwise, an empty list.</returns>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.ArrayUtil.IsNullOrEmpty(System.Array)">
+            <summary>
+            Checks whether the specified array is a null reference or an empty array.
+            </summary>
+            <param name="array">Array to check.</param>
+            <returns><b>true</b> if the provided array is <b>null</b> or empty; otherwise, false.</returns>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.ArrayUtil.IsNullOrEmpty(System.Collections.IEnumerable)">
+            <summary>
+            Checks whether the specified collection is a null reference or an empty collection.
+            </summary>
+            <param name="collection">Collection to check.</param>
+            <returns><b>true</b> if the provided collection is <b>null</b> or empty; otherwise, false.</returns>
+        </member>
+        <member name="T:FistCore.Generator.EntityComponents.Delegates">
+            <summary>
+            Contains commonly used generic procedure and function delegates.
+            </summary>
+        </member>
+        <member name="T:FistCore.Generator.EntityComponents.Delegates.Function`1">
+            <summary>
+            Represents a parameterless method that returns a value of the specified type.
+            </summary>
+            <typeparam name="TRetVal">Type of the return value.</typeparam>
+            <returns>A value of the specified type.</returns>
+        </member>
+        <member name="T:FistCore.Generator.EntityComponents.Delegates.Function`2">
+            <summary>
+            Represents a method that accepts one argument and returns a value of the specified type.
+            </summary>
+            <typeparam name="TRetVal">Type of the return value.</typeparam>
+            <typeparam name="TArg">Argument type.</typeparam>
+            <param name="arg">Method argument.</param>
+            <returns>A value of the specified type.</returns>
+        </member>
+        <member name="T:FistCore.Generator.EntityComponents.FistCoreComponentType">
+            <summary>Enumerates IDs of supported FistCore-based business object based component types.</summary>
+        </member>
+        <member name="F:FistCore.Generator.EntityComponents.FistCoreComponentType.BusinessObject">
+            <summary>Instance property contains a domain/business object.</summary>
+        </member>
+        <member name="F:FistCore.Generator.EntityComponents.FistCoreComponentType.Field">
+            <summary>Instance property contains <see cref="T:FistCore.Core.IDbColumn"/> object.</summary>
+        </member>
+        <member name="F:FistCore.Generator.EntityComponents.FistCoreComponentType.Collection">
+            <summary>Instance property contains <see cref="T:FistCore.Core.IEntityCollection"/> object.</summary>
+        </member>
+        <member name="F:FistCore.Generator.EntityComponents.FistCoreComponentType.BusinessObjectArray">
+            <summary>Instance property contains an array of domain/business objects.</summary>
+        </member>
+        <member name="F:FistCore.Generator.EntityComponents.FistCoreComponentType.SimpleProperty">
+            <summary>Instance property contains <see cref="T:System.Reflection.PropertyInfo"/> object.</summary>
+        </member>
+        <member name="F:FistCore.Generator.EntityComponents.FistCoreComponentType.ComplexProperty">
+            <summary>Instance property contains <see cref="T:System.Reflection.PropertyInfo"/> object.</summary>
+        </member>
+        <member name="T:FistCore.Generator.EntityComponents.FistCoreComponentBuilder">
+            <summary>Builds <see cref="F:FistCore.Generator.EntityComponents.FistCoreComponentType.BusinessObject"/> input components.</summary>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.FistCoreComponentBuilder.Build(System.Object)">
+            <summary>Builds <see cref="F:FistCore.Generator.EntityComponents.FistCoreComponentType.BusinessObject"/> input components.</summary>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.FistCoreComponentBuilder.IsCompatibleItem(System.Object)">
+            <summary>Returns <b>true</b> if non-null reference is passed.</summary>
+        </member>
+        <member name="T:FistCore.Generator.EntityComponents.BusinessObjectArrayComponentBuilder">
+            <summary>Builds <see cref="F:FistCore.Generator.EntityComponents.FistCoreComponentType.BusinessObjectArray"/> input components.</summary>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.BusinessObjectArrayComponentBuilder.Build(System.Object)">
+            <summary>Builds <see cref="F:FistCore.Generator.EntityComponents.FistCoreComponentType.BusinessObjectArray"/> input components.</summary>
+            <param name="instance">Array of objects.</param>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.BusinessObjectArrayComponentBuilder.IsCompatibleItem(System.Object)">
+            <summary>Returns <b>true</b> if an array is passed.</summary>
+        </member>
+        <member name="T:FistCore.Generator.EntityComponents.FistCoreComponent">
+            <summary>FistCore based template input component.</summary>
+            <remarks><para>Root component of a hierarchy is an IBusinessObject object.</para>
+            <para>The root component may contain the following subcomponents: entity collections and properties bound to entity/row fields.</para></remarks>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.FistCoreComponent.#ctor(System.Object,System.String)">
+            <summary>Creates a root component. Instance property contains a domain/business object.</summary>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.FistCoreComponent.#ctor(System.Object[])">
+            <summary>Creates a root component. Instance property contains an array of domain/business objects.</summary>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.FistCoreComponent.EnsureSubcomponents">
+            <summary>Ensures that Subcomponents property is initialized.</summary>
+        </member>
+        <member name="T:FistCore.Generator.EntityComponents.FieldExtensionMethods">
+            <summary>Contains extension methods for <see cref="F:FistCore.Generator.EntityComponents.FistCoreComponentType.Field"/> input components which may be used in templates.</summary>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.FieldExtensionMethods.GetFieldCaption(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Invokes a GetFieldCaption() method for the given field.</summary>
+            <param name="fieldComponent">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Core.IDbColumn"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.FieldExtensionMethods.DataType(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Gets .NET type for the given field. Eg. Int32, String...</summary>
+            <param name="fieldComponent">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Core.IDbColumn"/> object.</param>
+        </member>
+        <member name="T:FistCore.Generator.EntityComponents.FkFieldExtensionMethods">
+            <summary>Contains extension methods for <see cref="F:FistCore.Generator.EntityComponents.FistCoreComponentType.Field"/> compoments which represent a FK. Methods may be used in templates.</summary>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.FkFieldExtensionMethods.ParentEntityProperty(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Gets public entity class member that references parent entity object. Pascal case.</summary>
+            <param name="foreignKeyField">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Core.IDbColumn"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.FkFieldExtensionMethods.Parent1stPkProperty(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Gets the name of parent entity PK part property to which the given child FK field is linked.</summary>
+            <param name="childForeignKeyField">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Core.IDbColumn"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.FkFieldExtensionMethods.ParentDefaultTextProperty(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Gets the name of 1st textual property in the parent entity.</summary>
+            <param name="childForeignKeyField">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Core.IDbColumn"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.FkFieldExtensionMethods.ParentDefaultTextPropertyFullPath(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Gets the fulle path of 1st textual property in the parent entity.</summary>
+            <param name="childForeignKeyField">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Core.IDbColumn"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.FkFieldExtensionMethods.ParentEntityClass(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Gets the name of the parent entity class.</summary>
+            <param name="foreignKeyField">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Core.IDbColumn"/> object.</param>
+        </member>
+        <member name="T:FistCore.Generator.EntityComponents.SimplePropertyExtensionMethods">
+            <summary>Contains extension methods for <see cref="F:FistCore.Generator.EntityComponents.FistCoreComponentType.SimpleProperty"/> input components which may be used in templates.</summary>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.SimplePropertyExtensionMethods.PropertyDataType(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Gets simple property data type.</summary>
+            <param name="simpleProperty">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:System.Reflection.PropertyInfo"/> object.</param>
+        </member>
+        <member name="T:FistCore.Generator.EntityComponents.BusinessObjectCriteria">
+            <summary>Contains methods/predicates which evaluate business object criteria.</summary>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.BusinessObjectCriteria.HasChildren(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if business object has child collection.</summary>
+            <param name="bizobj">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a business object.</param>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.BusinessObjectCriteria.ImplementsInterfaces(FistCore.Generator.TemplateEngine.ITemplateInputComponent,System.String[])">
+            <summary>Returns <b>true</b> if business object implements the given interfaces.</summary>
+            <param name="bizobj">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a business object.</param>
+            <param name="fullInterfaceNames">Array of interface names.</param>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.BusinessObjectCriteria.HasIntegerPK(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if business object has single column integer PK.</summary>
+            <param name="bizobj">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a business object.</param>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.BusinessObjectCriteria.HasIntegerPk(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if business object has single column integer PK.</summary>
+            <param name="bizobj">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a business object.</param>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.BusinessObjectCriteria.HasForeignKeys(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if tables that contains business object has foreign keys.</summary>
+            <param name="bizobj">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a business object that implements IEntity interface.</param>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.BusinessObjectCriteria.HasTextField(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if table contains text field.</summary>
+            <param name="bizobj">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a business object.</param>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.BusinessObjectCriteria.HasNoTextField(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if table does not contain text field.</summary>
+            <param name="bizobj">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a business object.</param>
+        </member>
+        <member name="T:FistCore.Generator.EntityComponents.FieldCriteria">
+            <summary>Commonly used methods used to define FistCore field criteria in template XML files.</summary>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.FieldCriteria.IsPk(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if field is PK part.</summary>
+            <param name="fieldComponent">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Core.IDbColumn"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.FieldCriteria.IsNotPk(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if field is not PK part.</summary>
+            <param name="fieldComponent">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Core.IDbColumn"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.FieldCriteria.IsFk(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if field is FK part.</summary>
+            <param name="fieldComponent">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Core.IDbColumn"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.FieldCriteria.IsNotFk(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if field is not FK part.</summary>
+            <param name="fieldComponent">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Core.IDbColumn"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.FieldCriteria.IsKey(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if field is PK or FK part.</summary>
+            <param name="fieldComponent">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Core.IDbColumn"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.FieldCriteria.IsNotKey(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if field is not PK or FK part.</summary>
+            <param name="fieldComponent">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Core.IDbColumn"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.FieldCriteria.IsText(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if field is textual field.</summary>
+            <param name="fieldComponent">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Core.IDbColumn"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.FieldCriteria.IsNotText(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if field is not textual field.</summary>
+            <param name="fieldComponent">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Core.IDbColumn"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.FieldCriteria.IsNumber(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if field is numberic field.</summary>
+            <param name="fieldComponent">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Core.IDbColumn"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.FieldCriteria.IsNotNumber(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if field is not numeric field.</summary>
+            <param name="fieldComponent">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Core.IDbColumn"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.FieldCriteria.IsDate(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if field is date field.</summary>
+            <param name="fieldComponent">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Core.IDbColumn"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.FieldCriteria.IsNotDate(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if field is not date field.</summary>
+            <param name="fieldComponent">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Core.IDbColumn"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.FieldCriteria.IsMatch(System.String)">
+            <summary>Creates a predicate, ie. method delegate, which checks if column name matches give regular expression.</summary>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.FieldCriteria.IsFkToRoot(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if field is used to establish relation/FK to <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Root"/> object.</summary>
+            <param name="fieldComponent">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Core.IDbColumn"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.FieldCriteria.IsNotFkToRoot(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if field is not used to establish relation/FK to <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Root"/> object.</summary>
+            <param name="fieldComponent">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Core.IDbColumn"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.FieldCriteria.IsBool(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if field is boolean field.</summary>
+            <param name="fieldComponent">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Core.IDbColumn"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.FieldCriteria.IsNotBool(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if field is not boolean field.</summary>
+            <param name="fieldComponent">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Core.IDbColumn"/> object.</param>
+        </member>
+        <member name="T:FistCore.Generator.EntityComponents.CollectionCriteria">
+            <summary>Contains methods/predicates which evaluate entity collection criteria.</summary>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.CollectionCriteria.HasIntegerPk(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if entity collection has single column integer PK.</summary>
+            <param name="entityCollection">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Core.IEntityCollection"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.TypeUtil.IsInteger(System.Type)">
+            <summary>
+            Indicates whether the given type is an integer number (Int32, Byte, Long etc.).
+            </summary>
+            <param name="t">Type to be tested.</param>
+            <returns>True if a given type is an integral type; false otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.TypeUtil.IsFloatingPointNumber(System.Type)">
+            <summary>
+            Indicates wheter the given type is a floating point number (Single, Double, Decimal).
+            </summary>
+            <param name="t">Type to be tested.</param>
+            <returns>True if a given type is an integral type; false otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.TypeUtil.IsNumber(System.Type)">
+            <summary>
+            Indicates whether the given type is a number (integer or real number).
+            </summary>
+            <param name="t">Type to be tested.</param>
+            <returns>True if a given type is an integral type; false otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.TypeUtil.IsDate(System.Type)">
+            <summary>
+            Indicates whether the given type is a date type.
+            </summary>	
+            <param name="t">Type to be tested.</param>
+            <returns>True if a given type is an integral type; false otherwise.</returns>
+        </member>
+        <member name="M:FistCore.Generator.EntityComponents.TypeUtil.IsText(System.Type)">
+            <summary>
+            Indicates whether the given type is textual (String, Char, Char[]).
+            </summary>
+            <param name="t">Type to be tested.</param>
+            <returns>True if a given type is an integral type; false otherwise.</returns>
+        </member>
+    </members>
+</doc>

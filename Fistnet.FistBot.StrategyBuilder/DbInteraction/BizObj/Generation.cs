@@ -31,6 +31,16 @@ namespace Fistnet.FistBot.BL
                 return new GenerationEntity(rows.Rows[0]).IdGeneration;
         }
 
+        public static int GetGenerationCount()
+        {
+            GenerationMeta genMeta = new GenerationMeta();
+            SelectStatement select = new SelectStatement(genMeta);
+            select.OrderBy.Add(genMeta.IdGeneration, false);
+            DataTable rows = select.Execute();
+
+            return rows.Rows.Count;
+        }
+
         #endregion Static.
 
         #region Constructors.

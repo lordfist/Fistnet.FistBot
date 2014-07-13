@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Template xmlns="http://fuzzyeye.org/FistCore/TemplateEngine/Template.xsd" >
+  <Header>
+    <Title>app.config template</Title>
+    <Description>Application configuration file which contains connection string and target DBMS.</Description>
+    <Family>OrmConfig</Family>
+  </Header>
+  <Variables>
+    <Variable>
+      <Name>DbmsTypeAppSettingsKey</Name>
+      <Description>App settings entry which conains the target DBMS.</Description>
+      <DefaultValue>MySolution.DbmsType</DefaultValue>
+    </Variable>
+    <Variable>
+      <Name>DbmsType</Name>
+      <Description>Target DBMS</Description>
+      <DefaultValue>SqlServer_2005</DefaultValue>
+      <AllowedValues>
+        <ListItem>
+          <Name>SQL Server 2008</Name>
+          <Value>SqlServer_2008</Value>
+        </ListItem>
+        <ListItem>
+          <Name>SQL Server 2005</Name>
+          <Value>SqlServer_2005</Value>
+        </ListItem>
+        <ListItem>
+          <Name>SQL Server 2000</Name>
+          <Value>SqlServer_2000</Value>
+        </ListItem>
+        <ListItem>
+          <Name>SQL Server 7</Name>
+          <Value>SqlServer_7</Value>
+        </ListItem>
+        <ListItem>
+          <Name>Oracle 11g</Name>
+          <Value>Oracle_11g</Value>
+        </ListItem>
+        <ListItem>
+          <Name>Oracle 10g</Name>
+          <Value>Oracle_10g</Value>
+        </ListItem>
+        <ListItem>
+          <Name>Oracle 9i</Name>
+          <Value>Oracle_9i</Value>
+        </ListItem>
+        <ListItem>
+          <Name>MySQL</Name>
+          <Value>MySql_5</Value>
+        </ListItem>
+        <ListItem>
+          <Name>PostgreSQL</Name>
+          <Value>PostgreSql_9</Value>
+        </ListItem>
+        <ListItem>
+          <Name>Firebird</Name>
+          <Value>Firebird_2</Value>
+        </ListItem>
+        <ListItem>
+          <Name>ODBC Generic Connection</Name>
+          <Value>OdbcGeneric</Value>
+        </ListItem>
+        <ListItem>
+          <Name>OLE DB Generic Database</Name>
+          <Value>OleGeneric</Value>
+        </ListItem>
+      </AllowedValues>
+    </Variable>
+    <Variable>
+      <Name>ConnectionStringName</Name>
+      <Description>Name of the connection string in the .config file.</Description>
+      <DefaultValue>MySolution.ConnectionString</DefaultValue>
+    </Variable>
+    <Variable>
+      <Name>ConnectionString</Name>
+      <Description>Connection string</Description>
+      <DefaultValue></DefaultValue>
+    </Variable>
+    <Variable>
+      <Name>FileName</Name>
+      <Description>Generated file name with extension</Description>
+      <DefaultValue>App.config</DefaultValue>
+    </Variable>
+    <Variable>
+      <Name>ProjectNamespace</Name>
+      <Description>C# namespace for FistCore project</Description>
+      <DefaultValue>MySolution.FistCore</DefaultValue>
+    </Variable>
+    <Variable>
+      <Name>ConfigureSequences</Name>
+      <Description>Configure sequences</Description>
+      <DefaultValue>N</DefaultValue>
+      <AllowedValues>
+        <ListItem>
+          <Name>No</Name>
+          <Value>N</Value>
+        </ListItem>
+        <ListItem>
+          <Name>Yes</Name>
+          <Value>Y</Value>
+        </ListItem>
+      </AllowedValues>
+    </Variable>
+    <Variable>
+      <Name>OutputSubdirectory</Name>
+      <Description>Output subdirectory</Description>
+      <DefaultValue></DefaultValue>
+    </Variable>
+  </Variables>
+  <ReferencedAssemblies>
+    <Assembly>FistCore.Generator.OrmComponents.dll</Assembly>
+    <Assembly>FistCore.Generator.DbMetaData.dll</Assembly>
+  </ReferencedAssemblies>
+  <Namespaces>
+    <Using>System</Using>
+    <Using>FistCore.Generator.OrmComponents</Using>
+  </Namespaces>
+  <InputComponentBuilder>
+    <Assembly>FistCore.Generator.OrmComponents</Assembly>
+    <Class>FistCore.Generator.OrmComponents.DbComponentBuilder</Class>
+  </InputComponentBuilder>
+  <TemplateSegments>
+    <TemplateSegment Id="FileRoot">
+      <![CDATA[<?xml version="1.0"?>
+<configuration>
+  <appSettings>
+    <add key="$Variables["DbmsTypeAppSettingsKey"]$" value="$Variables["DbmsType"]$"/>$GenerateIf("SequencesConfiguration", Input, Variables["ConfigureSequences"] == "Y")$
+
+    <add key="Actor.LoginCookieName" value="userdata" />
+    <add key="Actor.LoginCookieUser" value="usr" />
+    <add key="Actor.LoginCookiePass" value="pwd" />
+    <add key="Actor.UserCache" value="@Reserved_ActorCache" />
+    <add key="Actor.DaysLoginActive" value="30" />
+
+    <add key="BL.ObaveznoPoljeError" value="*{0} je obavezno polje." />
+    <add key="BL.MailFrom" value="validate@NarodneNovine.hr" />
+    <add key="BL.MailSMTP" value="mx.posluh.hr" />
+
+    <add key="Web.BaseUrl" value="http://localhost" />
+    <add key="Web.UrlRouting" value="~/CoreUrlList.xml" />
+    <add key="Web.LanguageData" value="~/LanguageData.xml" />
+
+    <add key="Web.Common.DefaultCacheTimeoutMinutes" value="8000" />
+    <add key="Web.Common.DefaultCacheTableName" value="@Reserved_CacheTable" />
+    <add key="Web.Common.DefaultCacheCategoryName" value="@CacheDefault" />
+    <add key="Web.Common.DefaultCacheCodeListName" value="@CacheCodeListDefault" />
+
+    <add key="Web.Controls.DefaultPageSize" value="30" />
+    <add key="Web.Controls.DefaultActivePagerCssClass" value="active ui-state-active" />
+
+  </appSettings>
+  <connectionStrings>
+    <add name="$Variables["ConnectionStringName"]$" connectionString="$Variables["ConnectionString"]$"/>
+  </connectionStrings>
+</configuration>
+]]>
+    </TemplateSegment>
+    <TemplateSegment Id="SequencesConfiguration">
+      <![CDATA[$Generate("Sequence", Input.GetChildren(DbComponentType.Table, TableCriteria.HasIntegerPK))$]]>
+    </TemplateSegment>
+    <TemplateSegment Id="Sequence">
+      <![CDATA[
+    <add key="$Variables["ProjectNamespace"]$.$Input.Name$.$Generate("ColumnName", Input.GetChildren(DbComponentType.Field, FieldCriteria.IsPrimaryKeyPart))$.SequenceName" value="$Input.Name$_SEQ"/>]]>
+    </TemplateSegment>
+    <TemplateSegment Id="ColumnName">
+      <![CDATA[$Input.Name$]]>
+    </TemplateSegment>
+  </TemplateSegments>
+</Template>

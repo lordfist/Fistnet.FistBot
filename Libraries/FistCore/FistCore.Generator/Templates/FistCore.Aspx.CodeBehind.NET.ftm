@@ -1,0 +1,385 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Template>
+  <Header>
+    <Title>ASPX Code-behind Template</Title>
+    <Description>Generates code-behind file for an ASP.NET form which acts as an application controler for a FistCore based business object</Description>
+    <Family>EntityUI</Family>
+  </Header>
+  <Variables>
+    <Variable>
+      <Name>WebNamespace</Name>
+      <Description>Web namespace</Description>
+      <DefaultValue>MySolution.Web</DefaultValue>
+    </Variable>
+    <Variable>
+      <Name>BLNamespace</Name>
+      <Description>Web namespace</Description>
+      <DefaultValue>MySolution.BL</DefaultValue>
+    </Variable>
+    <Variable>
+      <Name>DALNamespace</Name>
+      <Description>DAL namespace</Description>
+      <DefaultValue>MySolution.DAL</DefaultValue>
+    </Variable>
+    <Variable>
+      <Name>FieldCriteriaRegex</Name>
+      <Description>A regular expression pattern which determines whether a code snippet for a field should be generated.</Description>
+      <DefaultValue>^(?!(^Status$|^CreatedBy$|^CreationDate$|^UpdatedBy$|^UpdateDate$|^LastUpdatedBy$|^LastUpdateDate$)).*$</DefaultValue>
+    </Variable>
+    <Variable>
+      <Name>RelativeFolderUrl</Name>
+      <DefaultValue>~/Forms</DefaultValue>
+      <Description>Relative path to virtual directory which contains the generated form ('~' is the root directory)</Description>
+    </Variable>
+    <Variable>
+      <Name>DataAccessScope</Name>
+      <DefaultValue>Parents</DefaultValue>
+      <Description>The scope and the detail level of data (related entities) that is to be fetched</Description>
+    </Variable>
+    <Variable>
+      <Name>OutputSubdirectory</Name>
+      <Description>Output subdirectory</Description>
+      <DefaultValue>AspNet</DefaultValue>
+    </Variable>
+  </Variables>
+  <Settings>
+    <Setting>
+      <Name>FileExtension</Name>
+      <Description>File extension</Description>
+      <Value>aspx.cs</Value>
+    </Setting>
+    <Setting>
+      <Name>FileNameSuffix</Name>
+      <Description>Suffix appended to generated file</Description>
+      <Value>Form</Value>
+    </Setting>
+  </Settings>
+  <ReferencedAssemblies>
+    <Assembly>FistCore.Generator.EntityComponents.dll</Assembly>
+  </ReferencedAssemblies>
+  <Namespaces>
+    <Using>System</Using>
+    <Using>FistCore.Generator.EntityComponents</Using>
+  </Namespaces>
+  <InputComponentBuilder>
+    <Assembly>FistCore.Generator.EntityComponents</Assembly>
+    <Class>FistCore.Generator.EntityComponents.FistCoreComponentBuilder</Class>
+  </InputComponentBuilder>
+  <TemplateSegments>
+    <TemplateSegment Id="AspxCodeBehindRoot">
+      <![CDATA[using System;
+using System.Web;
+using System.ComponentModel;
+using System.Collections.Specialized;
+using System.Collections.Generic;
+
+using FistCore.Common;
+using FistCore.Core;
+using FistCore.Core.Common;
+using FistCore.Web.Common;
+using FistCore.Web.Caching;
+using FistCore.Web.Controls;
+
+using $Variables["BLNamespace"]$;
+using $Variables["BLNamespace"]$.Common;
+using $Variables["DALNamespace"]$;
+
+namespace $Variables["WebNamespace"]$
+{
+    /// <summary>Form to show and edit $Input.Root.Name$.</summary>
+    public partial class $Input.Root.Name$Form : BindablePage<$Input.Root.Name$>
+    {
+        /// <summary>Relative form URL.</summary>
+        public const string RelativeUrl = "$Variables["RelativeFolderUrl"]$/$Input.Root.Name$Form.aspx";
+
+        #region Base override. Copy on each bindable page.
+
+        /// <summary>
+        /// Gets actor data for custom actor.
+        /// </summary>
+        protected override Actor.GetByUserPassDelegate ActorRetriver
+        {
+            get
+            {
+                return SuperUser.GetByUserPass;
+            }
+        }
+
+        /// <summary>
+        /// Sets the bindable container to use for entity manipulation -> uses this.BizObject
+        /// </summary>
+        public override BindableContainer EntityContainer
+        {
+            get
+            {
+                if (this.uiDialog != null)
+                    return this.uiDialog.Container;
+                else
+                    return null;
+            }
+        }
+
+        /// <summary>
+        /// Readies the bindable container
+        /// </summary>
+        public override void ReadyData()
+        {
+
+            // BIZOBJECT
+            if (this.BizObject == null)
+            {
+                this.BizObject = $Input.Root.Name$.New$Input.Root.Name$(this.PageActor);
+            }
+
+            // EDIT COLUMNS
+            if (this.EditColumns.Count == 0)
+            {
+                this.EditColumns.Clear();
+				$Generate("WriteEditColumn", Input.GetChildren(FistCoreComponentType.Field, FieldCriteria.IsMatch(Variables["FieldCriteriaRegex"])))$
+
+                this.ColumnControls.Clear();
+                //this.ColumnControls.Add(this.BizObject.Table.Active, typeof(BindableCheckBox));
+
+            }
+
+            // FKDATA
+            if (this.FKColumns.Count == 0 || !this.BizObject.IsNew)
+            {
+
+                this.FKColumns.Clear();
+				$Generate("WriteParentCodelist", Input.GetChildren(FistCoreComponentType.Field, FieldCriteria.IsFk, FieldCriteria.IsNotFkToRoot, FieldCriteria.IsMatch(Variables["FieldCriteriaRegex"])))$
+
+				$Generate("WriteParentCodelistForRootParent", Input.GetChildren(FistCoreComponentType.Field, FieldCriteria.IsFkToRoot, FieldCriteria.IsMatch(Variables["FieldCriteriaRegex"])))$
+
+            }
+            base.ReadyData();
+        }
+
+        /// <summary>
+        /// Readies filters and header for manipulation
+        /// </summary>
+        public override void ReadyFiltersAndHeader()
+        {
+
+			$GenerateIf("WriteFilterAsDefaultTextField", Input, BusinessObjectCriteria.HasTextField)$
+			$GenerateIf("WriteFilterAsPK", Input, BusinessObjectCriteria.HasNoTextField)$
+
+            Dictionary<ColumnKey, string> lista = new Dictionary<ColumnKey, string>();
+
+			// Display all normal columns
+			$Generate("WriteHeaderColumn", Input.GetChildren(FistCoreComponentType.Field, FieldCriteria.IsNotFk, FieldCriteria.IsMatch(Variables["FieldCriteriaRegex"])))$
+
+			// Display all foreign key columns
+			$Generate("WriteParentHeaderColumn", Input.GetChildren(FistCoreComponentType.Field, FieldCriteria.IsFk, FieldCriteria.IsMatch(Variables["FieldCriteriaRegex"])))$
+
+            this.Filters = filter;
+            this.HeaderList = lista;
+        }
+
+        /// <summary>
+        /// Binds data to bindable table
+        /// </summary>
+        public override void BindData()
+        {
+            this.BindData(this.uiTableView.CurentPage);
+        }
+
+        /// <summary>
+        /// Bind data event catch
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event arguments</param>
+        public void BindData(object s, EventArgs e)
+        {
+            this.BindData();
+        }
+
+        /// <summary>
+        /// Binds data to new page
+        /// </summary>
+        /// <param name="CurrPage">New page to bind to</param>
+        public override void BindData(int CurrPage)
+        {
+            this.ReadyFiltersAndHeader();
+
+            // GET ENTITY COLLECTION
+            $Input.Root.Name$Search search = new $Input.Root.Name$Search();
+
+			$GenerateIf("WriteOrderByAsDefaultTextField", Input, BusinessObjectCriteria.HasTextField)$
+			$GenerateIf("WriteOrderByAsPK", Input, BusinessObjectCriteria.HasNoTextField)$
+            EntityCollection<$Input.Root.Name$Entity, $Input.Root.Name$Meta> itemCollection =
+				search.Get$Input.Root.Name$Collection((SearchCondition)this.Filters, orderBy);
+            this.uiTableView.Data = itemCollection;
+            this.uiTableView.DisplayColumns = this.HeaderList;
+            this.uiTableView.ReBind(CurrPage);
+        }
+
+        #endregion
+
+        #region Page.
+
+		/// <summary>
+		/// Sets language for this page.
+		/// </summary>
+		private void SetLanguage()
+		{
+			this.LinkButtonNew.Text = TextHelper.GetCaption("Common_NewItem", "$Input.Root.Name$");
+			this.LinkButtonDeleteSelected.Text = TextHelper.GetCaption("Common_DeleteSelected");
+			this.LinkButtonSearch.Text = TextHelper.GetCaption("Common_Search");
+			this.LabelFilterCaption.Text = TextHelper.GetCaption("Common_Search");
+			this.LabelSearch.Text = TextHelper.GetCaption("Common_SearchFilter", "$Generate("WriteFieldName", Input.GetChildren(FistCoreComponentType.Field, 0, 1, FieldCriteria.IsText))$");
+        }
+
+		protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+				SetLanguage();
+            }
+        }
+
+        #endregion
+
+        #region Buttons.
+
+        /// <summary>
+        /// Delete items selected (checked) in TableView.
+        /// </summary>
+        protected void LinkButtonDeleteSelected_Click(object sender, EventArgs e)
+        {
+            List<int> items = this.uiTableView.GetSelectedItems();
+
+            foreach (int item in items)
+            {
+                $Input.Root.Name$ bizObj = new $Input.Root.Name$(item);
+                bizObj.EntityState = EntityState.Synchronized;
+                bizObj.DeleteIfValid(this.PageActor, true);
+            }
+            this.BindData();
+        }
+
+        /// <summary>
+        /// Create new BizObject item and open it for edit.
+        /// </summary>
+        protected void LinkButtonNew_Click(object sender, EventArgs e)
+        {
+
+            $Input.Root.Name$ bizItem = $Input.Root.Name$.New$Input.Root.Name$(this.PageActor);
+            this.BizObject = bizItem;
+            this.uiDialog.Title = TextHelper.GetCaption("Common_NewItem", "$Input.Root.Name$");
+            this.uiDialog.Visible = true;
+            this.ReloadContainer();
+        }
+
+        #endregion
+
+        #region Dialog save.
+
+        protected void uiDialog_SaveClicked(object sender, EventArgs e)
+        {
+
+            BusinessRuleCollection bRules = this.BizObject.SaveIfValid(this.PageActor, ValidationLevel.AllBusinessRules, true);
+
+            if (bRules.HasBrokenRules)
+            {
+                this.uiDialog.BRuleCollection = bRules;
+                this.uiDialog.Visible = true;
+            }
+            else
+            {
+                //CacheHelper.RemoveCache(new string[] { CacheCategories.MENU });
+                this.uiDialog.Clear();
+                this.BindData();
+            }
+        }
+
+        #endregion
+
+        #region Table view.
+
+        protected void uiTableView_Click(string CommandName, int KeyId)
+        {
+
+            $Input.Root.Name$ bizObject = new $Input.Root.Name$(KeyId);
+
+            if (CommandName == TableView.CommonItemCommandEdit) // Edit requested
+            {
+                if (bizObject.FetchIfValid(this.PageActor, DataAccessScope.EntityOnly, true).HasBrokenRules == false)
+                {
+                    this.BizObject = bizObject;
+                    this.uiDialog.Title = TextHelper.GetCaption("Common_EditItem", "$Input.Root.Name$");
+                    this.uiDialog.Visible = true;
+                    this.ReloadContainer();
+                }
+            }
+            else if (CommandName == TableView.CommonItemCommandDelete) // Delete requested
+            {
+                bizObject.DeleteIfValid(this.PageActor, true);
+            }
+
+            this.BindData();
+        }
+
+        protected void uiTableView_PagerPageChanged(int NewPage)
+        {
+            this.BindData(NewPage);
+        }
+
+        #endregion
+    }
+}
+]]>
+    </TemplateSegment>
+    <TemplateSegment Id="WriteEditColumn">
+      <![CDATA[
+				this.EditColumns.Add(this.BizObject.Table.$Input.Name$, TextHelper.GetCaption("$Input.Root.Name$_$Input.Name$"));]]>
+    </TemplateSegment>
+    <TemplateSegment Id="WriteHeaderColumn">
+      <![CDATA[lista.Add(new ColumnKey(this.BizObject.Table.$Input.Name$, null), TextHelper.GetCaption("$Input.Root.Name$_$Input.Name$"));
+			]]>
+    </TemplateSegment>
+    <TemplateSegment Id="WriteParentHeaderColumn">
+      <![CDATA[lista.Add(new ColumnKey(new $Input.ParentEntityClass().Replace("Entity", "Meta")$().$Input.ParentDefaultTextProperty()$, this.BizObject.Table.FK_$Input.Name$), TextHelper.GetCaption("$Input.Root.Name$_$Input.Name$"));
+			]]>
+    </TemplateSegment>
+    <TemplateSegment Id="WriteParentCodelist">
+      <![CDATA[//Codelist for parent object $Input.ParentEntityClass().Replace("Entity", "")$
+				$Input.ParentEntityClass().Replace("Entity", "")$Meta parent$Input.Name$Meta = new $Input.ParentEntityClass().Replace("Entity", "")$Meta();
+				this.FKColumns.Add(this.BizObject.Table.$Input.Name$, new $Input.ParentEntityClass().Replace("Entity", "")$Search().Get$Input.ParentEntityClass().Replace("Entity", "")$(null, new IDbColumn[] { parent$Input.Name$Meta.PrimaryKey[0], parent$Input.Name$Meta.$Input.ParentDefaultTextProperty()$ }, null));
+            ]]>
+    </TemplateSegment>
+    <TemplateSegment Id="WriteParentCodelistForRootParent">
+      <![CDATA[//FK for self-root
+				$Input.Root.Name$Meta parent$Input.Name$Meta = new $Input.Root.Name$Meta();
+				SearchCondition parent$Input.Name$Filter = new SearchCondition();
+
+				parent$Input.Name$Filter.Add(PredicateFactory.Compare(parent$Input.Name$Meta.PrimaryKey[0], ComparisonOperator.GreaterThan, 0));
+				parent$Input.Name$Filter.And(PredicateFactory.IsNull(parent$Input.Name$Meta.$Input.Name$, true));
+
+				if (!this.BizObject.IsNew)
+					parent$Input.Name$Filter.Add(PredicateFactory.Compare(parent$Input.Name$Meta.$Input.Name$, ComparisonOperator.NotEqual, this.BizObject.GetPrimaryKeyValue()[0]));
+
+				this.FKColumns.Add(this.BizObject.Table.$Input.Name$, new $Input.Root.Name$Search().Get$Input.Root.Name$(parent$Input.Name$Filter, new IDbColumn[] { parent$Input.Name$Meta.PrimaryKey[0], parent$Input.Name$Meta.$Input.ParentDefaultTextProperty()$ }, null));
+			]]>
+    </TemplateSegment>
+    <TemplateSegment Id="WriteFilterAsPK">
+      <![CDATA[SearchCondition filter = new SearchCondition(PredicateFactory.Like(this.BizObject.Table.PrimaryKey[0],
+                 "%" + TextBoxSearch.Text + "%"));]]>
+    </TemplateSegment>
+    <TemplateSegment Id="WriteFilterAsDefaultTextField">
+      <![CDATA[SearchCondition filter = new SearchCondition(PredicateFactory.Like(this.BizObject.Table.$Generate("WriteFieldName", Input.Root.GetChildren(FistCoreComponentType.Field, 0, 1, FieldCriteria.IsText))$,
+                 "%" + TextBoxSearch.Text + "%"));]]>
+    </TemplateSegment>
+    <TemplateSegment Id="WriteOrderByAsPK">
+      <![CDATA[OrderByClause orderBy = new OrderByClause(this.BizObject.Table.PrimaryKey[0]);
+	  ]]>
+    </TemplateSegment>
+    <TemplateSegment Id="WriteOrderByAsDefaultTextField">
+      <![CDATA[OrderByClause orderBy = new OrderByClause(this.BizObject.Table.$Generate("WriteFieldName", Input.GetChildren(FistCoreComponentType.Field, 0, 1, FieldCriteria.IsText))$);
+	  ]]>
+    </TemplateSegment>
+    <TemplateSegment Id="WriteFieldName">
+      <![CDATA[$Input.Name$]]>
+    </TemplateSegment>
+  </TemplateSegments>
+</Template>

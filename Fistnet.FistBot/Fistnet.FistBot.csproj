@@ -104,6 +104,7 @@
     <Compile Include="Actions\Turn\TurnToCenter.cs" />
     <Compile Include="Bot\Bot.cs" />
     <Compile Include="Bot\BotDna.cs" />
+    <Compile Include="Bot\BotStatistics.cs" />
     <Compile Include="Common.cs" />
     <Compile Include="Evaluation\Common.cs" />
     <Compile Include="Evaluation\JumpFalseCondition.cs" />

@@ -1,0 +1,669 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FistCore.Generator.TemplateEngine</name>
+    </assembly>
+    <members>
+        <member name="T:FistCore.Generator.TemplateEngine.ComponentType">
+            <summary>ID specifying component type.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.ComponentType.#ctor(System.Guid)">
+            <summary>
+            Initializes a new component type.
+            </summary>
+            <param name="id">Unique component type ID.</param>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.ComponentType.op_Equality(FistCore.Generator.TemplateEngine.ComponentType,FistCore.Generator.TemplateEngine.ComponentType)">
+            <summary>Returns true if both components have equal IDs.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.ComponentType.op_Inequality(FistCore.Generator.TemplateEngine.ComponentType,FistCore.Generator.TemplateEngine.ComponentType)">
+            <summary>Returns true if components have different IDs.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.ComponentType.GetHashCode">
+            <summary>Returns the hash code for this instance.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.ComponentType.Equals(System.Object)">
+            <summary>Returns true if both components have equal IDs.</summary>
+        </member>
+        <member name="T:FistCore.Generator.TemplateEngine.ITemplateInputComponent">
+            <summary>A component passed as input parameter to a template or template segment.</summary>
+            <remarks>Properties and methods of ITemplateInputComponent are accessible to template expressions (see <see cref="T:FistCore.Generator.TemplateEngine.ITemplateExpression"/>)
+            used in template XML files via <see cref="P:FistCore.Generator.TemplateEngine.ITemplateExpression.Input"/> property.</remarks>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.ITemplateInputComponent.GetChildren">
+            <summary>Gets all subcomponents.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.ITemplateInputComponent.GetChildren(FistCore.Generator.TemplateEngine.ComponentType)">
+            <summary>Gets all subcomponents of the specified type.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.ITemplateInputComponent.GetChildren(FistCore.Generator.TemplateEngine.ComponentType,System.Int32,System.Int32)">
+            <summary>Gets all subcomponents of the specified type and belong to the specified range.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.ITemplateInputComponent.GetChildren(System.Predicate{FistCore.Generator.TemplateEngine.ITemplateInputComponent}[])">
+            <summary>Gets all subcomponents matching specified criteria.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.ITemplateInputComponent.GetChildren(System.Int32,System.Int32,System.Predicate{FistCore.Generator.TemplateEngine.ITemplateInputComponent}[])">
+            <summary>Gets all subcomponents matching specified criteria and belong to the specified range.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.ITemplateInputComponent.GetChildren(FistCore.Generator.TemplateEngine.ComponentType,System.Predicate{FistCore.Generator.TemplateEngine.ITemplateInputComponent}[])">
+            <summary>Gets all subcomponents of the specified type matching specified criteria.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.ITemplateInputComponent.GetChildren(FistCore.Generator.TemplateEngine.ComponentType,System.Int32,System.Int32,System.Predicate{FistCore.Generator.TemplateEngine.ITemplateInputComponent}[])">
+            <summary>Gets all subcomponents of the specified type matching specified criteria and which belong to the specified range.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.ITemplateInputComponent.ExistsChild">
+            <summary>Checks whether the current object has any subcomponents.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.ITemplateInputComponent.ExistsChild(FistCore.Generator.TemplateEngine.ComponentType)">
+            <summary>Checks whether the current object has subcomponents of the specified type.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.ITemplateInputComponent.ExistsChild(System.Predicate{FistCore.Generator.TemplateEngine.ITemplateInputComponent}[])">
+            <summary>Checks whether the current object has subcomponents matching specified criteria.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.ITemplateInputComponent.ExistsChild(FistCore.Generator.TemplateEngine.ComponentType,System.Predicate{FistCore.Generator.TemplateEngine.ITemplateInputComponent}[])">
+            <summary>Checks whether the current object has of the specified type matching specified criteria.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Name">
+            <summary>Component name.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Class">
+            <summary>.NET type of the value stored in Instance property.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance">
+            <summary>Component instance.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Type">
+            <summary>Type of component stored in Instance property.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Parent">
+            <summary>Parent component of the current instance or null.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Root">
+            <summary>Root component of the hierarchy to which the current instance belongs to.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.CurrentTemplateData">
+            <summary>Optional data for template that is currently running.</summary>
+            <remarks>Enables components to access template variables and settings.</remarks>
+        </member>
+        <member name="T:FistCore.Generator.TemplateEngine.TemplateInputComponentBase">
+            <summary>Base class from which components passed as input parameter to a template or template segment are derived.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.TemplateInputComponentBase.#ctor(FistCore.Generator.TemplateEngine.ComponentType,System.Object,System.String,FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Initializes a new instance of TemplateInputComponentBase class.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.TemplateInputComponentBase.GetChildren">
+            <summary>Gets all subcomponents.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.TemplateInputComponentBase.GetChildren(FistCore.Generator.TemplateEngine.ComponentType)">
+            <summary>Gets all subcomponents of the specified type.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.TemplateInputComponentBase.GetChildren(FistCore.Generator.TemplateEngine.ComponentType,System.Int32,System.Int32)">
+            <summary>Gets all subcomponents of the specified type and belong to the specified range.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.TemplateInputComponentBase.GetChildren(System.Predicate{FistCore.Generator.TemplateEngine.ITemplateInputComponent}[])">
+            <summary>Gets all subcomponents matching specified criteria.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.TemplateInputComponentBase.GetChildren(System.Int32,System.Int32,System.Predicate{FistCore.Generator.TemplateEngine.ITemplateInputComponent}[])">
+            <summary>Gets all subcomponents matching specified criteria and belong to the specified range.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.TemplateInputComponentBase.GetChildren(FistCore.Generator.TemplateEngine.ComponentType,System.Predicate{FistCore.Generator.TemplateEngine.ITemplateInputComponent}[])">
+            <summary>Gets all subcomponents of the specified type matching specified criteria.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.TemplateInputComponentBase.GetChildren(FistCore.Generator.TemplateEngine.ComponentType,System.Int32,System.Int32,System.Predicate{FistCore.Generator.TemplateEngine.ITemplateInputComponent}[])">
+            <summary>Gets all subcomponents of the specified type matching specified criteria and which belong to the specified range.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.TemplateInputComponentBase.ExistsChild">
+            <summary>Checks whether the current object has any subcomponents.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.TemplateInputComponentBase.ExistsChild(FistCore.Generator.TemplateEngine.ComponentType)">
+            <summary>Checks whether the current object has subcomponents of the specified type.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.TemplateInputComponentBase.ExistsChild(System.Predicate{FistCore.Generator.TemplateEngine.ITemplateInputComponent}[])">
+            <summary>Checks whether the current object has subcomponents matching specified criteria.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.TemplateInputComponentBase.ExistsChild(FistCore.Generator.TemplateEngine.ComponentType,System.Predicate{FistCore.Generator.TemplateEngine.ITemplateInputComponent}[])">
+            <summary>Checks whether the current object has of the specified type matching specified criteria.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.TemplateInputComponentBase.EnsureSubcomponents">
+            <summary>Ensures that <see cref="P:FistCore.Generator.TemplateEngine.TemplateInputComponentBase.Subcomponents"/> property is initialized. Must be overriden in derived classes.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.TemplateInputComponentBase.Name">
+            <summary>Component name.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.TemplateInputComponentBase.Class">
+            <summary>.NET type of the value stored in Instance property.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.TemplateInputComponentBase.Instance">
+            <summary>Component instance.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.TemplateInputComponentBase.Type">
+            <summary>Type of component stored in Instance property.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.TemplateInputComponentBase.Parent">
+            <summary>Parent component of the current instance or null.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.TemplateInputComponentBase.Root">
+            <summary>Root component of the hierarchy to which the current instance belongs to.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.TemplateInputComponentBase.CurrentTemplateData">
+            <summary>Optional template that is currently running.</summary>
+            <remarks>Enables components to access template variables and settings.</remarks>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.TemplateInputComponentBase.Subcomponents">
+            <summary>Gets or sets subcomponent list.</summary>
+        </member>
+        <member name="T:FistCore.Generator.TemplateEngine.ITemplateData">
+            <summary>Read-only metadata specified for XML template.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.ITemplateData.GetVariable(System.String)">
+            <summary>Gets the value stored in the specified variable.</summary>
+            <param name="variableName">Variable name.</param>
+            <returns>Value stored in the specified variable; <b>null</b> if the specified variable is not found.</returns>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.ITemplateData.GetSetting(System.String)">
+            <summary>Gets the value associated with the specified settings key.</summary>
+            <param name="settingKey">Settings key.</param>
+            <returns>Value associated with the specified settings key; <b>null</b> if the specified setting is not found.</returns>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.ITemplateData.Header">
+            <summary>Template header.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.ITemplateData.Namespaces">
+            <summary>Namespaces from which types are imported and used in template expressions.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.ITemplateData.ReferencedAssemblies">
+            <summary>Assemblies required to run the template.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.ITemplateData.Segments">
+            <summary>Template segments.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.ITemplateData.Settings">
+            <summary>Additional template settings which affect how the code is generated.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.ITemplateData.Variables">
+            <summary>Template variables.</summary>
+        </member>
+        <member name="T:FistCore.Generator.TemplateEngine.ITemplate">
+            <summary>Generates code based on XML/C# templates.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.ITemplate.ReadXml(System.String)">
+            <summary>Reads template from the specified XML file.</summary>
+            <param name="fileName">The filename (including the path) from which to read.</param>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.ITemplate.Run(System.IO.StreamWriter,FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Generates code for the given input component.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.ITemplate.Run(System.IO.StreamWriter,System.Object)">
+            <summary>Generates code for the given object.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.ITemplate.Run(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Generates code for the given input component.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.ITemplate.Run(System.Object)">
+            <summary>Generates code for the given object.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.ITemplate.XmlContent">
+            <summary>Raw XML content.</summary>
+        </member>
+        <member name="T:FistCore.Generator.TemplateEngine.Template">
+            <summary>Generates code based on XML/C# templates.</summary>
+        </member>
+        <member name="F:FistCore.Generator.TemplateEngine.Template.ExpressionDelimiter">
+            <summary>C# expressions in templates, which are to be compiled and evaluated during generation, are placed between $ symbols.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.Template.ReadXml(System.String)">
+            <summary>Reads template from the specified XML file.</summary>
+            <param name="fileName">The filename (including the path) from which to read.</param>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.Template.GetVariable(System.String)">
+            <summary>Gets the value stored in the specified variable.</summary>
+            <param name="variableName">Variable name.</param>
+            <returns>Value stored in the specified variable; <b>null</b> if the specified variable is not found.</returns>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.Template.GetSetting(System.String)">
+            <summary>Gets the value associated with the specified settings key.</summary>
+            <param name="settingKey">Settings key.</param>
+            <returns>Value associated with the specified settings key; <b>null</b> if the specified setting is not found.</returns>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.Template.Run(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Compiles template and generates code for the given input component.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.Template.Run(System.Object)">
+            <summary>Compiles template and generates code for the given object.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.Template.Run(System.IO.StreamWriter,FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Compiles template and generates code for the given input component.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.Template.Run(System.IO.StreamWriter,System.Object)">
+            <summary>Compiles template and generates code for the given object.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.Template.Generate(System.String,System.Collections.Generic.IEnumerable{FistCore.Generator.TemplateEngine.ITemplateInputComponent})">
+            <summary>Generates code segments for the given input components.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.Template.GenerateIf(System.String,System.Collections.Generic.IEnumerable{FistCore.Generator.TemplateEngine.ITemplateInputComponent},FistCore.Generator.TemplateEngine.ITemplateInputComponent,System.Predicate{FistCore.Generator.TemplateEngine.ITemplateInputComponent}[])">
+            <summary>Generates code segments for the given input compoments if the specified condition is met.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.Template.Generate(System.String,FistCore.Generator.TemplateEngine.ITemplateInputComponent,System.Predicate{FistCore.Generator.TemplateEngine.ITemplateInputComponent}[])">
+            <summary>Generates code segments for input components which match the specified criteria.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.Template.Generate(System.String,FistCore.Generator.TemplateEngine.ITemplateInputComponent,System.Boolean[])">
+            <summary>Generates code segments for input components which match the specified criteria.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.Template.WriteIf(System.String,FistCore.Generator.TemplateEngine.ITemplateInputComponent,System.Predicate{FistCore.Generator.TemplateEngine.ITemplateInputComponent}[])">
+            <summary>Writes the text if the input component matches the specified criteria.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.Template.WriteIf(System.String,System.Boolean[])">
+            <summary>Writes the text if the input component matches the specified criteria.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.Template.Generate(FistCore.Generator.TemplateEngine.TemplateSegment,FistCore.Generator.TemplateEngine.ITemplateInputComponent,System.Predicate{FistCore.Generator.TemplateEngine.ITemplateInputComponent}[])">
+            <summary>Generates code segment for the given input compoments if it matches specified criteria.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.Template.Generate(System.IO.StreamWriter,FistCore.Generator.TemplateEngine.TemplateSegment,FistCore.Generator.TemplateEngine.ITemplateInputComponent,System.Predicate{FistCore.Generator.TemplateEngine.ITemplateInputComponent}[])">
+            <summary>Generates code segment for the given input compoments if it matches specified criteria.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.Template.XmlLines">
+            <summary>Gets XML template content/source.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.Template.Header">
+            <summary>Gets template header.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.Template.Segments">
+            <summary>Gets all template segments, including root segment.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.Template.Variables">
+            <summary>Gets template variables.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.Template.Settings">
+            <summary>Gets additional template settings which affect how the code is generated.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.Template.ReferencedAssemblies">
+            <summary>Gets assemblies required to run the template.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.Template.Namespaces">
+            <summary>Gets namespaces from which types are imported and used in template expressions.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.Template.XmlContent">
+            <summary>Gets raw XML content.</summary>
+        </member>
+        <member name="T:FistCore.Generator.TemplateEngine.TemplateCompiler">
+            <summary>Compiles and instantiates template expression objects.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.TemplateCompiler.CompileExpressions(FistCore.Generator.TemplateEngine.Template)">
+            <summary>Compiles an assembly that contains one class per each distinct expression found in given template.</summary>
+        </member>
+        <member name="T:FistCore.Generator.TemplateEngine.TemplateExpressionFactory">
+            <summary>Creates instances of classes derived from TemplateExpressionBase using prepared delegates/initializers - faster then reflection.</summary>
+        </member>
+        <member name="T:FistCore.Generator.TemplateEngine.ITemplateExpression">
+            <summary>Defines properties that may be used in XML template expressions (delimited by $ signs).</summary>
+            <remarks><para>Expressions, i.e. code segments delimited by $ signs in XML templates, are compiled as classes which implement <b>ITemplateExpression</b> interface.</para>
+            <para>C# template expressions have access to the <see cref="P:FistCore.Generator.TemplateEngine.ITemplateExpression.Input"/> and <see cref="P:FistCore.Generator.TemplateEngine.ITemplateExpression.Variables"/> public properties and
+            a collection of Generate* and Write* method.</para>
+            <para>All public types in the System, Idom3.Enteprise and Idom3.CodeGen may be used in C# template expressions as well as
+            assemblies explicitely referenced in <b>ReferencedAssemblies</b> element of template's XML file.</para></remarks>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.ITemplateExpression.Generate(System.String,System.Collections.Generic.IEnumerable{FistCore.Generator.TemplateEngine.ITemplateInputComponent})">
+            <summary>Generates the specified template segment for the given input components.</summary>
+            <param name="segmentId">Segment ID as defined in <b>Id</b> attribute of <b>TemplateSegment</b> XML element.</param>
+            <param name="components">A collection of input components.</param>
+            <returns>Generated text. Empty string if <b>components</b> collection is empty.</returns>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.ITemplateExpression.Generate(System.String,FistCore.Generator.TemplateEngine.ITemplateInputComponent,System.Predicate{FistCore.Generator.TemplateEngine.ITemplateInputComponent}[])">
+            <summary>Generates the specified template segment for input components that match the specified criteria.</summary>
+            <param name="segmentId">Segment ID as defined in <b>Id</b> attribute of <b>TemplateSegment</b> XML element.</param>
+            <param name="component">An input component.</param>
+            <param name="componentCriteria">An array of predicates that define a set of criteria for the input component.</param>
+            <returns>Generated text. Empty string if the criterira is not matched.</returns>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.ITemplateExpression.GenerateIf(System.String,FistCore.Generator.TemplateEngine.ITemplateInputComponent,System.Predicate{FistCore.Generator.TemplateEngine.ITemplateInputComponent}[])">
+            <summary>Generates the specified template segment for input component if it matches the specified criteria.</summary>
+            <param name="segmentId">Segment ID as defined in <b>Id</b> attribute of <b>TemplateSegment</b> XML element.</param>
+            <param name="component">An input component.</param>
+            <param name="componentCriteria">An array of predicates that define a set of criteria for the input component.</param>
+            <returns>Generated text. Empty string if the criterira is not matched.</returns>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.ITemplateExpression.GenerateIf(System.String,FistCore.Generator.TemplateEngine.ITemplateInputComponent,System.Boolean[])">
+            <summary>Generates the specified template segment for input component if it matches the specified criteria.</summary>
+            <param name="segmentId">Segment ID as defined in <b>Id</b> attribute of <b>TemplateSegment</b> XML element.</param>
+            <param name="component">An input component.</param>
+            <param name="evaluatedComponentCriteria">An array of flags. All must be <b>true</b> to generate the segment.</param>
+            <returns>Generated text. Empty string if the criterira is not matched.</returns>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.ITemplateExpression.GenerateIf(System.String,System.Collections.Generic.IEnumerable{FistCore.Generator.TemplateEngine.ITemplateInputComponent},FistCore.Generator.TemplateEngine.ITemplateInputComponent,System.Predicate{FistCore.Generator.TemplateEngine.ITemplateInputComponent}[])">
+            <summary>Generates the specified template segment for the given input components if the specified condition is met.</summary>
+            <param name="segmentId">Segment ID as defined in <b>Id</b> attribute of <b>TemplateSegment</b> XML element.</param>
+            <param name="components">A collection of input components.</param>
+            <param name="criteriaParameter">A component which is to be passed to the supplied criteria methods.</param>
+            <param name="criteria">An array of predicates that define a set of criteria for the component provided as criteria parameter.</param>
+            <returns>Generated text. Empty string if the criterira is not matched.</returns>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.ITemplateExpression.WriteIf(System.String,FistCore.Generator.TemplateEngine.ITemplateInputComponent,System.Predicate{FistCore.Generator.TemplateEngine.ITemplateInputComponent}[])">
+            <summary>Writes the given text if the input component matches the specified criteria.</summary>
+            <param name="text">Text to write.</param>
+            <param name="component">An input component.</param>
+            <param name="componentCriteria">An array of predicates that define a set of criteria for the input component.</param>
+            <returns>The specified text. Empty string if the criterira is not matched.</returns>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.ITemplateExpression.WriteIf(System.String,System.Boolean[])">
+            <summary>Writes the given text if the input component matches the specified criteria.</summary>
+            <param name="text">Text to write.</param>
+            <param name="evaluatedCriteria">An array of flags. All must be <b>true</b> to generate the segment.</param>
+            <returns>The specified text. Empty string if the criterira is not matched.</returns>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.ITemplateExpression.Initialize(FistCore.Generator.TemplateEngine.ITemplate,FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Initializes expression. Implementations should throw exception if the method is call more than once.</summary>
+            <param name="template">Template to which the current expression belongs to.</param>
+            <param name="input">Input component.</param>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.ITemplateExpression.Eval">
+            <summary>Executes expression.</summary>
+            <returns>Expression result.</returns>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.ITemplateExpression.Input">
+            <summary>Input component.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.ITemplateExpression.Variables">
+            <summary>Template variables.</summary>
+        </member>
+        <member name="T:FistCore.Generator.TemplateEngine.TemplateExpressionBase">
+            <summary>Base class for classes compiled in temporary assemblies.</summary>
+            <remarks><para>Defines properties and methods that may be used in XML template expressions (delimited by $ signs).</para>
+            <para>C# template expressions have access to the <see cref="P:FistCore.Generator.TemplateEngine.TemplateExpressionBase.Input"/> and <see cref="P:FistCore.Generator.TemplateEngine.TemplateExpressionBase.Variables"/> public properties and
+            a collection of Generate* and Write* method.</para>
+            <para>All public types in the System, Idom3.Enteprise and Idom3.CodeGen may be used in C# template expressions as well as
+            assemblies explicitely referenced in <b>ReferencedAssemblies</b> element of template's XML file.</para></remarks>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.TemplateExpressionBase.FistCore#Generator#TemplateEngine#ITemplateExpression#Initialize(FistCore.Generator.TemplateEngine.ITemplate,FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Initializes expression. This method can only be called once.</summary>
+            <param name="template">Template to which the current expression belongs to. This expression implementation only supports <see cref="T:FistCore.Generator.TemplateEngine.Template"/> class.</param>
+            <param name="input">Input component.</param>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.TemplateExpressionBase.Eval">
+            <summary>Executes compiled expression.</summary>
+            <returns>Expression result.</returns>
+            <remarks>Calling this method from XML expression will result with <see cref="T:System.StackOverflowException"/>.</remarks>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.TemplateExpressionBase.Generate(System.String,System.Collections.Generic.IEnumerable{FistCore.Generator.TemplateEngine.ITemplateInputComponent})">
+            <summary>Generates the specified template segment for the given input components.</summary>
+            <param name="segmentId">Segment ID as defined in <b>Id</b> attribute of <b>TemplateSegment</b> XML element.</param>
+            <param name="components">A collection of input components.</param>
+            <returns>Generated text. Empty string if <b>components</b> collection is empty.</returns>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.TemplateExpressionBase.Generate(System.String,FistCore.Generator.TemplateEngine.ITemplateInputComponent,System.Predicate{FistCore.Generator.TemplateEngine.ITemplateInputComponent}[])">
+            <summary>Generates the specified template segment for input components that match the specified criteria.</summary>
+            <param name="segmentId">Segment ID as defined in <b>Id</b> attribute of <b>TemplateSegment</b> XML element.</param>
+            <param name="component">An input component.</param>
+            <param name="componentCriteria">An array of predicates that define a set of criteria for the input component.</param>
+            <returns>Generated text. Empty string if the criterira is not matched.</returns>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.TemplateExpressionBase.GenerateIf(System.String,FistCore.Generator.TemplateEngine.ITemplateInputComponent,System.Predicate{FistCore.Generator.TemplateEngine.ITemplateInputComponent}[])">
+            <summary>Generates the specified template segment for input component if it matches the specified criteria.</summary>
+            <param name="segmentId">Segment ID as defined in <b>Id</b> attribute of <b>TemplateSegment</b> XML element.</param>
+            <param name="component">An input component.</param>
+            <param name="componentCriteria">An array of predicates that define a set of criteria for the input component.</param>
+            <returns>Generated text. Empty string if the criterira is not matched.</returns>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.TemplateExpressionBase.GenerateIf(System.String,FistCore.Generator.TemplateEngine.ITemplateInputComponent,System.Boolean[])">
+            <summary>Generates the specified template segment for input component if it matches the specified criteria.</summary>
+            <param name="segmentId">Segment ID as defined in <b>Id</b> attribute of <b>TemplateSegment</b> XML element.</param>
+            <param name="component">An input component.</param>
+            <param name="evaluatedComponentCriteria">An array of flags. All must be <b>true</b> to generate the segment.</param>
+            <returns>Generated text. Empty string if the criterira is not matched.</returns>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.TemplateExpressionBase.GenerateIf(System.String,System.Collections.Generic.IEnumerable{FistCore.Generator.TemplateEngine.ITemplateInputComponent},FistCore.Generator.TemplateEngine.ITemplateInputComponent,System.Predicate{FistCore.Generator.TemplateEngine.ITemplateInputComponent}[])">
+            <summary>Generates the specified template segment for the given input components if the specified condition is met.</summary>
+            <param name="segmentId">Segment ID as defined in <b>Id</b> attribute of <b>TemplateSegment</b> XML element.</param>
+            <param name="components">A collection of input components.</param>
+            <param name="criteriaParameter">A component which is to be passed to the supplied criteria methods.</param>
+            <param name="criteria">An array of predicates that define a set of criteria for the component provided as criteria parameter.</param>
+            <returns>Generated text. Empty string if the criterira is not matched.</returns>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.TemplateExpressionBase.WriteIf(System.String,FistCore.Generator.TemplateEngine.ITemplateInputComponent,System.Predicate{FistCore.Generator.TemplateEngine.ITemplateInputComponent}[])">
+            <summary>Writes the given text if the input component matches the specified criteria.</summary>
+            <param name="text">Text to write.</param>
+            <param name="component">An input component.</param>
+            <param name="componentCriteria">An array of predicates that define a set of criteria for the input component.</param>
+            <returns>The specified text. Empty string if the criterira is not matched.</returns>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.TemplateExpressionBase.WriteIf(System.String,System.Boolean[])">
+            <summary>Writes the given text if the input component matches the specified criteria.</summary>
+            <param name="text">Text to write.</param>
+            <param name="evaluatedCriteria">An array of flags. All must be <b>true</b> to generate the segment.</param>
+            <returns>The specified text. Empty string if the criterira is not matched.</returns>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.TemplateExpressionBase.Input">
+            <summary>Input component.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.TemplateExpressionBase.Variables">
+            <summary>Template variables.</summary>
+        </member>
+        <member name="T:FistCore.Generator.TemplateEngine.TemplateExpressionAssemblyCache">
+            <summary>Caches temporary assemblies in memory and optionally in temp directory.</summary>
+        </member>
+        <member name="T:FistCore.Generator.TemplateEngine.TemplateHeader">
+            <summary>Template title and description.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.TemplateHeader.Title">
+            <summary>Gets template title.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.TemplateHeader.Description">
+            <summary>Gets template description.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.TemplateHeader.Family">
+            <summary>Gets template family.</summary>
+        </member>
+        <member name="T:FistCore.Generator.TemplateEngine.ITemplateInputComponentBuilder">
+            <summary>Builds template input component for a given object.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.ITemplateInputComponentBuilder.Build(System.Object)">
+            <summary>Builds template input component for a given object.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.ITemplateInputComponentBuilder.IsCompatibleItem(System.Object)">
+            <summary>Checks whether the provided item is compatible with the component builder.</summary>
+        </member>
+        <member name="T:FistCore.Generator.TemplateEngine.TemplateSegment">
+            <summary>ID/name and segment body.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.TemplateSegment.Parse">
+            <summary>Parses and caches literals and expressions.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.TemplateSegment.Id">
+            <summary>Gets segment ID. Must be unique within template.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.TemplateSegment.Body">
+            <summary>Gets segment body.</summary>
+        </member>
+        <member name="T:FistCore.Generator.TemplateEngine.SegmentPart">
+            <summary>Segment part. Literal or expression.</summary>
+        </member>
+        <member name="T:FistCore.Generator.TemplateEngine.TemplateSegmentCollection">
+            <summary>Indexed segment collection which belongs to a single Template.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.TemplateSegmentCollection.#ctor(System.Collections.Generic.List{FistCore.Generator.TemplateEngine.TemplateSegment})">
+            <summary>CTor.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.TemplateSegmentCollection.GetSegment(System.String)">
+            <summary>Gets segment with the specified ID/name.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.TemplateSegmentCollection.Segments">
+            <summary>Gets all template segment, including root segment.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.TemplateSegmentCollection.RootSegment">
+            <summary>Gets root segment.</summary>
+        </member>
+        <member name="T:FistCore.Generator.TemplateEngine.TemplateSetting">
+            <summary>Template setting (name, value, description).</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.TemplateSetting.Name">
+            <summary>Gets setting name.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.TemplateSetting.Description">
+            <summary>Gets setting description.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.TemplateSetting.Value">
+            <summary>Gets setting value.</summary>
+        </member>
+        <member name="T:FistCore.Generator.TemplateEngine.TemplateVariableInfo">
+            <summary>Variable meta (name, default value, description) and chosen value.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.TemplateVariableInfo.#ctor(System.String,System.String,System.String)">
+            <summary>Initializes a new instance of <b>TemplateVariableInfo</b> class.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.TemplateVariableInfo.#ctor(System.String,System.String,System.String,FistCore.Generator.TemplateEngine.NameValuePair[])">
+            <summary>Initializes a new instance of <b>TemplateVariableInfo</b> class.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.TemplateVariableInfo.Name">
+            <summary>Gets variable name.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.TemplateVariableInfo.DefaultValue">
+            <summary>Gets default value.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.TemplateVariableInfo.Description">
+            <summary>Gets variable description.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.TemplateVariableInfo.Value">
+            <summary>Gets or sets variable value.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.TemplateVariableInfo.AllowedValues">
+            <summary>Gets an optional list of allowed value.</summary>
+        </member>
+        <member name="E:FistCore.Generator.TemplateEngine.TemplateVariableInfo.ValueChanged">
+            <summary>Occurs when variable value is changed.</summary>
+        </member>
+        <member name="T:FistCore.Generator.TemplateEngine.TemplateVariableCollection">
+            <summary>Represents a read-only collection of key/value pairs where key represent variable name and value represents TemplateVariableInfo object.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.TemplateVariableCollection.#ctor(System.Collections.Generic.IDictionary{System.String,FistCore.Generator.TemplateEngine.TemplateVariableInfo})">
+            <summary>Initializes a new instance of <b>TemplateVariableCollection</b> class.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.TemplateVariableCollection.GetEnumerator">
+            <summary>Returns an enumerator that iterates through the collection.</summary>
+            <returns>An IEnumerator object that can be used to iterate through the collection.</returns>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.TemplateVariableCollection.System#Collections#IEnumerable#GetEnumerator">
+            <summary>Returns an enumerator that iterates through the collection.</summary>
+            <returns>An IEnumerator object that can be used to iterate through the collection.</returns>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.TemplateVariableCollection.Item(System.String)">
+            <summary>Gets variable with the specified name.</summary>
+        </member>
+        <member name="T:FistCore.Generator.TemplateEngine.NameValuePair">
+            <summary>Name-value pair.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.NameValuePair.Name">
+            <summary>Gets item name.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.NameValuePair.Value">
+            <summary>Gets item value.</summary>
+        </member>
+        <member name="T:FistCore.Generator.TemplateEngine.ArrayUtil">
+            <summary>
+            Provides common operations for array and list manipulation (conversions, sets...).
+            </summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.ArrayUtil.Find``1(System.Collections.IEnumerable,System.Predicate{``0})">
+            <summary>
+            Searches for an element that matches the conditions defined by the specified predicate, and returns the first occurrence within the entire collection.
+            </summary>
+            <typeparam name="TElement">Type of elements contained in the collection.</typeparam>
+            <param name="collection">A collection.</param>
+            <param name="match">The Predicate(TElement) delegate that defines the conditions of the elements to search for.</param>
+            <returns>The first element that matches the conditions defined by the specified predicate, if found; otherwise, the default value for type TElement.</returns>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.ArrayUtil.FindAll``2(System.Collections.IEnumerable,System.Predicate{``1})">
+            <summary>
+            Retrieves all the elements that match the conditions defined by the specified predicate.
+            </summary>
+            <typeparam name="TList">Type of the list which is returned from the method.</typeparam>
+            <typeparam name="TElement">Type of elements contained in the collection.</typeparam>
+            <param name="collection">A collection.</param>
+            <param name="match">The Predicate(TElement) delegate that defines the conditions of the elements to search for.</param>
+            <returns>A list containing all the elements that match the conditions defined by the specified predicate, if found; otherwise, an empty list.</returns>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.ArrayUtil.IsNullOrEmpty(System.Array)">
+            <summary>
+            Checks whether the specified array is a null reference or an empty array.
+            </summary>
+            <param name="array">Array to check.</param>
+            <returns><b>true</b> if the provided array is <b>null</b> or empty; otherwise, false.</returns>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.ArrayUtil.IsNullOrEmpty(System.Collections.ICollection)">
+            <summary>
+            Checks whether the specified collection is a null reference or an empty collection.
+            </summary>
+            <param name="collection">Collection to check.</param>
+            <returns><b>true</b> if the provided collection is <b>null</b> or empty; otherwise, false.</returns>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.ArrayUtil.GetRange``1(System.Collections.Generic.List{``0},System.Int32,System.Int32)">
+            <summary>Creates a shallow copy of a range of elements in the source list.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.ArrayUtil.GetRange``1(System.Collections.Generic.IEnumerable{``0},System.Int32,System.Int32)">
+            <summary>Creates a shallow copy of a range of elements in the source list.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.ArrayUtil.Exists``1(System.Collections.IEnumerable,System.Predicate{``0})">
+            <summary>
+            Determines whether the collection contains elements that match the conditions defined by the specified predicate.
+            </summary>
+            <typeparam name="TElement">Type of elements contained in the collection.</typeparam>
+            <param name="collection">A collection.</param>
+            <param name="match">The Predicate(TElement) delegate that defines the conditions of the elements to search for.</param>
+            <returns>true if the collection contains one or more elements that match the conditions defined by the specified predicate; otherwise, false.</returns>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.ArrayUtil.TryGetValue``2(System.Collections.Generic.IDictionary{``0,``1},``0)">
+            <summary>Tries to get the value associated with the specified key.</summary>
+        </member>
+        <member name="T:FistCore.Generator.TemplateEngine.Delegates">
+            <summary>
+            Contains commonly used generic procedure and function delegates.
+            </summary>
+        </member>
+        <member name="T:FistCore.Generator.TemplateEngine.Delegates.Function`1">
+            <summary>
+            Represents a method that gets a value of the specified type.
+            </summary>
+            <typeparam name="TRetVal">Type of the return value.</typeparam>
+            <returns>A value of the specified type.</returns>
+        </member>
+        <member name="T:FistCore.Generator.TemplateEngine.Delegates.Function`2">
+            <summary>
+            Represents a method that accepts one argument and returns a value of the specified type.
+            </summary>
+            <typeparam name="TRetVal">Type of the return value.</typeparam>
+            <typeparam name="TArg">Argument type.</typeparam>
+            <param name="arg">Method argument.</param>
+            <returns>A value of the specified type.</returns>
+        </member>
+        <member name="T:FistCore.Generator.TemplateEngine.ReflectionUtil">
+            <summary>
+            Provides common operations which use advanced reflection features.
+            </summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.ReflectionUtil.CreateInstance(System.String,System.String)">
+            <summary>Locates the specified class in the given assembly and creates an instance of it using system activator.</summary>
+        </member>
+        <member name="T:FistCore.Generator.TemplateEngine.TextUtil">
+            <summary>Provides common operation for text manipulation.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.TextUtil.CountLines(System.String)">
+            <summary>Counts the number of lines in given text.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.TextUtil.Trim(System.String)">
+            <summary>Trims string.</summary>
+        </member>
+        <member name="T:FistCore.Generator.TemplateEngine.TextLines">
+            <summary>Represents input text with parsed lines.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.TextLines.Read(System.IO.Stream)">
+            <summary>Reads text and parses it into lines.</summary>
+        </member>
+        <member name="M:FistCore.Generator.TemplateEngine.TextLines.GetLineWithText(System.String)">
+            <summary>Gets first entire line that contains the specified part.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.TextLines.Text">
+            <summary>Gets all text including line breaks.</summary>
+        </member>
+        <member name="P:FistCore.Generator.TemplateEngine.TextLines.Lines">
+            <summary>Text broken into lines.</summary>
+        </member>
+    </members>
+</doc>

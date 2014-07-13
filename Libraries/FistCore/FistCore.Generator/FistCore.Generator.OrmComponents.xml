@@ -1,0 +1,646 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FistCore.Generator.OrmComponents</name>
+    </assembly>
+    <members>
+        <member name="T:FistCore.Generator.OrmComponents.DbComponentType">
+            <summary>Enumerates DB/ORM input component types.</summary>
+        </member>
+        <member name="F:FistCore.Generator.OrmComponents.DbComponentType.Table">
+            <summary>Instance property contains <see cref="T:FistCore.Generator.Table"/> object.</summary>
+        </member>
+        <member name="F:FistCore.Generator.OrmComponents.DbComponentType.Field">
+            <summary>Instance property contains <see cref="T:FistCore.Generator.TableField"/> object.</summary>
+        </member>
+        <member name="F:FistCore.Generator.OrmComponents.DbComponentType.FK">
+            <summary>Instance property contains <see cref="T:FistCore.Generator.ForeignKey"/> object.</summary>
+        </member>
+        <member name="F:FistCore.Generator.OrmComponents.DbComponentType.FkColumnName">
+            <summary>Instance contains the name (string) of the column that is a part of the foreign key.</summary>
+        </member>
+        <member name="F:FistCore.Generator.OrmComponents.DbComponentType.ChildTable">
+            <summary>Instance property contains <see cref="T:FistCore.Generator.Table"/> object.</summary>
+        </member>
+        <member name="F:FistCore.Generator.OrmComponents.DbComponentType.ChildRelation">
+            <summary>Instance property contains <see cref="T:FistCore.Generator.ForeignKey"/> object.</summary>
+        </member>
+        <member name="F:FistCore.Generator.OrmComponents.DbComponentType.TableArray">
+            <summary>Instance property contains an array of <see cref="T:FistCore.Generator.Table"/> objects.</summary>
+        </member>
+        <member name="T:FistCore.Generator.OrmComponents.DbComponentBuilder">
+            <summary>Builds <see cref="F:FistCore.Generator.OrmComponents.DbComponentType.Table"/> and <see cref="F:FistCore.Generator.OrmComponents.DbComponentType.TableArray"/> input components.</summary>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.DbComponentBuilder.Build(System.Object)">
+            <summary>Builds <see cref="F:FistCore.Generator.OrmComponents.DbComponentType.Table"/> and <see cref="F:FistCore.Generator.OrmComponents.DbComponentType.TableArray"/> input components.</summary>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.DbComponentBuilder.IsCompatibleItem(System.Object)">
+            <summary>Checks that the provided object is <see cref="T:FistCore.Generator.Table"/> object or an array of <see cref="T:FistCore.Generator.Table"/> objects.</summary>
+        </member>
+        <member name="T:FistCore.Generator.OrmComponents.DbComponent">
+            <summary>DB/ORM input component. One of the types enumerated in <see cref="T:FistCore.Generator.OrmComponents.DbComponentType"/> class.</summary>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.DbComponent.#ctor(FistCore.Generator.Table)">
+            <summary>Creates a root component. Instance property contains <see cref="T:FistCore.Generator.Table"/> object.</summary>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.DbComponent.#ctor(FistCore.Generator.Table[])">
+            <summary>Creates a root component. Instance property contains an array of <see cref="T:FistCore.Generator.Table"/> objects.</summary>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.DbComponent.EnsureSubcomponents">
+            <summary>Ensures that Subcomponents property is initialized.</summary>
+        </member>
+        <member name="T:FistCore.Generator.OrmComponents.CommonVariables">
+            <summary>Enumerates variables and settings that influence generator behavior.</summary>
+        </member>
+        <member name="F:FistCore.Generator.OrmComponents.CommonVariables.ParentSuffix">
+            <summary>Parent suffix. Default is "Parent".</summary>
+        </member>
+        <member name="F:FistCore.Generator.OrmComponents.CommonVariables.RecursiveParentSuffix">
+            <summary>Recursive parent suffix. Default is "Superior".</summary>
+        </member>
+        <member name="F:FistCore.Generator.OrmComponents.CommonVariables.ParallelParentSuffix">
+            <summary>Parallel parent suffix. Default is "Parent".</summary>
+        </member>
+        <member name="T:FistCore.Generator.OrmComponents.TableExtensionMethods">
+            <summary>Contains extension methods for DB table input components which may be used in templates.</summary>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.TableExtensionMethods.ClassPrefix(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Gets generated class prefix for a table/view. Pascal case name convention is enforced, thus table MY_TABLE will have MyTable class prefix.</summary>
+            <param name="table">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.Table"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.TableExtensionMethods.FieldCount(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Get the number of fields in the table.</summary>
+            <param name="table">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.Table"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.TableExtensionMethods.FkCount(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Gets the number of foreign keys for the table.</summary>
+            <param name="table">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.Table"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.TableExtensionMethods.PkCount(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Gets the number of PK fields in the table.</summary>
+            <param name="table">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.Table"/> object.</param>
+        </member>
+        <member name="T:FistCore.Generator.OrmComponents.FieldExtensionMethods">
+            <summary>Contains extension methods for DB field input components which may be used in templates.</summary>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.FieldExtensionMethods.LocalVariableName(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Gets generated local variable name for a column - camel case.</summary>
+            <param name="tableField">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.TableField"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.FieldExtensionMethods.PrivateMemberName(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Gets generated private mameber/field name for a column - camel case.</summary>
+            <param name="tableField">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.TableField"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.FieldExtensionMethods.ProtectedMemberName(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Gets generated protected property name for a column - pascal case prefixed with underscore character.</summary>
+            <param name="tableField">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.TableField"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.FieldExtensionMethods.PublicMemberName(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Gets generated public property name for a column - pascal case.</summary>
+            <param name="tableField">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.TableField"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.FieldExtensionMethods.NullableType(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Gets generated nullable type for a column. Eg. in C# for values types '?' character is appended to type name.</summary>
+            <param name="tableField">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.TableField"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.FieldExtensionMethods.Type(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Gets generated type for a column.</summary>
+            <param name="tableField">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.TableField"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.FieldExtensionMethods.ValueExpressionSuffix(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Gets generated expression that retrieves a value from the nullabe variable. Eg. in C# for nullable value type ".Value" is generated.</summary>
+            <param name="tableField">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.TableField"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.FieldExtensionMethods.CastExpression(FistCore.Generator.TemplateEngine.ITemplateInputComponent,System.String)">
+            <summary>Gets generated conversion or cast expression that converts the specified expression to data type of a column.</summary>
+            <param name="tableField">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.TableField"/> object.</param>
+            <param name="expressionThatIsToBeConverted">Expression/variable that is to be converted.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.FieldExtensionMethods.ConvertFromArrayAtIndex(FistCore.Generator.TemplateEngine.ITemplateInputComponent,System.String)">
+            <summary>Gets an expression that converts array element with the same index/position as column to data type of a column. Eg. Convert.ToInt32(values[0]) for the 1st table column.</summary>
+            <param name="tableField">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.TableField"/> object.</param>
+            <param name="arrayVariable">Array variable that contains values for all fields of the table.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.FieldExtensionMethods.ColumnName(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Gets column name.</summary>
+            <param name="tableField">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.TableField"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.FieldExtensionMethods.NewDbColumnConfiguration(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Generates code (hard coded) that creates a new instance of <see cref="T:FistCore.Core.DbColumnConfiguration"/> class for a column.</summary>
+            <param name="tableField">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.TableField"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.FieldExtensionMethods.GetFieldIndex(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Gets column index in the parent table.</summary>
+            <param name="tableField">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.TableField"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.FieldExtensionMethods.GetPkPartIndex(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Gets PK part zero based index or -1 if input table/view does not have a primary key.</summary>
+            <param name="pkField">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.TableField"/> object.</param>
+        </member>
+        <member name="T:FistCore.Generator.OrmComponents.FkExtensionMethods">
+            <summary>Contains extension methods for DB foreign key input components which may be used in templates.</summary>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.FkExtensionMethods.FkPropertyName(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Gets FK property name in the generated meta/table classes which contains a <see cref="T:FistCore.Core.DbRelation"/> object. Typically, property names have a "FK_" prefix.</summary>
+            <param name="foreignKey">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.ForeignKey"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.FkExtensionMethods.ParentClassPrefix(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Gets generated prefix of class that maps to parent table in the provided relation/FK.</summary>
+            <param name="foreignKey">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.ForeignKey"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.FkExtensionMethods.ProtectedChildFkProperty(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Gets the names of the protected property in child entity that contains a reference to parent entity.</summary>
+            <param name="childFkColumnName">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property contains the name (string) of a FK part child column name and
+            <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Parent"/> contains <see cref="T:FistCore.Generator.ForeignKey"/> instance.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.FkExtensionMethods.ProtectedChildFkPropertyDataType(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Gets generated data type for protected property mapped to FK part/column in generated child entity class.</summary>
+            <param name="childFkColumnName">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property contains the name (string) of a FK part child column name and
+            <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Parent"/> contains <see cref="T:FistCore.Generator.ForeignKey"/> instance.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.FkExtensionMethods.PublicParentPkProperty(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Gets the name of parent entity PK part property to which child FK part points to.</summary>
+            <param name="childFkColumnName">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property contains the name (string) of a FK part child column name and
+            <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Parent"/> contains <see cref="T:FistCore.Generator.ForeignKey"/> instance.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.FkExtensionMethods.FkPrivateMemberName(FistCore.Generator.TemplateEngine.ITemplateInputComponent,System.String)">
+            <summary>Gets private entity class member that references parent entity object. Camel case.</summary>
+            <param name="fkOrField">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property contain an instance of <see cref="T:FistCore.Generator.ForeignKey"/> object
+            or <see cref="T:FistCore.Generator.TableField"/> that belong to child table.</param>
+            <param name="semicolDelimitedParentPrefixesToRemove">Semicolon delimited parent table prefixes to remove.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.FkExtensionMethods.FkPublicMemberName(FistCore.Generator.TemplateEngine.ITemplateInputComponent,System.String)">
+            <summary>Gets public entity class member that references parent entity object. Pascal case.</summary>
+            <param name="fkOrField">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property contain an instance of <see cref="T:FistCore.Generator.ForeignKey"/> object
+            or <see cref="T:FistCore.Generator.TableField"/> that belong to child table.</param>
+            <param name="semicolDelimitedParentPrefixesToRemove">Semicolon delimited parent table prefixes to remove.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.FkExtensionMethods.GetFkIndex(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Gets zero based FK index from table it belongs to.</summary>
+            <param name="foreignKey">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.ForeignKey"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.FkExtensionMethods.NewDbRelation(FistCore.Generator.TemplateEngine.ITemplateInputComponent,System.String)">
+            <summary>Generates code (hard coded) that creates a new instance of <see cref="T:FistCore.Core.DbRelation"/> class for the given foreign key.</summary>
+            <param name="foreignKey">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.ForeignKey"/> object.</param>
+            <param name="semicolDelimitedParentPrefixesToRemove">Semicolon delimited parent table prefixes to remove.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.FkExtensionMethods.ParentTableName(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Gets parent table name.</summary>
+            <param name="foreignKey">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.ForeignKey"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.FkExtensionMethods.ChildClassPrefix(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Gets child class prefix. Pascal case.</summary>
+            <param name="foreignKey">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.ForeignKey"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.FkExtensionMethods.ChildClassPrefixCamelCase(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Gets child class prefix in camel case.</summary>
+            <param name="foreignKey">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.ForeignKey"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.FkExtensionMethods.ChildFkPropertyName(FistCore.Generator.TemplateEngine.ITemplateInputComponent,System.Int32)">
+            <summary>Gets child object FK part property name.</summary>
+            <param name="foreignKey">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.ForeignKey"/> object.</param>
+            <param name="index">Zero based index that specifies FK part.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.FkExtensionMethods.ChildPkPropertyName(FistCore.Generator.TemplateEngine.ITemplateInputComponent,System.Int32)">
+            <summary>Gets child object PK part property name.</summary>
+            <param name="foreignKey">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.ForeignKey"/> object.</param>
+            <param name="index">Zero based index that specifies PK part.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.FkExtensionMethods.ChildPkPropertyType(FistCore.Generator.TemplateEngine.ITemplateInputComponent,System.Int32)">
+            <summary>Gets child object PK part property data type.</summary>
+            <param name="foreignKey">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.ForeignKey"/> object.</param>
+            <param name="index">Zero based index that specifies PK part.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.FkExtensionMethods.UniqueChildSuffix(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Ensures unique child ordinal if child refences parent object via multiple FKs, ie. parallel relations. Empty string is returned for 1st FK, one-based ordinal if its 2nd, 3rd or later FK to the same table</summary>
+            <param name="foreignKey">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.ForeignKey"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.FkExtensionMethods.Parent1stTextPropertyOrAny(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Gets first textual property of parent table or any other if no text property is found.</summary>
+            <param name="foreignKey">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.ForeignKey"/> object.</param>
+        </member>
+        <member name="T:FistCore.Generator.OrmComponents.DbComponentExtensionMethods">
+            <summary>Contains common extension methods for all DB/ORM input components which may be used in templates.</summary>
+        </member>
+        <member name="F:FistCore.Generator.OrmComponents.DbComponentExtensionMethods.SuffixReplacementMapVariableName">
+            <summary>The name of the variable which contains suffix replacement map, ie. semicolon delimited rules for table name suffix replacement, eg: "ies"->"second";"s"->""</summary>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.DbComponentExtensionMethods.SplitNameToWords(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Splits <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Name"/> to words.</summary>
+            <param name="input">Input component whose name is first converted to camel case and then split to words.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.DbComponentExtensionMethods.SplitNameToWords(System.String)">
+            <summary>Splits input string to words.</summary>
+            <param name="inputName">Input string which is first converted to camel case and then split to words.</param>
+        </member>
+        <member name="T:FistCore.Generator.OrmComponents.TableCriteria">
+            <summary>Contains methods/predicates which evaluate table criteria.</summary>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.TableCriteria.HasForeignKeys(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if table has foreign keys.</summary>
+            <param name="table">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.Table"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.TableCriteria.HasNoForeignKeys(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>false</b> if table has foreign keys.</summary>
+            <param name="table">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.Table"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.TableCriteria.HasPrimaryKey(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if table/view has primary key.</summary>
+            <param name="table">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.Table"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.TableCriteria.HasNoPrimaryKey(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>false</b> if table/view has primary key.</summary>
+            <param name="table">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.Table"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.TableCriteria.HasChildren(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if table is referenced by other tables.</summary>
+            <param name="table">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.Table"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.TableCriteria.HasIntegerPK(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if table PK is constucted of a single integer column.</summary>
+            <param name="table">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.Table"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.TableCriteria.HasColumn(FistCore.Generator.TemplateEngine.ITemplateInputComponent,System.String)">
+            <summary>Returns <b>true</b> if table contains the specified column.</summary>
+            <param name="table">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.Table"/> object.</param>
+            <param name="columnName">Column name. Case is ignored.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.TableCriteria.IsView(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if input component is a view.</summary>
+            <param name="table">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.Table"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.TableCriteria.HasTextField(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if table contains text field.</summary>
+            <param name="table">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.Table"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.TableCriteria.HasNoTextField(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if table does not contain text field.</summary>
+            <param name="table">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.Table"/> object.</param>
+        </member>
+        <member name="T:FistCore.Generator.OrmComponents.FieldCriteria">
+            <summary>Contains methods/predicates which evaluate field criteria.</summary>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.FieldCriteria.IsValueType(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if field has a value type.</summary>
+            <param name="tableField">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.TableField"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.FieldCriteria.IsReferenceType(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if field has a reference type.</summary>
+            <param name="tableField">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.TableField"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.FieldCriteria.IsNullable(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if field is nullable.</summary>
+            <param name="tableField">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.TableField"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.FieldCriteria.IsNotNullable(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if field is not nullable.</summary>
+            <param name="tableField">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.TableField"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.FieldCriteria.IsForeignKeyPart(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if field is FK part.</summary>
+            <param name="tableField">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.TableField"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.FieldCriteria.IsNotForeignKeyPart(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if field is not FK part.</summary>
+            <param name="tableField">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.TableField"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.FieldCriteria.IsPrimaryKeyPart(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if field is PK part.</summary>
+            <param name="tableField">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.TableField"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.FieldCriteria.IsNotPrimaryKeyPart(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if field is not PK part.</summary>
+            <param name="tableField">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.TableField"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.FieldCriteria.IsText(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if field is textual.</summary>
+            <param name="tableField">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.TableField"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.FieldCriteria.IsMatch(System.String)">
+            <summary>Creates a predicate, ie. method delegate, which checks if column name matches give regular expression.</summary>
+        </member>
+        <member name="T:FistCore.Generator.OrmComponents.FkCriteria">
+            <summary>Contains methods/predicates which evaluate FK criteria.</summary>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.FkCriteria.IsParentEntityGenerated(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if code for parent table is generated.</summary>
+            <param name="foreignKey">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.ForeignKey"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.FkCriteria.ChildHasSingleFieldPk(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if child table has a single field PK.</summary>
+            <param name="foreignKey">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.ForeignKey"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.FkCriteria.ChildHasSingleFieldIntegerPk(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if child table has a single field integer PK.</summary>
+            <param name="foreignKey">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.ForeignKey"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.FkCriteria.ChildHasColumn(FistCore.Generator.TemplateEngine.ITemplateInputComponent,System.String)">
+            <summary>Returns <b>true</b> if child table contains the specified column.</summary>
+            <param name="foreignKey">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.ForeignKey"/> object.</param>
+            <param name="columnName">Column name.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.FkCriteria.IsOneToOneRelation(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if the provided FK represents a one-to-one relation.</summary>
+            <param name="foreignKey">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.ForeignKey"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.FkCriteria.IsNotOneToOneRelation(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>false</b> if the provided FK represents a one-to-one relation.</summary>
+            <param name="foreignKey">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.ForeignKey"/> object.</param>
+        </member>
+        <member name="T:FistCore.Generator.OrmComponents.SpComponentType">
+            <summary>Enumerates SP input component types.</summary>
+        </member>
+        <member name="F:FistCore.Generator.OrmComponents.SpComponentType.SpArray">
+            <summary>Instance property contains <see cref="T:FistCore.Generator.StoredProcedureWrapperClass"/> object.</summary>
+        </member>
+        <member name="F:FistCore.Generator.OrmComponents.SpComponentType.SP">
+            <summary>Instance property contains <see cref="T:FistCore.Generator.StoredProcedure"/> object.</summary>
+        </member>
+        <member name="F:FistCore.Generator.OrmComponents.SpComponentType.SpParameter">
+            <summary>Instance property contains <see cref="T:FistCore.Generator.IStoredProcedureParameter"/> object.</summary>
+        </member>
+        <member name="T:FistCore.Generator.OrmComponents.SpComponentBuilder">
+            <summary>Builds <see cref="F:FistCore.Generator.OrmComponents.SpComponentType.SpArray"/> input components.</summary>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.SpComponentBuilder.Build(System.Object)">
+            <summary>Builds <see cref="F:FistCore.Generator.OrmComponents.SpComponentType.SpArray"/> input components.</summary>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.SpComponentBuilder.IsCompatibleItem(System.Object)">
+            <summary>Checks that the provided object is <see cref="T:FistCore.Generator.StoredProcedureWrapperClass"/>.</summary>
+        </member>
+        <member name="T:FistCore.Generator.OrmComponents.SpComponent">
+            <summary>SP input component. One of the types enumerated in <see cref="T:FistCore.Generator.OrmComponents.SpComponentType"/> class.</summary>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.SpComponent.#ctor(FistCore.Generator.StoredProcedureWrapperClass)">
+            <summary>Creates a root component. Instance property contains <see cref="T:FistCore.Generator.StoredProcedureWrapperClass"/> object.</summary>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.SpComponent.EnsureSubcomponents">
+            <summary>Ensures that Subcomponents property is initialized.</summary>
+        </member>
+        <member name="T:FistCore.Generator.OrmComponents.SpComponentExtensions">
+            <summary>Contains extension methods for SP input components which may be used in templates.</summary>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.SpComponentExtensions.MethodParameterName(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Gets SP wrapper method parameter/argument name. Camel case.</summary>
+            <param name="component">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.IStoredProcedureParameter"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.SpComponentExtensions.MethodName(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Gets SP wrapper method name. Pascal case.</summary>
+            <param name="storedProcedure">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.StoredProcedure"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.SpComponentExtensions.MethodArgumentType(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Gets SP wrapper method parameter/argument type.</summary>
+            <param name="spParameter">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.IStoredProcedureParameter"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.SpComponentExtensions.MethodParameterKeyword(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Gets SP wrapper method parameter/argument modifier keyword (none, out or ref).</summary>
+            <param name="spParameter">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.IStoredProcedureParameter"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.SpComponentExtensions.NewDbParameter(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Generates code (hard coded) that creates a new instance of <see cref="T:FistCore.Core.DbParameter"/> class for give parameter meta data.</summary>
+            <param name="spParameter">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.IStoredProcedureParameter"/> object.</param>
+        </member>
+        <member name="T:FistCore.Generator.OrmComponents.SpParameterCriteria">
+            <summary>Contains methods/predicates which evaluate SP parameter criteria.</summary>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.SpParameterCriteria.IsInput(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if given parameter has <b>input</b> direction.</summary>
+            <param name="spParameter">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.IStoredProcedureParameter"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.SpParameterCriteria.IsOutput(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if given parameter has <b>output</b> direction.</summary>
+            <param name="spParameter">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.IStoredProcedureParameter"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.SpParameterCriteria.IsInputOutput(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if given parameter has both <b>input</b> and <b>output</b> direction.</summary>
+            <param name="spParameter">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.IStoredProcedureParameter"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.SpParameterCriteria.IsReturnValue(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if given parameter is a return value.</summary>
+            <param name="spParameter">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.IStoredProcedureParameter"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.SpParameterCriteria.IsNotDataTableFilledByAdapter(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if given parameter is primitive, ie. not a DataTable filled by adapter as required in Oracle and similar DBMSs.</summary>
+            <param name="spParameter">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.IStoredProcedureParameter"/> object.</param>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.SpParameterCriteria.IsRefOrOut(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if given parameter has a <b>ref</b> or <b>out</b> .NET argument modifier.</summary>
+            <param name="spParameter">Input component whose <see cref="P:FistCore.Generator.TemplateEngine.ITemplateInputComponent.Instance"/> property must contain a <see cref="T:FistCore.Generator.IStoredProcedureParameter"/> object.</param>
+        </member>
+        <member name="T:FistCore.Generator.OrmComponents.SpCriteria">
+            <summary>Contains methods/predicates which evaluate SP criteria.</summary>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.SpCriteria.ShouldGenerateReturnValue(FistCore.Generator.TemplateEngine.ITemplateInputComponent)">
+            <summary>Returns <b>true</b> if return value parameter should be generated.</summary>
+        </member>
+        <member name="T:FistCore.Generator.OrmComponents.ArrayUtil">
+            <summary>
+            Provides common operations for array and list manipulation (conversions, sets...).
+            </summary>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.ArrayUtil.Find``1(System.Collections.IEnumerable,System.Predicate{``0})">
+            <summary>
+            Searches for an element that matches the conditions defined by the specified predicate, and returns the first occurrence within the entire collection.
+            </summary>
+            <typeparam name="TElement">Type of elements contained in the collection.</typeparam>
+            <param name="collection">A collection.</param>
+            <param name="match">The Predicate(TElement) delegate that defines the conditions of the elements to search for.</param>
+            <returns>The first element that matches the conditions defined by the specified predicate, if found; otherwise, the default value for type TElement.</returns>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.ArrayUtil.FindAll``2(System.Collections.IEnumerable,System.Predicate{``1})">
+            <summary>
+            Retrieves all the elements that match the conditions defined by the specified predicate.
+            </summary>
+            <typeparam name="TList">Type of the list which is returned from the method.</typeparam>
+            <typeparam name="TElement">Type of elements contained in the collection.</typeparam>
+            <param name="collection">A collection.</param>
+            <param name="match">The Predicate(TElement) delegate that defines the conditions of the elements to search for.</param>
+            <returns>A list containing all the elements that match the conditions defined by the specified predicate, if found; otherwise, an empty list.</returns>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.ArrayUtil.IsNullOrEmpty(System.Collections.IEnumerable)">
+            <summary>
+            Checks whether the specified collection is a null reference or an empty collection.
+            </summary>
+            <param name="collection">Collection to check.</param>
+            <returns><b>true</b> if the provided collection is <b>null</b> or empty; otherwise, false.</returns>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.ArrayUtil.Concat(System.Collections.IEnumerable,System.String)">
+            <summary>
+            Concatenates the string representations of the elements in the specified list.  
+            </summary>
+            <param name="list">A list of objects.</param>
+            <param name="delimiter">Optional string which is used to delimit objects. Nullable.</param>
+            <returns>The concatenated and delimited string representations of the values of the elements in the list.</returns>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.ArrayUtil.FindIndex``1(System.Collections.IEnumerable,System.Predicate{``0})">
+            <summary>
+            Searches for an element that matches the conditions defined by the specified predicate, and returns the zero-based index of the first occurrence within the entire collection.
+            </summary>
+            <typeparam name="TElement">Type of elements contained in the collection.</typeparam>
+            <param name="collection">A collection.</param>
+            <param name="match">The Predicate(TElement) delegate that defines the conditions of the elements to search for.</param>
+            <returns>The zero-based index of the first occurrence of an element that matches the conditions defined by match, if found; otherwise, –1.</returns>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.ArrayUtil.Exists``1(System.Collections.IEnumerable,System.Predicate{``0})">
+            <summary>
+            Determines whether the collection contains elements that match the conditions defined by the specified predicate.
+            </summary>
+            <typeparam name="TElement">Type of elements contained in the collection.</typeparam>
+            <param name="collection">A collection.</param>
+            <param name="match">The Predicate(TElement) delegate that defines the conditions of the elements to search for.</param>
+            <returns>true if the collection contains one or more elements that match the conditions defined by the specified predicate; otherwise, false.</returns>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.ArrayUtil.Count``1(System.Collections.IEnumerable,System.Predicate{``0})">
+            <summary>
+            Returns the number of elements that match the conditions defined by the specified predicate.  
+            </summary>
+            <typeparam name="TElement">Type of elements contained in the collection.</typeparam>
+            <param name="collection">A collection.</param>
+            <param name="match">The Predicate(TElement) delegate that defines the conditions of the elements to search for.</param>
+            <returns>Number of elements that match the conditions defined by the specified predicate.</returns>
+        </member>
+        <member name="T:FistCore.Generator.OrmComponents.Delegates">
+            <summary>
+            Contains commonly used generic procedure and function delegates.
+            </summary>
+        </member>
+        <member name="T:FistCore.Generator.OrmComponents.Delegates.Procedure">
+            <summary>
+            Represents a parameterless method that doesn't return a value.
+            </summary>
+        </member>
+        <member name="T:FistCore.Generator.OrmComponents.Delegates.Procedure`1">
+            <summary>
+            Represents a method that accepts one argument and doesn't return a value.
+            </summary>
+            <typeparam name="TArg">Argument type.</typeparam>
+            <param name="arg">Method argument.</param>
+        </member>
+        <member name="T:FistCore.Generator.OrmComponents.Delegates.Procedure`2">
+            <summary>
+            Represents a method that accepts two arguments and doesn't return a value.
+            </summary>
+            <typeparam name="TArg1">Type of the first argument.</typeparam>
+            <typeparam name="TArg2">Type of the second argument.</typeparam>
+            <param name="arg1">First argument.</param>
+            <param name="arg2">Second argument.</param>
+        </member>
+        <member name="T:FistCore.Generator.OrmComponents.Delegates.Procedure`3">
+            <summary>
+            Represents a method that accepts three arguments and doesn't return a value.
+            </summary>
+            <typeparam name="TArg1">Type of the first argument.</typeparam>
+            <typeparam name="TArg2">Type of the second argument.</typeparam>
+            <typeparam name="TArg3">Type of the third argument.</typeparam>
+            <param name="arg1">First argument.</param>
+            <param name="arg2">Second argument.</param>
+            <param name="arg3">Third argument.</param>
+        </member>
+        <member name="T:FistCore.Generator.OrmComponents.Delegates.Procedure`4">
+            <summary>
+            Represents a method that accepts four arguments and doesn't return a value.
+            </summary>
+            <typeparam name="TArg1">Type of the first argument.</typeparam>
+            <typeparam name="TArg2">Type of the second argument.</typeparam>
+            <typeparam name="TArg3">Type of the third argument.</typeparam>
+            <typeparam name="TArg4">Type of the fourth argument.</typeparam>
+            <param name="arg1">First argument.</param>
+            <param name="arg2">Second argument.</param>
+            <param name="arg3">Third argument.</param>
+            <param name="arg4">Fourth argument.</param>
+        </member>
+        <member name="T:FistCore.Generator.OrmComponents.Delegates.Procedure`5">
+            <summary>
+            Represents a method that accepts five arguments and doesn't return a value.
+            </summary>
+            <typeparam name="TArg1">Type of the first argument.</typeparam>
+            <typeparam name="TArg2">Type of the second argument.</typeparam>
+            <typeparam name="TArg3">Type of the third argument.</typeparam>
+            <typeparam name="TArg4">Type of the fourth argument.</typeparam>
+            <typeparam name="TArg5">Type of the fifth argument.</typeparam>
+            <param name="arg1">First argument.</param>
+            <param name="arg2">Second argument.</param>
+            <param name="arg3">Third argument.</param>
+            <param name="arg4">Fourth argument.</param>
+            <param name="arg5">Fifth argument.</param>
+        </member>
+        <member name="T:FistCore.Generator.OrmComponents.Delegates.Function`1">
+            <summary>
+            Represents a parameterless method that returns a value of the specified type.
+            </summary>
+            <typeparam name="TRetVal">Type of the return value.</typeparam>
+            <returns>A value of the specified type.</returns>
+        </member>
+        <member name="T:FistCore.Generator.OrmComponents.Delegates.Function`2">
+            <summary>
+            Represents a method that accepts one argument and returns a value of the specified type.
+            </summary>
+            <typeparam name="TRetVal">Type of the return value.</typeparam>
+            <typeparam name="TArg">Argument type.</typeparam>
+            <param name="arg">Method argument.</param>
+            <returns>A value of the specified type.</returns>
+        </member>
+        <member name="T:FistCore.Generator.OrmComponents.Delegates.Function`3">
+            <summary>
+            Represents a method that accepts two arguments and returns a value of the specified type.
+            </summary>
+            <typeparam name="TRetVal">Type of the return value.</typeparam>
+            <typeparam name="TArg1">Type of the first argument.</typeparam>
+            <typeparam name="TArg2">Type of the second argument.</typeparam>
+            <param name="arg1">First argument.</param>
+            <param name="arg2">Second argument.</param>
+            <returns>A value of the specified type.</returns>
+        </member>
+        <member name="T:FistCore.Generator.OrmComponents.Delegates.Function`4">
+            <summary>
+            Represents a method that accepts three arguments and returns a value of the specified type.
+            </summary>
+            <typeparam name="TRetVal">Type of the return value.</typeparam>
+            <typeparam name="TArg1">Type of the first argument.</typeparam>
+            <typeparam name="TArg2">Type of the second argument.</typeparam>
+            <typeparam name="TArg3">Type of the third argument.</typeparam>
+            <param name="arg1">First argument.</param>
+            <param name="arg2">Second argument.</param>
+            <param name="arg3">Third argument.</param>
+            <returns>A value of the specified type.</returns>
+        </member>
+        <member name="T:FistCore.Generator.OrmComponents.Delegates.Function`5">
+            <summary>
+            Represents a method that accepts four arguments and returns a value of the specified type.
+            </summary>
+            <typeparam name="TRetVal">Type of the return value.</typeparam>
+            <typeparam name="TArg1">Type of the first argument.</typeparam>
+            <typeparam name="TArg2">Type of the second argument.</typeparam>
+            <typeparam name="TArg3">Type of the third argument.</typeparam>
+            <typeparam name="TArg4">Type of the fourh argument.</typeparam>
+            <param name="arg1">First argument.</param>
+            <param name="arg2">Second argument.</param>
+            <param name="arg3">Third argument.</param>
+            <param name="arg4">Fourth argument.</param>
+            <returns>A value of the specified type.</returns>
+        </member>
+        <member name="T:FistCore.Generator.OrmComponents.Delegates.Function`6">
+            <summary>
+            Represents a method that accepts five arguments and returns a value of the specified type.
+            </summary>
+            <typeparam name="TRetVal">Type of the return value.</typeparam>
+            <typeparam name="TArg1">Type of the first argument.</typeparam>
+            <typeparam name="TArg2">Type of the second argument.</typeparam>
+            <typeparam name="TArg3">Type of the third argument.</typeparam>
+            <typeparam name="TArg4">Type of the fourth argument.</typeparam>
+            <typeparam name="TArg5">Type of the fifth argument.</typeparam>
+            <param name="arg1">First argument.</param>
+            <param name="arg2">Second argument.</param>
+            <param name="arg3">Third argument.</param>
+            <param name="arg4">Fourth argument.</param>
+            <param name="arg5">Fifth argument.</param>
+            <returns>A value of the specified type.</returns>
+        </member>
+        <member name="T:FistCore.Generator.OrmComponents.TextUtil">
+            <summary>Provides common operation for text manipulation.</summary>
+        </member>
+        <member name="M:FistCore.Generator.OrmComponents.TextUtil.StripPrefix(System.String,System.String[])">
+            <summary>Strips prefixes.</summary>
+        </member>
+    </members>
+</doc>

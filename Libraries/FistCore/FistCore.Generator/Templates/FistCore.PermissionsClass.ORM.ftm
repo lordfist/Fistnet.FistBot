@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Template>
+  <Header>
+    <Title>Permissions class</Title>
+    <Description>Generates class which contains names/IDs of typical permissions/functions for selected business objects</Description>
+    <Family>Other</Family>
+  </Header>
+  <Variables>
+    <Variable>
+      <Name>ProjectNamespace</Name>
+      <Description>C# namespace which contains FistCore generated entities</Description>
+      <DefaultValue>MySolution.DAL</DefaultValue>
+    </Variable>
+    <Variable>
+      <Name>BizLayerNamespace</Name>
+      <Description>C# namespace for business layer logic</Description>
+      <DefaultValue>MySolution.BL</DefaultValue>
+    </Variable>
+    <Variable>
+      <Name>OutputSubdirectory</Name>
+      <Description>Output subdirectory</Description>
+      <DefaultValue></DefaultValue>
+    </Variable>
+    <Variable>
+      <Name>SingleFile</Name>
+      <Description>Name of the single file which will contain code for all selected items</Description>
+      <DefaultValue>Permissions.cs</DefaultValue>
+    </Variable>
+  </Variables>
+  <ReferencedAssemblies>
+    <Assembly>FistCore.Generator.OrmComponents.dll</Assembly>
+    <Assembly>FistCore.Generator.DbMetaData.dll</Assembly>
+  </ReferencedAssemblies>
+  <Namespaces>
+    <Using>System</Using>
+    <Using>FistCore.Generator.OrmComponents</Using>
+  </Namespaces>
+  <InputComponentBuilder>
+    <Assembly>FistCore.Generator.OrmComponents</Assembly>
+    <Class>FistCore.Generator.OrmComponents.DbComponentBuilder</Class>
+  </InputComponentBuilder>
+  <TemplateSegments>
+    <TemplateSegment Id="FunctionsRoot">
+      <![CDATA[using System;
+
+namespace $Variables["BizLayerNamespace"]$
+{
+	/// <summary>Permission table constants.</summary>
+	/// <remarks>
+	/// select 'public const int ' + naziv + ' = ' + convert(varchar(50), Id) + ';' from Permissions order by naziv
+	/// </remarks>
+	public static class Permissions
+	{$Generate("BizObjFunctionNames", Input.GetChildren(DbComponentType.Table))$
+	}
+}
+]]>
+    </TemplateSegment>
+    <TemplateSegment Id="BizObjFunctionNames">
+      <![CDATA[
+		/// <summary>Permission for read access of $Input.ClassPrefix()$ objektu.</summary>
+		public const int $Input.ClassPrefix()$_Read = 0;
+		/// <summary>Permission for edit of $Input.ClassPrefix()$ objekata.</summary>
+		public const int $Input.ClassPrefix()$_Update = 0;
+		/// <summary>Permission for create of $Input.ClassPrefix()$ objekata.</summary>
+		public const int $Input.ClassPrefix()$_Insert = 0;
+		/// <summary>Permission for delete of $Input.ClassPrefix()$ objekata.</summary>
+		public const int $Input.ClassPrefix()$_Delete = 0;
+
+]]>
+    </TemplateSegment>
+  </TemplateSegments>
+</Template>
